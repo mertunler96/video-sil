@@ -93,22 +93,22 @@
       <h2>Our Signature Pieces</h2>
     </div>
     <div class="products-grid">
+      {% comment %}Show 4 non-Solenne products first, then Solenne as wide card{% endcomment %}
       {% assign fp_count = 0 %}
+      {% assign solenne_product = nil %}
       {% for product in collections['all'].products %}
-        {% if fp_count < 5 %}
+        {% assign tl = product.title | downcase %}
+        {% if tl contains 'solenne' %}
+          {% assign solenne_product = product %}
+        {% elsif fp_count < 4 %}
           {% assign fp_count = fp_count | plus: 1 %}
           {% assign tags_lower = product.tags | join: ',' | downcase %}
-          {% assign extra_class = '' %}
-          {% if fp_count == 5 %}{% assign extra_class = ' product-card--wide' %}{% endif %}
-          <article class="product-card{{ extra_class }} reveal" onclick="window.location='{{ product.url }}'" style="cursor:pointer">
+          <article class="product-card reveal" onclick="window.location='{{ product.url }}'" style="cursor:pointer">
             <div class="product-img-wrap">
               <img src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-main">
-              {% if product.images[1] %}
-                <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-hover">
-              {% endif %}
+              {% if product.images[1] %}<img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-hover">{% endif %}
               <div class="product-overlay"><a href="{{ product.url }}" class="btn-add-cart">View Product</a></div>
               {% if tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
-              {% if tags_lower contains 'signature' or product.title contains 'Solenne' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
             </div>
             <div class="product-info">
               <div class="product-meta">
@@ -124,6 +124,23 @@
           </article>
         {% endif %}
       {% endfor %}
+      {% comment %}Solenne Mirror — always last, always wide{% endcomment %}
+      {% if solenne_product %}
+        <article class="product-card product-card--wide reveal" onclick="window.location='{{ solenne_product.url }}'" style="cursor:pointer">
+          <div class="product-img-wrap">
+            <img src="{{ solenne_product.featured_image | img_url: '800x' }}" alt="{{ solenne_product.title }}" class="product-img-main">
+            {% if solenne_product.images[1] %}<img src="{{ solenne_product.images[1] | img_url: '800x' }}" alt="{{ solenne_product.title }}" class="product-img-hover">{% endif %}
+            <div class="product-overlay"><a href="{{ solenne_product.url }}" class="btn-add-cart">View Product</a></div>
+            <span class="product-badge product-badge--gold">Signature</span>
+          </div>
+          <div class="product-info">
+            <div class="product-meta">
+              <h3 class="product-name">The Solenne Mirror</h3>
+            </div>
+            <span class="product-price">{{ solenne_product.price | money_without_trailing_zeros }}</span>
+          </div>
+        </article>
+      {% endif %}
     </div>
     <div class="products-cta">
       <a href="/collections/all" class="btn btn-dark">View All Products</a>
