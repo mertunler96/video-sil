@@ -54,20 +54,40 @@
       <div class="product-info-col">
         <div class="product-info-sticky">
 
+          {% assign tl = product.title | downcase %}
           <div class="pinfo-header">
-            {% if product.title contains '–' %}
-              <span class="pinfo-collection">{{ product.title | split: '–' | last | strip }}</span>
-              <h1 class="pinfo-title">{{ product.title | split: '–' | first | strip }}</h1>
+            {% if tl contains 'brook' and tl contains 'champagne' %}
+              <span class="pinfo-collection">Mirrors — Champagne Gold</span>
+              <h1 class="pinfo-title">The Brook Mirror</h1>
+              <p class="pinfo-tagline">An architectural focal point, crafted for lasting beauty and unparalleled clarity.</p>
+            {% elsif tl contains 'brook' and tl contains 'black' or tl contains 'brook' and tl contains 'matte' %}
+              <span class="pinfo-collection">Mirrors — Matte Black</span>
+              <h1 class="pinfo-title">The Brook Mirror</h1>
+              <p class="pinfo-tagline">Bold, modern elegance meets industrial-grade precision. A statement in any space.</p>
+            {% elsif tl contains 'solenne' %}
+              <span class="pinfo-collection">Mirrors — Signature Collection</span>
+              <h1 class="pinfo-title">The Solenne Mirror</h1>
+              <p class="pinfo-tagline">An oversized, organic silhouette that transforms any room into a gallery. Hand-crafted in small batches.</p>
+            {% elsif tl contains 'rib' %}
+              <span class="pinfo-collection">Furniture — The Base Edit</span>
+              <h1 class="pinfo-title">The Rib End Table</h1>
+              <p class="pinfo-tagline">A hand-carved fluted column in solid hardwood. Classical form, stripped of ornament, built for the contemporary home.</p>
+            {% elsif tl contains 'volta' %}
+              <span class="pinfo-collection">Furniture — The Base Edit</span>
+              <h1 class="pinfo-title">The Volta End Table</h1>
+              <p class="pinfo-tagline">Architectural detail meets natural material. Each piece is unique — no two marble tops are ever identical.</p>
             {% else %}
-              <h1 class="pinfo-title">{{ product.title }}</h1>
-            {% endif %}
-            {% if product.metafields.custom.tagline %}
-              <p class="pinfo-tagline">{{ product.metafields.custom.tagline }}</p>
+              {% if product.title contains '–' %}
+                <span class="pinfo-collection">{{ product.title | split: '–' | last | strip }}</span>
+                <h1 class="pinfo-title">{{ product.title | split: '–' | first | strip }}</h1>
+              {% else %}
+                <h1 class="pinfo-title">{{ product.title }}</h1>
+              {% endif %}
             {% endif %}
           </div>
 
           <div class="pinfo-price-block">
-            <span class="pinfo-price" id="pinfo-price">{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</span>
+            <span class="pinfo-price" id="pinfo-price">{{ product.selected_or_first_available_variant.price | money }}</span>
             <span class="pinfo-price-note">Inc. VAT · Free UK delivery over £150</span>
           </div>
 
@@ -94,7 +114,7 @@
                     {% assign parts = variant.title | split: ' - ' %}
                     <button type="button" class="size-btn {% if variant == product.selected_or_first_available_variant %}active{% endif %}"
                       data-variant-id="{{ variant.id }}"
-                      data-price="{{ variant.price | money_without_trailing_zeros }}"
+                      data-price="{{ variant.price | money }}"
                       data-title="{{ variant.title }}"
                       {% unless variant.available %}disabled{% endunless %}>
                       <span class="size-cm">{{ parts[0] }}</span>
@@ -104,6 +124,18 @@
                 {% endfor %}
               </div>
             </div>
+            {% elsif size_count == 1 %}
+            {% for variant in product.variants %}
+              {% assign vt = variant.title | downcase %}
+              {% unless vt contains 'gold' or vt contains 'black' or vt contains 'white' or vt == 'default title' %}
+              <div class="option-group">
+                <div class="option-label-row">
+                  <span class="option-label">Dimensions</span>
+                  <span class="option-selected-val">{{ variant.title }}</span>
+                </div>
+              </div>
+              {% endunless %}
+            {% endfor %}
             {% endif %}
 
             <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
