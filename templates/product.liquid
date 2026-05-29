@@ -1,4 +1,4 @@
-{% assign variant_prices = '' %}
+﻿{% assign variant_prices = '' %}
 {% for v in product.variants %}
   {% assign variant_prices = variant_prices | append: v.id | append: ':' | append: v.price | append: ',' %}
 {% endfor %}
@@ -130,9 +130,7 @@
           {% assign title_lower = product.title | downcase %}
           <div class="accordions">
 
-            {% case true %}
-
-            {% when title_lower contains 'brook' and title_lower contains 'champagne' %}
+            {% if title_lower contains 'brook' and title_lower contains 'champagne' %}
               <!-- Brook Mirror - Champagne Gold -->
               <div class="accordion open">
                 <button class="accordion-btn" aria-expanded="true">
@@ -190,7 +188,7 @@
                 </div>
               </div>
 
-            {% when title_lower contains 'brook' and title_lower contains 'black' or title_lower contains 'brook' and title_lower contains 'matte' %}
+            {% elsif title_lower contains 'brook' and title_lower contains 'black' or title_lower contains 'brook' and title_lower contains 'matte' %}
               <!-- Brook Mirror - Matte Black -->
               <div class="accordion open">
                 <button class="accordion-btn" aria-expanded="true">
@@ -249,7 +247,7 @@
                 </div>
               </div>
 
-            {% when title_lower contains 'solenne' %}
+            {% elsif title_lower contains 'solenne' %}
               <!-- Solenne Mirror -->
               <div class="accordion open">
                 <button class="accordion-btn" aria-expanded="true">
@@ -308,7 +306,7 @@
                 </div>
               </div>
 
-            {% when title_lower contains 'rib' %}
+            {% elsif title_lower contains 'rib' %}
               <!-- Rib End Table -->
               <div class="accordion open">
                 <button class="accordion-btn" aria-expanded="true">
@@ -366,7 +364,7 @@
                 </div>
               </div>
 
-            {% when title_lower contains 'volta' %}
+            {% elsif title_lower contains 'volta' %}
               <!-- Volta End Table -->
               <div class="accordion open">
                 <button class="accordion-btn" aria-expanded="true">
@@ -456,7 +454,7 @@
                 </div>
               </div>
 
-            {% endcase %}
+            {% endif %}
 
           </div>
 
