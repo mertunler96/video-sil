@@ -15,31 +15,7 @@
   <link rel="stylesheet" href="{{ 'style.css' | asset_url }}">
   <link rel="stylesheet" href="{{ 'pages.css' | asset_url }}">
   <link rel="stylesheet" href="{{ 'product.css' | asset_url }}">
-  {% if template == 'policy' %}
-  <style>main{background:#1c1c1c!important}h1{color:#fff!important}</style>
-  <script>
-  document.addEventListener('DOMContentLoaded',function(){
-    var m=document.querySelector('main');
-    if(m)m.style.setProperty('background','#1c1c1c','important');
-    var rte=document.querySelector('.rte');
-    if(!rte)return;
-    rte.querySelectorAll('*').forEach(function(el){
-      var s=el.style;
-      s.setProperty('color','rgba(255,255,255,0.75)','important');
-      s.setProperty('border-color','rgba(255,255,255,0.12)','important');
-    });
-    rte.querySelectorAll('h1,h2').forEach(function(el){
-      el.style.setProperty('color','#fff','important');
-    });
-    rte.querySelectorAll('h3').forEach(function(el){
-      el.style.setProperty('color','rgba(255,255,255,0.55)','important');
-    });
-    rte.querySelectorAll('strong').forEach(function(el){
-      el.style.setProperty('color','#fff','important');
-    });
-  });
-  </script>
-  {% endif %}
+  {% if template == 'policy' %}<style>main h1{display:none!important}</style>{% endif %}
 </head>
 <body>
 
