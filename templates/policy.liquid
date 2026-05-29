@@ -1,0 +1,10 @@
+{% render 'page-hero', img: 'https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg', title: policy.title %}
+
+<section class="warranty-body">
+  <div class="container-narrow">
+    <p class="policy-updated">Last updated: {{ 'now' | date: '%d %B %Y' }}</p>
+    <div class="policy-section">
+      {{ policy.body }}
+    </div>
+  </div>
+</section>

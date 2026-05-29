@@ -1,0 +1,56 @@
+<section class="cart-page" style="padding: 8rem var(--gutter) 6rem; min-height: 60vh;">
+  <div class="container-narrow">
+    <h1 style="font-family: var(--font-serif); font-size: clamp(2rem,4vw,3rem); font-weight: 300; margin-bottom: 3rem;">Your Cart</h1>
+
+    {% if cart.item_count == 0 %}
+      <div style="text-align: center; padding: 4rem 0; border-top: 1px solid var(--color-border);">
+        <p style="color: var(--color-mid); margin-bottom: 2rem;">Your cart is empty.</p>
+        <a href="/collections/all" class="btn btn-dark">Continue Shopping</a>
+      </div>
+    {% else %}
+      <form action="/cart" method="post">
+        <table class="cart-table" style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <th style="text-align:left; padding-bottom:1rem; font-family:var(--font-sans); font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:400; color:var(--color-mid);">Product</th>
+              <th style="text-align:center; padding-bottom:1rem; font-family:var(--font-sans); font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:400; color:var(--color-mid);">Quantity</th>
+              <th style="text-align:right; padding-bottom:1rem; font-family:var(--font-sans); font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:400; color:var(--color-mid);">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart.items %}
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <td style="padding: 1.5rem 0; display:flex; gap:1.2rem; align-items:center;">
+                <a href="{{ item.url }}">
+                  <img src="{{ item.image | img_url: '120x120', crop: 'center' }}" alt="{{ item.title }}" style="width:80px;height:80px;object-fit:cover;">
+                </a>
+                <div>
+                  <p style="font-family:var(--font-serif); font-size:1.1rem; margin-bottom:0.2rem;"><a href="{{ item.url }}" style="color:var(--color-dark); text-decoration:none;">{{ item.product.title }}</a></p>
+                  {% unless item.variant.title == 'Default Title' %}
+                    <p style="font-size:0.8rem; color:var(--color-mid);">{{ item.variant.title }}</p>
+                  {% endunless %}
+                  <a href="/cart/change?line={{ forloop.index }}&quantity=0" style="font-size:0.75rem; color:var(--color-mid); text-decoration:underline; margin-top:0.4rem; display:inline-block;">Remove</a>
+                </div>
+              </td>
+              <td style="text-align:center; padding: 1.5rem 0;">
+                <input type="number" name="updates[]" value="{{ item.quantity }}" min="1" style="width:50px; text-align:center; border:1px solid var(--color-border); padding:0.4rem; font-family:var(--font-sans); font-size:0.9rem;">
+              </td>
+              <td style="text-align:right; padding: 1.5rem 0; font-family:var(--font-serif); font-size:1.1rem;">{{ item.line_price | money }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2rem; flex-wrap:wrap; gap:1rem;">
+          <button type="submit" name="update" style="background:none; border:1px solid var(--color-border); padding:0.8rem 1.6rem; font-family:var(--font-sans); font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; color:var(--color-mid);">Update Cart</button>
+          <div style="text-align:right;">
+            <p style="font-family:var(--font-sans); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--color-mid); margin-bottom:0.5rem;">Subtotal</p>
+            <p style="font-family:var(--font-serif); font-size:1.6rem; font-weight:300; margin-bottom:1.2rem;">{{ cart.total_price | money }}</p>
+            <p style="font-size:0.78rem; color:var(--color-mid); margin-bottom:1.2rem;">Shipping calculated at checkout.</p>
+            <a href="/checkout" class="btn btn-dark" style="display:inline-block; min-width:220px; text-align:center;">Proceed to Checkout</a>
+          </div>
+        </div>
+      </form>
+    {% endif %}
+  </div>
+</section>

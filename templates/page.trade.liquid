@@ -1,0 +1,77 @@
+<section class="page-hero trade-hero">
+  <span class="section-label" style="color: var(--color-gold);">For the Trade</span>
+  <h1 class="page-hero-title">Trade Programme</h1>
+  <a href="#trade-apply" class="btn btn-light trade-hero-cta">Apply Now</a>
+</section>
+
+<section class="about-intro">
+  <div class="about-intro-inner container">
+    <div class="about-intro-text reveal">
+      <span class="section-label">The Programme</span>
+      <h2>Designed for Design Professionals</h2>
+      <p>The MUNLER Trade Programme is built for interior designers, architects, and hospitality professionals who want to specify our pieces with confidence — and with commercial terms that reflect your relationship with us.</p>
+      <p>Trade members receive preferential pricing, dedicated support, early access to new pieces, and the ability to request samples and bespoke specifications for client projects.</p>
+    </div>
+    <div class="about-intro-img reveal">
+      <img src="https://munler.co.uk/cdn/shop/files/aynaya_odakli_shotlar_ver_2K_202605251702.jpg" alt="MUNLER Trade Programme">
+    </div>
+  </div>
+</section>
+
+<section class="values" style="border-top: 1px solid var(--color-border);">
+  <div class="container">
+    <div class="section-header"><span class="section-label">Member Benefits</span><h2>What You Get</h2></div>
+    <div class="about-values-grid">
+      <div class="value-item reveal"><div class="value-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><h4>Trade Pricing</h4><p>Competitive trade discounts on all MUNLER products. Consistent margins, no hidden conditions.</p></div>
+      <div class="value-item reveal"><div class="value-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>Dedicated Support</h4><p>A direct point of contact for all trade enquiries, orders, and client project support.</p></div>
+      <div class="value-item reveal"><div class="value-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h4>Early Access</h4><p>Preview and order new pieces before they're available to the public.</p></div>
+      <div class="value-item reveal"><div class="value-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Sample Service</h4><p>Request material and finish samples for client presentations and site visits.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 7rem 0; background: var(--color-light); border-top: 1px solid var(--color-border);">
+  <div class="container">
+    <div class="section-header"><span class="section-label">Who Qualifies</span><h2>The Programme is Open To</h2></div>
+    <div class="trade-who-grid">
+      <div class="trade-who-card reveal"><div class="trade-who-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><h4>Interior Designers</h4><p>Practising interior designers and interior architects specifying for residential and commercial projects.</p></div>
+      <div class="trade-who-card reveal"><div class="trade-who-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><line x1="1" y1="6" x2="23" y2="6"/><line x1="1" y1="18" x2="23" y2="18"/><line x1="12" y1="2" x2="12" y2="22"/></svg></div><h4>Architects</h4><p>Architectural practices working on high-end residential, hospitality, or commercial developments.</p></div>
+      <div class="trade-who-card reveal"><div class="trade-who-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><rect x="9" y="12" width="6" height="10"/></svg></div><h4>Hospitality</h4><p>Hotels, restaurants, and hospitality operators furnishing and specifying for guest-facing spaces.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="trade-apply" style="padding: 7rem 0; background: var(--color-bg); border-top: 1px solid var(--color-border);">
+  <div class="container">
+    <div class="trade-apply-grid" style="display: grid; grid-template-columns: 1fr 380px; gap: 5rem; align-items: start;">
+      <div>
+        <div class="section-header" style="text-align:left;"><span class="section-label">Apply Now</span><h2>Join the Trade Programme</h2></div>
+        {% form 'contact' %}
+          {% if form.posted_successfully? %}
+            <div style="padding:1.5rem; background:#f0f7f0; border:1px solid #c3e0c3; margin-bottom:1.5rem;"><p style="color:#2d6a2d; font-size:0.9rem;">Thank you for your application. We'll review it and be in touch within 2 working days.</p></div>
+          {% endif %}
+          <input type="hidden" name="contact[tags]" value="trade-application">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.2rem;">
+            <div class="form-group"><label>Company Name</label><input type="text" name="contact[company]" required placeholder="Your company"></div>
+            <div class="form-group"><label>Your Name</label><input type="text" name="contact[name]" required placeholder="Full name"></div>
+            <div class="form-group"><label>Email</label><input type="email" name="contact[email]" required placeholder="your@email.com"></div>
+            <div class="form-group"><label>Phone</label><input type="tel" name="contact[phone]" placeholder="+44"></div>
+            <div class="form-group"><label>Business Type</label><select name="contact[business_type]" style="width:100%; padding:0.85rem 1rem; border:1px solid var(--color-border); font-family:var(--font-sans); font-size:0.88rem; background:#fff; color:var(--color-dark); cursor:pointer;"><option value="">Select type…</option><option>Interior Designer</option><option>Architect</option><option>Hospitality</option><option>Property Developer</option><option>Contractor</option><option>Other</option></select></div>
+            <div class="form-group"><label>VAT Number (if applicable)</label><input type="text" name="contact[vat]" placeholder="GB 123456789"></div>
+          </div>
+          <div class="form-group" style="margin-top:1rem;"><label>Website</label><input type="url" name="contact[website]" placeholder="https://"></div>
+          <div class="form-group"><label>Tell us about your work</label><textarea name="contact[body]" rows="5" placeholder="Brief description of your practice and the types of projects you work on…"></textarea></div>
+          <button type="submit" class="btn btn-dark" style="width:100%; margin-top:0.5rem;">Submit Application</button>
+        {% endform %}
+      </div>
+      <div>
+        <div class="trade-steps">
+          <h3 style="font-family:var(--font-serif); font-size:1.4rem; font-weight:300; margin-bottom:2rem;">How It Works</h3>
+          <div class="trade-step"><span class="trade-step-num">01</span><div><h4>Apply</h4><p>Complete the application form with your business details. We'll review within 2 working days.</p></div></div>
+          <div class="trade-step"><span class="trade-step-num">02</span><div><h4>Verification</h4><p>We verify your trade credentials and business type to ensure we can offer the right terms.</p></div></div>
+          <div class="trade-step"><span class="trade-step-num">03</span><div><h4>Welcome</h4><p>Once approved, you'll receive your trade account details, pricing, and a dedicated contact.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

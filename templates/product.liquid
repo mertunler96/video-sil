@@ -1,0 +1,121 @@
+<section class="product-page">
+  <div class="product-page-inner">
+
+    <!-- Image Gallery -->
+    <div class="product-gallery">
+      <div class="product-gallery-main">
+        <img src="{{ product.featured_image | img_url: '1000x1000', crop: 'center' }}" alt="{{ product.title }}" id="gallery-main-img" class="product-gallery-img">
+      </div>
+      {% if product.images.size > 1 %}
+      <div class="product-gallery-thumbs">
+        {% for image in product.images %}
+        <button class="product-thumb {% if forloop.first %}active{% endif %}" onclick="document.getElementById('gallery-main-img').src='{{ image | img_url: '1000x1000', crop: 'center' }}'">
+          <img src="{{ image | img_url: '120x120', crop: 'center' }}" alt="{{ image.alt | default: product.title }}">
+        </button>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-info-panel">
+      <div class="product-breadcrumb">
+        <a href="/">Home</a> / <a href="/collections/all">Shop</a> / <span>{{ product.title }}</span>
+      </div>
+
+      <h1 class="product-detail-title">{{ product.title }}</h1>
+
+      {% if product.metafields.custom.subtitle %}
+        <p class="product-detail-subtitle">{{ product.metafields.custom.subtitle }}</p>
+      {% endif %}
+
+      <div class="product-detail-price">
+        <span class="product-price-main">{{ product.selected_or_first_available_variant.price | money }}</span>
+        {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}
+          <span class="product-price-was">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+        {% endif %}
+      </div>
+
+      {% form 'product', product %}
+        {% if product.variants.size > 1 %}
+        <div class="product-variants">
+          <label class="variant-label">Finish</label>
+          <div class="variant-options">
+            {% for variant in product.variants %}
+            <label class="variant-option {% if variant == product.selected_or_first_available_variant %}active{% endif %}">
+              <input type="radio" name="id" value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}checked{% endif %} {% unless variant.available %}disabled{% endunless %}>
+              {{ variant.title }}
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+        {% else %}
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+        {% endif %}
+
+        <div class="product-actions">
+          <div class="quantity-wrap">
+            <button type="button" class="qty-btn" onclick="var q=this.nextElementSibling;q.value=Math.max(1,+q.value-1)">−</button>
+            <input type="number" name="quantity" value="1" min="1" class="qty-input">
+            <button type="button" class="qty-btn" onclick="var q=this.previousElementSibling;q.value=+q.value+1">+</button>
+          </div>
+          <button type="submit" name="add" class="btn btn-dark btn-add-to-cart" {% unless product.available %}disabled{% endunless %}>
+            {% if product.available %}Add to Cart{% else %}Sold Out{% endif %}
+          </button>
+        </div>
+
+        <a href="/collections/all" class="product-continue">Continue Shopping</a>
+      {% endform %}
+
+      <div class="product-detail-meta">
+        <div class="product-meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Free UK delivery over £150
+        </div>
+        <div class="product-meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          5-Year Warranty
+        </div>
+        <div class="product-meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          30-Day Returns
+        </div>
+      </div>
+
+      {% if product.description != blank %}
+      <div class="product-description">
+        {{ product.description }}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- Related Products -->
+{% assign related = collections['all'].products | where: 'handle', product.handle | map: 'handle' %}
+<section class="related-products">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">You May Also Like</span>
+      <h2>More from MUNLER</h2>
+    </div>
+    <div class="products-grid">
+      {% assign count = 0 %}
+      {% for p in collections['all'].products %}
+        {% if p.handle != product.handle and count < 4 %}
+          {% assign count = count | plus: 1 %}
+          <article class="product-card reveal" onclick="window.location='/products/{{ p.handle }}'" style="cursor:pointer">
+            <div class="product-img-wrap">
+              <img src="{{ p.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ p.title }}" class="product-img-main">
+              <div class="product-overlay"><a href="/products/{{ p.handle }}" class="btn-add-cart">View Product</a></div>
+            </div>
+            <div class="product-info">
+              <div class="product-meta"><h3 class="product-name">{{ p.title }}</h3></div>
+              <span class="product-price">{{ p.price | money }}</span>
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

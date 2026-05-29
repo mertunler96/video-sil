@@ -1,0 +1,42 @@
+<section class="shop-page">
+  <div class="shop-hero" style="padding: 8rem var(--gutter) 4rem; background: var(--color-dark); text-align: center; margin-top: -34px;">
+    <span class="section-label" style="color: var(--color-gold);">{{ collection.title }}</span>
+    <h1 style="color: #fff; margin-top: 1rem;">{% if collection.handle == 'all' %}All Products{% else %}{{ collection.title }}{% endif %}</h1>
+    {% if collection.description != blank %}
+      <p style="color: rgba(255,255,255,0.65); max-width: 520px; margin: 1.2rem auto 0; font-size: 0.9rem; line-height: 1.8;">{{ collection.description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="container" style="padding-top: 5rem; padding-bottom: 6rem;">
+    {% if collection.products.size == 0 %}
+      <p style="text-align:center; color: var(--color-mid); padding: 4rem 0;">No products found in this collection.</p>
+    {% else %}
+      <div class="products-grid">
+        {% for product in collection.products %}
+          <article class="product-card reveal" onclick="window.location='/products/{{ product.handle }}'" style="cursor:pointer">
+            <div class="product-img-wrap">
+              <img src="{{ product.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ product.title }}" class="product-img-main">
+              {% if product.images[1] %}
+                <img src="{{ product.images[1] | img_url: '600x600', crop: 'center' }}" alt="{{ product.title }} lifestyle" class="product-img-hover">
+              {% endif %}
+              <div class="product-overlay">
+                <a href="/products/{{ product.handle }}" class="btn-add-cart">View Product</a>
+              </div>
+              {% if product.tags contains 'new' %}<span class="product-badge">New</span>{% endif %}
+              {% if product.tags contains 'signature' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
+            </div>
+            <div class="product-info">
+              <div class="product-meta">
+                <h3 class="product-name">{{ product.title }}</h3>
+                {% if product.variants.size > 1 %}
+                  <span class="product-variant">{{ product.variants.size }} options</span>
+                {% endif %}
+              </div>
+              <span class="product-price">{{ product.price | money }}</span>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
