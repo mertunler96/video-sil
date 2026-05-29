@@ -50,9 +50,17 @@
             </div>
             <div class="product-info">
               <div class="product-meta">
-                <h3 class="product-name">{{ product.title }}</h3>
-                {% if product.variants.first.title != 'Default Title' %}
-                  <span class="product-variant">{{ product.variants.first.title }}</span>
+                {% if product.title contains '–' %}
+                  <h3 class="product-name">{{ product.title | split: '–' | first | strip }}</h3>
+                  <span class="product-variant">{{ product.title | split: '–' | last | strip }}</span>
+                {% elsif product.title contains '-' and product.title contains 'Mirror' or product.title contains 'Table' %}
+                  <h3 class="product-name">{{ product.title | split: '-' | first | strip }}</h3>
+                  <span class="product-variant">{{ product.title | split: '-' | last | strip }}</span>
+                {% else %}
+                  <h3 class="product-name">{{ product.title }}</h3>
+                  {% if product.variants.first.title != 'Default Title' %}
+                    <span class="product-variant">{{ product.variants.first.title }}</span>
+                  {% endif %}
                 {% endif %}
               </div>
               <span class="product-price">{{ product.price | money_without_trailing_zeros }}</span>

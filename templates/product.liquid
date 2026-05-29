@@ -23,7 +23,12 @@
         <a href="/">Home</a> / <a href="/collections/all">Shop</a> / <span>{{ product.title }}</span>
       </div>
 
-      <h1 class="product-detail-title">{{ product.title }}</h1>
+      {% if product.title contains '–' %}
+        <h1 class="product-detail-title">{{ product.title | split: '–' | first | strip }}</h1>
+        <p class="product-detail-subtitle" style="font-family:var(--font-sans);font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-mid);margin-bottom:1rem;">{{ product.title | split: '–' | last | strip }}</p>
+      {% else %}
+        <h1 class="product-detail-title">{{ product.title }}</h1>
+      {% endif %}
 
       {% if product.metafields.custom.subtitle %}
         <p class="product-detail-subtitle">{{ product.metafields.custom.subtitle }}</p>
@@ -37,9 +42,31 @@
       </div>
 
       {% form 'product', product %}
-        {% if product.variants.size > 1 %}
+        {% assign size_variants = product.variants | where: 'available', true %}
+        {% assign has_size = false %}
+        {% for variant in product.variants %}
+          {% unless variant.title == 'Default Title' or variant.title contains 'Gold' or variant.title contains 'Black' or variant.title contains 'White' %}
+            {% assign has_size = true %}
+          {% endunless %}
+        {% endfor %}
+
+        {% if has_size %}
         <div class="product-variants">
-          <label class="variant-label">Finish</label>
+          <label class="variant-label">Size</label>
+          <div class="variant-options">
+            {% for variant in product.variants %}
+              {% unless variant.title contains 'Gold' or variant.title contains 'Black' or variant.title contains 'White' %}
+              <label class="variant-option {% if variant == product.selected_or_first_available_variant %}active{% endif %}">
+                <input type="radio" name="id" value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}checked{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                {{ variant.title }}
+              </label>
+              {% endunless %}
+            {% endfor %}
+          </div>
+        </div>
+        {% elsif product.variants.size > 1 %}
+        <div class="product-variants">
+          <label class="variant-label">Option</label>
           <div class="variant-options">
             {% for variant in product.variants %}
             <label class="variant-option {% if variant == product.selected_or_first_available_variant %}active{% endif %}">
