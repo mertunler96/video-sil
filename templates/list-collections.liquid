@@ -1,0 +1,35 @@
+<section class="page-hero">
+  <span class="section-label" style="color: var(--color-gold);">Browse</span>
+  <h1 class="page-hero-title">Collections</h1>
+  <p class="page-hero-desc">Explore our full range of mirrors and home objects.</p>
+</section>
+
+<section style="padding: 6rem 0 8rem; background: var(--color-bg);">
+  <div class="container">
+    <div class="collections-list-grid">
+      {% for collection in collections %}
+        {% unless collection.handle == 'frontpage' %}
+          <a href="{{ collection.url }}" class="collection-list-card reveal">
+            <div class="collection-list-img-wrap">
+              {% if collection.image %}
+                <img src="{{ collection.image | img_url: '800x800', crop: 'center' }}" alt="{{ collection.title }}">
+              {% elsif collection.products.first and collection.products.first.featured_image %}
+                <img src="{{ collection.products.first.featured_image | img_url: '800x800', crop: 'center' }}" alt="{{ collection.title }}">
+              {% else %}
+                <div style="width:100%;height:100%;background:var(--color-light);"></div>
+              {% endif %}
+              <div class="collection-list-overlay"></div>
+            </div>
+            <div class="collection-list-info">
+              <h2>{{ collection.title }}</h2>
+              {% if collection.description != blank %}
+                <p>{{ collection.description | strip_html | truncate: 100 }}</p>
+              {% endif %}
+              <span class="collection-list-cta">Shop Now →</span>
+            </div>
+          </a>
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

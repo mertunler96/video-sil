@@ -123,6 +123,73 @@
     transform: scale(1.04);
 }
 
+/* === LIST COLLECTIONS PAGE === */
+.collections-list-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.collection-list-card {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--color-dark);
+}
+
+.collection-list-img-wrap {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: var(--color-light);
+    margin-bottom: 1.2rem;
+}
+
+.collection-list-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease-out);
+}
+
+.collection-list-card:hover .collection-list-img-wrap img {
+    transform: scale(1.04);
+}
+
+.collection-list-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.1);
+    transition: background var(--transition);
+}
+
+.collection-list-card:hover .collection-list-overlay {
+    background: rgba(0,0,0,0.2);
+}
+
+.collection-list-info h2 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.collection-list-info p {
+    font-size: 0.85rem;
+    color: var(--color-mid);
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+}
+
+.collection-list-cta {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+}
+
 /* === FILTER TABS (Shop) === */
 .filter-row {
     display: flex;

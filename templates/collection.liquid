@@ -1,23 +1,32 @@
-<section class="shop-page">
-  <div class="shop-hero" style="padding: 8rem var(--gutter) 4rem; background: var(--color-dark); text-align: center; margin-top: -34px;">
-    <span class="section-label" style="color: var(--color-gold);">{{ collection.title }}</span>
-    <h1 style="color: #fff; margin-top: 1rem;">{% if collection.handle == 'all' %}All Products{% else %}{{ collection.title }}{% endif %}</h1>
-    {% if collection.description != blank %}
-      <p style="color: rgba(255,255,255,0.65); max-width: 520px; margin: 1.2rem auto 0; font-size: 0.9rem; line-height: 1.8;">{{ collection.description }}</p>
-    {% endif %}
-  </div>
+<section class="page-hero">
+  <span class="section-label" style="color: var(--color-gold);">
+    {% if collection.handle == 'all' %}All Products{% else %}The Collection{% endif %}
+  </span>
+  <h1 class="page-hero-title">
+    {% if collection.handle == 'all' %}Shop All{% else %}{{ collection.title }}{% endif %}
+  </h1>
+  {% if collection.description != blank %}
+    <p class="page-hero-desc">{{ collection.description | strip_html }}</p>
+  {% endif %}
+</section>
 
-  <div class="container" style="padding-top: 5rem; padding-bottom: 6rem;">
+<section style="padding: 5rem 0 8rem; background: var(--color-bg);">
+  <div class="container">
     {% if collection.products.size == 0 %}
-      <p style="text-align:center; color: var(--color-mid); padding: 4rem 0;">No products found in this collection.</p>
+      <div style="text-align:center; padding: 6rem 0;">
+        <p style="color: var(--color-mid); font-size: 0.95rem; margin-bottom: 2rem;">No products found in this collection.</p>
+        <a href="/collections/all" class="btn btn-dark">View All Products</a>
+      </div>
     {% else %}
       <div class="products-grid">
         {% for product in collection.products %}
           <article class="product-card reveal" onclick="window.location='/products/{{ product.handle }}'" style="cursor:pointer">
             <div class="product-img-wrap">
-              <img src="{{ product.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ product.title }}" class="product-img-main">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ product.title }}" class="product-img-main">
+              {% endif %}
               {% if product.images[1] %}
-                <img src="{{ product.images[1] | img_url: '600x600', crop: 'center' }}" alt="{{ product.title }} lifestyle" class="product-img-hover">
+                <img src="{{ product.images[1] | img_url: '600x600', crop: 'center' }}" alt="{{ product.title }}" class="product-img-hover">
               {% endif %}
               <div class="product-overlay">
                 <a href="/products/{{ product.handle }}" class="btn-add-cart">View Product</a>
