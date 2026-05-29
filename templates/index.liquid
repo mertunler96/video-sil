@@ -77,67 +77,37 @@
       <h2>Our Signature Pieces</h2>
     </div>
     <div class="products-grid">
-
-      <article class="product-card reveal" onclick="window.location='/products/the-brook-mirror'" style="cursor:pointer">
-        <div class="product-img-wrap">
-          <img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_911uwy911uwy911u_e7d39ccc-05d1-48df-b1ad-be72125a156c.png" alt="The Brook Mirror — Champagne Gold" class="product-img-main">
-          <img src="https://munler.co.uk/cdn/shop/files/bu_odanin_farkli_shotlarini_ver__202605231515_91bb8878-aaa5-4548-a64a-2a5e1238b6b5.jpg" alt="The Brook Mirror lifestyle" class="product-img-hover">
-          <div class="product-overlay"><a href="/cart/add?id={{ all_products['the-brook-mirror'].selected_or_first_available_variant.id }}&quantity=1" class="btn-add-cart">Add to Cart</a></div>
-          <span class="product-badge">New</span>
-        </div>
-        <div class="product-info">
-          <div class="product-meta"><h3 class="product-name">The Brook Mirror</h3><span class="product-variant">Champagne Gold</span></div>
-          <span class="product-price">{{ all_products['the-brook-mirror'].price | money_without_trailing_zeros }}</span>
-        </div>
-      </article>
-
-      <article class="product-card reveal" onclick="window.location='/products/the-brook-mirror-matte-black'" style="cursor:pointer">
-        <div class="product-img-wrap">
-          <img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_q04fizq04fizq04f_93c8f86e-3b76-48f2-8f88-91396526d02c.png" alt="The Brook Mirror — Matte Black" class="product-img-main">
-          <img src="https://munler.co.uk/cdn/shop/files/ayna_cercevelerini_siyah_yap_2K_202605251344.jpg" alt="The Brook Mirror Matte Black lifestyle" class="product-img-hover">
-          <div class="product-overlay"><a href="/cart/add?id={{ all_products['the-brook-mirror-matte-black'].selected_or_first_available_variant.id }}&quantity=1" class="btn-add-cart">Add to Cart</a></div>
-        </div>
-        <div class="product-info">
-          <div class="product-meta"><h3 class="product-name">The Brook Mirror</h3><span class="product-variant">Matte Black</span></div>
-          <span class="product-price">{{ all_products['the-brook-mirror-matte-black'].price | money_without_trailing_zeros }}</span>
-        </div>
-      </article>
-
-      <article class="product-card reveal" onclick="window.location='/products/the-volta-end-table'" style="cursor:pointer">
-        <div class="product-img-wrap">
-          <img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_f348e2f348e2f348.png" alt="The Volta End Table" class="product-img-main">
-          <div class="product-overlay"><a href="/cart/add?id={{ all_products['the-volta-end-table'].selected_or_first_available_variant.id }}&quantity=1" class="btn-add-cart">Add to Cart</a></div>
-        </div>
-        <div class="product-info">
-          <div class="product-meta"><h3 class="product-name">The Volta End Table</h3></div>
-          <span class="product-price">{{ all_products['the-volta-end-table'].price | money_without_trailing_zeros }}</span>
-        </div>
-      </article>
-
-      <article class="product-card reveal" onclick="window.location='/products/the-rib-end-table'" style="cursor:pointer">
-        <div class="product-img-wrap">
-          <img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_en00uven00uven00_073900b8-d131-4da8-abf2-5d60f3b89639.png" alt="The Rib End Table" class="product-img-main">
-          <div class="product-overlay"><a href="/cart/add?id={{ all_products['the-rib-end-table'].selected_or_first_available_variant.id }}&quantity=1" class="btn-add-cart">Add to Cart</a></div>
-        </div>
-        <div class="product-info">
-          <div class="product-meta"><h3 class="product-name">The Rib End Table</h3></div>
-          <span class="product-price">{{ all_products['the-rib-end-table'].price | money_without_trailing_zeros }}</span>
-        </div>
-      </article>
-
-      <article class="product-card reveal product-card--wide" onclick="window.location='/products/the-solenne-mirror'" style="cursor:pointer">
-        <div class="product-img-wrap">
-          <img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_xskxeuxskxeuxskx.png" alt="The Solenne Mirror" class="product-img-main">
-          <img src="https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg" alt="The Solenne Mirror lifestyle" class="product-img-hover">
-          <div class="product-overlay"><a href="/cart/add?id={{ all_products['the-solenne-mirror'].selected_or_first_available_variant.id }}&quantity=1" class="btn-add-cart">Add to Cart</a></div>
-          <span class="product-badge product-badge--gold">Signature</span>
-        </div>
-        <div class="product-info">
-          <div class="product-meta"><h3 class="product-name">The Solenne Mirror</h3></div>
-          <span class="product-price">{{ all_products['the-solenne-mirror'].price | money_without_trailing_zeros }}</span>
-        </div>
-      </article>
-
+      {% assign fp_count = 0 %}
+      {% for product in collections['all'].products %}
+        {% if fp_count < 5 %}
+          {% assign fp_count = fp_count | plus: 1 %}
+          {% assign tags_lower = product.tags | join: ',' | downcase %}
+          {% assign extra_class = '' %}
+          {% if fp_count == 5 %}{% assign extra_class = ' product-card--wide' %}{% endif %}
+          <article class="product-card{{ extra_class }} reveal" onclick="window.location='{{ product.url }}'" style="cursor:pointer">
+            <div class="product-img-wrap">
+              <img src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-main">
+              {% if product.images[1] %}
+                <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-hover">
+              {% endif %}
+              <div class="product-overlay"><a href="{{ product.url }}" class="btn-add-cart">View Product</a></div>
+              {% if tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
+              {% if tags_lower contains 'signature' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
+            </div>
+            <div class="product-info">
+              <div class="product-meta">
+                {% if product.title contains '–' %}
+                  <h3 class="product-name">{{ product.title | split: '–' | first | strip }}</h3>
+                  <span class="product-variant">{{ product.title | split: '–' | last | strip }}</span>
+                {% else %}
+                  <h3 class="product-name">{{ product.title }}</h3>
+                {% endif %}
+              </div>
+              <span class="product-price">{{ product.price | money_without_trailing_zeros }}</span>
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
     </div>
     <div class="products-cta">
       <a href="/collections/all" class="btn btn-dark">View All Products</a>
