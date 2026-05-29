@@ -15,19 +15,9 @@
 .policy-section a{color:var(--color-dark)!important;text-decoration:underline;text-underline-offset:3px}
 .policy-section strong{color:var(--color-dark);font-weight:500}
 </style>
-{% case policy.url %}
-  {% when '/policies/privacy-policy' %}
-    {% assign hero_img = 'https://munler.co.uk/cdn/shop/files/aynaya_odakli_shotlar_ver_2K_202605251702.jpg' %}
-  {% when '/policies/refund-policy' %}
-    {% assign hero_img = 'https://munler.co.uk/cdn/shop/files/ayna_cercevelerini_siyah_yap_2K_202605251344.jpg' %}
-  {% when '/policies/shipping-policy' %}
-    {% assign hero_img = 'https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg' %}
-  {% when '/policies/terms-of-service' %}
-    {% assign hero_img = 'https://munler.co.uk/cdn/shop/files/Make_the_armchair_202511231422.jpg' %}
-  {% else %}
-    {% assign hero_img = 'https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg' %}
-{% endcase %}
-{% render 'page-hero', img: hero_img, title: policy.title %}
+<div style="background:#1c1c1c;padding:7rem 2rem 5rem;text-align:center">
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,5rem);font-weight:400;color:#fff;line-height:1.1;margin:0">{{ policy.title }}</h1>
+</div>
 
 <section class="warranty-body">
   <div class="container-narrow">
