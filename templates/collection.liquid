@@ -30,9 +30,10 @@
     {% else %}
       <div class="shop-grid" id="shop-grid">
         {% for product in collection.products %}
+          {% assign product_tags_lower = product.tags | join: ',' | downcase %}
           {% assign cat = '' %}
-          {% if product.tags contains 'mirrors' %}{% assign cat = 'mirrors' %}{% endif %}
-          {% if product.tags contains 'furniture' %}{% assign cat = 'furniture' %}{% endif %}
+          {% if product_tags_lower contains 'mirror' %}{% assign cat = 'mirrors' %}{% endif %}
+          {% if product_tags_lower contains 'furniture' %}{% assign cat = 'furniture' %}{% endif %}
           <article class="product-card reveal" data-category="{{ cat }}" onclick="window.location='/products/{{ product.handle }}'" style="cursor:pointer">
             <div class="product-img-wrap">
               {% if product.featured_image %}
