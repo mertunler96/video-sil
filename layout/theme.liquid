@@ -39,6 +39,10 @@
     var path = window.location.pathname;
     var imgSrc = imgMap[path] || 'https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg';
     var pageTitle = document.title.split('|')[0].trim();
+    // Remove duplicate h1 (Shopify auto-renders page title before content_for_layout)
+    var allH1s = document.querySelectorAll('h1');
+    if (allH1s.length > 1) { allH1s[0].remove(); }
+
     var rte = document.querySelector('.rte');
     if (rte && !document.querySelector('.munler-policy-hero')) {
       var hero = document.createElement('div');
