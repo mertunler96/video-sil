@@ -4,13 +4,13 @@
     <!-- Image Gallery -->
     <div class="product-gallery">
       <div class="product-gallery-main">
-        <img src="{{ product.featured_image | img_url: '1000x1000', crop: 'center' }}" alt="{{ product.title }}" id="gallery-main-img" class="product-gallery-img">
+        <img src="{{ product.featured_image | img_url: '1000x' }}" alt="{{ product.title }}" id="gallery-main-img" class="product-gallery-img">
       </div>
       {% if product.images.size > 1 %}
       <div class="product-gallery-thumbs">
         {% for image in product.images %}
-        <button class="product-thumb {% if forloop.first %}active{% endif %}" onclick="document.getElementById('gallery-main-img').src='{{ image | img_url: '1000x1000', crop: 'center' }}'">
-          <img src="{{ image | img_url: '120x120', crop: 'center' }}" alt="{{ image.alt | default: product.title }}">
+        <button class="product-thumb {% if forloop.first %}active{% endif %}" onclick="document.getElementById('gallery-main-img').src='{{ image | img_url: '1000x' }}'">
+          <img src="{{ image | img_url: '120x' }}" alt="{{ image.alt | default: product.title }}">
         </button>
         {% endfor %}
       </div>
@@ -35,9 +35,9 @@
       {% endif %}
 
       <div class="product-detail-price">
-        <span class="product-price-main">{{ product.selected_or_first_available_variant.price | money }}</span>
+        <span class="product-price-main">{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</span>
         {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price %}
-          <span class="product-price-was">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+          <span class="product-price-was">{{ product.selected_or_first_available_variant.compare_at_price | money_without_trailing_zeros }}</span>
         {% endif %}
       </div>
 
@@ -133,12 +133,12 @@
           {% assign count = count | plus: 1 %}
           <article class="product-card reveal" onclick="window.location='/products/{{ p.handle }}'" style="cursor:pointer">
             <div class="product-img-wrap">
-              <img src="{{ p.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ p.title }}" class="product-img-main">
+              <img src="{{ p.featured_image | img_url: '800x' }}" alt="{{ p.title }}" class="product-img-main">
               <div class="product-overlay"><a href="/products/{{ p.handle }}" class="btn-add-cart">View Product</a></div>
             </div>
             <div class="product-info">
               <div class="product-meta"><h3 class="product-name">{{ p.title }}</h3></div>
-              <span class="product-price">{{ p.price | money }}</span>
+              <span class="product-price">{{ p.price | money_without_trailing_zeros }}</span>
             </div>
           </article>
         {% endif %}
