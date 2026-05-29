@@ -1474,20 +1474,29 @@ p {
         display: block;
     }
 
-    /* Collections stack */
+    /* Collections - 2 columns on mobile, compact portrait */
     .collections-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 3px;
     }
 
     .collection-img-wrap {
-        aspect-ratio: 16 / 9;
+        aspect-ratio: 3 / 4;
     }
 
     /* Products 2-col */
     .products-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem 1rem;
+    }
+
+    /* Wide Solenne card: full-width on mobile */
+    .product-card--wide {
+        grid-column: 1 / -1;
+    }
+
+    .product-card--wide .product-img-wrap {
+        aspect-ratio: 16 / 9;
     }
 
     /* Editorial stack */
