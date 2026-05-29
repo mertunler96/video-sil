@@ -1,3 +1,20 @@
+<style>
+.warranty-hero{position:relative;height:90vh;min-height:560px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.warranty-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.warranty-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,10,.55),rgba(10,10,10,.45))}
+.warranty-hero-content{position:relative;z-index:2;padding:0 var(--gutter);max-width:680px}
+.warranty-hero-title{font-family:var(--font-serif);font-size:clamp(3.5rem,7vw,6.5rem);font-weight:400;color:#fff;line-height:1.05}
+.warranty-body{padding:8rem 0;background:#fff}
+.policy-updated{font-family:var(--font-sans);font-size:.72rem;font-weight:300;color:var(--color-mid);letter-spacing:.08em;margin-bottom:3.5rem;padding-bottom:2rem;border-bottom:1px solid var(--color-border)}
+.policy-section{margin-bottom:3.5rem;padding-bottom:3.5rem;border-bottom:1px solid var(--color-border)}
+.policy-section h2{font-family:var(--font-serif)!important;font-size:clamp(1.3rem,2.5vw,1.9rem)!important;font-weight:400!important;color:var(--color-dark)!important;margin-bottom:1.2rem!important;line-height:1.2!important}
+.policy-section h3{font-family:var(--font-sans)!important;font-size:.78rem!important;font-weight:500!important;letter-spacing:.1em!important;text-transform:uppercase!important;color:var(--color-dark)!important;margin-bottom:.8rem!important;margin-top:1.8rem!important;font-style:normal!important}
+.policy-section p{font-size:.88rem;line-height:1.9;color:var(--color-mid);margin-bottom:1rem}
+.policy-section ul,.policy-section ol{padding-left:1.4rem;margin-bottom:1rem}
+.policy-section li{font-size:.88rem;line-height:1.85;color:var(--color-mid);margin-bottom:.4rem}
+.policy-section a{color:var(--color-dark)!important;text-decoration:underline;text-underline-offset:3px}
+.policy-section strong{color:var(--color-dark);font-weight:500}
+</style>
 {% case policy.url %}
   {% when '/policies/privacy-policy' %}
     {% assign hero_img = 'https://munler.co.uk/cdn/shop/files/aynaya_odakli_shotlar_ver_2K_202605251702.jpg' %}
