@@ -1,4 +1,4 @@
-<section class="page-hero">
+﻿<section class="page-hero">
   <span class="section-label" style="color:var(--color-gold);">Curated</span>
   <h1 class="page-hero-title">Collections</h1>
   <p class="page-hero-desc">Three distinct collections, one consistent vision — objects that endure and elevate.</p>
@@ -33,7 +33,7 @@
                     <a href="/products/{{ product.handle }}" class="btn-add-cart">View Product</a>
                   </div>
                   {% if product_tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
-                  {% if product_tags_lower contains 'signature' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
+                  {% if product_tags_lower contains 'signature' or product.title contains 'Solenne' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
                 </div>
                 <div class="product-info">
                   <div class="product-meta">

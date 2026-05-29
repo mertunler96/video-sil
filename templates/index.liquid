@@ -108,7 +108,7 @@
               {% endif %}
               <div class="product-overlay"><a href="{{ product.url }}" class="btn-add-cart">View Product</a></div>
               {% if tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
-              {% if tags_lower contains 'signature' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
+              {% if tags_lower contains 'signature' or product.title contains 'Solenne' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
             </div>
             <div class="product-info">
               <div class="product-meta">
