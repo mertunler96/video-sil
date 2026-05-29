@@ -218,7 +218,17 @@
   function galleryGoTo(idx) {
     currentIdx = idx;
     var mainImg = document.getElementById('gallery-main-img');
-    if(mainImg) mainImg.src = images[idx];
+    if(mainImg) {
+      mainImg.style.opacity = '0';
+      var preload = new Image();
+      preload.onload = function() {
+        mainImg.src = images[idx];
+        mainImg.style.opacity = '1';
+      };
+      preload.src = images[idx];
+      // fallback if cached
+      if(preload.complete) { mainImg.src = images[idx]; mainImg.style.opacity = '1'; }
+    }
     document.querySelectorAll('.thumb').forEach(function(t,i){ t.classList.toggle('active', i===idx); });
     document.querySelectorAll('.dot').forEach(function(d,i){ d.classList.toggle('active', i===idx); });
   }
