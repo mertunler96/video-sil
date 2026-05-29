@@ -128,39 +128,51 @@
           </div>
 
           <div class="accordions">
-            {% if product.description != blank %}
             <div class="accordion open">
               <button class="accordion-btn" aria-expanded="true">
                 <span>Description</span>
                 <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
-              <div class="accordion-body" style="max-height:none; padding-bottom:1.2rem;">
-                <div class="accordion-description">{{ product.description }}</div>
+              <div class="accordion-body">
+                {% if product.description != blank %}
+                  <div class="accordion-description">{{ product.description }}</div>
+                {% else %}
+                  <p style="font-size:0.85rem;color:var(--color-mid);">No description available.</p>
+                {% endif %}
               </div>
             </div>
-            {% endif %}
-            {% if product.metafields.custom.materials %}
             <div class="accordion">
               <button class="accordion-btn" aria-expanded="false">
                 <span>Materials &amp; Craft</span>
                 <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="accordion-body">
-                <div class="accordion-description">{{ product.metafields.custom.materials }}</div>
+                <ul class="detail-list">
+                  <li>Frame: 304-grade stainless steel</li>
+                  <li>Glass: 4mm ecological silver glass</li>
+                  <li>Copper-free and lead-free production</li>
+                  <li>Corrosion and moisture resistant</li>
+                </ul>
               </div>
             </div>
-            {% endif %}
-            {% if product.metafields.custom.dimensions %}
             <div class="accordion">
               <button class="accordion-btn" aria-expanded="false">
                 <span>Dimensions</span>
                 <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="accordion-body">
-                <div class="accordion-description">{{ product.metafields.custom.dimensions }}</div>
+                <ul class="detail-list">
+                  {% for variant in product.variants %}
+                    {% assign vt = variant.title | downcase %}
+                    {% unless vt contains 'gold' or vt contains 'black' or vt contains 'default' %}
+                      <li>{{ variant.title }}</li>
+                    {% endunless %}
+                  {% endfor %}
+                  <li>Wall fixings included</li>
+                  <li>Mountable vertically or horizontally</li>
+                </ul>
               </div>
             </div>
-            {% endif %}
             <div class="accordion">
               <button class="accordion-btn" aria-expanded="false">
                 <span>Delivery &amp; Returns</span>
