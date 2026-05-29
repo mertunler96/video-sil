@@ -1481,7 +1481,9 @@ p {
     }
 
     .collection-img-wrap {
-        aspect-ratio: 16 / 9;
+        aspect-ratio: unset;
+        height: 55vw;
+        max-height: 220px;
     }
 
     /* Products 2-col */
