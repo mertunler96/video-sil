@@ -1,26 +1,39 @@
 <section class="page-hero">
-  <span class="section-label" style="color: var(--color-gold);">
+  <span class="section-label" style="color:var(--color-gold);">
     {% if collection.handle == 'all' %}All Products{% else %}The Collection{% endif %}
   </span>
   <h1 class="page-hero-title">
-    {% if collection.handle == 'all' %}Shop All{% else %}{{ collection.title }}{% endif %}
+    {% if collection.handle == 'all' %}Shop{% else %}{{ collection.title }}{% endif %}
   </h1>
-  {% if collection.description != blank %}
+  {% if collection.handle == 'all' %}
+    <p class="page-hero-desc">Premium mirrors and furniture, crafted for the extraordinary home.</p>
+  {% elsif collection.description != blank %}
     <p class="page-hero-desc">{{ collection.description | strip_html }}</p>
   {% endif %}
 </section>
 
-<section style="padding: 5rem 0 8rem; background: var(--color-bg);">
+{% if collection.handle == 'all' %}
+<div class="filter-row" id="filter-row">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="mirrors">Mirrors</button>
+  <button class="filter-btn" data-filter="furniture">Furniture</button>
+</div>
+{% endif %}
+
+<section class="shop-section">
   <div class="container">
     {% if collection.products.size == 0 %}
-      <div style="text-align:center; padding: 6rem 0;">
-        <p style="color: var(--color-mid); font-size: 0.95rem; margin-bottom: 2rem;">No products found in this collection.</p>
+      <div style="text-align:center;padding:6rem 0;">
+        <p style="color:var(--color-mid);font-size:0.95rem;margin-bottom:2rem;">No products found in this collection.</p>
         <a href="/collections/all" class="btn btn-dark">View All Products</a>
       </div>
     {% else %}
-      <div class="products-grid">
+      <div class="shop-grid" id="shop-grid">
         {% for product in collection.products %}
-          <article class="product-card reveal" onclick="window.location='/products/{{ product.handle }}'" style="cursor:pointer">
+          {% assign cat = '' %}
+          {% if product.tags contains 'mirrors' %}{% assign cat = 'mirrors' %}{% endif %}
+          {% if product.tags contains 'furniture' %}{% assign cat = 'furniture' %}{% endif %}
+          <article class="product-card reveal" data-category="{{ cat }}" onclick="window.location='/products/{{ product.handle }}'" style="cursor:pointer">
             <div class="product-img-wrap">
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ product.title }}" class="product-img-main">
@@ -39,6 +52,8 @@
                 <h3 class="product-name">{{ product.title }}</h3>
                 {% if product.variants.size > 1 %}
                   <span class="product-variant">{{ product.variants.size }} options</span>
+                {% elsif product.variants.first.title != 'Default Title' %}
+                  <span class="product-variant">{{ product.variants.first.title }}</span>
                 {% endif %}
               </div>
               <span class="product-price">{{ product.price | money }}</span>
@@ -49,3 +64,26 @@
     {% endif %}
   </div>
 </section>
+
+{% if collection.handle == 'all' %}
+<script>
+(function(){
+  var btns = document.querySelectorAll('.filter-btn');
+  var cards = document.querySelectorAll('#shop-grid .product-card');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.getAttribute('data-filter');
+      cards.forEach(function(card){
+        if(filter === 'all' || card.getAttribute('data-category') === filter){
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+})();
+</script>
+{% endif %}
