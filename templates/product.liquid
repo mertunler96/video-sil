@@ -550,6 +550,9 @@
                 <img src="{{ p.featured_image | img_url: '800x' }}" alt="{{ p.title }}" class="product-img-main">
                 {% if p.images[1] %}<img src="{{ p.images[1] | img_url: '800x' }}" alt="{{ p.title }}" class="product-img-hover">{% endif %}
                 <div class="product-overlay"><a href="{{ p.url }}" class="btn-add-cart">View Product</a></div>
+                {% assign p_tags_lower = p.tags | join: ',' | downcase %}
+                {% if p_tags_lower contains 'signature' or p.title contains 'Solenne' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
+                {% if p_tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
               </div>
               <div class="product-info">
                 <div class="product-meta">
