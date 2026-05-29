@@ -1,4 +1,16 @@
-{% render 'page-hero', img: 'https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg', title: policy.title %}
+{% case policy.url %}
+  {% when '/policies/privacy-policy' %}
+    {% assign hero_img = 'https://munler.co.uk/cdn/shop/files/aynaya_odakli_shotlar_ver_2K_202605251702.jpg' %}
+  {% when '/policies/refund-policy' %}
+    {% assign hero_img = 'https://munler.co.uk/cdn/shop/files/ayna_cercevelerini_siyah_yap_2K_202605251344.jpg' %}
+  {% when '/policies/shipping-policy' %}
+    {% assign hero_img = 'https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg' %}
+  {% when '/policies/terms-of-service' %}
+    {% assign hero_img = 'https://munler.co.uk/cdn/shop/files/Make_the_armchair_202511231422.jpg' %}
+  {% else %}
+    {% assign hero_img = 'https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg' %}
+{% endcase %}
+{% render 'page-hero', img: hero_img, title: policy.title %}
 
 <section class="warranty-body">
   <div class="container-narrow">
