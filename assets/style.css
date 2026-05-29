@@ -1474,16 +1474,33 @@ p {
         display: block;
     }
 
-    /* Collections: 1 column, compact landscape */
+    /* Collections: 2 columns, portrait small cards */
     .collections-grid {
-        grid-template-columns: 1fr;
-        gap: 3px;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
     }
 
     .collection-img-wrap {
         aspect-ratio: unset;
-        height: 55vw;
-        max-height: 220px;
+        height: 52vw;
+        max-height: 210px;
+    }
+
+    .collection-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+        padding: 0.8rem 0 0;
+    }
+
+    .collection-info h3 {
+        font-size: 1.1rem;
+        text-align: left;
+    }
+
+    .collection-info .link-arrow {
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
     }
 
     /* Products 2-col */
