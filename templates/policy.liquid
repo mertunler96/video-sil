@@ -55,19 +55,38 @@ document.addEventListener('DOMContentLoaded', function() {
   var section = document.querySelector('.policy-section');
   if (section) {
     section.querySelectorAll('h2').forEach(function(el) {
-      Object.assign(el.style, {fontFamily:'"Cormorant Garamond",serif',fontSize:'clamp(1.3rem,2.5vw,1.9rem)',fontWeight:'400',color:'#1c1c1c',lineHeight:'1.2',marginBottom:'1.2rem'});
+      el.style.setProperty('font-family', '"Cormorant Garamond", serif', 'important');
+      el.style.setProperty('font-size', '1.6rem', 'important');
+      el.style.setProperty('font-weight', '400', 'important');
+      el.style.setProperty('color', '#1c1c1c', 'important');
+      el.style.setProperty('line-height', '1.2', 'important');
+      el.style.setProperty('margin-bottom', '1.2rem', 'important');
     });
     section.querySelectorAll('h3').forEach(function(el) {
-      Object.assign(el.style, {fontFamily:'"Jost",sans-serif',fontSize:'.78rem',fontWeight:'500',letterSpacing:'.1em',textTransform:'uppercase',color:'#1c1c1c',marginBottom:'.8rem',marginTop:'1.8rem',fontStyle:'normal'});
+      el.style.setProperty('font-family', '"Jost", sans-serif', 'important');
+      el.style.setProperty('font-size', '0.75rem', 'important');
+      el.style.setProperty('font-weight', '500', 'important');
+      el.style.setProperty('letter-spacing', '0.1em', 'important');
+      el.style.setProperty('text-transform', 'uppercase', 'important');
+      el.style.setProperty('color', '#1c1c1c', 'important');
+      el.style.setProperty('margin-bottom', '0.8rem', 'important');
+      el.style.setProperty('margin-top', '1.8rem', 'important');
+      el.style.setProperty('font-style', 'normal', 'important');
     });
     section.querySelectorAll('p').forEach(function(el) {
-      Object.assign(el.style, {fontSize:'.88rem',lineHeight:'1.9',color:'#6b6b67',marginBottom:'1rem'});
+      el.style.setProperty('font-size', '0.88rem', 'important');
+      el.style.setProperty('line-height', '1.9', 'important');
+      el.style.setProperty('color', '#6b6b67', 'important');
+      el.style.setProperty('margin-bottom', '1rem', 'important');
     });
     section.querySelectorAll('li').forEach(function(el) {
-      Object.assign(el.style, {fontSize:'.88rem',lineHeight:'1.85',color:'#6b6b67',marginBottom:'.4rem'});
+      el.style.setProperty('font-size', '0.88rem', 'important');
+      el.style.setProperty('line-height', '1.85', 'important');
+      el.style.setProperty('color', '#6b6b67', 'important');
     });
     section.querySelectorAll('a').forEach(function(el) {
-      Object.assign(el.style, {color:'#1c1c1c',textDecoration:'underline'});
+      el.style.setProperty('color', '#1c1c1c', 'important');
+      el.style.setProperty('text-decoration', 'underline', 'important');
     });
   }
 });
