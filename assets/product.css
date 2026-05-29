@@ -667,3 +667,15 @@
         font-size: 2rem;
     }
 }
+
+/* Description inside accordion */
+.accordion-description {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--color-mid);
+}
+.accordion-description p { margin-bottom: 0.8rem; }
+.accordion-description ul { padding-left: 1rem; }
+.accordion-description li { margin-bottom: 0.4rem; }
+.accordion-description strong { color: var(--color-dark); font-weight: 500; }
+.accordion.open .accordion-body { max-height: 1200px; padding-bottom: 1.2rem; }

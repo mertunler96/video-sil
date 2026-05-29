@@ -128,15 +128,39 @@
           </div>
 
           <div class="accordions">
+            {% if product.description != blank %}
             <div class="accordion open">
               <button class="accordion-btn" aria-expanded="true">
                 <span>Description</span>
                 <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
-              <div class="accordion-body">
-                {{ product.description }}
+              <div class="accordion-body" style="max-height:none; padding-bottom:1.2rem;">
+                <div class="accordion-description">{{ product.description }}</div>
               </div>
             </div>
+            {% endif %}
+            {% if product.metafields.custom.materials %}
+            <div class="accordion">
+              <button class="accordion-btn" aria-expanded="false">
+                <span>Materials &amp; Craft</span>
+                <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="accordion-body">
+                <div class="accordion-description">{{ product.metafields.custom.materials }}</div>
+              </div>
+            </div>
+            {% endif %}
+            {% if product.metafields.custom.dimensions %}
+            <div class="accordion">
+              <button class="accordion-btn" aria-expanded="false">
+                <span>Dimensions</span>
+                <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="accordion-body">
+                <div class="accordion-description">{{ product.metafields.custom.dimensions }}</div>
+              </div>
+            </div>
+            {% endif %}
             <div class="accordion">
               <button class="accordion-btn" aria-expanded="false">
                 <span>Delivery &amp; Returns</span>
@@ -144,23 +168,10 @@
               </button>
               <div class="accordion-body">
                 <ul class="detail-list">
-                  <li>Dispatched within 3–5 business days</li>
+                  <li>Dispatched within 3-5 business days</li>
                   <li>Fully tracked and insured UK delivery</li>
                   <li>Free delivery on orders over £150</li>
-                  <li>30-day returns — <a href="/pages/shipping-returns">full policy</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="accordion">
-              <button class="accordion-btn" aria-expanded="false">
-                <span>Warranty</span>
-                <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
-              <div class="accordion-body">
-                <ul class="detail-list">
-                  <li>5-year warranty against manufacturing defects</li>
-                  <li>Covers frame corrosion and structural failure</li>
-                  <li><a href="/pages/warranty">View full warranty terms</a></li>
+                  <li>30-day returns - <a href="/pages/shipping-returns">full policy</a></li>
                 </ul>
               </div>
             </div>
