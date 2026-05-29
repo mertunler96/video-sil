@@ -1,6 +1,6 @@
 {% comment %}Usage: {% render 'page-hero', img: 'URL', title: 'Page Title' %}{% endcomment %}
 <div class="warranty-hero">
-  <img src="{{ img }}" alt="{{ title }}" class="warranty-hero-img">
+  <img src="{{ img }}" alt="{{ title }}" class="warranty-hero-img" style="object-position: {{ img_position | default: 'center center' }}">
   <div class="warranty-hero-overlay"></div>
   <div class="warranty-hero-content"><h1 class="warranty-hero-title">{{ title }}</h1></div>
 </div>
