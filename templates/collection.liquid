@@ -37,16 +37,16 @@
           <article class="product-card reveal" data-category="{{ cat }}" onclick="window.location='/products/{{ product.handle }}'" style="cursor:pointer">
             <div class="product-img-wrap">
               {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ product.title }}" class="product-img-main">
+                <img src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-main">
               {% endif %}
               {% if product.images[1] %}
-                <img src="{{ product.images[1] | img_url: '600x600', crop: 'center' }}" alt="{{ product.title }}" class="product-img-hover">
+                <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-hover">
               {% endif %}
               <div class="product-overlay">
                 <a href="/products/{{ product.handle }}" class="btn-add-cart">View Product</a>
               </div>
-              {% if product.tags contains 'new' %}<span class="product-badge">New</span>{% endif %}
-              {% if product.tags contains 'signature' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
+              {% if product_tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
+              {% if product_tags_lower contains 'signature' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
             </div>
             <div class="product-info">
               <div class="product-meta">

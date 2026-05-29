@@ -6,172 +6,51 @@
 
 <section class="collections-page-section">
   <div class="container">
-
-    <!-- Collection 01: The Brook Mirror -->
-    <div class="collection-group">
-      <div class="collection-group-header reveal">
-        <span class="section-label">Collection 01</span>
-        <h2>The Brook Mirror</h2>
-        <p>Bold asymmetry in premium stainless steel. Available in Champagne Gold and Matte Black, in two sizes each. An architectural focal point for any interior.</p>
-      </div>
-      <div class="collection-products-grid">
-        {% assign brook = all_products['the-brook-mirror'] %}
-        {% if brook %}
-          <article class="product-card reveal" onclick="window.location='/products/the-brook-mirror'" style="cursor:pointer">
-            <div class="product-img-wrap">
-              <img src="{{ brook.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ brook.title }}" class="product-img-main">
-              <div class="product-overlay"><a href="/products/the-brook-mirror" class="btn-add-cart">View Product</a></div>
-            </div>
-            <div class="product-info">
-              <div class="product-meta">
-                <h3 class="product-name">{{ brook.title }}</h3>
-                <span class="product-variant">Champagne Gold</span>
-              </div>
-              <span class="product-price">{{ brook.price | money }}</span>
-            </div>
-          </article>
-        {% else %}
-          <article class="product-card reveal" onclick="window.location='/products/the-brook-mirror'" style="cursor:pointer">
-            <div class="product-img-wrap">
-              <img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_911uwy911uwy911u_e7d39ccc-05d1-48df-b1ad-be72125a156c.png" alt="The Brook Mirror — Champagne Gold" class="product-img-main">
-              <div class="product-overlay"><a href="/products/the-brook-mirror" class="btn-add-cart">View Product</a></div>
-            </div>
-            <div class="product-info">
-              <div class="product-meta"><h3 class="product-name">The Brook Mirror</h3><span class="product-variant">Champagne Gold</span></div>
-              <span class="product-price">£209</span>
-            </div>
-          </article>
-        {% endif %}
-
-        {% assign brook_black = all_products['the-brook-mirror-matte-black'] %}
-        {% if brook_black %}
-          <article class="product-card reveal" onclick="window.location='/products/the-brook-mirror-matte-black'" style="cursor:pointer">
-            <div class="product-img-wrap">
-              <img src="{{ brook_black.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ brook_black.title }}" class="product-img-main">
-              <div class="product-overlay"><a href="/products/the-brook-mirror-matte-black" class="btn-add-cart">View Product</a></div>
-            </div>
-            <div class="product-info">
-              <div class="product-meta">
-                <h3 class="product-name">{{ brook_black.title }}</h3>
-                <span class="product-variant">Matte Black</span>
-              </div>
-              <span class="product-price">{{ brook_black.price | money }}</span>
-            </div>
-          </article>
-        {% else %}
-          <article class="product-card reveal" onclick="window.location='/products/the-brook-mirror-matte-black'" style="cursor:pointer">
-            <div class="product-img-wrap">
-              <img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_q04fizq04fizq04f_93c8f86e-3b76-48f2-8f88-91396526d02c.png" alt="The Brook Mirror — Matte Black" class="product-img-main">
-              <div class="product-overlay"><a href="/products/the-brook-mirror-matte-black" class="btn-add-cart">View Product</a></div>
-            </div>
-            <div class="product-info">
-              <div class="product-meta"><h3 class="product-name">The Brook Mirror</h3><span class="product-variant">Matte Black</span></div>
-              <span class="product-price">£189</span>
-            </div>
-          </article>
-        {% endif %}
-      </div>
-    </div>
-
-    <!-- Collection 02: The Solenne -->
-    <div class="collection-group">
-      <div class="collection-group-header reveal">
-        <span class="section-label">Collection 02</span>
-        <h2>The Solenne</h2>
-        <p>Our signature floor mirror — an oversized, organic silhouette that creates gallery-worthy drama. Hand-crafted in small batches. One size, no compromises.</p>
-      </div>
-      <div class="collection-products-grid">
-        {% assign solenne = all_products['the-solenne-mirror'] %}
-        {% if solenne %}
-          <article class="product-card reveal" onclick="window.location='/products/the-solenne-mirror'" style="cursor:pointer">
-            <div class="product-img-wrap">
-              <img src="{{ solenne.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ solenne.title }}" class="product-img-main">
-              <div class="product-overlay"><a href="/products/the-solenne-mirror" class="btn-add-cart">View Product</a></div>
-              <span class="product-badge product-badge--gold">Signature</span>
-            </div>
-            <div class="product-info">
-              <div class="product-meta">
-                <h3 class="product-name">{{ solenne.title }}</h3>
-                <span class="product-variant">Champagne Gold · 170 × 90 cm</span>
-              </div>
-              <span class="product-price">{{ solenne.price | money }}</span>
-            </div>
-          </article>
-        {% else %}
-          <article class="product-card reveal" onclick="window.location='/products/the-solenne-mirror'" style="cursor:pointer">
-            <div class="product-img-wrap">
-              <img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_xskxeuxskxeuxskx.png" alt="The Solenne Mirror" class="product-img-main">
-              <div class="product-overlay"><a href="/products/the-solenne-mirror" class="btn-add-cart">View Product</a></div>
-              <span class="product-badge product-badge--gold">Signature</span>
-            </div>
-            <div class="product-info">
-              <div class="product-meta"><h3 class="product-name">The Solenne Mirror</h3><span class="product-variant">Champagne Gold · 170 × 90 cm</span></div>
-              <span class="product-price">£599</span>
-            </div>
-          </article>
-        {% endif %}
-      </div>
-    </div>
-
-    <!-- Collection 03: The Base Edit -->
-    <div class="collection-group">
-      <div class="collection-group-header reveal">
-        <span class="section-label">Collection 03</span>
-        <h2>The Base Edit</h2>
-        <p>Our furniture collection. Pieces designed to ground your space — hand-carved hardwood and natural marble, built to age beautifully alongside your MUNLER mirrors.</p>
-      </div>
-      <div class="collection-products-grid">
-        {% assign rib = all_products['the-rib-end-table'] %}
-        {% if rib %}
-          <article class="product-card reveal" onclick="window.location='/products/the-rib-end-table'" style="cursor:pointer">
-            <div class="product-img-wrap">
-              <img src="{{ rib.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ rib.title }}" class="product-img-main">
-              <div class="product-overlay"><a href="/products/the-rib-end-table" class="btn-add-cart">View Product</a></div>
-            </div>
-            <div class="product-info">
-              <div class="product-meta"><h3 class="product-name">{{ rib.title }}</h3><span class="product-variant">Dark Hardwood</span></div>
-              <span class="product-price">{{ rib.price | money }}</span>
-            </div>
-          </article>
-        {% else %}
-          <article class="product-card reveal" onclick="window.location='/products/the-rib-end-table'" style="cursor:pointer">
-            <div class="product-img-wrap">
-              <img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_en00uven00uven00_073900b8-d131-4da8-abf2-5d60f3b89639.png" alt="The Rib End Table" class="product-img-main">
-              <div class="product-overlay"><a href="/products/the-rib-end-table" class="btn-add-cart">View Product</a></div>
-            </div>
-            <div class="product-info">
-              <div class="product-meta"><h3 class="product-name">The Rib End Table</h3><span class="product-variant">Dark Hardwood</span></div>
-              <span class="product-price">£199</span>
-            </div>
-          </article>
-        {% endif %}
-
-        {% assign volta = all_products['the-volta-end-table'] %}
-        {% if volta %}
-          <article class="product-card reveal" onclick="window.location='/products/the-volta-end-table'" style="cursor:pointer">
-            <div class="product-img-wrap">
-              <img src="{{ volta.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ volta.title }}" class="product-img-main">
-              <div class="product-overlay"><a href="/products/the-volta-end-table" class="btn-add-cart">View Product</a></div>
-            </div>
-            <div class="product-info">
-              <div class="product-meta"><h3 class="product-name">{{ volta.title }}</h3><span class="product-variant">Dark Hardwood &amp; Marble</span></div>
-              <span class="product-price">{{ volta.price | money }}</span>
-            </div>
-          </article>
-        {% else %}
-          <article class="product-card reveal" onclick="window.location='/products/the-volta-end-table'" style="cursor:pointer">
-            <div class="product-img-wrap">
-              <img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_f348e2f348e2f348.png" alt="The Volta End Table" class="product-img-main">
-              <div class="product-overlay"><a href="/products/the-volta-end-table" class="btn-add-cart">View Product</a></div>
-            </div>
-            <div class="product-info">
-              <div class="product-meta"><h3 class="product-name">The Volta End Table</h3><span class="product-variant">Dark Hardwood &amp; Marble</span></div>
-              <span class="product-price">£299</span>
-            </div>
-          </article>
-        {% endif %}
-      </div>
-    </div>
-
+    {% assign col_counter = 0 %}
+    {% for collection in collections %}
+      {% unless collection.handle == 'frontpage' or collection.handle == 'all' or collection.products_count == 0 %}
+        {% assign col_counter = col_counter | plus: 1 %}
+        <div class="collection-group">
+          <div class="collection-group-header reveal">
+            <span class="section-label">Collection 0{{ col_counter }}</span>
+            <h2>{{ collection.title }}</h2>
+            {% if collection.description != blank %}
+              <p>{{ collection.description | strip_html }}</p>
+            {% endif %}
+          </div>
+          <div class="collection-products-grid">
+            {% for product in collection.products limit: 3 %}
+              {% assign product_tags_lower = product.tags | join: ',' | downcase %}
+              <article class="product-card reveal" onclick="window.location='/products/{{ product.handle }}'" style="cursor:pointer">
+                <div class="product-img-wrap">
+                  {% if product.featured_image %}
+                    <img src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-main">
+                  {% endif %}
+                  {% if product.images[1] %}
+                    <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-hover">
+                  {% endif %}
+                  <div class="product-overlay">
+                    <a href="/products/{{ product.handle }}" class="btn-add-cart">View Product</a>
+                  </div>
+                  {% if product_tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
+                  {% if product_tags_lower contains 'signature' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
+                </div>
+                <div class="product-info">
+                  <div class="product-meta">
+                    {% if product.title contains '–' %}
+                      <h3 class="product-name">{{ product.title | split: '–' | first | strip }}</h3>
+                      <span class="product-variant">{{ product.title | split: '–' | last | strip }}</span>
+                    {% else %}
+                      <h3 class="product-name">{{ product.title }}</h3>
+                    {% endif %}
+                  </div>
+                  <span class="product-price">{{ product.price | money_without_trailing_zeros }}</span>
+                </div>
+              </article>
+            {% endfor %}
+          </div>
+        </div>
+      {% endunless %}
+    {% endfor %}
   </div>
 </section>
