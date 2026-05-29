@@ -1431,10 +1431,40 @@ p {
         --header-h: 64px;
     }
 
+    /* Mobile header layout */
+    .header-inner {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    /* Logo absolutely centered */
+    .site-logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        justify-self: unset;
+        white-space: nowrap;
+    }
+
     /* Hide desktop nav links on mobile */
     .nav-left,
-    .nav-right .nav-link,
+    .nav-right .nav-link {
+        display: none;
+    }
+
+    /* Push nav-right to the far right */
+    .nav-right {
+        margin-left: auto;
+    }
+
+    /* Show only cart icon on mobile */
     .nav-icons {
+        display: flex;
+        gap: 0.8rem;
+    }
+
+    .nav-icons .icon-btn:not(.cart-btn) {
         display: none;
     }
 
