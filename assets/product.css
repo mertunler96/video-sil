@@ -679,3 +679,13 @@
 .accordion-description li { margin-bottom: 0.4rem; }
 .accordion-description strong { color: var(--color-dark); font-weight: 500; }
 .accordion.open .accordion-body { max-height: 1200px; padding-bottom: 1.2rem; }
+/* Fix: form inside product-info-sticky needs its own flex layout */
+.product-info-sticky form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.product-info-sticky .pinfo-actions {
+    margin-top: 0;
+}

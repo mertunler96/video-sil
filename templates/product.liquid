@@ -72,16 +72,16 @@
           </div>
 
           {% form 'product', product %}
-            {% assign size_variants = product.variants | where: 'available', true %}
-            {% assign has_sizes = false %}
+            {% comment %}Count selectable size variants (exclude colour names and single/default){% endcomment %}
+            {% assign size_count = 0 %}
             {% for v in product.variants %}
               {% assign vt = v.title | downcase %}
               {% unless vt == 'default title' or vt contains 'gold' or vt contains 'black' or vt contains 'white' %}
-                {% assign has_sizes = true %}
+                {% assign size_count = size_count | plus: 1 %}
               {% endunless %}
             {% endfor %}
 
-            {% if has_sizes %}
+            {% if size_count > 1 %}
             <div class="option-group">
               <div class="option-label-row">
                 <span class="option-label">Size</span>
