@@ -71,20 +71,30 @@
 (function(){
   var btns = document.querySelectorAll('.filter-btn');
   var cards = document.querySelectorAll('#shop-grid .product-card');
+
+  function applyFilter(filter) {
+    btns.forEach(function(b){ b.classList.remove('active'); });
+    btns.forEach(function(b){ if(b.getAttribute('data-filter') === filter) b.classList.add('active'); });
+    cards.forEach(function(card){
+      card.style.display = (filter === 'all' || card.getAttribute('data-category') === filter) ? '' : 'none';
+    });
+  }
+
   btns.forEach(function(btn){
     btn.addEventListener('click', function(){
-      btns.forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
       var filter = btn.getAttribute('data-filter');
-      cards.forEach(function(card){
-        if(filter === 'all' || card.getAttribute('data-category') === filter){
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+      applyFilter(filter);
+      history.replaceState(null, '', filter === 'all' ? window.location.pathname : '#' + filter);
     });
   });
+
+  // Auto-activate filter from URL hash (e.g. /collections/all#mirrors)
+  var hash = window.location.hash.replace('#', '');
+  if(hash === 'mirrors' || hash === 'furniture') {
+    applyFilter(hash);
+    var el = document.getElementById('filter-row');
+    if(el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
+  }
 })();
 </script>
 {% endif %}
