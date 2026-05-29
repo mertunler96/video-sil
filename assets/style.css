@@ -1474,14 +1474,14 @@ p {
         display: block;
     }
 
-    /* Collections - 2 columns on mobile, compact portrait */
+    /* Collections: 1 column, compact landscape */
     .collections-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 3px;
     }
 
     .collection-img-wrap {
-        aspect-ratio: 3 / 4;
+        aspect-ratio: 16 / 9;
     }
 
     /* Products 2-col */
@@ -1490,13 +1490,9 @@ p {
         gap: 1.5rem 1rem;
     }
 
-    /* Wide Solenne card: full-width on mobile */
+    /* Solenne wide card: same size as other cards on mobile */
     .product-card--wide {
-        grid-column: 1 / -1;
-    }
-
-    .product-card--wide .product-img-wrap {
-        aspect-ratio: 16 / 9;
+        grid-column: auto;
     }
 
     /* Editorial stack */
