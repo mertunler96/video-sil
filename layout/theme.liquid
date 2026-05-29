@@ -19,6 +19,7 @@
   {% if template == 'policy' %}
   <style>
     .warranty-hero { display: none !important; }
+    h1 { font-family: 'Cormorant Garamond', serif !important; font-size: clamp(2.8rem,5vw,4.5rem) !important; font-weight: 400 !important; color: #1c1c1c !important; text-align: center !important; padding: 4rem 0 2rem !important; line-height: 1.1 !important; }
     .rte h2 { font-family: 'Cormorant Garamond', serif !important; font-size: 1.6rem !important; font-weight: 400 !important; color: #1c1c1c !important; line-height: 1.2 !important; margin-bottom: 1.2rem !important; }
     .rte h3 { font-family: 'Jost', sans-serif !important; font-size: .75rem !important; font-weight: 500 !important; letter-spacing: .1em !important; text-transform: uppercase !important; color: #1c1c1c !important; margin-bottom: .8rem !important; margin-top: 1.8rem !important; font-style: normal !important; }
     .rte p { font-size: .88rem !important; line-height: 1.9 !important; color: #6b6b67 !important; margin-bottom: 1rem !important; }
@@ -26,7 +27,6 @@
     .rte li { font-size: .88rem !important; line-height: 1.85 !important; color: #6b6b67 !important; margin-bottom: .4rem !important; }
     .rte a { color: #1c1c1c !important; text-decoration: underline !important; }
     .rte strong { color: #1c1c1c !important; font-weight: 500 !important; }
-    .munler-policy-hero { position: relative; height: 90vh; min-height: 560px; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
   </style>
   <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -39,10 +39,6 @@
     var path = window.location.pathname;
     var imgSrc = imgMap[path] || 'https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg';
     var pageTitle = document.title.split('|')[0].trim();
-    // Remove duplicate h1 (Shopify auto-renders page title before content_for_layout)
-    var allH1s = document.querySelectorAll('h1');
-    if (allH1s.length > 1) { allH1s[0].remove(); }
-
     var rte = document.querySelector('.rte');
     if (rte && !document.querySelector('.munler-policy-hero')) {
       var hero = document.createElement('div');
