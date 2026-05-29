@@ -28,30 +28,7 @@
     .rte a { color: #1c1c1c !important; text-decoration: underline !important; }
     .rte strong { color: #1c1c1c !important; font-weight: 500 !important; }
   </style>
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var imgMap = {
-      '/policies/privacy-policy': 'https://munler.co.uk/cdn/shop/files/aynaya_odakli_shotlar_ver_2K_202605251702.jpg',
-      '/policies/refund-policy': 'https://munler.co.uk/cdn/shop/files/ayna_cercevelerini_siyah_yap_2K_202605251344.jpg',
-      '/policies/shipping-policy': 'https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg',
-      '/policies/terms-of-service': 'https://munler.co.uk/cdn/shop/files/Make_the_armchair_202511231422.jpg'
-    };
-    var path = window.location.pathname;
-    var imgSrc = imgMap[path] || 'https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg';
-    var pageTitle = document.title.split('|')[0].trim();
-    var rte = document.querySelector('.rte');
-    if (rte && !document.querySelector('.munler-policy-hero')) {
-      var hero = document.createElement('div');
-      hero.className = 'munler-policy-hero';
-      hero.setAttribute('style', 'position:relative;height:90vh;min-height:560px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden');
-      hero.innerHTML = '<img src="' + imgSrc + '" alt="' + pageTitle + '" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center">' +
-        '<div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,10,.55),rgba(10,10,10,.45))"></div>' +
-        '<div style="position:relative;z-index:2;padding:0 24px;max-width:680px"><h1 style="font-family:\'Cormorant Garamond\',serif;font-size:clamp(3.5rem,7vw,6.5rem);font-weight:400;color:#fff;line-height:1.05;margin:0">' + pageTitle + '</h1></div>';
-      rte.parentElement.insertBefore(hero, rte);
-    }
-  });
-  </script>
-  {% endif %}
+{% endif %}
 </head>
 <body>
 
