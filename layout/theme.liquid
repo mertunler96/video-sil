@@ -18,22 +18,38 @@
 
   {% if template == 'policy' %}
   <style>
-    .warranty-hero { position: relative; height: 90vh; min-height: 560px; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
-    .warranty-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-    .warranty-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,.55), rgba(10,10,10,.45)); }
-    .warranty-hero-content { position: relative; z-index: 2; padding: 0 24px; max-width: 680px; }
-    .warranty-hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 7vw, 6.5rem); font-weight: 400; color: #fff; line-height: 1.05; }
-    .warranty-body { padding: 8rem 0; background: #fff; }
-    .policy-updated { font-family: 'Jost', sans-serif; font-size: .72rem; font-weight: 300; color: #888; letter-spacing: .08em; margin-bottom: 3.5rem; padding-bottom: 2rem; border-bottom: 1px solid #e8e4de; }
-    .policy-section { margin-bottom: 3.5rem; padding-bottom: 3.5rem; border-bottom: 1px solid #e8e4de; }
-    .policy-section h2 { font-family: 'Cormorant Garamond', serif !important; font-size: clamp(1.3rem, 2.5vw, 1.9rem) !important; font-weight: 400 !important; color: #1a1a18 !important; margin-bottom: 1.2rem !important; line-height: 1.2 !important; }
-    .policy-section h3 { font-family: 'Jost', sans-serif !important; font-size: .78rem !important; font-weight: 500 !important; letter-spacing: .1em !important; text-transform: uppercase !important; color: #1a1a18 !important; margin-bottom: .8rem !important; margin-top: 1.8rem !important; font-style: normal !important; }
-    .policy-section p { font-size: .88rem; line-height: 1.9; color: #6b6b67; margin-bottom: 1rem; }
-    .policy-section ul, .policy-section ol { padding-left: 1.4rem; margin-bottom: 1rem; }
-    .policy-section li { font-size: .88rem; line-height: 1.85; color: #6b6b67; margin-bottom: .4rem; }
-    .policy-section a { color: #1a1a18 !important; text-decoration: underline; text-underline-offset: 3px; }
-    .policy-section strong { color: #1a1a18; font-weight: 500; }
+    .rte h2 { font-family: 'Cormorant Garamond', serif !important; font-size: 1.6rem !important; font-weight: 400 !important; color: #1c1c1c !important; line-height: 1.2 !important; margin-bottom: 1.2rem !important; }
+    .rte h3 { font-family: 'Jost', sans-serif !important; font-size: .75rem !important; font-weight: 500 !important; letter-spacing: .1em !important; text-transform: uppercase !important; color: #1c1c1c !important; margin-bottom: .8rem !important; margin-top: 1.8rem !important; font-style: normal !important; }
+    .rte p { font-size: .88rem !important; line-height: 1.9 !important; color: #6b6b67 !important; margin-bottom: 1rem !important; }
+    .rte ul, .rte ol { padding-left: 1.4rem !important; margin-bottom: 1rem !important; }
+    .rte li { font-size: .88rem !important; line-height: 1.85 !important; color: #6b6b67 !important; margin-bottom: .4rem !important; }
+    .rte a { color: #1c1c1c !important; text-decoration: underline !important; }
+    .rte strong { color: #1c1c1c !important; font-weight: 500 !important; }
+    .munler-policy-hero { position: relative; height: 90vh; min-height: 560px; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
   </style>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var imgMap = {
+      '/policies/privacy-policy': 'https://munler.co.uk/cdn/shop/files/aynaya_odakli_shotlar_ver_2K_202605251702.jpg',
+      '/policies/refund-policy': 'https://munler.co.uk/cdn/shop/files/ayna_cercevelerini_siyah_yap_2K_202605251344.jpg',
+      '/policies/shipping-policy': 'https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg',
+      '/policies/terms-of-service': 'https://munler.co.uk/cdn/shop/files/Make_the_armchair_202511231422.jpg'
+    };
+    var path = window.location.pathname;
+    var imgSrc = imgMap[path] || 'https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg';
+    var pageTitle = document.title.split('|')[0].trim();
+    var rte = document.querySelector('.rte');
+    if (rte && !document.querySelector('.munler-policy-hero')) {
+      var hero = document.createElement('div');
+      hero.className = 'munler-policy-hero';
+      hero.setAttribute('style', 'position:relative;height:90vh;min-height:560px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden');
+      hero.innerHTML = '<img src="' + imgSrc + '" alt="' + pageTitle + '" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center">' +
+        '<div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,10,.55),rgba(10,10,10,.45))"></div>' +
+        '<div style="position:relative;z-index:2;padding:0 24px;max-width:680px"><h1 style="font-family:\'Cormorant Garamond\',serif;font-size:clamp(3.5rem,7vw,6.5rem);font-weight:400;color:#fff;line-height:1.05;margin:0">' + pageTitle + '</h1></div>';
+      rte.parentElement.insertBefore(hero, rte);
+    }
+  });
+  </script>
   {% endif %}
 </head>
 <body>
