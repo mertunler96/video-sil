@@ -668,6 +668,141 @@
     }
 }
 
+/* === QUANTITY SELECTOR === */
+.qty-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.qty-group .option-label {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+.qty-control {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-border);
+    width: fit-content;
+}
+
+.qty-btn {
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--color-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s;
+    font-family: var(--font-sans);
+}
+
+.qty-btn:hover { background: var(--color-bg); }
+
+.qty-input {
+    width: 52px;
+    height: 44px;
+    text-align: center;
+    border: none;
+    border-left: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    background: none;
+    color: var(--color-dark);
+    -moz-appearance: textfield;
+}
+
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* === STICKY MOBILE ATC BAR === */
+.sticky-atc-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 400;
+    background: var(--color-white);
+    border-top: 1px solid var(--color-border);
+    padding: 0.9rem var(--gutter);
+    gap: 1rem;
+    align-items: center;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    transform: translateY(100%);
+    transition: transform 0.3s var(--ease-out);
+}
+
+.sticky-atc-bar.is-visible {
+    transform: translateY(0);
+}
+
+.sticky-atc-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.sticky-atc-name {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    color: var(--color-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sticky-atc-price {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-mid);
+    margin-top: 0.15rem;
+}
+
+.sticky-atc-btn {
+    flex-shrink: 0;
+    padding: 13px 24px;
+    background: var(--color-dark);
+    color: var(--color-white);
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background var(--transition);
+    white-space: nowrap;
+    min-height: 44px;
+}
+
+.sticky-atc-btn:hover { background: var(--color-dark-2); }
+
+@media (max-width: 900px) {
+    .sticky-atc-bar {
+        display: flex;
+    }
+}
+
+/* === REVIEWS SECTION === */
+.reviews-section {
+    padding: 6rem 0;
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+}
+
 /* Description inside accordion */
 .accordion-description {
     font-size: 0.85rem;

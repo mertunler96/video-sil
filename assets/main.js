@@ -72,9 +72,16 @@
     const mobileMenu = document.getElementById('mobile-menu');
 
     if (menuBtn && mobileMenu) {
+        menuBtn.setAttribute('aria-expanded', 'false');
+
         menuBtn.addEventListener('click', function () {
-            mobileMenu.classList.toggle('open');
+            var isOpen = mobileMenu.classList.toggle('open');
             menuBtn.classList.toggle('active');
+            menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            if (isOpen) {
+                var firstLink = mobileMenu.querySelector('a');
+                if (firstLink) setTimeout(function(){ firstLink.focus(); }, 50);
+            }
         });
 
         // Close when a link is clicked
@@ -82,7 +89,34 @@
             link.addEventListener('click', function () {
                 mobileMenu.classList.remove('open');
                 menuBtn.classList.remove('active');
+                menuBtn.setAttribute('aria-expanded', 'false');
             });
+        });
+
+        // ESC key closes menu
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                mobileMenu.classList.remove('open');
+                menuBtn.classList.remove('active');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.focus();
+            }
+        });
+
+        // Focus trap within mobile menu
+        mobileMenu.addEventListener('keydown', function(e) {
+            if (!mobileMenu.classList.contains('open') || e.key !== 'Tab') return;
+            var focusable = Array.from(mobileMenu.querySelectorAll('a'));
+            if (focusable.length === 0) return;
+            var first = focusable[0];
+            var last  = focusable[focusable.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                menuBtn.focus();
+            }
         });
     }
 
@@ -197,33 +231,7 @@
     }
 
     // ── Search overlay ───────────────────────────────────────
-    var SEARCH_PRODUCTS = [
-        {
-            name: 'The Brook Mirror', variant: 'Champagne Gold', price: '£209',
-            img: 'https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_911uwy911uwy911u_e7d39ccc-05d1-48df-b1ad-be72125a156c.png',
-            url: '/products/the-brook-mirror'
-        },
-        {
-            name: 'The Brook Mirror', variant: 'Matte Black', price: '£189',
-            img: 'https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_q04fizq04fizq04f_93c8f86e-3b76-48f2-8f88-91396526d02c.png',
-            url: '/products/the-brook-mirror-matte-black'
-        },
-        {
-            name: 'The Solenne Mirror', variant: '', price: '£599',
-            img: 'https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_xskxeuxskxeuxskx.png',
-            url: '/products/the-solenne-mirror'
-        },
-        {
-            name: 'The Rib End Table', variant: '', price: '£199',
-            img: 'https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_en00uven00uven00_073900b8-d131-4da8-abf2-5d60f3b89639.png',
-            url: '/products/the-rib-end-table'
-        },
-        {
-            name: 'The Volta End Table', variant: '', price: '£299',
-            img: 'https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_f348e2f348e2f348.png',
-            url: '/products/the-volta-end-table'
-        }
-    ];
+    var SEARCH_PRODUCTS = window.MUNLER_SEARCH_PRODUCTS || [];
 
     // Inject overlay HTML
     var overlayEl = document.createElement('div');
@@ -258,36 +266,81 @@
     var searchCloseBtn   = document.getElementById('search-close-btn');
     var searchQueryDisp  = document.getElementById('search-query-display');
 
-    function renderProducts(query) {
-        var q = query.trim().toLowerCase();
-        var list = q
-            ? SEARCH_PRODUCTS.filter(function (p) {
-                return (p.name + ' ' + p.variant).toLowerCase().indexOf(q) !== -1;
-              })
-            : SEARCH_PRODUCTS;
+    var searchDebounce;
 
+    function renderStaticProducts(list, query) {
         if (list.length === 0) {
             searchGrid.style.display = 'none';
             searchEmpty.style.display = 'block';
-            searchQueryDisp.textContent = query;
+            searchQueryDisp.textContent = query || '';
             searchLabel.textContent = 'No results';
         } else {
             searchGrid.style.display = 'grid';
             searchEmpty.style.display = 'none';
-            searchLabel.textContent = q ? 'Results for “' + query + '”' : 'All Products';
+            searchLabel.textContent = query ? 'Results for “' + query + '”' : 'All Products';
             searchGrid.innerHTML = list.map(function (p) {
-                return '<a href="' + p.url + '" class="search-product-card">' +
-                    '<div class="search-product-img-wrap">' +
-                        '<img src="' + p.img + '" alt="' + p.name + '" class="search-product-img" loading="lazy">' +
+                return '<a href=”' + p.url + '” class=”search-product-card”>' +
+                    '<div class=”search-product-img-wrap”>' +
+                        '<img src=”' + p.img + '” alt=”' + p.name + '” class=”search-product-img” loading=”lazy”>' +
                     '</div>' +
-                    '<div class="search-product-info">' +
-                        '<p class="search-product-name">' + p.name + '</p>' +
-                        (p.variant ? '<p class="search-product-variant">' + p.variant + '</p>' : '') +
-                        '<p class="search-product-price">' + p.price + '</p>' +
+                    '<div class=”search-product-info”>' +
+                        '<p class=”search-product-name”>' + p.name + '</p>' +
+                        '<p class=”search-product-price”>' + p.price + '</p>' +
                     '</div>' +
                 '</a>';
             }).join('');
         }
+    }
+
+    function renderProducts(query) {
+        var q = query.trim();
+        clearTimeout(searchDebounce);
+
+        if (!q) {
+            renderStaticProducts(SEARCH_PRODUCTS, '');
+            return;
+        }
+
+        // Debounce API calls by 220ms
+        searchDebounce = setTimeout(function() {
+            fetch('/search/suggest.json?q=' + encodeURIComponent(q) +
+                  '&resources[type]=product&resources[limit]=6' +
+                  '&resources[options][unavailable_products]=last')
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    var products = (data.resources && data.resources.results && data.resources.results.products) || [];
+                    if (products.length === 0) {
+                        searchGrid.style.display = 'none';
+                        searchEmpty.style.display = 'block';
+                        searchQueryDisp.textContent = query;
+                        searchLabel.textContent = 'No results';
+                        return;
+                    }
+                    searchGrid.style.display = 'grid';
+                    searchEmpty.style.display = 'none';
+                    searchLabel.textContent = 'Results for “' + query + '”';
+                    searchGrid.innerHTML = products.map(function(p) {
+                        var img = p.featured_image ? p.featured_image.url || p.featured_image : '';
+                        return '<a href=”' + p.url + '” class=”search-product-card”>' +
+                            '<div class=”search-product-img-wrap”>' +
+                                (img ? '<img src=”' + img + '” alt=”' + (p.title || '') + '” class=”search-product-img” loading=”lazy”>' : '') +
+                            '</div>' +
+                            '<div class=”search-product-info”>' +
+                                '<p class=”search-product-name”>' + (p.title || '') + '</p>' +
+                                '<p class=”search-product-price”>' + (p.price || '') + '</p>' +
+                            '</div>' +
+                        '</a>';
+                    }).join('');
+                })
+                .catch(function() {
+                    // Fallback to static search on network error
+                    var q2 = q.toLowerCase();
+                    var list = SEARCH_PRODUCTS.filter(function(p) {
+                        return (p.name + ' ' + p.variant).toLowerCase().indexOf(q2) !== -1;
+                    });
+                    renderStaticProducts(list, query);
+                });
+        }, 220);
     }
 
     function openSearch() {

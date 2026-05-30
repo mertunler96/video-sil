@@ -84,6 +84,51 @@
     gap: 2.5rem 2rem;
 }
 
+/* === PAGINATION === */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 3rem 0 1rem;
+}
+
+.pagination-btn,
+.pagination-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 0.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-mid);
+    border: 1px solid var(--color-border);
+    transition: border-color var(--transition), color var(--transition);
+    text-decoration: none;
+}
+
+.pagination-btn:hover,
+.pagination-num:hover {
+    border-color: var(--color-dark);
+    color: var(--color-dark);
+}
+
+.pagination-num.is-current {
+    border-color: var(--color-dark);
+    color: var(--color-dark);
+    background: var(--color-dark);
+    color: var(--color-white);
+}
+
+.pagination-ellipsis {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-mid);
+    padding: 0 0.4rem;
+}
+
 /* === COLLECTIONS PAGE === */
 .collections-page-section {
     padding: 6rem 0 8rem;
@@ -860,6 +905,27 @@
     .trade-who-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .shop-grid {
+        gap: 1.5rem 1rem;
+    }
+
+    .filter-btn {
+        padding: 1rem 1.2rem;
+        font-size: 0.65rem;
+    }
+
+    .about-story-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
     }
 }
 

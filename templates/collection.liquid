@@ -28,6 +28,7 @@
         <a href="/collections/all" class="btn btn-dark">View All Products</a>
       </div>
     {% else %}
+      {% paginate collection.products by 12 %}
       <div class="shop-grid" id="shop-grid">
         {% for product in collection.products %}
           {% assign product_tags_lower = product.tags | join: ',' | downcase %}
@@ -37,10 +38,13 @@
           <article class="product-card reveal" data-category="{{ cat }}" onclick="window.location='/products/{{ product.handle }}'" style="cursor:pointer">
             <div class="product-img-wrap">
               {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-main">
+                <img src="{{ product.featured_image | img_url: '800x' }}"
+                     srcset="{{ product.featured_image | img_url: '400x' }} 400w, {{ product.featured_image | img_url: '800x' }} 800w"
+                     sizes="(max-width: 600px) 50vw, (max-width: 1100px) 33vw, 25vw"
+                     alt="{{ product.title }}" class="product-img-main" width="800" height="1067" loading="lazy">
               {% endif %}
               {% if product.images[1] %}
-                <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-hover">
+                <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-hover" width="800" height="1067" loading="lazy">
               {% endif %}
               <div class="product-overlay">
                 <a href="/products/{{ product.handle }}" class="btn-add-cart">View Product</a>
@@ -62,6 +66,32 @@
           </article>
         {% endfor %}
       </div>
+
+      {% if paginate.pages > 1 %}
+      <div class="pagination">
+        {% if paginate.previous %}
+          <a href="{{ paginate.previous.url }}" class="pagination-btn" aria-label="Previous page">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </a>
+        {% endif %}
+        {% for part in paginate.parts %}
+          {% if part.is_link %}
+            <a href="{{ part.url }}" class="pagination-num">{{ part.title }}</a>
+          {% elsif part.title == paginate.current_page %}
+            <span class="pagination-num is-current">{{ part.title }}</span>
+          {% else %}
+            <span class="pagination-ellipsis">{{ part.title }}</span>
+          {% endif %}
+        {% endfor %}
+        {% if paginate.next %}
+          <a href="{{ paginate.next.url }}" class="pagination-btn" aria-label="Next page">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+          </a>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      {% endpaginate %}
     {% endif %}
   </div>
 </section>

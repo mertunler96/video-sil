@@ -19,7 +19,8 @@
   <div class="hero-slides">
     <div class="hero-slide is-active">
       <div class="hero-media">
-        <video class="hero-video" autoplay muted loop playsinline>
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+               poster="https://munler.co.uk/cdn/shop/files/bu_odanin_farkli_shotlarini_ver__202605231515_91bb8878-aaa5-4548-a64a-2a5e1238b6b5.jpg">
           <source src="{{ 'hero.mp4' | asset_url }}" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
@@ -32,7 +33,7 @@
     </div>
     <div class="hero-slide">
       <div class="hero-media">
-        <img src="https://munler.co.uk/cdn/shop/files/bu_odanin_farkli_shotlarini_ver__202605231515_91bb8878-aaa5-4548-a64a-2a5e1238b6b5.jpg" alt="MUNLER — The Brook Mirror in a modern living space" class="hero-img">
+        <img src="https://munler.co.uk/cdn/shop/files/bu_odanin_farkli_shotlarini_ver__202605231515_91bb8878-aaa5-4548-a64a-2a5e1238b6b5.jpg" alt="MUNLER — The Brook Mirror in a modern living space" class="hero-img" width="1920" height="1080" loading="lazy">
         <div class="hero-overlay"></div>
       </div>
       <div class="hero-content">
@@ -64,7 +65,7 @@
   <div class="collections-grid">
     <div class="collection-card reveal">
       <div class="collection-img-wrap">
-        <img src="https://munler.co.uk/cdn/shop/files/aynaya_odakli_shotlar_ver_2K_202605251702.jpg" alt="MUNLER Mirror Collection">
+        <img src="https://munler.co.uk/cdn/shop/files/aynaya_odakli_shotlar_ver_2K_202605251702.jpg" alt="MUNLER Mirror Collection" width="800" height="1000" loading="lazy">
       </div>
       <div class="collection-info">
         <span class="collection-num">01</span>
@@ -74,7 +75,7 @@
     </div>
     <div class="collection-card reveal">
       <div class="collection-img-wrap">
-        <img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_f348e2f348e2f348.png" alt="MUNLER Furniture Collection">
+        <img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_f348e2f348e2f348.png" alt="MUNLER Furniture Collection" width="800" height="1000" loading="lazy">
       </div>
       <div class="collection-info">
         <span class="collection-num">02</span>
@@ -105,8 +106,11 @@
           {% assign tags_lower = product.tags | join: ',' | downcase %}
           <article class="product-card reveal" onclick="window.location='{{ product.url }}'" style="cursor:pointer">
             <div class="product-img-wrap">
-              <img src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-main">
-              {% if product.images[1] %}<img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-hover">{% endif %}
+              <img src="{{ product.featured_image | img_url: '800x' }}"
+                   srcset="{{ product.featured_image | img_url: '400x' }} 400w, {{ product.featured_image | img_url: '800x' }} 800w"
+                   sizes="(max-width: 600px) 50vw, 25vw"
+                   alt="{{ product.title }}" class="product-img-main" width="800" height="1067" loading="lazy">
+              {% if product.images[1] %}<img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-hover" width="800" height="1067" loading="lazy">{% endif %}
               <div class="product-overlay"><a href="{{ product.url }}" class="btn-add-cart">View Product</a></div>
               {% if tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
             </div>
@@ -128,8 +132,11 @@
       {% if solenne_product %}
         <article class="product-card product-card--wide reveal" onclick="window.location='{{ solenne_product.url }}'" style="cursor:pointer">
           <div class="product-img-wrap">
-            <img src="{{ solenne_product.featured_image | img_url: '800x' }}" alt="{{ solenne_product.title }}" class="product-img-main">
-            {% if solenne_product.images[1] %}<img src="{{ solenne_product.images[1] | img_url: '800x' }}" alt="{{ solenne_product.title }}" class="product-img-hover">{% endif %}
+            <img src="{{ solenne_product.featured_image | img_url: '800x' }}"
+                   srcset="{{ solenne_product.featured_image | img_url: '400x' }} 400w, {{ solenne_product.featured_image | img_url: '800x' }} 800w"
+                   sizes="(max-width: 600px) 100vw, 50vw"
+                   alt="{{ solenne_product.title }}" class="product-img-main" width="800" height="1067" loading="lazy">
+            {% if solenne_product.images[1] %}<img src="{{ solenne_product.images[1] | img_url: '800x' }}" alt="{{ solenne_product.title }}" class="product-img-hover" width="800" height="1067" loading="lazy">{% endif %}
             <div class="product-overlay"><a href="{{ solenne_product.url }}" class="btn-add-cart">View Product</a></div>
             <span class="product-badge product-badge--gold">Signature</span>
           </div>

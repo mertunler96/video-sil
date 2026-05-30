@@ -5,6 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{{ page_description | default: shop.description | default: 'MUNLER — Stainless steel frames and ecological mirrors. Crafted for the extraordinary home.' }}">
   <title>{% if template == 'index' %}MUNLER — Premium Home Objects{% elsif page_title %}{{ page_title }} | MUNLER{% else %}MUNLER{% endif %}</title>
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="MUNLER">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:locale" content="en_GB">
+  {% if template == 'index' %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MUNLER — Premium Home Objects">
+    <meta property="og:description" content="{{ shop.description | default: 'Stainless steel frames and ecological mirrors. Crafted for the extraordinary home.' | escape }}">
+    {% if settings.share_image %}<meta property="og:image" content="https:{{ settings.share_image | img_url: '1200x630' }}">{% endif %}
+  {% elsif template contains 'product' %}
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="{{ product.title | escape }} | MUNLER">
+    <meta property="og:description" content="{{ product.description | strip_html | truncate: 160 | escape }}">
+    <meta property="og:image" content="https:{{ product.featured_image | img_url: '1200x630' }}">
+    <meta property="product:price:amount" content="{{ product.price | money_without_currency }}">
+    <meta property="product:price:currency" content="GBP">
+  {% elsif template contains 'collection' %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ collection.title | escape }} | MUNLER">
+    <meta property="og:description" content="{{ collection.description | strip_html | truncate: 160 | default: 'Shop the MUNLER collection.' | escape }}">
+    {% if collection.image %}<meta property="og:image" content="https:{{ collection.image | img_url: '1200x630' }}">{% elsif settings.share_image %}<meta property="og:image" content="https:{{ settings.share_image | img_url: '1200x630' }}">{% endif %}
+  {% else %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% if page_title %}{{ page_title | escape }} | MUNLER{% else %}MUNLER{% endif %}">
+    <meta property="og:description" content="{{ page_description | default: shop.description | default: 'Stainless steel frames and ecological mirrors. Crafted for the extraordinary home.' | escape }}">
+    {% if settings.share_image %}<meta property="og:image" content="https:{{ settings.share_image | img_url: '1200x630' }}">{% endif %}
+  {% endif %}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@munleruk">
+  <meta name="twitter:title" content="{% if template == 'index' %}MUNLER — Premium Home Objects{% elsif page_title %}{{ page_title | escape }} | MUNLER{% else %}MUNLER{% endif %}">
+  <meta name="twitter:description" content="{{ page_description | default: shop.description | default: 'Stainless steel frames and ecological mirrors. Crafted for the extraordinary home.' | escape }}">
+  {% if template contains 'product' and product.featured_image %}
+    <meta name="twitter:image" content="https:{{ product.featured_image | img_url: '1200x628' }}">
+  {% elsif settings.share_image %}
+    <meta name="twitter:image" content="https:{{ settings.share_image | img_url: '1200x628' }}">
+  {% endif %}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,9 +53,30 @@
   {{ content_for_header }}
 
   <link rel="stylesheet" href="{{ 'style.css' | asset_url }}">
-  <link rel="stylesheet" href="{{ 'pages.css' | asset_url }}">
-  <link rel="stylesheet" href="{{ 'product.css' | asset_url }}">
-  {% if template == 'policy' %}<style>main h1{display:none!important}</style>{% endif %}
+  {% if template contains 'product' %}
+    <link rel="stylesheet" href="{{ 'product.css' | asset_url }}">
+  {% endif %}
+  {% unless template == 'index' or template contains 'product' or template == 'cart' %}
+    <link rel="stylesheet" href="{{ 'pages.css' | asset_url }}">
+  {% endunless %}
+  {% if template == 'policy' %}<style>main h1{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}</style>{% endif %}
+
+  {% if template == 'index' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "MUNLER",
+    "url": "{{ shop.url }}",
+    "description": {{ shop.description | default: 'Stainless steel frames and ecological mirrors. Crafted for the extraordinary home.' | json }},
+    "sameAs": [
+      "https://instagram.com/munleruk",
+      "https://pinterest.com/munleruk",
+      "https://tiktok.com/@munleruk"
+    ]
+  }
+  </script>
+  {% endif %}
 </head>
 <body>
 
@@ -172,6 +233,9 @@
     </div>
   </footer>
 
+  <script>
+  window.MUNLER_SEARCH_PRODUCTS = [{% for p in collections['all'].products limit: 8 %}{name:{{ p.title | json }},img:{{ p.featured_image | img_url: '300x' | prepend: 'https:' | json }},url:{{ p.url | json }},price:{{ p.price | money | json }}}{% unless forloop.last %},{% endunless %}{% endfor %}];
+  </script>
   <script src="{{ 'main.js' | asset_url }}" defer></script>
 </body>
 </html>
