@@ -294,23 +294,41 @@
 
     var searchDebounce;
 
+    // Clean a raw value from Shopify API that may have surrounding quotes or be a full URL
+    function cleanShopifyString(raw) {
+        var s = (raw || '').toString().replace(/^[“'\s]+|[“'\s]+$/g, '');
+        return s;
+    }
+
+    // Extract a clean /products/handle path from whatever the API returns
+    function getProductPath(p) {
+        var raw = cleanShopifyString(p.url || p.handle || '');
+        // If it's a full absolute URL (https://...), strip the origin
+        if (/^https?:\/\//i.test(raw)) {
+            raw = raw.replace(/^https?:\/\/[^\/]*/i, '');
+        }
+        if (!raw) return '/collections/all';
+        if (!raw.startsWith('/')) raw = '/' + raw;
+        return raw;
+    }
+
     // Build a product card HTML — works for both suggest API and products.json formats
     function buildCard(p, fromProductsJson) {
-        // URL: suggest API already provides correct p.url (e.g. /products/handle)
-        // Strip any stray quote characters, then make absolute to prevent relative-path bugs
-        var rawUrl = (!fromProductsJson && p.url) ? p.url : ('/products/' + (p.handle || ''));
-        var url = window.location.origin + '/' + rawUrl.replace(/[“']/g, '').replace(/^\/+/, '');
+        // URL
+        var url = fromProductsJson
+            ? '/products/' + (p.handle || '')
+            : getProductPath(p);
 
-        // Image: no CDN suffix manipulation — use raw URL to avoid breaking Shopify CDN paths
+        // Image
         var img = '';
         if (fromProductsJson) {
-            img = (p.images && p.images[0] && p.images[0].src) || '';
+            img = (p.images && p.images[0] && (p.images[0].src || p.images[0].url)) || '';
         } else {
             var fi = p.featured_image;
-            img = fi ? (typeof fi === 'object' ? (fi.url || fi.src || '') : String(fi)) : '';
+            img = fi ? cleanShopifyString(typeof fi === 'object' ? (fi.url || fi.src || '') : String(fi)) : '';
         }
 
-        // Price — both APIs return a decimal string e.g. “599.00” (already in pounds, not pence)
+        // Price — both APIs return decimal string e.g. “599.00” (already in pounds, not pence)
         var rawPrice = fromProductsJson
             ? ((p.variants && p.variants[0] && p.variants[0].price) || '')
             : (p.price || '');
