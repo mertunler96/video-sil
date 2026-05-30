@@ -329,16 +329,32 @@
                     searchEmpty.style.display = 'none';
                     searchLabel.textContent = 'Results for “' + query + '”';
                     searchGrid.innerHTML = products.map(function(p) {
-                        var img = p.featured_image ? (p.featured_image.url || p.featured_image) : '';
-                        var url = (p.url || '').replace(/^”|”$/g, '');
+                        // Build URL from handle (most reliable) or fall back to p.url
+                        var url = p.handle
+                            ? '/products/' + p.handle
+                            : (p.url || '').replace(/^[“'\s]+|[“'\s]+$/g, '');
                         if (url && url.charAt(0) !== '/') url = '/' + url;
+
+                        // Get image — try featured_image.url, then featured_image as string, then image field
+                        var fi = p.featured_image;
+                        var img = fi
+                            ? (typeof fi === 'object' ? (fi.url || fi.src || '') : fi)
+                            : (p.image || '');
+
+                        // Format price (API returns cents as integer or formatted string)
+                        var price = '';
+                        if (p.price !== undefined && p.price !== null) {
+                            var raw = parseFloat(p.price);
+                            price = isNaN(raw) ? p.price : '£' + (raw / 100).toFixed(2).replace('.00', '');
+                        }
+
                         return '<a href=”' + url + '” class=”search-product-card”>' +
                             '<div class=”search-product-img-wrap”>' +
                                 (img ? '<img src=”' + img + '” alt=”' + (p.title || '') + '” class=”search-product-img” loading=”lazy”>' : '') +
                             '</div>' +
                             '<div class=”search-product-info”>' +
                                 '<p class=”search-product-name”>' + (p.title || '') + '</p>' +
-                                '<p class=”search-product-price”>' + (p.price || '') + '</p>' +
+                                '<p class=”search-product-price”>' + price + '</p>' +
                             '</div>' +
                         '</a>';
                     }).join('');
