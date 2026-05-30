@@ -1501,10 +1501,16 @@ p {
         margin-left: auto;
     }
 
-    /* Show all icons on mobile */
+    /* Show all icons on mobile — compact to avoid logo overlap */
     .nav-icons {
         display: flex;
-        gap: 0.6rem;
+        gap: 0;
+    }
+
+    .nav-icons .icon-btn {
+        min-width: unset;
+        min-height: 44px;
+        padding: 10px 7px;
     }
 
     /* Show hamburger on the left */
