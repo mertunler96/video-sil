@@ -312,48 +312,66 @@
         return raw;
     }
 
-    // Build a product card HTML — works for both suggest API and products.json formats
+    // Build a product card DOM element — DOM-based to avoid any HTML quote issues
     function buildCard(p, fromProductsJson) {
-        // URL
         var url = fromProductsJson
             ? '/products/' + (p.handle || '')
             : getProductPath(p);
 
-        // Image
-        var img = '';
+        var imgSrc = '';
         if (fromProductsJson) {
-            img = (p.images && p.images[0] && (p.images[0].src || p.images[0].url)) || '';
+            imgSrc = (p.images && p.images[0] && (p.images[0].src || p.images[0].url)) || '';
         } else {
             var fi = p.featured_image;
-            img = fi ? cleanShopifyString(typeof fi === 'object' ? (fi.url || fi.src || '') : String(fi)) : '';
+            imgSrc = fi ? cleanShopifyString(typeof fi === 'object' ? (fi.url || fi.src || '') : String(fi)) : '';
         }
 
-        // Price — both APIs return decimal string e.g. “599.00” (already in pounds, not pence)
         var rawPrice = fromProductsJson
             ? ((p.variants && p.variants[0] && p.variants[0].price) || '')
             : (p.price || '');
         var price = rawPrice ? '£' + parseFloat(rawPrice).toFixed(2).replace(/\.00$/, '') : '';
-
         var title = p.title || '';
-        return '<a href=”' + url + '” class=”search-product-card”>' +
-            '<div class=”search-product-img-wrap”>' +
-            (img ? '<img src=”' + img + '” alt=”' + title + '” class=”search-product-img” loading=”lazy”>' : '') +
-            '</div>' +
-            '<div class=”search-product-info”>' +
-            '<p class=”search-product-name”>' + title + '</p>' +
-            '<p class=”search-product-price”>' + price + '</p>' +
-            '</div>' +
-            '</a>';
+
+        var a = document.createElement('a');
+        a.className = 'search-product-card';
+        a.href = url; // set as property — no HTML parsing, no quote issues
+
+        var imgWrap = document.createElement('div');
+        imgWrap.className = 'search-product-img-wrap';
+        if (imgSrc) {
+            var img = document.createElement('img');
+            img.src = imgSrc;
+            img.alt = title;
+            img.className = 'search-product-img';
+            img.loading = 'lazy';
+            imgWrap.appendChild(img);
+        }
+
+        var info = document.createElement('div');
+        info.className = 'search-product-info';
+        var pName = document.createElement('p');
+        pName.className = 'search-product-name';
+        pName.textContent = title;
+        var pPrice = document.createElement('p');
+        pPrice.className = 'search-product-price';
+        pPrice.textContent = price;
+        info.appendChild(pName);
+        info.appendChild(pPrice);
+
+        a.appendChild(imgWrap);
+        a.appendChild(info);
+        return a;
     }
 
     function showCards(cards, label) {
+        searchGrid.innerHTML = '';
         if (!cards.length) {
             searchGrid.style.display = 'none';
             searchEmpty.style.display = 'block';
             searchLabel.textContent = label;
             return;
         }
-        searchGrid.innerHTML = cards.join('');
+        cards.forEach(function(card) { searchGrid.appendChild(card); });
         searchGrid.style.display = 'grid';
         searchEmpty.style.display = 'none';
         searchLabel.textContent = label;
