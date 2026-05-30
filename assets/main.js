@@ -294,30 +294,11 @@
 
     var searchDebounce;
 
-    function renderStaticProducts(list, query) {
-        if (list.length === 0) {
-            searchGrid.style.display = 'none';
-            searchEmpty.style.display = 'block';
-            searchQueryDisp.textContent = query || '';
-            searchLabel.textContent = 'No results';
-        } else {
-            searchGrid.style.display = 'grid';
-            searchEmpty.style.display = 'none';
-            searchLabel.textContent = query ? 'Results for “' + query + '”' : 'All Products';
-            searchGrid.innerHTML = list.map(function (p) {
-                var purl = (p.url || '').replace(/^”|”$/g, '');
-                if (purl && purl.charAt(0) !== '/') purl = '/' + purl;
-                return '<a href=”' + purl + '” class=”search-product-card”>' +
-                    '<div class=”search-product-img-wrap”>' +
-                        '<img src=”' + p.img + '” alt=”' + p.name + '” class=”search-product-img” loading=”lazy”>' +
-                    '</div>' +
-                    '<div class=”search-product-info”>' +
-                        '<p class=”search-product-name”>' + p.name + '</p>' +
-                        '<p class=”search-product-price”>' + p.price + '</p>' +
-                    '</div>' +
-                '</a>';
-            }).join('');
-        }
+    function showSearchPlaceholder() {
+        searchGrid.style.display = 'none';
+        searchEmpty.style.display = 'none';
+        searchLabel.textContent = 'Start typing to search products…';
+        searchGrid.innerHTML = '';
     }
 
     function renderProducts(query) {
@@ -325,7 +306,7 @@
         clearTimeout(searchDebounce);
 
         if (!q) {
-            renderStaticProducts(SEARCH_PRODUCTS, '');
+            showSearchPlaceholder();
             return;
         }
 
@@ -363,12 +344,10 @@
                     }).join('');
                 })
                 .catch(function() {
-                    // Fallback to static search on network error
-                    var q2 = q.toLowerCase();
-                    var list = SEARCH_PRODUCTS.filter(function(p) {
-                        return (p.name + ' ' + p.variant).toLowerCase().indexOf(q2) !== -1;
-                    });
-                    renderStaticProducts(list, query);
+                    searchGrid.style.display = 'none';
+                    searchEmpty.style.display = 'block';
+                    searchQueryDisp.textContent = query;
+                    searchLabel.textContent = 'Search unavailable';
                 });
         }, 220);
     }
@@ -377,7 +356,7 @@
         searchOverlay.classList.add('is-open');
         searchOverlay.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
-        renderProducts('');
+        showSearchPlaceholder();
         setTimeout(function () { searchInput.focus(); }, 80);
     }
 
