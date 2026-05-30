@@ -296,21 +296,21 @@
 
     // Build a product card HTML — works for both suggest API and products.json formats
     function buildCard(p, fromProductsJson) {
-        var url = '/products/' + (p.handle || '');
+        // URL: suggest API already provides correct p.url (e.g. /products/handle)
+        // Strip any stray quote characters, then make absolute to prevent relative-path bugs
+        var rawUrl = (!fromProductsJson && p.url) ? p.url : ('/products/' + (p.handle || ''));
+        var url = window.location.origin + '/' + rawUrl.replace(/[“']/g, '').replace(/^\/+/, '');
 
+        // Image: no CDN suffix manipulation — use raw URL to avoid breaking Shopify CDN paths
         var img = '';
         if (fromProductsJson) {
-            // products.json: images[].src
             img = (p.images && p.images[0] && p.images[0].src) || '';
         } else {
-            // suggest API: featured_image.url or featured_image as string
             var fi = p.featured_image;
             img = fi ? (typeof fi === 'object' ? (fi.url || fi.src || '') : String(fi)) : '';
         }
-        // Add Shopify CDN size suffix for faster loading
-        if (img) img = img.replace(/(\.[a-z]+)(\?|$)/i, '_400x$1$2');
 
-        // Price — both APIs return it as a decimal string e.g. “599.00”
+        // Price — both APIs return a decimal string e.g. “599.00” (already in pounds, not pence)
         var rawPrice = fromProductsJson
             ? ((p.variants && p.variants[0] && p.variants[0].price) || '')
             : (p.price || '');
