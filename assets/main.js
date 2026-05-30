@@ -294,11 +294,63 @@
 
     var searchDebounce;
 
-    function showSearchPlaceholder() {
-        searchGrid.style.display = 'none';
+    // Build a product card HTML — works for both suggest API and products.json formats
+    function buildCard(p, fromProductsJson) {
+        var url = '/products/' + (p.handle || '');
+
+        var img = '';
+        if (fromProductsJson) {
+            // products.json: images[].src
+            img = (p.images && p.images[0] && p.images[0].src) || '';
+        } else {
+            // suggest API: featured_image.url or featured_image as string
+            var fi = p.featured_image;
+            img = fi ? (typeof fi === 'object' ? (fi.url || fi.src || '') : String(fi)) : '';
+        }
+        // Add Shopify CDN size suffix for faster loading
+        if (img) img = img.replace(/(\.[a-z]+)(\?|$)/i, '_400x$1$2');
+
+        // Price — both APIs return it as a decimal string e.g. “599.00”
+        var rawPrice = fromProductsJson
+            ? ((p.variants && p.variants[0] && p.variants[0].price) || '')
+            : (p.price || '');
+        var price = rawPrice ? '£' + parseFloat(rawPrice).toFixed(2).replace(/\.00$/, '') : '';
+
+        var title = p.title || '';
+        return '<a href=”' + url + '” class=”search-product-card”>' +
+            '<div class=”search-product-img-wrap”>' +
+            (img ? '<img src=”' + img + '” alt=”' + title + '” class=”search-product-img” loading=”lazy”>' : '') +
+            '</div>' +
+            '<div class=”search-product-info”>' +
+            '<p class=”search-product-name”>' + title + '</p>' +
+            '<p class=”search-product-price”>' + price + '</p>' +
+            '</div>' +
+            '</a>';
+    }
+
+    function showCards(cards, label) {
+        if (!cards.length) {
+            searchGrid.style.display = 'none';
+            searchEmpty.style.display = 'block';
+            searchLabel.textContent = label;
+            return;
+        }
+        searchGrid.innerHTML = cards.join('');
+        searchGrid.style.display = 'grid';
         searchEmpty.style.display = 'none';
-        searchLabel.textContent = 'Start typing to search products…';
-        searchGrid.innerHTML = '';
+        searchLabel.textContent = label;
+    }
+
+    // Load all products when search opens (no query)
+    function loadAllProducts() {
+        searchLabel.textContent = 'All Products';
+        fetch('/collections/all/products.json?limit=8&sort_by=created-desc')
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                var products = data.products || [];
+                showCards(products.map(function(p) { return buildCard(p, true); }), 'All Products');
+            })
+            .catch(function() { searchLabel.textContent = 'All Products'; });
     }
 
     function renderProducts(query) {
@@ -306,11 +358,10 @@
         clearTimeout(searchDebounce);
 
         if (!q) {
-            showSearchPlaceholder();
+            loadAllProducts();
             return;
         }
 
-        // Debounce API calls by 220ms
         searchDebounce = setTimeout(function() {
             fetch('/search/suggest.json?q=' + encodeURIComponent(q) +
                   '&resources[type]=product&resources[limit]=6' +
@@ -318,46 +369,11 @@
                 .then(function(r) { return r.json(); })
                 .then(function(data) {
                     var products = (data.resources && data.resources.results && data.resources.results.products) || [];
-                    if (products.length === 0) {
-                        searchGrid.style.display = 'none';
-                        searchEmpty.style.display = 'block';
-                        searchQueryDisp.textContent = query;
-                        searchLabel.textContent = 'No results';
-                        return;
-                    }
-                    searchGrid.style.display = 'grid';
-                    searchEmpty.style.display = 'none';
-                    searchLabel.textContent = 'Results for “' + query + '”';
-                    searchGrid.innerHTML = products.map(function(p) {
-                        // Build URL from handle (most reliable) or fall back to p.url
-                        var url = p.handle
-                            ? '/products/' + p.handle
-                            : (p.url || '').replace(/^[“'\s]+|[“'\s]+$/g, '');
-                        if (url && url.charAt(0) !== '/') url = '/' + url;
-
-                        // Get image — try featured_image.url, then featured_image as string, then image field
-                        var fi = p.featured_image;
-                        var img = fi
-                            ? (typeof fi === 'object' ? (fi.url || fi.src || '') : fi)
-                            : (p.image || '');
-
-                        // Format price (API returns cents as integer or formatted string)
-                        var price = '';
-                        if (p.price !== undefined && p.price !== null) {
-                            var raw = parseFloat(p.price);
-                            price = isNaN(raw) ? p.price : '£' + (raw / 100).toFixed(2).replace('.00', '');
-                        }
-
-                        return '<a href=”' + url + '” class=”search-product-card”>' +
-                            '<div class=”search-product-img-wrap”>' +
-                                (img ? '<img src=”' + img + '” alt=”' + (p.title || '') + '” class=”search-product-img” loading=”lazy”>' : '') +
-                            '</div>' +
-                            '<div class=”search-product-info”>' +
-                                '<p class=”search-product-name”>' + (p.title || '') + '</p>' +
-                                '<p class=”search-product-price”>' + price + '</p>' +
-                            '</div>' +
-                        '</a>';
-                    }).join('');
+                    if (!products.length) { searchQueryDisp.textContent = query; }
+                    showCards(
+                        products.map(function(p) { return buildCard(p, false); }),
+                        products.length ? 'Results for “' + query + '”' : 'No results'
+                    );
                 })
                 .catch(function() {
                     searchGrid.style.display = 'none';
@@ -372,7 +388,7 @@
         searchOverlay.classList.add('is-open');
         searchOverlay.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
-        showSearchPlaceholder();
+        loadAllProducts();
         setTimeout(function () { searchInput.focus(); }, 80);
     }
 
