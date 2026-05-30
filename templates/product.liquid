@@ -60,7 +60,7 @@
       <div class="product-gallery" id="product-gallery">
         <div class="gallery-thumbs" id="gallery-thumbs">
           {% for image in product.images %}
-            <button class="thumb {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}" data-src="{{ image | img_url: '1000x' }}" onclick="galleryGoTo({{ forloop.index0 }})">
+            <button class="thumb {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}" data-src="{{ image | img_url: '1000x' }}">
               <img src="{{ image | img_url: '120x' }}" alt="{{ image.alt | default: product.title }}">
             </button>
           {% endfor %}
@@ -672,6 +672,7 @@
 
     setTimeout(function(){
       mainImg.src = images[index];
+      mainImg.removeAttribute('srcset');
       currentIndex = index;
 
       mainImg.style.transition = 'none';
