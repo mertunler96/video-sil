@@ -1,0 +1,56 @@
+﻿<section class="page-hero">
+  <span class="section-label" style="color:var(--color-gold);">Curated</span>
+  <h1 class="page-hero-title">Collections</h1>
+  <p class="page-hero-desc">Three distinct collections, one consistent vision — objects that endure and elevate.</p>
+</section>
+
+<section class="collections-page-section">
+  <div class="container">
+    {% assign col_counter = 0 %}
+    {% for collection in collections %}
+      {% unless collection.handle == 'frontpage' or collection.handle == 'all' or collection.products_count == 0 %}
+        {% assign col_counter = col_counter | plus: 1 %}
+        <div class="collection-group">
+          <div class="collection-group-header reveal">
+            <span class="section-label">Collection 0{{ col_counter }}</span>
+            <h2>{{ collection.title }}</h2>
+            {% if collection.description != blank %}
+              <p>{{ collection.description | strip_html }}</p>
+            {% endif %}
+          </div>
+          <div class="collection-products-grid">
+            {% for product in collection.products limit: 3 %}
+              {% assign product_tags_lower = product.tags | join: ',' | downcase %}
+              <article class="product-card reveal" onclick="window.location='/products/{{ product.handle }}'" style="cursor:pointer">
+                <div class="product-img-wrap">
+                  {% if product.featured_image %}
+                    <img src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-main">
+                  {% endif %}
+                  {% if product.images[1] %}
+                    <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-hover">
+                  {% endif %}
+                  <div class="product-overlay">
+                    <a href="/products/{{ product.handle }}" class="btn-add-cart">View Product</a>
+                  </div>
+                  {% if product_tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
+                  {% if product_tags_lower contains 'signature' or product.title contains 'Solenne' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
+                </div>
+                <div class="product-info">
+                  <div class="product-meta">
+                    {% if product.title contains '–' %}
+                      <h3 class="product-name">{{ product.title | split: '–' | first | strip }}</h3>
+                      <span class="product-variant">{{ product.title | split: '–' | last | strip }}</span>
+                    {% else %}
+                      <h3 class="product-name">{{ product.title }}</h3>
+                    {% endif %}
+                  </div>
+                  <span class="product-price">{{ product.price | money_without_trailing_zeros }}</span>
+                </div>
+              </article>
+            {% endfor %}
+          </div>
+        </div>
+      {% endunless %}
+    {% endfor %}
+  </div>
+</section>

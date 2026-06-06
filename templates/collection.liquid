@@ -1,0 +1,130 @@
+﻿<section class="page-hero">
+  <span class="section-label" style="color:var(--color-gold);">
+    {% if collection.handle == 'all' %}All Products{% else %}The Collection{% endif %}
+  </span>
+  <h1 class="page-hero-title">
+    {% if collection.handle == 'all' %}Shop{% else %}{{ collection.title }}{% endif %}
+  </h1>
+  {% if collection.handle == 'all' %}
+    <p class="page-hero-desc">Premium mirrors and furniture, crafted for the extraordinary home.</p>
+  {% elsif collection.description != blank %}
+    <p class="page-hero-desc">{{ collection.description | strip_html }}</p>
+  {% endif %}
+</section>
+
+{% if collection.handle == 'all' %}
+<div class="filter-row" id="filter-row">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="mirrors">Mirrors</button>
+  <button class="filter-btn" data-filter="furniture">Furniture</button>
+</div>
+{% endif %}
+
+<section class="shop-section">
+  <div class="container">
+    {% if collection.products.size == 0 %}
+      <div style="text-align:center;padding:6rem 0;">
+        <p style="color:var(--color-mid);font-size:0.95rem;margin-bottom:2rem;">No products found in this collection.</p>
+        <a href="/collections/all" class="btn btn-dark">View All Products</a>
+      </div>
+    {% else %}
+      {% paginate collection.products by 12 %}
+      <div class="shop-grid" id="shop-grid">
+        {% for product in collection.products %}
+          {% assign product_tags_lower = product.tags | join: ',' | downcase %}
+          {% assign cat = '' %}
+          {% if product_tags_lower contains 'mirror' %}{% assign cat = 'mirrors' %}{% endif %}
+          {% if product_tags_lower contains 'furniture' %}{% assign cat = 'furniture' %}{% endif %}
+          <article class="product-card reveal" data-category="{{ cat }}" onclick="window.location='/products/{{ product.handle }}'" style="cursor:pointer">
+            <div class="product-img-wrap">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | img_url: '800x' }}"
+                     srcset="{{ product.featured_image | img_url: '400x' }} 400w, {{ product.featured_image | img_url: '800x' }} 800w"
+                     sizes="(max-width: 600px) 50vw, (max-width: 1100px) 33vw, 25vw"
+                     alt="{{ product.title }}" class="product-img-main" width="800" height="1067" loading="lazy">
+              {% endif %}
+              {% if product.images[1] %}
+                <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-hover" width="800" height="1067" loading="lazy">
+              {% endif %}
+              <div class="product-overlay">
+                <a href="/products/{{ product.handle }}" class="btn-add-cart">View Product</a>
+              </div>
+              {% if product_tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
+              {% if product_tags_lower contains 'signature' or product.title contains 'Solenne' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
+            </div>
+            <div class="product-info">
+              <div class="product-meta">
+                {% if product.title contains '–' %}
+                  <h3 class="product-name">{{ product.title | split: '–' | first | strip }}</h3>
+                  <span class="product-variant">{{ product.title | split: '–' | last | strip }}</span>
+                {% else %}
+                  <h3 class="product-name">{{ product.title }}</h3>
+                {% endif %}
+              </div>
+              <span class="product-price">{{ product.price | money_without_trailing_zeros }}</span>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+
+      {% if paginate.pages > 1 %}
+      <div class="pagination">
+        {% if paginate.previous %}
+          <a href="{{ paginate.previous.url }}" class="pagination-btn" aria-label="Previous page">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </a>
+        {% endif %}
+        {% for part in paginate.parts %}
+          {% if part.is_link %}
+            <a href="{{ part.url }}" class="pagination-num">{{ part.title }}</a>
+          {% elsif part.title == paginate.current_page %}
+            <span class="pagination-num is-current">{{ part.title }}</span>
+          {% else %}
+            <span class="pagination-ellipsis">{{ part.title }}</span>
+          {% endif %}
+        {% endfor %}
+        {% if paginate.next %}
+          <a href="{{ paginate.next.url }}" class="pagination-btn" aria-label="Next page">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+          </a>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      {% endpaginate %}
+    {% endif %}
+  </div>
+</section>
+
+{% if collection.handle == 'all' %}
+<script>
+(function(){
+  var btns = document.querySelectorAll('.filter-btn');
+  var cards = document.querySelectorAll('#shop-grid .product-card');
+
+  function applyFilter(filter) {
+    btns.forEach(function(b){ b.classList.remove('active'); });
+    btns.forEach(function(b){ if(b.getAttribute('data-filter') === filter) b.classList.add('active'); });
+    cards.forEach(function(card){
+      card.style.display = (filter === 'all' || card.getAttribute('data-category') === filter) ? '' : 'none';
+    });
+  }
+
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var filter = btn.getAttribute('data-filter');
+      applyFilter(filter);
+      history.replaceState(null, '', filter === 'all' ? window.location.pathname : '#' + filter);
+    });
+  });
+
+  // Auto-activate filter from URL hash (e.g. /collections/all#mirrors)
+  var hash = window.location.hash.replace('#', '');
+  if(hash === 'mirrors' || hash === 'furniture') {
+    applyFilter(hash);
+    var el = document.getElementById('filter-row');
+    if(el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
+  }
+})();
+</script>
+{% endif %}

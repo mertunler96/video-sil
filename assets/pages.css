@@ -1,0 +1,946 @@
+/* =====================================================
+   MUNLER — Pages (Shop, Collections, About, Contact)
+   ===================================================== */
+
+/* === PAGE HERO BANNER === */
+.page-hero {
+    background: var(--color-dark);
+    padding: calc(var(--header-h) + 34px + 4rem) var(--gutter) 5rem;
+    text-align: center;
+}
+
+.page-hero .section-label {
+    color: var(--color-gold);
+    margin-bottom: 1.2rem;
+}
+
+.page-hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 400;
+    color: var(--color-white);
+    line-height: 1.08;
+    margin-bottom: 1.2rem;
+}
+
+.page-hero-desc {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* === FILTER TABS (Shop) === */
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-white);
+    padding: 0 var(--gutter);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.filter-row::-webkit-scrollbar { display: none; }
+
+.filter-btn {
+    flex-shrink: 0;
+    padding: 1.2rem 1.8rem;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-mid);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color var(--transition), border-color var(--transition);
+    margin-bottom: -1px;
+}
+
+.filter-btn:hover { color: var(--color-dark); }
+
+.filter-btn.active {
+    color: var(--color-dark);
+    border-bottom-color: var(--color-dark);
+}
+
+/* === SHOP GRID === */
+.shop-section {
+    padding: 5rem 0 8rem;
+    background: var(--color-bg);
+}
+
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem 2rem;
+}
+
+/* === PAGINATION === */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 3rem 0 1rem;
+}
+
+.pagination-btn,
+.pagination-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 0.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-mid);
+    border: 1px solid var(--color-border);
+    transition: border-color var(--transition), color var(--transition);
+    text-decoration: none;
+}
+
+.pagination-btn:hover,
+.pagination-num:hover {
+    border-color: var(--color-dark);
+    color: var(--color-dark);
+}
+
+.pagination-num.is-current {
+    border-color: var(--color-dark);
+    color: var(--color-dark);
+    background: var(--color-dark);
+    color: var(--color-white);
+}
+
+.pagination-ellipsis {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-mid);
+    padding: 0 0.4rem;
+}
+
+/* === COLLECTIONS PAGE === */
+.collections-page-section {
+    padding: 6rem 0 8rem;
+    background: var(--color-white);
+}
+
+.collection-group {
+    margin-bottom: 6rem;
+}
+
+.collection-group:last-child { margin-bottom: 0; }
+
+.collection-group-header {
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.collection-group-header h2 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin-bottom: 0.6rem;
+}
+
+.collection-group-header p {
+    max-width: 480px;
+}
+
+.collection-products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+/* === ABOUT PAGE === */
+.about-story {
+    padding: 8rem 0;
+    background: var(--color-white);
+}
+
+.about-story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+    align-items: center;
+}
+
+.about-story-img {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: var(--color-light);
+}
+
+.about-story-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.9s var(--ease-out);
+}
+
+.about-story-img:hover img {
+    transform: scale(1.04);
+}
+
+.about-story-text .section-label {
+    margin-bottom: 1.5rem;
+}
+
+.about-story-text h2 {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    margin-bottom: 1.8rem;
+    line-height: 1.1;
+}
+
+.about-story-text p {
+    margin-bottom: 1.2rem;
+    font-size: 0.92rem;
+    line-height: 1.9;
+}
+
+.about-values {
+    padding: 8rem 0;
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+}
+
+.about-values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    margin-top: 4rem;
+}
+
+.value-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.value-num {
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--color-gold-dark);
+}
+
+.value-item h4 {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+.value-item p {
+    font-size: 0.84rem;
+    line-height: 1.75;
+}
+
+.about-quote {
+    padding: 8rem var(--gutter);
+    text-align: center;
+    background: var(--color-dark);
+}
+
+.about-quote blockquote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--color-white);
+    line-height: 1.5;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-quote cite {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-top: 2rem;
+}
+
+/* === CONTACT PAGE === */
+.contact-section {
+    padding: 7rem 0 8rem;
+    background: var(--color-white);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 8rem;
+    align-items: start;
+}
+
+.contact-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-field label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    padding: 14px 16px;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--color-dark);
+    transition: border-color var(--transition);
+    outline: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+    width: 100%;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    border-color: var(--color-dark);
+}
+
+.form-field textarea {
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.6;
+}
+
+.btn-submit {
+    align-self: flex-start;
+    padding: 16px 40px;
+    background: var(--color-dark);
+    color: var(--color-white);
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-dark);
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+}
+
+.btn-submit:hover {
+    background: transparent;
+    color: var(--color-dark);
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding-top: 0.5rem;
+}
+
+.contact-info-block h4 {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+    margin-bottom: 0.8rem;
+}
+
+.contact-info-block p,
+.contact-info-block a {
+    font-size: 0.88rem;
+    color: var(--color-mid);
+    font-weight: 300;
+    line-height: 1.7;
+}
+
+.contact-info-block a:hover {
+    color: var(--color-dark);
+}
+
+.contact-social {
+    display: flex;
+    gap: 1.2rem;
+}
+
+.contact-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-border);
+    color: var(--color-mid);
+    transition: border-color var(--transition), color var(--transition);
+}
+
+.contact-social a:hover {
+    border-color: var(--color-dark);
+    color: var(--color-dark);
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--color-border);
+    padding: 1.1rem 0;
+}
+
+.faq-q {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--color-dark);
+    margin-bottom: 0.5rem;
+}
+
+.faq-a {
+    font-size: 0.84rem;
+    line-height: 1.75;
+    color: var(--color-mid);
+}
+
+/* === WARRANTY PAGE === */
+.warranty-hero {
+    position: relative;
+    height: 90vh;
+    min-height: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.warranty-hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.warranty-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.45) 100%);
+}
+
+.warranty-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 var(--gutter);
+    max-width: 680px;
+}
+
+.warranty-hero-content .section-label {
+    color: var(--color-gold);
+    margin-bottom: 1.4rem;
+}
+
+.warranty-hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-weight: 400;
+    color: var(--color-white);
+    line-height: 1.05;
+    margin-bottom: 1.4rem;
+}
+
+.warranty-hero-desc {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+    line-height: 1.85;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.warranty-body {
+    padding: 8rem 0;
+    background: var(--color-white);
+}
+
+.warranty-intro {
+    margin-bottom: 5rem;
+}
+
+.warranty-intro .section-label {
+    margin-bottom: 1.2rem;
+}
+
+.warranty-intro h2 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin-bottom: 1.6rem;
+    line-height: 1.15;
+}
+
+.warranty-intro p {
+    font-size: 0.92rem;
+    line-height: 1.9;
+    margin-bottom: 1rem;
+    max-width: 680px;
+}
+
+.warranty-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 6rem;
+}
+
+.warranty-card {
+    padding: 2.5rem;
+    border: 1px solid var(--color-border);
+}
+
+.warranty-card--covered {
+    background: var(--color-bg);
+}
+
+.warranty-card--excluded {
+    background: var(--color-white);
+}
+
+.warranty-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.8rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.warranty-card--covered .warranty-card-header svg {
+    color: var(--color-gold-dark);
+}
+
+.warranty-card--excluded .warranty-card-header svg {
+    color: var(--color-mid);
+}
+
+.warranty-card-header h3 {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+}
+
+.warranty-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.warranty-card ul li {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--color-mid);
+    padding-left: 1.1rem;
+    position: relative;
+}
+
+.warranty-card--covered ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-gold-dark);
+    font-size: 0.7rem;
+    top: 0.15em;
+}
+
+.warranty-card--excluded ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-mid);
+    font-size: 0.7rem;
+    top: 0.15em;
+    opacity: 0.5;
+}
+
+.warranty-claim {
+    margin-bottom: 5rem;
+}
+
+.warranty-claim .section-label {
+    margin-bottom: 1.2rem;
+}
+
+.warranty-claim h2 {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin-bottom: 3rem;
+    line-height: 1.15;
+}
+
+.warranty-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--color-border);
+}
+
+.warranty-step {
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.warranty-step-num {
+    flex-shrink: 0;
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--color-gold-dark);
+    width: 3rem;
+    padding-top: 0.1rem;
+}
+
+.warranty-step-body h4 {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+    margin-bottom: 0.6rem;
+}
+
+.warranty-step-body p {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--color-mid);
+}
+
+.warranty-step-body a {
+    color: var(--color-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.warranty-note {
+    padding: 2rem 2.5rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+}
+
+.warranty-note p {
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: var(--color-mid);
+    margin-bottom: 0.8rem;
+}
+
+.warranty-note p:last-child {
+    margin-bottom: 0;
+}
+
+.warranty-note a {
+    color: var(--color-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+    .warranty-hero {
+        height: 70vh;
+    }
+
+    .warranty-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* === POLICY PAGES (Privacy, Terms, Shipping, Returns) === */
+.policy-section {
+    margin-bottom: 3.5rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.policy-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.policy-updated {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: var(--color-mid);
+    letter-spacing: 0.08em;
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.policy-section h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+    font-weight: 400;
+    color: var(--color-dark);
+    margin-bottom: 1.2rem;
+    line-height: 1.2;
+}
+
+.policy-section h3 {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+    margin-bottom: 0.8rem;
+    margin-top: 1.8rem;
+}
+
+.policy-section p {
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: var(--color-mid);
+    margin-bottom: 1rem;
+}
+
+.policy-section p:last-child {
+    margin-bottom: 0;
+}
+
+.policy-section ul,
+.policy-section ol {
+    padding-left: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.policy-section li {
+    font-size: 0.88rem;
+    line-height: 1.85;
+    color: var(--color-mid);
+    margin-bottom: 0.4rem;
+}
+
+.policy-section a {
+    color: var(--color-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.policy-section strong {
+    color: var(--color-dark);
+    font-weight: 500;
+}
+
+/* === TRADE PAGE === */
+.trade-hero .page-hero-title {
+    margin-bottom: 1.4rem;
+}
+
+.trade-hero-cta {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 14px 36px;
+    border: 1px solid rgba(255,255,255,0.4);
+    color: var(--color-white);
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color var(--transition), background var(--transition);
+}
+
+.trade-hero-cta:hover {
+    border-color: var(--color-white);
+    background: rgba(255,255,255,0.08);
+}
+
+.trade-who-section {
+    padding: 8rem 0;
+    background: var(--color-white);
+    border-top: 1px solid var(--color-border);
+}
+
+.trade-who-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-top: 4rem;
+}
+
+.trade-who-card {
+    padding: 2.5rem;
+    border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    transition: border-color var(--transition);
+}
+
+.trade-who-card:hover {
+    border-color: var(--color-dark);
+}
+
+.trade-who-icon {
+    color: var(--color-gold-dark);
+}
+
+.trade-who-card h3 {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+    line-height: 1.5;
+}
+
+.trade-who-card p {
+    font-size: 0.84rem;
+    line-height: 1.8;
+    color: var(--color-mid);
+}
+
+.trade-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    margin-top: 0.8rem;
+}
+
+.trade-step {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+}
+
+.trade-step-num {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--color-gold-dark);
+    margin-top: 0.1rem;
+}
+
+.trade-step p {
+    font-size: 0.84rem;
+    line-height: 1.75;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 1100px) {
+    .shop-grid,
+    .collection-products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-story-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .about-values-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .trade-who-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .shop-grid {
+        gap: 1.5rem 1rem;
+    }
+
+    .filter-btn {
+        padding: 1rem 1.2rem;
+        font-size: 0.65rem;
+    }
+
+    .about-story-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .shop-grid,
+    .collection-products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .about-values-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-hero {
+        padding: calc(var(--header-h) + 34px + 3rem) var(--gutter) 4rem;
+    }
+}
