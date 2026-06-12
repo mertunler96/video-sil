@@ -2,10 +2,12 @@
    MUNLER — Product Page Styles
    ===================================================== */
 
+/* Product page has a light background always */
 .product-main {
     background: var(--color-bg);
 }
 
+/* Force header to always be solid on product page */
 .product-main ~ footer,
 .site-header.scrolled {
     /* already scrolled style applied via class in HTML */
@@ -54,6 +56,7 @@
     grid-template-columns: 1fr 420px;
     gap: 5rem;
     align-items: start;
+    /* isolate stacking context so sticky doesn't bleed into next sections */
     isolation: isolate;
 }
 
@@ -64,6 +67,7 @@
     gap: 1rem;
 }
 
+/* Thumbnails */
 .gallery-thumbs {
     display: flex;
     flex-direction: column;
@@ -105,6 +109,7 @@
     opacity: 0.85;
 }
 
+/* Main image */
 .gallery-main-wrap {
     position: relative;
 }
@@ -122,6 +127,7 @@
     transition: opacity 0.4s ease;
 }
 
+/* Gallery arrows */
 .gallery-arrow {
     position: absolute;
     top: 50%;
@@ -149,6 +155,7 @@
     color: var(--color-white);
 }
 
+/* Dots (mobile) */
 .gallery-dots {
     display: none;
     justify-content: center;
@@ -182,6 +189,7 @@
     gap: 2rem;
 }
 
+/* Header */
 .pinfo-collection {
     display: block;
     font-family: var(--font-sans);
@@ -209,6 +217,7 @@
     max-width: 360px;
 }
 
+/* Price block */
 .pinfo-price-block {
     display: flex;
     align-items: baseline;
@@ -233,6 +242,7 @@
     font-weight: 300;
 }
 
+/* Size selector */
 .option-group {
     display: flex;
     flex-direction: column;
@@ -309,6 +319,7 @@
     color: var(--color-white);
 }
 
+/* Actions */
 .pinfo-actions {
     display: grid;
     grid-template-columns: 1fr 56px;
@@ -364,6 +375,7 @@
     color: var(--color-gold-dark);
 }
 
+/* Trust badges */
 .trust-badges {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -791,6 +803,7 @@
     border-top: 1px solid var(--color-border);
 }
 
+/* Description inside accordion */
 .accordion-description {
     font-size: 0.85rem;
     line-height: 1.8;
@@ -801,7 +814,7 @@
 .accordion-description li { margin-bottom: 0.4rem; }
 .accordion-description strong { color: var(--color-dark); font-weight: 500; }
 .accordion.open .accordion-body { max-height: 1200px; padding-bottom: 1.2rem; }
-
+/* Fix: form inside product-info-sticky needs its own flex layout */
 .product-info-sticky form {
     display: flex;
     flex-direction: column;
@@ -811,12 +824,12 @@
 .product-info-sticky .pinfo-actions {
     margin-top: 0;
 }
-
 /* === JUDGE.ME STAR BADGE === */
 .pinfo-rating {
     margin: 0.4rem 0 0.6rem;
 }
-.jdgm-preview-badge {
+.pinfo-rating a { text-decoration: none !important; }
+.jdgm-prev-badge {
     display: inline-flex !important;
     align-items: center !important;
     gap: 0.4rem !important;
@@ -825,11 +838,9 @@
     font-weight: 400 !important;
     letter-spacing: 0.04em !important;
     color: var(--color-mid) !important;
-    text-decoration: none !important;
 }
-.jdgm-preview-badge .jdgm-star {
-    color: var(--color-gold) !important;
-}
-.jdgm-preview-badge[data-number-of-reviews="0"] {
-    display: none !important;
-}
+.jdgm-prev-badge[data-number-of-reviews="0"] { display: none !important; }
+.jdgm-prev-badge__stars { display: inline-flex !important; gap: 0.15rem !important; }
+.jdgm-prev-badge .jdgm-star.jdgm--on { color: var(--color-gold) !important; }
+.jdgm-prev-badge .jdgm-star.jdgm--off { color: #ccc !important; }
+.jdgm-prev-badge__text { font-size: 0.75rem !important; color: var(--color-mid) !important; }
