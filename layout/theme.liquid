@@ -168,6 +168,19 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
           </a>
         </div>
+        <form class="footer-newsletter" id="footer-newsletter-form">
+          <p class="footer-newsletter-label">Stay in the loop</p>
+          <div class="footer-newsletter-field">
+            <input type="email" name="email" placeholder="Your email address" required
+                   class="footer-newsletter-input" id="footer-newsletter-email"
+                   autocomplete="email" aria-label="Email address for newsletter">
+            <button type="submit" class="footer-newsletter-btn" aria-label="Subscribe">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+          <p class="footer-newsletter-success" id="footer-newsletter-success" style="display:none">Thank you. You're on the list.</p>
+          <p class="footer-newsletter-error" id="footer-newsletter-error" style="display:none">Something went wrong. Please try again.</p>
+        </form>
       </div>
 
       <div class="footer-links">
@@ -237,5 +250,45 @@
   window.MUNLER_SEARCH_PRODUCTS = [{% for p in collections['all'].products limit: 8 %}{name:{{ p.title | json }},img:{{ p.featured_image | img_url: '300x' | prepend: 'https:' | json }},url:{{ p.url | json }},price:{{ p.price | money | json }}}{% unless forloop.last %},{% endunless %}{% endfor %}];
   </script>
   <script src="{{ 'main.js' | asset_url }}" defer></script>
+  <script>
+  (function() {
+    var form = document.getElementById('footer-newsletter-form');
+    if (!form) return;
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('footer-newsletter-email').value.trim();
+      if (!email) return;
+      fetch('https://a.klaviyo.com/client/subscriptions/?company_id=PUBLIC_API_KEY_HERE', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'revision': '2023-12-15' },
+        body: JSON.stringify({
+          data: {
+            type: 'subscription',
+            attributes: {
+              profile: { data: { type: 'profile', attributes: { email: email } } }
+            },
+            relationships: {
+              list: { data: { type: 'list', id: 'LIST_ID_HERE' } }
+            }
+          }
+        })
+      })
+      .then(function(res) {
+        if (res.ok || res.status === 202) {
+          document.getElementById('footer-newsletter-success').style.display = 'block';
+          document.getElementById('footer-newsletter-error').style.display = 'none';
+          form.querySelector('input[type="email"]').value = '';
+          var _learnq = window._learnq || [];
+          _learnq.push(['identify', { '$email': email }]);
+        } else {
+          document.getElementById('footer-newsletter-error').style.display = 'block';
+        }
+      })
+      .catch(function() {
+        document.getElementById('footer-newsletter-error').style.display = 'block';
+      });
+    });
+  })();
+  </script>
 </body>
 </html>
