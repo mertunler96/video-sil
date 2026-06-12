@@ -22,7 +22,7 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    padding-top: 34px; /* compensate for fixed announcement bar */
+    padding-top: 34px;
 }
 
 img {
@@ -68,13 +68,11 @@ ul { list-style: none; }
     --header-h:      72px;
 }
 
-/* Focus visible — keyboard nav only */
 :focus-visible {
     outline: 2px solid var(--color-gold-dark);
     outline-offset: 3px;
 }
 
-/* Screen-reader only, visible to crawlers */
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -208,7 +206,6 @@ p {
     transform: translateY(0);
 }
 
-/* stagger siblings */
 .reveal:nth-child(2) { transition-delay: 0.1s; }
 .reveal:nth-child(3) { transition-delay: 0.2s; }
 .reveal:nth-child(4) { transition-delay: 0.3s; }
@@ -261,12 +258,11 @@ p {
     left: 0;
     right: 0;
     z-index: 900;
-    transform: translateY(34px); /* sits below announcement bar at page top */
+    transform: translateY(34px);
     transition: transform 0.32s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     border-bottom: 1px solid transparent;
 }
 
-/* Solid & visible (scroll-up state, or non-hero pages) */
 .site-header.scrolled {
     transform: translateY(0);
     background: rgba(249, 247, 244, 0.96);
@@ -276,13 +272,11 @@ p {
     box-shadow: 0 2px 24px rgba(0,0,0,0.06);
 }
 
-/* Hidden (scroll-down state) */
 .site-header.header-hidden {
     transform: translateY(-110%);
     pointer-events: none;
 }
 
-/* At page top on non-hero pages: solid but still below announcement bar */
 .site-header.scrolled.at-page-top {
     transform: translateY(34px);
 }
@@ -295,7 +289,6 @@ p {
     padding: 0 var(--gutter);
 }
 
-/* Logo */
 .site-logo {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 1.55rem;
@@ -312,14 +305,12 @@ p {
     color: var(--color-dark);
 }
 
-/* Nav Left */
 .nav-left {
     display: flex;
     align-items: center;
     gap: 2.5rem;
 }
 
-/* Nav Right */
 .nav-right {
     display: flex;
     align-items: center;
@@ -345,7 +336,6 @@ p {
     opacity: 0.6;
 }
 
-/* Icons */
 .nav-icons {
     display: flex;
     align-items: center;
@@ -387,7 +377,6 @@ p {
     padding: 0 3px;
 }
 
-/* Mobile toggle */
 .mobile-menu-btn {
     display: none;
     flex-direction: column;
@@ -416,7 +405,6 @@ p {
 .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
 .mobile-menu-btn.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-/* Mobile menu dropdown */
 .mobile-menu {
     display: none;
     background: var(--color-white);
@@ -456,10 +444,9 @@ p {
     height: 100vh;
     min-height: 620px;
     overflow: hidden;
-    margin-top: -34px; /* negate body padding so hero is truly full-bleed */
+    margin-top: -34px;
 }
 
-/* Slider */
 .hero-slides {
     position: absolute;
     inset: 0;
@@ -518,7 +505,6 @@ p {
     animation: fadeUp 1.1s var(--ease-out) 0.3s both;
 }
 
-/* Arrows */
 .hero-arrow {
     position: absolute;
     top: 50%;
@@ -546,7 +532,6 @@ p {
 .hero-arrow--prev { left: 2.5rem; }
 .hero-arrow--next { right: 2.5rem; }
 
-/* Dots */
 .hero-dots {
     position: absolute;
     bottom: 2.8rem;
@@ -611,7 +596,6 @@ p {
     font-weight: 300;
 }
 
-/* Scroll indicator */
 .hero-scroll {
     position: absolute;
     bottom: 3rem;
@@ -723,7 +707,6 @@ p {
     margin-bottom: 4rem;
 }
 
-/* Center 5th item in a 4-col grid */
 .product-card--wide {
     grid-column: 2 / 4;
 }
@@ -765,7 +748,6 @@ p {
     transform: scale(1.04);
 }
 
-/* Add to cart overlay */
 .product-overlay {
     position: absolute;
     inset-inline: 0;
@@ -781,7 +763,6 @@ p {
     transform: translateY(0);
 }
 
-/* Touch devices: always show overlay (no hover) */
 @media (hover: none) {
     .product-overlay {
         transform: translateY(0);
@@ -809,7 +790,6 @@ p {
     color: var(--color-white);
 }
 
-/* Badge */
 .product-badge {
     position: absolute;
     top: 1rem;
@@ -829,7 +809,6 @@ p {
     background: var(--color-gold-dark);
 }
 
-/* Product info */
 .product-info {
     display: flex;
     align-items: flex-start;
@@ -866,7 +845,7 @@ p {
     text-align: center;
 }
 
-/* === EDITORIAL / ABOUT === */
+/* === EDITORIAL === */
 .editorial {
     background: var(--color-light);
     overflow: hidden;
@@ -1411,7 +1390,6 @@ p {
     color: var(--color-white);
 }
 
-/* Payment icons row */
 .payment-row {
     max-width: var(--container-max);
     margin: 0 auto;
@@ -1474,14 +1452,12 @@ p {
         --header-h: 64px;
     }
 
-    /* Mobile header layout: hamburger left | logo center | icons right */
     .header-inner {
         display: flex;
         align-items: center;
         position: relative;
     }
 
-    /* Logo absolutely centered */
     .site-logo {
         position: absolute;
         left: 50%;
@@ -1490,18 +1466,15 @@ p {
         white-space: nowrap;
     }
 
-    /* Hide desktop nav links on mobile */
     .nav-left,
     .nav-right .nav-link {
         display: none;
     }
 
-    /* Push nav-right to the far right */
     .nav-right {
         margin-left: auto;
     }
 
-    /* Show all icons on mobile — compact to avoid logo overlap */
     .nav-icons {
         display: flex;
         gap: 0;
@@ -1513,7 +1486,6 @@ p {
         padding: 10px 7px;
     }
 
-    /* Show hamburger on the left */
     .mobile-menu-btn {
         display: flex;
         flex-shrink: 0;
@@ -1523,7 +1495,6 @@ p {
         display: block;
     }
 
-    /* Collections: 2 columns, portrait small cards */
     .collections-grid {
         grid-template-columns: 1fr 1fr;
         gap: 8px;
@@ -1552,18 +1523,15 @@ p {
         letter-spacing: 0.1em;
     }
 
-    /* Products 2-col */
     .products-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem 1rem;
     }
 
-    /* Solenne wide card: same size as other cards on mobile */
     .product-card--wide {
         grid-column: auto;
     }
 
-    /* Editorial stack */
     .editorial-inner {
         grid-template-columns: 1fr;
     }
@@ -1580,11 +1548,9 @@ p {
         max-width: 100%;
     }
 
-    /* Photo marquee mobile */
     .photo-marquee { padding: 3.5rem 0; }
     .photo-marquee-item { width: 200px; height: 270px; }
 
-    /* Footer */
     .footer-inner {
         grid-template-columns: 1fr;
         gap: 3.5rem;
@@ -1688,4 +1654,74 @@ p {
         height: 70vh;
     }
 }
+
+/* === FOOTER NEWSLETTER === */
+.footer-newsletter {
+    margin-top: 1.6rem;
+}
+.footer-newsletter-label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-mid);
+    margin-bottom: 0.6rem;
+}
+.footer-newsletter-field {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+}
+.footer-newsletter-input {
+    flex: 1;
+    padding: 0.65rem 0.8rem;
+    background: transparent;
+    border: none;
+    color: var(--color-white);
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 300;
+    outline: none;
+}
+.footer-newsletter-input::placeholder {
+    color: rgba(255,255,255,0.35);
+}
+.footer-newsletter-btn {
+    padding: 0 0.9rem;
+    background: transparent;
+    border: none;
+    border-left: 1px solid rgba(255,255,255,0.15);
+    color: var(--color-gold);
+    cursor: pointer;
+    transition: color var(--transition);
+    display: flex;
+    align-items: center;
+}
+.footer-newsletter-btn:hover {
+    color: var(--color-white);
+}
+.footer-newsletter-success,
+.footer-newsletter-error {
+    margin-top: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+}
+.footer-newsletter-success { color: var(--color-gold); }
+.footer-newsletter-error   { color: #c0837a; }
+
+/* === JUDGE.ME COLLECTION CARD BADGES === */
+.product-card .jdgm-preview-badge {
+    margin-top: 0.3rem !important;
+    font-size: 0.72rem !important;
+    color: var(--color-mid) !important;
+}
+.product-card .jdgm-preview-badge .jdgm-star {
+    color: var(--color-gold) !important;
+    font-size: 0.72rem !important;
+}
+.product-card .jdgm-preview-badge[data-number-of-reviews="0"] {
+    display: none !important;
 }
