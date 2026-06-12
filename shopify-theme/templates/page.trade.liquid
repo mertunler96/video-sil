@@ -1,0 +1,229 @@
+<!-- Page Hero -->
+<div class="page-hero trade-hero">
+  <span class="section-label" style="color: var(--color-gold);">For the Trade</span>
+  <h1 class="page-hero-title">Trade Programme</h1>
+  <p class="page-hero-desc">Exclusive pricing, dedicated support, and early access for design professionals, architects, and hospitality operators.</p>
+  <a href="#trade-apply" class="trade-hero-cta">Apply Now</a>
+</div>
+
+<!-- Intro -->
+<section class="about-story">
+  <div class="container">
+    <div class="about-story-grid">
+      <div class="about-story-img reveal">
+        <img src="https://munler.co.uk/cdn/shop/files/aynaya_odakli_shotlar_ver_2K_202605251702.jpg" alt="MUNLER Trade Programme">
+      </div>
+      <div class="about-story-text reveal">
+        <span class="section-label">The Programme</span>
+        <h2>Built for Those Who Specify at Scale</h2>
+        <p>The MUNLER Trade Programme is designed for professionals who work with multiple spaces — whether that's a single flagship hotel or an ongoing residential practice. We offer the tools, pricing, and support to make specifying MUNLER straightforward.</p>
+        <p>Verified trade accounts receive preferred pricing across the full range, access to tearsheets and specification documents, and a named point of contact for every project — from initial brief to final delivery.</p>
+        <p>Applications are reviewed within 3–5 working days. Once approved, your discount is applied automatically at checkout.</p>
+        <a href="#trade-apply" class="link-arrow">
+          Apply for a trade account
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits -->
+<section class="about-values">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Trade Benefits</span>
+      <h2>What You Get</h2>
+    </div>
+    <div class="about-values-grid">
+      <div class="value-item reveal">
+        <span class="value-num">01</span>
+        <h4>Trade Pricing</h4>
+        <p>Up to 30% off RRP for verified trade accounts, applied automatically at checkout on every order.</p>
+      </div>
+      <div class="value-item reveal">
+        <span class="value-num">02</span>
+        <h4>Dedicated Support</h4>
+        <p>A named account manager for every project — available for product queries, lead times, and bespoke requests.</p>
+      </div>
+      <div class="value-item reveal">
+        <span class="value-num">03</span>
+        <h4>Early Access</h4>
+        <p>Trade accounts are the first to see new collections and limited editions, ahead of any public announcement.</p>
+      </div>
+      <div class="value-item reveal">
+        <span class="value-num">04</span>
+        <h4>Sample Service</h4>
+        <p>Request finish samples, specification tearsheets, and CAD files for client presentations and planning submissions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Who Qualifies -->
+<section class="trade-who-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Eligibility</span>
+      <h2>Who Can Apply</h2>
+    </div>
+    <div class="trade-who-grid">
+      <div class="trade-who-card reveal">
+        <div class="trade-who-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <h3>Interior Designers &amp; Decorators</h3>
+        <p>Practising interior designers and decorators specifying for residential or commercial projects, with a verifiable business presence.</p>
+      </div>
+      <div class="trade-who-card reveal">
+        <div class="trade-who-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+            <line x1="2" y1="20" x2="22" y2="20"/>
+          </svg>
+        </div>
+        <h3>Architects &amp; Specifiers</h3>
+        <p>Architects and specification consultants working on new builds, refurbishments, or fit-outs where MUNLER products will be formally specified.</p>
+      </div>
+      <div class="trade-who-card reveal">
+        <div class="trade-who-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+            <path d="M3 3h18v4H3z"/>
+            <path d="M3 10h18v4H3z"/>
+            <path d="M3 17h18v4H3z"/>
+          </svg>
+        </div>
+        <h3>Hospitality &amp; Property</h3>
+        <p>Hotels, restaurants, serviced apartments, and property developers sourcing for multiple units or ongoing refurbishment programmes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Apply Form -->
+<section class="contact-section" id="trade-apply" style="background: var(--color-bg); border-top: 1px solid var(--color-border);">
+  <div class="container">
+    <div class="section-header reveal" style="margin-bottom: 4rem;">
+      <span class="section-label">Get Started</span>
+      <h2>Apply for a Trade Account</h2>
+    </div>
+    <div class="contact-grid">
+      {% form 'contact' %}
+        {% if form.posted_successfully? %}
+          <div style="padding:1.5rem; background:#f0f7f0; border:1px solid #c3e0c3; margin-bottom:1.5rem;"><p style="color:#2d6a2d; font-size:0.9rem;">Thank you — your application has been received. We'll be in touch within 3–5 working days.</p></div>
+        {% endif %}
+        <input type="hidden" name="contact[tags]" value="trade-application">
+        <div class="contact-form-group">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem;">
+            <div class="form-field">
+              <label for="t-company">Company Name</label>
+              <input type="text" id="t-company" name="contact[company]" placeholder="Studio / Practice name" required>
+            </div>
+            <div class="form-field">
+              <label for="t-name">Your Name</label>
+              <input type="text" id="t-name" name="contact[name]" placeholder="First and last name" required>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem;">
+            <div class="form-field">
+              <label for="t-email">Email Address</label>
+              <input type="email" id="t-email" name="contact[email]" placeholder="you@studio.com" required>
+            </div>
+            <div class="form-field">
+              <label for="t-phone">Phone Number</label>
+              <input type="tel" id="t-phone" name="contact[phone]" placeholder="+44 ...">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem;">
+            <div class="form-field">
+              <label for="t-type">Business Type</label>
+              <select id="t-type" name="contact[business_type]" required>
+                <option value="" disabled selected>Select type</option>
+                <option value="designer">Interior Designer / Decorator</option>
+                <option value="architect">Architect / Specifier</option>
+                <option value="hospitality">Hospitality / Hotel</option>
+                <option value="property">Property Developer</option>
+                <option value="retail">Retail / Showroom</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="t-vat">VAT Number <span style="font-weight:300;text-transform:none;letter-spacing:0;font-size:0.7rem;color:var(--color-mid)">(if applicable)</span></label>
+              <input type="text" id="t-vat" name="contact[vat]" placeholder="GB 000 0000 00">
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="t-website">Website or Portfolio</label>
+            <input type="url" id="t-website" name="contact[website]" placeholder="https://yourstudio.com">
+          </div>
+          <div class="form-field">
+            <label for="t-message">Tell Us About Your Work</label>
+            <textarea id="t-message" name="contact[body]" placeholder="Briefly describe your practice or project — the kinds of spaces you work on and how you typically source products." rows="5"></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Submit Application</button>
+        </div>
+      {% endform %}
+
+      <div class="contact-info">
+        <div class="contact-info-block">
+          <h4>How It Works</h4>
+          <div class="trade-steps">
+            <div class="trade-step">
+              <span class="trade-step-num">1</span>
+              <div>
+                <p style="font-weight:400; color:var(--color-dark); margin-bottom:0.3rem;">Submit your application</p>
+                <p>Complete the form with your business details and a short description of your work.</p>
+              </div>
+            </div>
+            <div class="trade-step">
+              <span class="trade-step-num">2</span>
+              <div>
+                <p style="font-weight:400; color:var(--color-dark); margin-bottom:0.3rem;">Verification</p>
+                <p>We review every application manually. You'll hear back within 3–5 working days.</p>
+              </div>
+            </div>
+            <div class="trade-step">
+              <span class="trade-step-num">3</span>
+              <div>
+                <p style="font-weight:400; color:var(--color-dark); margin-bottom:0.3rem;">Trade access granted</p>
+                <p>Once approved, your discount is live at checkout and your account manager will be in touch.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-info-block">
+          <h4>Questions?</h4>
+          <p>Email us directly at<br><a href="mailto:info@munler.co.uk">info@munler.co.uk</a></p>
+        </div>
+
+        <div class="contact-info-block">
+          <h4>Trade FAQ</h4>
+          <div class="faq-list">
+            <div class="faq-item">
+              <p class="faq-q">How long does approval take?</p>
+              <p class="faq-a">Applications are reviewed within 3–5 working days. You'll receive a confirmation email either way.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">What discount do trade accounts receive?</p>
+              <p class="faq-a">Verified trade accounts receive up to 30% off RRP, applied automatically at checkout.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Can I request samples before ordering?</p>
+              <p class="faq-a">Yes. Approved trade accounts can request finish samples and tearsheets through their account manager.</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">Do you offer bespoke sizing?</p>
+              <p class="faq-a">For larger project orders we can discuss bespoke options. Contact your account manager or email info@munler.co.uk.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,160 @@
+{% render 'page-hero', img: 'https://munler.co.uk/cdn/shop/files/aynanin_tam_karsisindan_shot_ver__202605251536.jpg', title: 'FAQs' %}
+
+<style>
+  .faq-group{border-bottom:1px solid var(--color-border);margin-bottom:0}
+  .faq-group:first-of-type{border-top:1px solid var(--color-border)}
+  .faq-item{border-bottom:1px solid var(--color-border)}
+  .faq-item:last-child{border-bottom:none}
+  .faq-group-title{font-family:var(--font-serif);font-size:.72rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--color-gold);padding:2.5rem 0 1rem}
+  .faq-question{width:100%;background:none;border:none;padding:1.4rem 0;display:flex;align-items:center;justify-content:space-between;gap:2rem;cursor:pointer;text-align:left;font-family:var(--font-serif);font-size:1.15rem;font-weight:400;color:var(--color-dark);line-height:1.4}
+  .faq-question:hover{color:var(--color-gold)}
+  .faq-icon{flex-shrink:0;width:18px;height:18px;position:relative;transition:transform .3s var(--ease-out)}
+  .faq-icon::before,.faq-icon::after{content:'';position:absolute;background:currentColor;border-radius:1px;transition:opacity .3s,transform .3s}
+  .faq-icon::before{width:18px;height:1px;top:50%;left:0;transform:translateY(-50%)}
+  .faq-icon::after{width:1px;height:18px;left:50%;top:0;transform:translateX(-50%)}
+  .faq-item.is-open .faq-icon::after{opacity:0;transform:translateX(-50%) rotate(90deg)}
+  .faq-answer{max-height:0;overflow:hidden;transition:max-height .4s var(--ease-out),padding .3s}
+  .faq-item.is-open .faq-answer{max-height:600px}
+  .faq-answer-inner{padding-bottom:1.6rem;font-size:.9rem;line-height:1.85;color:#555}
+  .faq-answer-inner p{margin-bottom:.8rem}
+  .faq-answer-inner p:last-child{margin-bottom:0}
+  .faq-answer-inner a{color:var(--color-dark);text-decoration:underline;text-underline-offset:3px}
+  .faq-answer-inner a:hover{color:var(--color-gold)}
+</style>
+
+<section class="warranty-body">
+  <div class="container-narrow">
+
+    <p class="faq-group-title">Orders &amp; Payment</p>
+    <div class="faq-group">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">How do I place an order?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Browse our collection on the <a href="/collections/all">Shop page</a>, select your piece, and add it to your cart. Checkout is handled securely online — you can pay by card, Apple Pay, Google Pay, PayPal, Klarna, and other major methods.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">Can I amend or cancel my order after placing it?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>We process orders quickly. If you need to amend or cancel, please contact us at <a href="mailto:info@munler.co.uk">info@munler.co.uk</a> as soon as possible. We'll do our best to accommodate changes before your order is dispatched. Once dispatched, our standard return policy applies.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">What payment methods do you accept?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>We accept Visa, Mastercard, American Express, Apple Pay, Google Pay, PayPal, Klarna (buy now, pay later), Maestro, Discover, Diners Club, Shop Pay, and UnionPay.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">Is it safe to pay on your website?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Yes. All transactions are processed through encrypted, PCI-compliant payment gateways. We do not store your card details.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">Will I receive an order confirmation?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Yes — a confirmation email is sent automatically to the address you provided at checkout. If you don't see it within a few minutes, please check your spam folder or contact us.</p></div></div>
+      </div>
+    </div>
+
+    <p class="faq-group-title">Delivery</p>
+    <div class="faq-group">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">How long will delivery take?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Standard UK delivery takes 3–5 working days from the date of dispatch. Express delivery (1–2 working days) is available at checkout for an additional charge.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">Is delivery free?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Yes — standard delivery is free on all UK orders over £150. Orders under £150 are charged at a flat rate of £5.95.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">Do you deliver outside the UK?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Currently we ship within the UK only. International shipping is something we're working on — sign up to our newsletter to hear when it becomes available, or <a href="/pages/contact">contact us</a> to discuss your specific requirements.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">Will I receive tracking information?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Yes. Once your order is dispatched, you'll receive an email with a tracking number and a link to follow your delivery in real time.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">My parcel arrived damaged — what should I do?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>If your parcel arrives visibly damaged, please photograph the outer packaging before opening it, and photograph the damage to the item. Contact us at <a href="mailto:info@munler.co.uk">info@munler.co.uk</a> within 48 hours of delivery with your order number and photos — we'll arrange a replacement or refund promptly.</p></div></div>
+      </div>
+    </div>
+
+    <p class="faq-group-title">Returns &amp; Refunds</p>
+    <div class="faq-group">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">What is your returns policy?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>You have 30 days from delivery to return any item in its original, unused condition for a full refund. This exceeds the 14-day statutory right under UK consumer law.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">How do I start a return?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Email <a href="mailto:info@munler.co.uk">info@munler.co.uk</a> with your order number and reason for return. We'll send you a returns authorisation and packaging instructions. Do not return items without contacting us first.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">Who pays for return shipping?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>For change-of-mind returns, return postage is the customer's responsibility. If the item is faulty or was incorrectly dispatched, we will cover the cost of return shipping.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">When will I receive my refund?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Refunds are processed within 5 working days of us receiving and inspecting the returned item. The refund will appear on your original payment method within 3–5 business days depending on your bank.</p></div></div>
+      </div>
+    </div>
+
+    <p class="faq-group-title">Products &amp; Materials</p>
+    <div class="faq-group">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">What makes MUNLER mirrors ecological?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Our mirrors use a silvering-free reflective coating process that eliminates the use of toxic chemicals traditionally found in conventional mirror production. The result is a safer manufacturing process, a product with lower environmental impact, and glass that is recyclable at end of life.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">Are the frames really stainless steel?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Yes. All MUNLER mirror frames are constructed from grade 304 brushed stainless steel — the same grade used in professional kitchens and architectural applications. It will not rust, tarnish, or corrode under normal indoor conditions.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">Are your products made in the UK?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>MUNLER products are designed in the UK and manufactured to our specification by carefully selected partner suppliers. Each piece is quality-checked before dispatch.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">Can I see the products in person before buying?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>We are currently an online-only brand. However, we offer a 30-day return window so you can receive the piece, assess it in your space, and return it if it's not right — at no risk to you.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">Do you offer bespoke or custom sizes?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Custom commissions are available through our Trade Programme for verified interior designers and architects. <a href="/pages/trade">Find out more</a> or <a href="/pages/contact">contact us</a> to discuss your project.</p></div></div>
+      </div>
+    </div>
+
+    <p class="faq-group-title">Warranty</p>
+    <div class="faq-group">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">What does the MUNLER warranty cover?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>All MUNLER products are covered by a 5-year warranty against manufacturing defects, including frame deformation, structural failure of joints, mirror delamination, and abnormal rust or corrosion under normal indoor use. Full details are on our <a href="/pages/warranty">Warranty page</a>.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">Is the warranty transferable if I give the piece as a gift?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>The warranty applies to the original purchaser and is non-transferable. Proof of purchase is required for all warranty claims.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">How do I make a warranty claim?<span class="faq-icon" aria-hidden="true"></span></button>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Contact us at <a href="mailto:info@munler.co.uk">info@munler.co.uk</a> with your order number, a description of the issue, and clear photographs. Our team will review your claim within 3–5 working days and confirm next steps.</p></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding:8rem 0;background:var(--color-bg);text-align:center;border-top:1px solid var(--color-border);">
+  <div class="container-narrow">
+    <span class="section-label">Still Have Questions?</span>
+    <h2 style="margin-bottom:1.5rem;">We're Always Happy to Help</h2>
+    <p style="margin-bottom:2.5rem;max-width:420px;margin-left:auto;margin-right:auto;font-size:0.9rem;line-height:1.8;">If your question isn't answered above, reach out to us directly. We aim to respond within one working day.</p>
+    <a href="/pages/contact" class="btn btn-dark">Contact Us</a>
+  </div>
+</section>
+
+<script>
+(function(){
+  var items=document.querySelectorAll('.faq-item');
+  items.forEach(function(item){
+    var btn=item.querySelector('.faq-question');
+    btn.addEventListener('click',function(){
+      var isOpen=item.classList.contains('is-open');
+      items.forEach(function(el){el.classList.remove('is-open');el.querySelector('.faq-question').setAttribute('aria-expanded','false');});
+      if(!isOpen){item.classList.add('is-open');btn.setAttribute('aria-expanded','true');}
+    });
+  });
+})();
+</script>
