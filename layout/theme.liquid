@@ -258,7 +258,7 @@
       e.preventDefault();
       var email = document.getElementById('footer-newsletter-email').value.trim();
       if (!email) return;
-      fetch('https://a.klaviyo.com/client/subscriptions/?company_id=PUBLIC_API_KEY_HERE', {
+      fetch('https://a.klaviyo.com/client/subscriptions/?company_id=U2UQE5', {
         method: 'POST',
         headers: { 'content-type': 'application/json', 'revision': '2023-12-15' },
         body: JSON.stringify({
@@ -268,7 +268,7 @@
               profile: { data: { type: 'profile', attributes: { email: email } } }
             },
             relationships: {
-              list: { data: { type: 'list', id: 'LIST_ID_HERE' } }
+              list: { data: { type: 'list', id: 'WqGLDz' } }
             }
           }
         })
