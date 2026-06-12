@@ -125,9 +125,11 @@
             {% endif %}
           </div>
 
+          {% if product.metafields.judgeme.badge %}
           <div class="pinfo-rating">
-            <a href="#product-reviews" class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}"></a>
+            <a href="#product-reviews">{{ product.metafields.judgeme.badge }}</a>
           </div>
+          {% endif %}
 
           <div class="pinfo-price-block">
             <span class="pinfo-price" id="pinfo-price">{{ product.selected_or_first_available_variant.price | money }}</span>
@@ -530,6 +532,7 @@
                   </ul>
                 </div>
               </div>
+
             {% endif %}
 
           </div>
