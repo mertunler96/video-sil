@@ -1,4 +1,4 @@
-﻿{% assign variant_prices = '' %}
+{% assign variant_prices = '' %}
 {% for v in product.variants %}
   {% assign variant_prices = variant_prices | append: v.id | append: ':' | append: v.price | append: ',' %}
 {% endfor %}
@@ -39,7 +39,6 @@
 
 <main class="product-main">
 
-  <!-- Breadcrumb -->
   <div class="breadcrumb-bar">
     <div class="container">
       <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -52,11 +51,9 @@
     </div>
   </div>
 
-  <!-- Product Layout -->
   <section class="product-section">
     <div class="product-layout container">
 
-      <!-- Gallery -->
       <div class="product-gallery" id="product-gallery">
         <div class="gallery-thumbs" id="gallery-thumbs">
           {% for image in product.images %}
@@ -89,7 +86,6 @@
         </div>
       </div>
 
-      <!-- Product Info -->
       <div class="product-info-col">
         <div class="product-info-sticky">
 
@@ -125,13 +121,16 @@
             {% endif %}
           </div>
 
+          <div class="pinfo-rating">
+            <a href="#product-reviews" class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}"></a>
+          </div>
+
           <div class="pinfo-price-block">
             <span class="pinfo-price" id="pinfo-price">{{ product.selected_or_first_available_variant.price | money }}</span>
             <span class="pinfo-price-note">Free UK delivery over £150</span>
           </div>
 
           {% form 'product', product %}
-            {% comment %}Count selectable size variants (exclude colour names and single/default){% endcomment %}
             {% assign size_count = 0 %}
             {% for v in product.variants %}
               {% assign vt = v.title | downcase %}
@@ -209,342 +208,112 @@
           <div class="accordions">
 
             {% if title_lower contains 'brook' and title_lower contains 'champagne' %}
-              <!-- Brook Mirror - Champagne Gold -->
               <div class="accordion open">
-                <button class="accordion-btn" aria-expanded="true">
-                  <span>Description</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <div class="accordion-description">
-                    <p>More than just a mirror - The Brook Mirror is an architectural focal point designed for lasting beauty and unparalleled clarity. Its dynamic, bold asymmetry makes a statement in any room, from the entryway to the living room.</p>
-                    <p>The robust 304-grade stainless steel frame in a refined Champagne Gold finish resists corrosion and moisture, making it equally suited to bathrooms as it is to bedrooms. Mountable vertically or horizontally for total flexibility.</p>
-                  </div>
-                </div>
+                <button class="accordion-btn" aria-expanded="true"><span>Description</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><div class="accordion-description"><p>More than just a mirror - The Brook Mirror is an architectural focal point designed for lasting beauty and unparalleled clarity. Its dynamic, bold asymmetry makes a statement in any room, from the entryway to the living room.</p><p>The robust 304-grade stainless steel frame in a refined Champagne Gold finish resists corrosion and moisture, making it equally suited to bathrooms as it is to bedrooms. Mountable vertically or horizontally for total flexibility.</p></div></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Materials &amp; Craft</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Frame: 304-grade stainless steel, Champagne Gold finish</li>
-                    <li>Glass: 4mm ecological silver glass</li>
-                    <li>Copper-free and lead-free production</li>
-                    <li>Corrosion and moisture resistant</li>
-                    <li>Bathroom-safe construction</li>
-                    <li>5-year warranty against manufacturing defects</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Materials &amp; Craft</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Frame: 304-grade stainless steel, Champagne Gold finish</li><li>Glass: 4mm ecological silver glass</li><li>Copper-free and lead-free production</li><li>Corrosion and moisture resistant</li><li>Bathroom-safe construction</li><li>5-year warranty against manufacturing defects</li></ul></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Dimensions</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Size S: 73 x 52 cm (29 x 20 in)</li>
-                    <li>Size L: 90 x 65 cm (35 x 26 in)</li>
-                    <li>Mountable vertically or horizontally</li>
-                    <li>Wall fixings included</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Dimensions</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Size S: 73 x 52 cm (29 x 20 in)</li><li>Size L: 90 x 65 cm (35 x 26 in)</li><li>Mountable vertically or horizontally</li><li>Wall fixings included</li></ul></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Delivery &amp; Returns</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Dispatched within 3-5 business days</li>
-                    <li>Fully tracked and insured UK delivery</li>
-                    <li>Estimated arrival: 5-8 business days from order</li>
-                    <li>Free delivery</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Delivery &amp; Returns</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Dispatched within 3-5 business days</li><li>Fully tracked and insured UK delivery</li><li>Estimated arrival: 5-8 business days from order</li><li>Free delivery</li></ul></div>
               </div>
 
             {% elsif title_lower contains 'brook' and title_lower contains 'black' or title_lower contains 'brook' and title_lower contains 'matte' %}
-              <!-- Brook Mirror - Matte Black -->
               <div class="accordion open">
-                <button class="accordion-btn" aria-expanded="true">
-                  <span>Description</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <div class="accordion-description">
-                    <p>The Brook Mirror in Matte Black instantly elevates any space, marrying bold, modern elegance with professional-grade durability. Its dynamic asymmetrical silhouette commands attention - equally at home in a pared-back entryway as a statement bathroom.</p>
-                    <p>The robust 304-grade stainless steel frame in a refined Matte Black finish resists corrosion and moisture, making it as functional as it is beautiful. Mountable vertically or horizontally for total flexibility.</p>
-                  </div>
-                </div>
+                <button class="accordion-btn" aria-expanded="true"><span>Description</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><div class="accordion-description"><p>The Brook Mirror in Matte Black instantly elevates any space, marrying bold, modern elegance with professional-grade durability. Its dynamic asymmetrical silhouette commands attention - equally at home in a pared-back entryway as a statement bathroom.</p><p>The robust 304-grade stainless steel frame in a refined Matte Black finish resists corrosion and moisture, making it as functional as it is beautiful. Mountable vertically or horizontally for total flexibility.</p></div></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Materials &amp; Craft</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Frame: 304-grade stainless steel, Matte Black finish</li>
-                    <li>Glass: 4mm ecological silver glass</li>
-                    <li>Copper-free and lead-free production</li>
-                    <li>Corrosion and moisture resistant</li>
-                    <li>Bathroom-safe construction</li>
-                    <li>5-year warranty against manufacturing defects</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Materials &amp; Craft</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Frame: 304-grade stainless steel, Matte Black finish</li><li>Glass: 4mm ecological silver glass</li><li>Copper-free and lead-free production</li><li>Corrosion and moisture resistant</li><li>Bathroom-safe construction</li><li>5-year warranty against manufacturing defects</li></ul></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Dimensions</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Size S: 73 x 52 cm (29 x 20 in)</li>
-                    <li>Size L: 90 x 65 cm (35 x 26 in)</li>
-                    <li>Mountable vertically or horizontally</li>
-                    <li>Wall fixings included</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Dimensions</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Size S: 73 x 52 cm (29 x 20 in)</li><li>Size L: 90 x 65 cm (35 x 26 in)</li><li>Mountable vertically or horizontally</li><li>Wall fixings included</li></ul></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Delivery &amp; Returns</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Dispatched within 3-5 business days</li>
-                    <li>Fully tracked and insured UK delivery</li>
-                    <li>Estimated arrival: 5-8 business days from order</li>
-                    <li>Free delivery</li>
-                    <li>30-day returns accepted</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Delivery &amp; Returns</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Dispatched within 3-5 business days</li><li>Fully tracked and insured UK delivery</li><li>Estimated arrival: 5-8 business days from order</li><li>Free delivery</li><li>30-day returns accepted</li></ul></div>
               </div>
 
             {% elsif title_lower contains 'solenne' %}
-              <!-- Solenne Mirror -->
               <div class="accordion open">
-                <button class="accordion-btn" aria-expanded="true">
-                  <span>Description</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <div class="accordion-description">
-                    <p>The Solenne is not just a mirror - it is a sculpture for your wall. Its oversized, organic silhouette with flowing asymmetrical edges creates gallery-worthy drama in any space, from a dressing room to a grand entrance hall.</p>
-                    <p>Hand-crafted in small batches, each Solenne features a brushed Champagne Gold 304-grade stainless steel frame and 5mm ecological glass. Install it leaning against the wall or wall-mount it with the included hardware - both positions are equally striking.</p>
-                  </div>
-                </div>
+                <button class="accordion-btn" aria-expanded="true"><span>Description</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><div class="accordion-description"><p>The Solenne is not just a mirror - it is a sculpture for your wall. Its oversized, organic silhouette with flowing asymmetrical edges creates gallery-worthy drama in any space, from a dressing room to a grand entrance hall.</p><p>Hand-crafted in small batches, each Solenne features a brushed Champagne Gold 304-grade stainless steel frame and 5mm ecological glass. Install it leaning against the wall or wall-mount it with the included hardware - both positions are equally striking.</p></div></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Materials &amp; Craft</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Frame: 304-grade stainless steel, brushed Champagne Gold</li>
-                    <li>Glass: 5mm ecological, copper-free and lead-free</li>
-                    <li>Backing: Premium plywood backboard for stability</li>
-                    <li>Hand-crafted in small batches</li>
-                    <li>5-year warranty against frame corrosion</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Materials &amp; Craft</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Frame: 304-grade stainless steel, brushed Champagne Gold</li><li>Glass: 5mm ecological, copper-free and lead-free</li><li>Backing: Premium plywood backboard for stability</li><li>Hand-crafted in small batches</li><li>5-year warranty against frame corrosion</li></ul></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Dimensions</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>170 x 90 cm (67 x 35 in)</li>
-                    <li>Flexible installation: lean or wall-mount</li>
-                    <li>Wall-mounting hardware included</li>
-                    <li>Clean with soft, damp cloth only</li>
-                    <li>Remove protective film before installation</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Dimensions</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>170 x 90 cm (67 x 35 in)</li><li>Flexible installation: lean or wall-mount</li><li>Wall-mounting hardware included</li><li>Clean with soft, damp cloth only</li><li>Remove protective film before installation</li></ul></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Delivery &amp; Returns</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Dispatched within 3-5 business days</li>
-                    <li>Fully tracked and insured UK delivery</li>
-                    <li>Estimated arrival: 5-8 business days from order</li>
-                    <li>30-day returns accepted</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Delivery &amp; Returns</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Dispatched within 3-5 business days</li><li>Fully tracked and insured UK delivery</li><li>Estimated arrival: 5-8 business days from order</li><li>30-day returns accepted</li></ul></div>
               </div>
 
             {% elsif title_lower contains 'rib' %}
-              <!-- Rib End Table -->
               <div class="accordion open">
-                <button class="accordion-btn" aria-expanded="true">
-                  <span>Description</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <div class="accordion-description">
-                    <p>The Rib is a hand-carved fluted column in solid hardwood, crowned with a smooth, generous round top. The vertical grooves - carved by hand - extend the full height of the column, creating light-catching detail that changes throughout the day.</p>
-                    <p>Use it as a side table, nightstand, plant stand, or display pedestal. It pairs beautifully with the Volta End Table to create a layered, considered interior.</p>
-                  </div>
-                </div>
+                <button class="accordion-btn" aria-expanded="true"><span>Description</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><div class="accordion-description"><p>The Rib is a hand-carved fluted column in solid hardwood, crowned with a smooth, generous round top. The vertical grooves - carved by hand - extend the full height of the column, creating light-catching detail that changes throughout the day.</p><p>Use it as a side table, nightstand, plant stand, or display pedestal. It pairs beautifully with the Volta End Table to create a layered, considered interior.</p></div></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Materials &amp; Craft</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Solid hardwood construction</li>
-                    <li>Hand-carved vertical fluting</li>
-                    <li>Dark stain finish</li>
-                    <li>Matte wax top coat</li>
-                    <li>Clean with soft, damp cloth only</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Materials &amp; Craft</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Solid hardwood construction</li><li>Hand-carved vertical fluting</li><li>Dark stain finish</li><li>Matte wax top coat</li><li>Clean with soft, damp cloth only</li></ul></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Dimensions</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Height: 62 cm</li>
-                    <li>Diameter: 36 cm</li>
-                    <li>Solid hardwood - substantial and stable</li>
-                    <li>Avoid direct sunlight and harsh chemicals</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Dimensions</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Height: 62 cm</li><li>Diameter: 36 cm</li><li>Solid hardwood - substantial and stable</li><li>Avoid direct sunlight and harsh chemicals</li></ul></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Delivery &amp; Returns</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Dispatched within 3-5 business days</li>
-                    <li>Fully tracked and insured UK delivery</li>
-                    <li>Estimated arrival: 5-8 business days from order</li>
-                    <li>30-day returns accepted</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Delivery &amp; Returns</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Dispatched within 3-5 business days</li><li>Fully tracked and insured UK delivery</li><li>Estimated arrival: 5-8 business days from order</li><li>30-day returns accepted</li></ul></div>
               </div>
 
             {% elsif title_lower contains 'volta' %}
-              <!-- Volta End Table -->
               <div class="accordion open">
-                <button class="accordion-btn" aria-expanded="true">
-                  <span>Description</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <div class="accordion-description">
-                    <p>The Volta combines two materials that age well and only look better over time. A dark-stained hardwood base with ribbed arch relief carved into each face, crowned by a hand-selected natural marble slab with unique veining. No two pieces are ever identical.</p>
-                    <p>Use it as a side table beside a sofa or bed, as an accent piece in an entrance hall, or alongside the Rib End Table for a fully considered interior.</p>
-                  </div>
-                </div>
+                <button class="accordion-btn" aria-expanded="true"><span>Description</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><div class="accordion-description"><p>The Volta combines two materials that age well and only look better over time. A dark-stained hardwood base with ribbed arch relief carved into each face, crowned by a hand-selected natural marble slab with unique veining. No two pieces are ever identical.</p><p>Use it as a side table beside a sofa or bed, as an accent piece in an entrance hall, or alongside the Rib End Table for a fully considered interior.</p></div></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Materials &amp; Craft</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Base: dark-stained solid hardwood</li>
-                    <li>Ribbed arch relief carved into each face</li>
-                    <li>Top: hand-selected natural marble slab</li>
-                    <li>Unique veining - no two pieces identical</li>
-                    <li>Clean with soft, damp cloth only</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Materials &amp; Craft</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Base: dark-stained solid hardwood</li><li>Ribbed arch relief carved into each face</li><li>Top: hand-selected natural marble slab</li><li>Unique veining - no two pieces identical</li><li>Clean with soft, damp cloth only</li></ul></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Dimensions</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Height: 56 cm</li>
-                    <li>Width: 41 cm</li>
-                    <li>Depth: 41 cm</li>
-                    <li>Avoid harsh chemicals on marble surface</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Dimensions</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Height: 56 cm</li><li>Width: 41 cm</li><li>Depth: 41 cm</li><li>Avoid harsh chemicals on marble surface</li></ul></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Delivery &amp; Returns</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Dispatched within 3-5 business days</li>
-                    <li>Fully tracked and insured UK delivery</li>
-                    <li>Estimated arrival: 5-8 business days from order</li>
-                    <li>30-day returns accepted</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Delivery &amp; Returns</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Dispatched within 3-5 business days</li><li>Fully tracked and insured UK delivery</li><li>Estimated arrival: 5-8 business days from order</li><li>30-day returns accepted</li></ul></div>
               </div>
 
             {% else %}
-              <!-- Fallback: generic accordions -->
               <div class="accordion open">
-                <button class="accordion-btn" aria-expanded="true">
-                  <span>Description</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <div class="accordion-description">
-                    {% if product.description != blank %}
-                      {{ product.description }}
-                    {% else %}
-                      <p style="font-size:0.85rem;color:var(--color-mid);">No description available.</p>
-                    {% endif %}
-                  </div>
-                </div>
+                <button class="accordion-btn" aria-expanded="true"><span>Description</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><div class="accordion-description">{% if product.description != blank %}{{ product.description }}{% else %}<p style="font-size:0.85rem;color:var(--color-mid);">No description available.</p>{% endif %}</div></div>
               </div>
               <div class="accordion">
-                <button class="accordion-btn" aria-expanded="false">
-                  <span>Delivery &amp; Returns</span>
-                  <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-                <div class="accordion-body">
-                  <ul class="detail-list">
-                    <li>Dispatched within 3-5 business days</li>
-                    <li>Fully tracked and insured UK delivery</li>
-                    <li>Estimated arrival: 5-8 business days from order</li>
-                    <li>30-day returns accepted</li>
-                  </ul>
-                </div>
+                <button class="accordion-btn" aria-expanded="false"><span>Delivery &amp; Returns</span><svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <div class="accordion-body"><ul class="detail-list"><li>Dispatched within 3-5 business days</li><li>Fully tracked and insured UK delivery</li><li>Estimated arrival: 5-8 business days from order</li><li>30-day returns accepted</li></ul></div>
               </div>
-
             {% endif %}
 
           </div>
-
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- Features Strip -->
   <section class="features-strip">
     <div class="container">
       <div class="features-strip-grid">
@@ -579,18 +348,16 @@
     </div>
   </section>
 
-  <!-- Reviews -->
   <section class="reviews-section" id="product-reviews">
     <div class="container">
       <div class="section-header">
         <span class="section-label">Customer Reviews</span>
         <h2>What Our Customers Say</h2>
       </div>
-      <div id="shopify-product-reviews" data-id="{{ product.id }}"></div>
+      <div id="judgeme_product_reviews" data-id="{{ product.id }}" data-handle="{{ product.handle }}"></div>
     </div>
   </section>
 
-  <!-- Related Products -->
   <section class="related-section">
     <div class="container">
       <div class="section-header">
@@ -631,7 +398,6 @@
 
 </main>
 
-<!-- Sticky mobile ATC bar -->
 <div class="sticky-atc-bar" id="sticky-atc-bar" aria-hidden="true">
   <div class="sticky-atc-info">
     <span class="sticky-atc-name">{% if product.title contains '–' %}{{ product.title | split: '–' | first | strip }}{% else %}{{ product.title }}{% endif %}</span>
@@ -644,7 +410,6 @@
 (function(){
   'use strict';
 
-  // Build image array from thumbnail data-src attributes
   var thumbBtns = document.querySelectorAll('.thumb');
   var images    = Array.from(thumbBtns).map(function(btn){ return btn.getAttribute('data-src'); });
   var currentIndex = 0;
@@ -652,67 +417,44 @@
   var mainImg      = document.getElementById('gallery-main-img');
   var dots         = document.querySelectorAll('.dot');
 
-  // Preload all images upfront for smooth transitions
   images.forEach(function(src){ var i = new Image(); i.src = src; });
 
-  // Slide animation — direction: 1=next, -1=prev, 0=direct
   function goTo(index, direction) {
     if (isAnimating) return;
     if (index < 0) index = images.length - 1;
     if (index >= images.length) index = 0;
     if (index === currentIndex) return;
     isAnimating = true;
-
     var exitX  = direction > 0 ? '-40px' : direction < 0 ? '40px' : '0px';
     var enterX = direction > 0 ? '40px'  : direction < 0 ? '-40px' : '0px';
-
     mainImg.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
     mainImg.style.opacity    = '0';
     mainImg.style.transform  = 'translateX(' + exitX + ')';
-
     setTimeout(function(){
       mainImg.src = images[index];
       mainImg.removeAttribute('srcset');
       currentIndex = index;
-
       mainImg.style.transition = 'none';
       mainImg.style.transform  = 'translateX(' + enterX + ')';
       mainImg.style.opacity    = '0';
-
-      void mainImg.offsetWidth; // force repaint
-
+      void mainImg.offsetWidth;
       mainImg.style.transition = 'opacity 0.32s ease, transform 0.32s ease';
       mainImg.style.opacity    = '1';
       mainImg.style.transform  = 'translateX(0)';
-
       thumbBtns.forEach(function(btn,i){ btn.classList.toggle('active', i===index); });
       dots.forEach(function(dot,i){ dot.classList.toggle('active', i===index); });
-
       setTimeout(function(){ isAnimating = false; }, 350);
     }, 290);
   }
 
-  // Thumbnail clicks
-  thumbBtns.forEach(function(btn, i){
-    btn.addEventListener('click', function(){
-      goTo(i, i > currentIndex ? 1 : -1);
-    });
-  });
+  thumbBtns.forEach(function(btn, i){ btn.addEventListener('click', function(){ goTo(i, i > currentIndex ? 1 : -1); }); });
+  dots.forEach(function(dot, i){ dot.addEventListener('click', function(){ goTo(i, i > currentIndex ? 1 : -1); }); });
 
-  // Dot clicks
-  dots.forEach(function(dot, i){
-    dot.addEventListener('click', function(){
-      goTo(i, i > currentIndex ? 1 : -1);
-    });
-  });
-
-  // Arrow buttons
   var prevBtn = document.getElementById('gallery-prev');
   var nextBtn = document.getElementById('gallery-next');
   if (prevBtn) prevBtn.addEventListener('click', function(){ goTo(currentIndex - 1, -1); });
   if (nextBtn) nextBtn.addEventListener('click', function(){ goTo(currentIndex + 1,  1); });
 
-  // Touch swipe
   var touchStartX = 0;
   var mainWrap = document.querySelector('.gallery-main-wrap');
   if (mainWrap) {
@@ -723,7 +465,6 @@
     }, { passive: true });
   }
 
-  // Size selector + price update
   document.querySelectorAll('.size-btn').forEach(function(btn){
     btn.addEventListener('click', function(){
       document.querySelectorAll('.size-btn').forEach(function(b){ b.classList.remove('active'); });
@@ -736,7 +477,6 @@
     });
   });
 
-  // Accordions
   document.querySelectorAll('.accordion-btn').forEach(function(btn){
     btn.addEventListener('click', function(){
       var acc = btn.closest('.accordion');
@@ -749,20 +489,15 @@
     });
   });
 
-  // Quantity selector
   document.querySelectorAll('.qty-btn').forEach(function(btn){
     btn.addEventListener('click', function(){
       var input = btn.closest('.qty-control').querySelector('.qty-input');
       var val = parseInt(input.value, 10) || 1;
-      if (btn.classList.contains('qty-plus')) {
-        input.value = val + 1;
-      } else if (val > 1) {
-        input.value = val - 1;
-      }
+      if (btn.classList.contains('qty-plus')) { input.value = val + 1; }
+      else if (val > 1) { input.value = val - 1; }
     });
   });
 
-  // Wishlist with localStorage
   var wishBtn = document.querySelector('.btn-wishlist');
   if (wishBtn) {
     var pid = wishBtn.getAttribute('data-product-id');
@@ -779,7 +514,6 @@
     });
   }
 
-  // Sticky ATC bar — show when original ATC scrolls out of view
   var stickyBar = document.getElementById('sticky-atc-bar');
   var atcBtn    = document.querySelector('.btn-atc');
   var stickyBtn = document.getElementById('sticky-atc-btn');
@@ -798,12 +532,56 @@
     }
   }
 
-  // Sync sticky price with variant changes
   document.querySelectorAll('.size-btn').forEach(function(btn){
     btn.addEventListener('click', function(){
       if (stickyPriceEl) stickyPriceEl.textContent = btn.getAttribute('data-price');
     });
   });
+
+  // Klaviyo — Viewed Product
+  (function() {
+    var _learnq = window._learnq || [];
+    var item = {
+      "Name":           {{ product.title | json }},
+      "ProductID":      {{ product.id | json }},
+      "SKU":            {{ product.selected_or_first_available_variant.sku | json }},
+      "Categories":     [{% for c in product.collections %}{{ c.title | json }}{% unless forloop.last %},{% endunless %}{% endfor %}],
+      "ImageURL":       "https:{{ product.featured_image | img_url: '800x' }}",
+      "URL":            "{{ shop.url }}{{ product.url }}",
+      "Brand":          "MUNLER",
+      "Price":          {{ product.price | money_without_currency | json }},
+      "CompareAtPrice": {{ product.compare_at_price | money_without_currency | default: "" | json }}
+    };
+    _learnq.push(['track', 'Viewed Product', item]);
+    _learnq.push(['trackViewedItem', {
+      "Title":    item.Name,
+      "ItemId":   item.ProductID,
+      "ImageUrl": item.ImageURL,
+      "Url":      item.URL,
+      "Metadata": { "Brand": "MUNLER", "Price": item.Price }
+    }]);
+  })();
+
+  // Klaviyo — Added to Cart
+  var atcForm = document.querySelector('form[action="/cart/add"]');
+  if (atcForm) {
+    atcForm.addEventListener('submit', function() {
+      var _learnq = window._learnq || [];
+      var variantId = document.getElementById('variant-id') ? parseInt(document.getElementById('variant-id').value, 10) : null;
+      var qty = document.getElementById('product-qty') ? parseInt(document.getElementById('product-qty').value, 10) : 1;
+      _learnq.push(['track', 'Added to Cart', {
+        "Name":      {{ product.title | json }},
+        "ProductID": {{ product.id | json }},
+        "SKU":       {{ product.selected_or_first_available_variant.sku | json }},
+        "VariantID": variantId,
+        "ImageURL":  "https:{{ product.featured_image | img_url: '800x' }}",
+        "URL":       "{{ shop.url }}{{ product.url }}",
+        "Brand":     "MUNLER",
+        "Price":     {{ product.price | money_without_currency | json }},
+        "Quantity":  qty
+      }]);
+    });
+  }
 
 })();
 </script>
