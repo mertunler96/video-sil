@@ -1,4 +1,4 @@
-﻿<section class="page-hero">
+<section class="page-hero">
   <span class="section-label" style="color:var(--color-gold);">
     {% if collection.handle == 'all' %}All Products{% else %}The Collection{% endif %}
   </span>
@@ -62,6 +62,7 @@
                 {% endif %}
               </div>
               <span class="product-price">{{ product.price | money_without_trailing_zeros }}</span>
+              <div class="jdgm-widget jdgm-preview-badge" data-id="{{ product.id }}"></div>
             </div>
           </article>
         {% endfor %}
@@ -118,7 +119,6 @@
     });
   });
 
-  // Auto-activate filter from URL hash (e.g. /collections/all#mirrors)
   var hash = window.location.hash.replace('#', '');
   if(hash === 'mirrors' || hash === 'furniture') {
     applyFilter(hash);
