@@ -29,7 +29,7 @@
   {% if collection.handle == 'all' %}
     <p class="page-hero-desc">Premium mirrors and furniture, crafted for the extraordinary home.</p>
   {% elsif collection.description != blank %}
-    <p class="page-hero-desc">{{ collection.description | strip_html }}</p>
+    <p class="page-hero-desc">{{ collection.description | strip_html | truncate: 165 }}</p>
   {% endif %}
 </section>
 
@@ -118,10 +118,10 @@
   </div>
 </section>
 
-{% if collection.metafields.custom.seo_content != blank %}
+{% if collection.description != blank and collection.handle != 'all' %}
 <section class="collection-seo">
   <div class="container collection-seo-inner">
-    {{ collection.metafields.custom.seo_content }}
+    {{ collection.description }}
   </div>
 </section>
 {% endif %}
