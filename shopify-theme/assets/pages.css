@@ -33,6 +33,45 @@
     line-height: 1.8;
 }
 
+/* === COLLECTION SEO CONTENT (below product grid) === */
+.collection-seo {
+    padding: 1rem var(--gutter) 6rem;
+}
+.collection-seo-inner {
+    max-width: 760px;
+}
+.collection-seo-inner h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400;
+    margin: 2.4rem 0 1rem;
+    line-height: 1.2;
+}
+.collection-seo-inner h3 {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin: 1.8rem 0 0.8rem;
+}
+.collection-seo-inner p,
+.collection-seo-inner li {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--color-mid);
+    margin-bottom: 1.1rem;
+}
+.collection-seo-inner a {
+    color: var(--color-gold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.collection-seo-inner ul {
+    padding-left: 1.2rem;
+    margin-bottom: 1.1rem;
+}
+
 /* === FILTER TABS (Shop) === */
 .filter-row {
     display: flex;

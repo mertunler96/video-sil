@@ -6,5 +6,42 @@
     "theme_author": "MUNLER",
     "theme_documentation_url": "https://munler.co.uk",
     "theme_support_url": "mailto:info@munler.co.uk"
+  },
+  {
+    "name": "SEO & Social",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Sharing"
+      },
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Default social sharing image",
+        "info": "Shown when pages are shared on Facebook, Pinterest, Twitter/X and used as the Organization logo. Recommended 1200 x 630 px."
+      },
+      {
+        "type": "header",
+        "content": "Search Engine Verification"
+      },
+      {
+        "type": "text",
+        "id": "google_site_verification",
+        "label": "Google Search Console verification code",
+        "info": "Paste only the content value from the meta tag (e.g. AbC123...), not the full tag."
+      },
+      {
+        "type": "text",
+        "id": "bing_site_verification",
+        "label": "Bing Webmaster verification code",
+        "info": "The content value from the msvalidate.01 meta tag."
+      },
+      {
+        "type": "text",
+        "id": "pinterest_site_verification",
+        "label": "Pinterest domain verification code",
+        "info": "The content value from the p:domain_verify meta tag."
+      }
+    ]
   }
 ]

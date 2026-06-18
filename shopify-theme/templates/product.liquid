@@ -3,6 +3,7 @@
   {% assign variant_prices = variant_prices | append: v.id | append: ':' | append: v.price | append: ',' %}
 {% endfor %}
 
+{%- assign rating_count = product.metafields.reviews.rating_count.value | plus: 0 -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -10,18 +11,54 @@
   "name": {{ product.title | json }},
   "description": {{ product.description | strip_html | truncate: 500 | json }},
   "url": "{{ shop.url }}{{ product.url }}",
-  "image": [{% for image in product.images %}"{{ image | img_url: '1000x' }}"{% unless forloop.last %},{% endunless %}{% endfor %}],
+  "image": [{% for image in product.images %}"https:{{ image | img_url: '1000x' }}"{% unless forloop.last %},{% endunless %}{% endfor %}],
   "brand": {
     "@type": "Brand",
     "name": "MUNLER"
   },
+  {% if product.selected_or_first_available_variant.sku != blank %}"sku": {{ product.selected_or_first_available_variant.sku | json }},
+  "mpn": {{ product.selected_or_first_available_variant.sku | json }},{% endif %}
+  {% if rating_count > 0 %}"aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ product.metafields.reviews.rating.value.rating }}",
+    "reviewCount": "{{ rating_count }}",
+    "bestRating": "{{ product.metafields.reviews.rating.value.scale_max }}",
+    "worstRating": "{{ product.metafields.reviews.rating.value.scale_min }}"
+  },{% endif %}
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "GBP",
-    "lowPrice": "{{ product.price_min | money_without_currency }}",
-    "highPrice": "{{ product.price_max | money_without_currency }}",
+    "lowPrice": "{{ product.price_min | money_without_currency | strip_html }}",
+    "highPrice": "{{ product.price_max | money_without_currency | strip_html }}",
     "offerCount": {{ product.variants.size }},
-    "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}"
+    "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+    "itemCondition": "https://schema.org/NewCondition",
+    "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "GB",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/ReturnShippingFees"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0",
+        "currency": "GBP"
+      },
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "GB"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 2, "unitCode": "DAY" },
+        "transitTime": { "@type": "QuantitativeValue", "minValue": 2, "maxValue": 5, "unitCode": "DAY" }
+      }
+    }
   }
 }
 </script>
@@ -74,7 +111,7 @@
             <img src="{{ product.featured_image | img_url: '1000x' }}"
                  srcset="{{ product.featured_image | img_url: '480x' }} 480w, {{ product.featured_image | img_url: '800x' }} 800w, {{ product.featured_image | img_url: '1000x' }} 1000w"
                  sizes="(max-width: 900px) 100vw, 55vw"
-                 alt="{{ product.title }}"
+                 alt="{{ product.featured_image.alt | default: product.title }}"
                  width="800" height="1067"
                  id="gallery-main-img">
           </div>
@@ -610,8 +647,8 @@
             {% assign rel_count = rel_count | plus: 1 %}
             <article class="product-card reveal" onclick="window.location='{{ p.url }}'" style="cursor:pointer">
               <div class="product-img-wrap">
-                <img src="{{ p.featured_image | img_url: '800x' }}" alt="{{ p.title }}" class="product-img-main">
-                {% if p.images[1] %}<img src="{{ p.images[1] | img_url: '800x' }}" alt="{{ p.title }}" class="product-img-hover">{% endif %}
+                <img src="{{ p.featured_image | img_url: '800x' }}" alt="{{ p.featured_image.alt | default: p.title }}" class="product-img-main" loading="lazy">
+                {% if p.images[1] %}<img src="{{ p.images[1] | img_url: '800x' }}" alt="{{ p.images[1].alt | default: p.title }}" class="product-img-hover" loading="lazy">{% endif %}
                 <div class="product-overlay"><a href="{{ p.url }}" class="btn-add-cart">View Product</a></div>
                 {% assign p_tags_lower = p.tags | join: ',' | downcase %}
                 {% if p_tags_lower contains 'signature' or p.title contains 'Solenne' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
