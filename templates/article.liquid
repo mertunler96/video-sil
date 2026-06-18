@@ -32,12 +32,14 @@
   .article-head{padding:calc(var(--header-h) + 34px + 4rem) var(--gutter) 2.5rem;text-align:center;max-width:760px;margin:0 auto}
   .article-meta{font-family:var(--font-sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--color-gold);margin-bottom:1.2rem}
   .article-title{font-family:var(--font-serif);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:400;line-height:1.1;color:var(--color-dark)}
-  .article-hero-img{display:block;width:100%;max-width:1100px;margin:1rem auto 3rem;aspect-ratio:16/9;object-fit:cover}
+  .article-hero-img{display:block;width:auto;max-width:min(100%,720px);max-height:90vh;height:auto;margin:1rem auto 3.5rem}
   .article-body{max-width:720px;margin:0 auto;padding:0 var(--gutter) 4rem}
   .article-body p,.article-body li{font-family:var(--font-sans);font-size:1rem;font-weight:300;line-height:1.95;color:#444;margin-bottom:1.3rem}
   .article-body h2{font-family:var(--font-serif);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;margin:2.8rem 0 1rem;line-height:1.2}
   .article-body h3{font-family:var(--font-serif);font-size:1.35rem;font-weight:400;margin:2rem 0 .8rem}
-  .article-body img{max-width:100%;height:auto;margin:1.5rem 0}
+  .article-body figure{margin:2.4rem 0}
+  .article-body img{display:block;max-width:100%;width:auto;max-height:760px;height:auto;margin:0 auto}
+  .article-body figcaption{margin-top:.7rem;text-align:center;font-family:var(--font-sans);font-size:.78rem;font-weight:300;letter-spacing:.02em;color:var(--color-mid)}
   .article-body a{color:var(--color-gold);text-decoration:underline;text-underline-offset:3px}
   .article-body ul,.article-body ol{padding-left:1.3rem;margin-bottom:1.3rem}
   .article-cta{text-align:center;padding:3.5rem var(--gutter) 6rem;border-top:1px solid var(--color-border);max-width:720px;margin:0 auto}
@@ -53,7 +55,7 @@
   </header>
 
   {% if article.image %}
-    <img src="{{ article.image | img_url: '1100x' }}" alt="{{ article.image.alt | default: article.title }}" class="article-hero-img" width="1100" height="619">
+    <img src="{{ article.image | img_url: '1200x' }}" alt="{{ article.image.alt | default: article.title }}" class="article-hero-img" loading="eager">
   {% endif %}
 
   <div class="article-body rte">
