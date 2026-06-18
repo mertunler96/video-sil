@@ -4,8 +4,8 @@
   .blog-body{padding:5rem var(--gutter) 6rem}
   .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:3rem 2.4rem;max-width:1200px;margin:0 auto}
   .blog-card{display:flex;flex-direction:column}
-  .blog-card-imgwrap{aspect-ratio:3/2;overflow:hidden;background:var(--color-light);margin-bottom:1.4rem}
-  .blog-card-img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out)}
+  .blog-card-imgwrap{display:block;aspect-ratio:4/5;overflow:hidden;background:var(--color-light);margin-bottom:1.4rem}
+  .blog-card-img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .6s var(--ease-out)}
   .blog-card:hover .blog-card-img{transform:scale(1.04)}
   .blog-card-meta{font-family:var(--font-sans);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--color-gold);margin-bottom:.7rem}
   .blog-card-title{font-family:var(--font-serif);font-size:1.5rem;font-weight:400;line-height:1.25;margin-bottom:.8rem;color:var(--color-dark)}
@@ -25,7 +25,7 @@
         <article class="blog-card">
           <a href="{{ article.url }}" class="blog-card-imgwrap" aria-label="{{ article.title | escape }}">
             {% if article.image %}
-              <img src="{{ article.image | img_url: '600x' }}" alt="{{ article.image.alt | default: article.title }}" class="blog-card-img" width="600" height="400" loading="lazy">
+              <img src="{{ article.image | img_url: '600x' }}" alt="{{ article.image.alt | default: article.title }}" class="blog-card-img" width="600" height="750" loading="lazy">
             {% endif %}
           </a>
           <p class="blog-card-meta">{{ article.published_at | date: '%B %d, %Y' }}{% if article.tags.size > 0 %} · {{ article.tags.first }}{% endif %}</p>
