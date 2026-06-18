@@ -19,6 +19,9 @@
 }
 </script>
 
+{%- assign collection_lead = collection.description | split: '</p>' | first | append: '</p>' -%}
+{%- assign collection_body = collection.description | remove_first: collection_lead -%}
+
 <section class="page-hero">
   <span class="section-label" style="color:var(--color-gold);">
     {% if collection.handle == 'all' %}All Products{% else %}The Collection{% endif %}
@@ -29,7 +32,7 @@
   {% if collection.handle == 'all' %}
     <p class="page-hero-desc">Premium mirrors and furniture, crafted for the extraordinary home.</p>
   {% elsif collection.description != blank %}
-    <p class="page-hero-desc">{{ collection.description | strip_html | truncate: 165 }}</p>
+    <p class="page-hero-desc">{{ collection_lead | strip_html }}</p>
   {% endif %}
 </section>
 
@@ -118,10 +121,11 @@
   </div>
 </section>
 
-{% if collection.description != blank and collection.handle != 'all' %}
+{% if collection_body != blank and collection.handle != 'all' %}
 <section class="collection-seo">
   <div class="container collection-seo-inner">
-    {{ collection.description }}
+    <span class="collection-seo-eyebrow">About the Collection</span>
+    <div class="rte">{{ collection_body }}</div>
   </div>
 </section>
 {% endif %}

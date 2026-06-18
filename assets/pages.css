@@ -35,10 +35,22 @@
 
 /* === COLLECTION SEO CONTENT (below product grid) === */
 .collection-seo {
-    padding: 1rem var(--gutter) 6rem;
+    padding: 4.5rem var(--gutter) 6.5rem;
+    border-top: 1px solid var(--color-border);
+    margin-top: 3rem;
 }
 .collection-seo-inner {
-    max-width: 760px;
+    max-width: 720px;
+    margin: 0 auto;
+}
+.collection-seo-eyebrow {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 1.5rem;
 }
 .collection-seo-inner h2 {
     font-family: var(--font-serif);
@@ -46,6 +58,9 @@
     font-weight: 400;
     margin: 2.4rem 0 1rem;
     line-height: 1.2;
+}
+.collection-seo-inner h2:first-child {
+    margin-top: 0;
 }
 .collection-seo-inner h3 {
     font-family: var(--font-serif);
