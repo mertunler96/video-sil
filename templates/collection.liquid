@@ -1,3 +1,24 @@
+﻿<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ collection.title | json }},
+  "description": {{ collection.description | strip_html | truncate: 300 | default: 'Shop the MUNLER collection of stainless steel framed mirrors and furniture.' | json }},
+  "url": "{{ shop.url }}{{ collection.url }}"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Home","item":"{{ shop.url }}"},
+    {"@type":"ListItem","position":2,"name":"Shop","item":"{{ shop.url }}/collections/all"},
+    {"@type":"ListItem","position":3,"name":{{ collection.title | json }},"item":"{{ shop.url }}{{ collection.url }}"}
+  ]
+}
+</script>
+
 <section class="page-hero">
   <span class="section-label" style="color:var(--color-gold);">
     {% if collection.handle == 'all' %}All Products{% else %}The Collection{% endif %}
@@ -97,6 +118,14 @@
   </div>
 </section>
 
+{% if collection.metafields.custom.seo_content != blank %}
+<section class="collection-seo">
+  <div class="container collection-seo-inner">
+    {{ collection.metafields.custom.seo_content }}
+  </div>
+</section>
+{% endif %}
+
 {% if collection.handle == 'all' %}
 <script>
 (function(){
@@ -119,6 +148,7 @@
     });
   });
 
+  // Auto-activate filter from URL hash (e.g. /collections/all#mirrors)
   var hash = window.location.hash.replace('#', '');
   if(hash === 'mirrors' || hash === 'furniture') {
     applyFilter(hash);
