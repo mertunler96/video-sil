@@ -217,70 +217,61 @@
 }
 
 /* === ABOUT PAGE === */
-/* Cinematic hero */
+/* Editorial intro hero */
 .about-hero {
     position: relative;
-    min-height: 84vh;
+    background: var(--color-dark);
+    min-height: 72vh;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 9rem var(--gutter) 7rem;
     overflow: hidden;
 }
-.about-hero-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.about-hero-inner {
+    max-width: 780px;
 }
-.about-hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(22,19,16,0.82) 0%, rgba(22,19,16,0.34) 42%, rgba(22,19,16,0.12) 100%);
-}
-.about-hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 760px;
-    padding: 0 var(--gutter) 7rem;
-}
-.about-hero-content .section-label {
+.about-hero .section-label {
     color: var(--color-gold);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.6rem;
 }
 .about-hero-title {
     font-family: var(--font-serif);
-    font-size: clamp(2.8rem, 6.2vw, 5.2rem);
+    font-size: clamp(2.8rem, 6vw, 5rem);
     font-weight: 400;
-    line-height: 1.04;
+    line-height: 1.06;
     color: var(--color-white);
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.9rem;
 }
-.about-hero-content p {
+.about-hero p {
     font-family: var(--font-sans);
     font-weight: 300;
     font-size: 1.02rem;
     line-height: 1.85;
-    color: rgba(255,255,255,0.82);
+    color: rgba(255,255,255,0.72);
     max-width: 540px;
+    margin: 0 auto;
 }
 .about-hero-scroll {
     position: absolute;
-    right: var(--gutter);
     bottom: 2.5rem;
-    z-index: 2;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    color: rgba(255,255,255,0.6);
+    gap: 0.8rem;
+    color: rgba(255,255,255,0.5);
     font-family: var(--font-sans);
-    font-size: 0.62rem;
+    font-size: 0.6rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
 }
 .about-hero-scroll .scroll-line {
     width: 1px;
-    height: 48px;
-    background: rgba(255,255,255,0.4);
+    height: 40px;
+    background: rgba(255,255,255,0.35);
 }
 
 /* Story chapters */
@@ -343,6 +334,12 @@
     margin-bottom: 1.2rem;
     font-size: 0.92rem;
     line-height: 1.9;
+}
+.about-story-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2.2rem;
 }
 
 /* Finale */
