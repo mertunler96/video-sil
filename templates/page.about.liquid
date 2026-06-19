@@ -1,19 +1,26 @@
-<!-- Page Hero (dark banner) -->
-<div class="page-hero">
-  <span class="section-label">Our Story</span>
-  <h1 class="page-hero-title">Born in a small room in London</h1>
-  <p class="page-hero-desc">MUNLER began with two people, very little space, and one refusal: that a mirror should ever be ordinary.</p>
-</div>
+<!-- Cinematic Hero -->
+<section class="about-hero">
+  <img class="about-hero-img" src="{{ 'about-1.jpg' | asset_url }}" alt="London at dusk, where MUNLER began" width="1920" height="1280">
+  <div class="about-hero-overlay"></div>
+  <div class="about-hero-content reveal">
+    <span class="section-label">Our Story</span>
+    <h1 class="about-hero-title">Born in a small room<br>in London</h1>
+    <p>MUNLER began with two people, very little space, and one refusal: that a mirror should ever be ordinary.</p>
+  </div>
+  <div class="about-hero-scroll"><span>Read our story</span><div class="scroll-line"></div></div>
+</section>
 
 <!-- Chapter 1: image left -->
 <section class="about-story">
   <div class="container">
     <div class="about-story-grid">
-      <div class="about-story-img reveal">
-        <img src="{{ 'about-1.jpg' | asset_url }}" alt="The London skyline at dusk, where MUNLER began">
-      </div>
+      <figure class="about-story-img reveal">
+        <span class="about-story-imgframe"><img src="{{ 'about-2.jpg' | asset_url }}" alt="A quiet London street on a grey morning"></span>
+        <figcaption class="about-story-caption">London, before any of it began</figcaption>
+      </figure>
       <div class="about-story-text reveal">
-        <span class="section-label">Chapter One</span>
+        <span class="about-chapter-num">01</span>
+        <span class="section-label">The beginning</span>
         <h2>It started on a building site</h2>
         <p>Before MUNLER, there was a building site. One of us trained as a civil engineer and spent years in London on large, demanding projects, the kind where materials are chosen for how they perform, not for how little they cost.</p>
         <p>That world teaches you to look closely at how things are made, and to trust the materials that earn it. It is a habit we never lost.</p>
@@ -23,18 +30,20 @@
 </section>
 
 <!-- Chapter 2: image right -->
-<section class="about-story">
+<section class="about-story about-story--tint">
   <div class="container">
     <div class="about-story-grid">
       <div class="about-story-text reveal">
-        <span class="section-label">Chapter Two</span>
+        <span class="about-chapter-num">02</span>
+        <span class="section-label">The frustration</span>
         <h2>Every mirror looked the same</h2>
         <p>Somewhere along the way, one thing would not let go. Every mirror looked the same. The same safe shapes, the same thin aluminium and pot metal, the same quiet compromise. For something you stand in front of every single day, it felt like a missed opportunity.</p>
         <p>We became convinced a mirror could be the opposite of forgettable. Sculptural, asymmetrical, finished to a standard no one else seemed willing to reach. The asymmetry was deliberate, a quiet refusal of all that sameness.</p>
       </div>
-      <div class="about-story-img reveal">
-        <img src="{{ 'about-2.jpg' | asset_url }}" alt="A quiet London street on a grey morning">
-      </div>
+      <figure class="about-story-img reveal">
+        <span class="about-story-imgframe"><img src="{{ 'about-3.jpg' | asset_url }}" alt="A misty path through a London park"></span>
+        <figcaption class="about-story-caption">A different way of seeing an everyday object</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -43,11 +52,13 @@
 <section class="about-story">
   <div class="container">
     <div class="about-story-grid">
-      <div class="about-story-img reveal">
-        <img src="{{ 'about-3.jpg' | asset_url }}" alt="A misty path through a London park">
-      </div>
+      <figure class="about-story-img reveal">
+        <span class="about-story-imgframe"><img src="{{ 'about-4.jpg' | asset_url }}" alt="A London mews at golden hour"></span>
+        <figcaption class="about-story-caption">Ten square metres, and a great deal of will</figcaption>
+      </figure>
       <div class="about-story-text reveal">
-        <span class="section-label">Chapter Three</span>
+        <span class="about-chapter-num">03</span>
+        <span class="section-label">The leap</span>
         <h2>Ten square metres</h2>
         <p>MUNLER was not born in a studio or a boardroom. It was born in a ten square metre room in London, where we were living at the time. We were twenty eight and twenty four.</p>
         <p>We left a career behind and put everything into this idea, in conditions that were anything but comfortable. Looking back, that small room was the whole point. MUNLER came out of scarcity, out of the will to build something lasting from very little.</p>
@@ -57,18 +68,20 @@
 </section>
 
 <!-- Chapter 4: image right -->
-<section class="about-story">
+<section class="about-story about-story--tint">
   <div class="container">
     <div class="about-story-grid">
       <div class="about-story-text reveal">
-        <span class="section-label">Chapter Four</span>
+        <span class="about-chapter-num">04</span>
+        <span class="section-label">The two of us</span>
         <h2>Two different worlds</h2>
         <p>We come from two different worlds. One from engineering and the building trade, the other from international relations and law. What we share is a stubborn belief that things should be made properly, and a willingness to risk a great deal to prove it.</p>
         <p>We are partners in life as well as in work, and we built MUNLER together, from that first room.</p>
       </div>
-      <div class="about-story-img reveal">
-        <img src="{{ 'about-4.jpg' | asset_url }}" alt="A London mews at golden hour">
-      </div>
+      <figure class="about-story-img reveal">
+        <span class="about-story-imgframe"><img src="{{ 'about-5.jpg' | asset_url }}" alt="An elegant London street in Mayfair"></span>
+        <figcaption class="about-story-caption">Built together, from the very first room</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -77,11 +90,13 @@
 <section class="about-story">
   <div class="container">
     <div class="about-story-grid">
-      <div class="about-story-img reveal">
-        <img src="{{ 'about-5.jpg' | asset_url }}" alt="An elegant London street in Mayfair">
-      </div>
+      <figure class="about-story-img reveal">
+        <span class="about-story-imgframe"><img src="{{ 'about-6.jpg' | asset_url }}" alt="The River Thames and the London skyline at blue hour"></span>
+        <figcaption class="about-story-caption">Made properly, or not at all</figcaption>
+      </figure>
       <div class="about-story-text reveal">
-        <span class="section-label">Chapter Five</span>
+        <span class="about-chapter-num">05</span>
+        <span class="section-label">The standard</span>
         <h2>Made properly, or not at all</h2>
         <p>To make mirrors properly, we went looking for people who still cared about making things properly. We spoke with manufacturers across the world and chose only those who could meet our standard.</p>
         <p>Premium stainless steel, ecological silver glass that is copper free and lead free, and a level of finish you can feel. Two things are never for sale here: quality and responsibility.</p>
@@ -90,22 +105,33 @@
   </div>
 </section>
 
-<!-- Chapter 6: image right -->
-<section class="about-story">
+<!-- The MUNLER Standard (credibility strip) -->
+<section class="about-values">
   <div class="container">
-    <div class="about-story-grid">
-      <div class="about-story-text reveal">
-        <span class="section-label">Chapter Six</span>
-        <h2>That is a MUNLER</h2>
-        <p>The name is personal. It is ours, kept deliberately quiet, a signature rather than a spotlight. We have always preferred to let the work speak.</p>
-        <p>Our hope is a simple one. That one day someone could walk into a room, glance at the mirror on the wall, and simply know. That is a MUNLER.</p>
-        <a href="/collections/all" class="link-arrow">
-          Explore the collection
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
+    <div class="section-header reveal">
+      <span class="section-label">What goes into a MUNLER</span>
+      <h2>The MUNLER Standard</h2>
+    </div>
+    <div class="about-values-grid">
+      <div class="value-item reveal">
+        <span class="value-num">01</span>
+        <h4>Stainless Steel Frames</h4>
+        <p>Rust-resistant brushed steel, strong enough to hold a crisp, sculptural edge for years.</p>
       </div>
-      <div class="about-story-img reveal">
-        <img src="{{ 'about-6.jpg' | asset_url }}" alt="The River Thames and the London skyline at blue hour">
+      <div class="value-item reveal">
+        <span class="value-num">02</span>
+        <h4>Ecological Glass</h4>
+        <p>Copper-free, lead-free silver mirror. Cleaner to make, and clear far longer.</p>
+      </div>
+      <div class="value-item reveal">
+        <span class="value-num">03</span>
+        <h4>Made to Last</h4>
+        <p>A level of finish you can feel, built to be kept rather than replaced.</p>
+      </div>
+      <div class="value-item reveal">
+        <span class="value-num">04</span>
+        <h4>Free UK Delivery</h4>
+        <p>Carefully packed and delivered to your door, anywhere in the UK.</p>
       </div>
     </div>
   </div>
@@ -113,21 +139,21 @@
 
 <!-- Quote -->
 <section class="about-quote">
-  <blockquote>
+  <blockquote class="reveal">
     "The best objects are the ones you stop noticing, not because they disappear, but because they become part of how a space feels."
     <cite>MUNLER</cite>
   </blockquote>
 </section>
 
-<!-- CTA -->
-<section style="padding: 8rem 0; background: var(--color-bg); text-align: center; border-top: 1px solid var(--color-border);">
-  <div class="container-narrow">
-    <span class="section-label">Explore</span>
-    <h2 style="margin-bottom: 1.5rem;">Find your MUNLER</h2>
-    <p style="margin-bottom: 2.5rem; max-width: 440px; margin-left: auto; margin-right: auto;">Browse our full collection of mirrors and furniture, or get in touch if you have any questions.</p>
-    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-      <a href="/collections/all" class="btn btn-dark">Shop All</a>
-      <a href="/pages/contact" class="btn" style="border: 1px solid var(--color-dark); color: var(--color-dark);">Contact Us</a>
+<!-- Finale / CTA -->
+<section class="about-finale">
+  <div class="container-narrow reveal">
+    <span class="about-chapter-num">06</span>
+    <h2>That is a MUNLER</h2>
+    <p>The name is personal. It is ours, kept deliberately quiet, a signature rather than a spotlight. We have always preferred to let the work speak. Our hope is a simple one: that one day someone could walk into a room, glance at the mirror on the wall, and simply know.</p>
+    <div class="about-finale-actions">
+      <a href="/collections/all" class="btn btn-dark">Explore the Collection</a>
+      <a href="/pages/contact" class="btn btn-outline">Contact Us</a>
     </div>
   </div>
 </section>
