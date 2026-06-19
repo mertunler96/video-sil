@@ -259,19 +259,22 @@
 }
 .about-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
+    grid-template-columns: 1.35fr 0.9fr;
+    gap: 4rem;
     align-items: center;
-    max-width: 1240px;
+    max-width: 1320px;
     margin: 0 auto;
     padding: 4.5rem var(--gutter);
+}
+.about-row--reverse {
+    grid-template-columns: 0.9fr 1.35fr;
 }
 .about-row--reverse .about-row-img {
     order: 2;
 }
 .about-row-img {
     margin: 0;
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     background: #2a2622;
 }
@@ -1160,7 +1163,8 @@
         min-height: 46vh;
         padding: 7rem var(--gutter) 4rem;
     }
-    .about-row {
+    .about-row,
+    .about-row--reverse {
         grid-template-columns: 1fr;
         gap: 2.5rem;
         padding: 3.5rem var(--gutter);
