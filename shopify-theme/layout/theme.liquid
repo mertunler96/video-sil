@@ -11,6 +11,7 @@
   <link rel="canonical" href="{{ canonical_url }}">
 
   <!-- Open Graph -->
+  {%- assign default_share_image = 'https://munler.co.uk/cdn/shop/files/bu_odanin_farkli_shotlarini_ver__202605231515_91bb8878-aaa5-4548-a64a-2a5e1238b6b5.jpg?width=1200&height=630&crop=center' -%}
   <meta property="og:site_name" content="MUNLER">
   <meta property="og:url" content="{{ canonical_url }}">
   <meta property="og:locale" content="en_GB">
@@ -18,7 +19,7 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="MUNLER — Premium Home Objects">
     <meta property="og:description" content="{{ shop.description | default: 'Stainless steel frames and ecological mirrors. Crafted for the extraordinary home.' | escape }}">
-    {% if settings.share_image %}<meta property="og:image" content="https:{{ settings.share_image | img_url: '1200x630' }}">{% endif %}
+    {% if settings.share_image %}<meta property="og:image" content="https:{{ settings.share_image | img_url: '1200x630' }}">{% else %}<meta property="og:image" content="{{ default_share_image }}">{% endif %}
   {% elsif template contains 'product' %}
     <meta property="og:type" content="product">
     <meta property="og:title" content="{{ product.title | escape }} | MUNLER">
@@ -30,13 +31,15 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ collection.title | escape }} | MUNLER">
     <meta property="og:description" content="{{ collection.description | strip_html | truncate: 160 | default: 'Shop the MUNLER collection.' | escape }}">
-    {% if collection.image %}<meta property="og:image" content="https:{{ collection.image | img_url: '1200x630' }}">{% elsif settings.share_image %}<meta property="og:image" content="https:{{ settings.share_image | img_url: '1200x630' }}">{% endif %}
+    {% if collection.image %}<meta property="og:image" content="https:{{ collection.image | img_url: '1200x630' }}">{% elsif settings.share_image %}<meta property="og:image" content="https:{{ settings.share_image | img_url: '1200x630' }}">{% else %}<meta property="og:image" content="{{ default_share_image }}">{% endif %}
   {% else %}
     <meta property="og:type" content="website">
     <meta property="og:title" content="{% if page_title %}{{ page_title | escape }} | MUNLER{% else %}MUNLER{% endif %}">
     <meta property="og:description" content="{{ page_description | default: shop.description | default: 'Stainless steel frames and ecological mirrors. Crafted for the extraordinary home.' | escape }}">
-    {% if settings.share_image %}<meta property="og:image" content="https:{{ settings.share_image | img_url: '1200x630' }}">{% endif %}
+    {% if settings.share_image %}<meta property="og:image" content="https:{{ settings.share_image | img_url: '1200x630' }}">{% else %}<meta property="og:image" content="{{ default_share_image }}">{% endif %}
   {% endif %}
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -47,6 +50,8 @@
     <meta name="twitter:image" content="https:{{ product.featured_image | img_url: '1200x628' }}">
   {% elsif settings.share_image %}
     <meta name="twitter:image" content="https:{{ settings.share_image | img_url: '1200x628' }}">
+  {% else %}
+    <meta name="twitter:image" content="{{ default_share_image }}">
   {% endif %}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
