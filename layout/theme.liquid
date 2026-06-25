@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="{{ page_description | default: shop.description | default: 'MUNLER — Stainless steel frames and ecological mirrors. Crafted for the extraordinary home.' }}">
+  <meta name="description" content="{% if template == 'index' %}Premium asymmetrical and full-length mirrors with handcrafted stainless steel frames and ecological glass. Free UK delivery, crafted for the extraordinary home.{% else %}{{ page_description | default: shop.description | default: 'Stainless steel frames and ecological mirrors. Crafted for the extraordinary home.' }}{% endif %}">
   <meta name="google-site-verification" content="{{ settings.google_site_verification | default: 'exJl5lQDjCnemV41M1dhpCzTHevOF8ampm6GFkfMYaY' }}">
   {% if settings.bing_site_verification != blank %}<meta name="msvalidate.01" content="{{ settings.bing_site_verification }}">{% endif %}
   {% if settings.pinterest_site_verification != blank %}<meta name="p:domain_verify" content="{{ settings.pinterest_site_verification }}">{% endif %}
