@@ -76,7 +76,7 @@
   {% unless template == 'index' or template contains 'product' or template == 'cart' %}
     <link rel="stylesheet" href="{{ 'pages.css' | asset_url }}">
   {% endunless %}
-  <style>.shopify-policy__title{position:absolute !important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
+  <style>.shopify-policy__title{position:absolute !important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.shopify-policy__container{padding-top:calc(var(--header-h) + 2.5rem)}</style>
 
   {% if template == 'index' %}
   <script type="application/ld+json">
