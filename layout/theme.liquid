@@ -76,7 +76,6 @@
   {% unless template == 'index' or template contains 'product' or template == 'cart' %}
     <link rel="stylesheet" href="{{ 'pages.css' | asset_url }}">
   {% endunless %}
-  {% if template == 'policy' %}<style>main h1{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}</style>{% endif %}
 
   {% if template == 'index' %}
   <script type="application/ld+json">
