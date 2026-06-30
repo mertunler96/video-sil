@@ -190,15 +190,22 @@
                 <span class="option-selected-val" id="selected-size-label">{{ product.selected_or_first_available_variant.title }}</span>
               </div>
               <div class="size-options">
+                {% assign size_idx = 0 %}
                 {% for variant in product.variants %}
                   {% assign vt = variant.title | downcase %}
                   {% unless vt contains 'gold' or vt contains 'black' or vt contains 'white' %}
+                    {% assign size_idx = size_idx | plus: 1 %}
+                    {% assign size_name = '' %}
+                    {% if size_count == 2 %}
+                      {% if size_idx == 1 %}{% assign size_name = 'Medium' %}{% else %}{% assign size_name = 'Large' %}{% endif %}
+                    {% endif %}
                     {% assign parts = variant.title | split: ' - ' %}
                     <button type="button" class="size-btn {% if variant == product.selected_or_first_available_variant %}active{% endif %}"
                       data-variant-id="{{ variant.id }}"
                       data-price="{{ variant.price | money }}"
                       data-title="{{ variant.title }}"
                       {% unless variant.available %}disabled{% endunless %}>
+                      {% if size_name != '' %}<span class="size-name">{{ size_name }}</span>{% endif %}
                       <span class="size-cm">{{ parts[0] }}</span>
                       {% if parts[1] %}<span class="size-in">{{ parts[1] }}</span>{% endif %}
                     </button>
