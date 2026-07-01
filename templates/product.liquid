@@ -173,6 +173,10 @@
             <span class="pinfo-price-note">Free UK delivery</span>
           </div>
 
+          {% if product.handle == 'brook-matte-black-wall-mirror' %}
+          <p class="pinfo-stock"><span class="pinfo-stock-dot"></span>In stock, ready to ship in 3–5 days</p>
+          {% endif %}
+
           {% form 'product', product %}
             {% comment %}Count selectable size variants (exclude colour names and single/default){% endcomment %}
             {% assign size_count = 0 %}
@@ -247,6 +251,17 @@
               </button>
             </div>
           {% endform %}
+
+          {% if product.handle == 'brook-matte-black-wall-mirror' %}
+          <p class="klarna-line">Pay in 3 interest-free payments with <strong>Klarna</strong>, chosen at checkout.</p>
+          <ul class="feature-checklist">
+            <li>100% real glass, distortion-free reflection</li>
+            <li>Arrives ready to hang, wall fixings included</li>
+            <li>Handmade 304-grade stainless steel frame</li>
+            <li>5-year warranty against manufacturing defects</li>
+            <li>30-day returns, fully insured UK delivery</li>
+          </ul>
+          {% endif %}
 
           <div class="trust-badges">
             <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>Free UK Delivery</span></div>

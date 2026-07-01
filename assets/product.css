@@ -411,6 +411,70 @@
     flex-shrink: 0;
 }
 
+/* === PRODUCT TRUST ENHANCEMENTS === */
+.pinfo-stock {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--color-mid);
+    margin: 0.5rem 0 0;
+}
+.pinfo-stock-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #5a8a5a;
+    box-shadow: 0 0 0 3px rgba(90, 138, 90, 0.15);
+    flex-shrink: 0;
+}
+.klarna-line {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    color: var(--color-mid);
+    text-align: center;
+    margin: 0.25rem 0 0;
+}
+.klarna-line strong {
+    font-weight: 500;
+    color: var(--color-dark);
+}
+.feature-checklist {
+    list-style: none;
+    margin: 0.25rem 0 0;
+    padding: 1.25rem 0 0;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+.feature-checklist li {
+    position: relative;
+    padding-left: 1.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    color: var(--color-mid);
+}
+.feature-checklist li::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 0.05em;
+    width: 5px;
+    height: 10px;
+    border-right: 1.5px solid var(--color-gold-dark);
+    border-bottom: 1.5px solid var(--color-gold-dark);
+    transform: rotate(45deg);
+}
+
 /* === ACCORDIONS === */
 .accordions {
     border-top: 1px solid var(--color-border);
