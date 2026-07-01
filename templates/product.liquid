@@ -168,7 +168,7 @@
           </div>
           {% endif %}
 
-          {% if product.handle == 'brook-matte-black-wall-mirror' %}
+          {% if product.handle == 'brook-matte-black-wall-mirror' or product.handle == 'brook-champagne-gold-wall-mirror' or product.handle == 'solenne-champagne-gold-full-length-mirror' %}
           <button type="button" class="see-at-home-trigger" data-open-home-gallery>See it in the home</button>
           {% endif %}
 
@@ -177,7 +177,7 @@
             <span class="pinfo-price-note">Free UK delivery</span>
           </div>
 
-          {% if product.handle == 'brook-matte-black-wall-mirror' %}
+          {% if product.available %}
           <p class="pinfo-stock"><span class="pinfo-stock-dot"></span>In stock, ready to ship in 3–5 days</p>
           {% endif %}
 
@@ -256,8 +256,8 @@
             </div>
           {% endform %}
 
-          {% if product.handle == 'brook-matte-black-wall-mirror' %}
           <p class="klarna-line">Pay in 3 interest-free payments with <strong>Klarna</strong>, chosen at checkout.</p>
+          {% if product.type == 'Mirrors' %}
           <ul class="feature-checklist">
             <li>100% real glass, distortion-free reflection</li>
             <li>Arrives ready to hang, wall fixings included</li>
@@ -274,20 +274,37 @@
             <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Ships in 3–5 Days</span></div>
           </div>
 
-          {% if product.handle == 'brook-matte-black-wall-mirror' %}
+          {% if product.handle == 'brook-matte-black-wall-mirror' or product.handle == 'brook-champagne-gold-wall-mirror' or product.handle == 'solenne-champagne-gold-full-length-mirror' %}
+          {% assign home_name = product.title | split: ' ' | first %}
           <div class="home-gallery-overlay" id="home-gallery" hidden>
             <div class="home-gallery-panel">
               <button type="button" class="home-gallery-close" data-close-home-gallery aria-label="Close">&times;</button>
               <p class="home-gallery-eyebrow">Styled by MUNLER</p>
-              <h3 class="home-gallery-title">The Brook at home</h3>
+              <h3 class="home-gallery-title">The {{ home_name }} at home</h3>
               <div class="home-gallery-grid">
-                <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/brook-black-hallway.jpg?v=1782914934&width=900" alt="Brook Matte Black mirror in a modern hallway" loading="lazy">
-                <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-entryway-black-mirror-pampas.jpg?v=1781825224&width=900" alt="Brook Matte Black mirror in a bright entryway" loading="lazy">
-                <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-bathroom-black-marble-tub-mirror.jpg?v=1781825223&width=900" alt="Brook Matte Black mirror in a marble bathroom" loading="lazy">
-                <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-powder-room-ribbed-black-mirror.jpg?v=1781825222&width=900" alt="Brook Matte Black mirror in a moody powder room" loading="lazy">
-                <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-entryway-black-asymmetrical-mirror.jpg?v=1781823661&width=900" alt="Brook Matte Black mirror above a console" loading="lazy">
+                {% case product.handle %}
+                {% when 'brook-matte-black-wall-mirror' %}
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/brook-black-hallway.jpg?v=1782914934&width=900" alt="Matte black Brook mirror in a modern hallway" loading="lazy">
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-bathroom-black-marble-tub-mirror.jpg?v=1781825223&width=900" alt="Matte black Brook mirror in a marble bathroom" loading="lazy">
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-powder-room-ribbed-black-mirror.jpg?v=1781825222&width=900" alt="Matte black Brook mirror in a moody powder room" loading="lazy">
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/bu_evin_salonunu_ver_2K_202606281547.jpg?v=1782914935&width=900" alt="Matte black Brook mirror in a living room" loading="lazy">
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/Bu_evin_hallway_entryway_tasarimini_202605261414.jpg?v=1782914935&width=900" alt="Matte black Brook mirror in an entryway" loading="lazy">
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-entryway-black-asymmetrical-mirror.jpg?v=1781823661&width=900" alt="Matte black Brook mirror above a console" loading="lazy">
+                {% when 'brook-champagne-gold-wall-mirror' %}
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-entryway-black-mirror-pampas.jpg?v=1781825224&width=900" alt="Champagne gold Brook mirror in a bright entryway" loading="lazy">
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-living-fireplace-gold-mirror.jpg?v=1781825224&width=900" alt="Champagne gold Brook mirror above a fireplace" loading="lazy">
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-bathroom-gold-marble-mirror.jpg?v=1781825224&width=900" alt="Champagne gold Brook mirror in a marble bathroom" loading="lazy">
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/lavabonun_yanina_sabunluk_ve_kremler_202605181135.jpg?v=1782914935&width=900" alt="Champagne gold Brook mirror in a powder room" loading="lazy">
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/dining_room_CLEAN.jpg?v=1782914927&width=900" alt="Champagne gold Brook mirror in a dining room" loading="lazy">
+                {% when 'solenne-champagne-gold-full-length-mirror' %}
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-bedroom-gold-leaner-fiddle.jpg?v=1781825223&width=900" alt="Champagne gold Solenne full-length mirror in a bedroom" loading="lazy">
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-living-gold-leaner-fireplace.jpg?v=1781825224&width=900" alt="Champagne gold Solenne full-length mirror by a fireplace" loading="lazy">
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/Bu_evin_master_bedroom_tasarimini_202605261539.jpg?v=1782914934&width=900" alt="Champagne gold Solenne full-length mirror in a master bedroom" loading="lazy">
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/Yansimadak_agaci_daha_farkli_bir_202604292056.jpg?v=1782914933&width=900" alt="Champagne gold Solenne full-length mirror in a living corner" loading="lazy">
+                  <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/Farkli_acidan_cek_fotoyu_2K_202605261548.jpg?v=1782914935&width=900" alt="Champagne gold Solenne full-length mirror in a living room" loading="lazy">
+                {% endcase %}
               </div>
-              <p class="home-gallery-note">Styled interiors featuring the Brook Mirror.</p>
+              <p class="home-gallery-note">Styled interiors featuring the {{ home_name }} Mirror.</p>
             </div>
           </div>
           <script>
