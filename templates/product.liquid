@@ -168,6 +168,10 @@
           </div>
           {% endif %}
 
+          {% if product.handle == 'brook-matte-black-wall-mirror' %}
+          <button type="button" class="see-at-home-trigger" data-open-home-gallery>See it in the home</button>
+          {% endif %}
+
           <div class="pinfo-price-block">
             <span class="pinfo-price" id="pinfo-price">{{ product.selected_or_first_available_variant.price | money }}</span>
             <span class="pinfo-price-note">Free UK delivery</span>
@@ -269,6 +273,36 @@
             <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Tracked Shipping</span></div>
             <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Ships in 3–5 Days</span></div>
           </div>
+
+          {% if product.handle == 'brook-matte-black-wall-mirror' %}
+          <div class="home-gallery-overlay" id="home-gallery" hidden>
+            <div class="home-gallery-panel">
+              <button type="button" class="home-gallery-close" data-close-home-gallery aria-label="Close">&times;</button>
+              <p class="home-gallery-eyebrow">Styled by MUNLER</p>
+              <h3 class="home-gallery-title">The Brook at home</h3>
+              <div class="home-gallery-grid">
+                <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/brook-black-hallway.jpg?v=1782914934&width=900" alt="Brook Matte Black mirror in a modern hallway" loading="lazy">
+                <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-entryway-black-mirror-pampas.jpg?v=1781825224&width=900" alt="Brook Matte Black mirror in a bright entryway" loading="lazy">
+                <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-bathroom-black-marble-tub-mirror.jpg?v=1781825223&width=900" alt="Brook Matte Black mirror in a marble bathroom" loading="lazy">
+                <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-powder-room-ribbed-black-mirror.jpg?v=1781825222&width=900" alt="Brook Matte Black mirror in a moody powder room" loading="lazy">
+                <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/blog-entryway-black-asymmetrical-mirror.jpg?v=1781823661&width=900" alt="Brook Matte Black mirror above a console" loading="lazy">
+              </div>
+              <p class="home-gallery-note">Styled interiors featuring the Brook Mirror.</p>
+            </div>
+          </div>
+          <script>
+          (function(){
+            var t = document.querySelector('[data-open-home-gallery]');
+            var o = document.getElementById('home-gallery');
+            if(!t || !o) return;
+            function closeG(){ o.hidden = true; document.body.style.overflow=''; }
+            t.addEventListener('click', function(){ o.hidden = false; document.body.style.overflow='hidden'; });
+            o.querySelector('[data-close-home-gallery]').addEventListener('click', closeG);
+            o.addEventListener('click', function(e){ if(e.target === o) closeG(); });
+            document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !o.hidden) closeG(); });
+          })();
+          </script>
+          {% endif %}
 
           {% assign title_lower = product.title | downcase %}
           <div class="accordions">
