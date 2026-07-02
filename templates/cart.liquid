@@ -74,7 +74,27 @@
           <div class="cart-item-body">
             <a href="{{ item.url }}" class="cart-item-name">{{ item.product.title }}</a>
             {% unless item.variant.title == 'Default Title' %}
-              <span class="cart-item-variant">{{ item.variant.title }}</span>
+              {%- assign size_count = 0 -%}
+              {%- for v in item.product.variants -%}
+                {%- assign vt = v.title | downcase -%}
+                {%- unless vt == 'default title' or vt contains 'gold' or vt contains 'black' or vt contains 'white' -%}
+                  {%- assign size_count = size_count | plus: 1 -%}
+                {%- endunless -%}
+              {%- endfor -%}
+              {%- assign size_name = '' -%}
+              {%- if size_count == 2 -%}
+                {%- assign size_idx = 0 -%}
+                {%- for v in item.product.variants -%}
+                  {%- assign vt = v.title | downcase -%}
+                  {%- unless vt contains 'gold' or vt contains 'black' or vt contains 'white' -%}
+                    {%- assign size_idx = size_idx | plus: 1 -%}
+                    {%- if v.id == item.variant.id -%}
+                      {%- if size_idx == 1 -%}{%- assign size_name = 'Medium' -%}{%- else -%}{%- assign size_name = 'Large' -%}{%- endif -%}
+                    {%- endif -%}
+                  {%- endunless -%}
+                {%- endfor -%}
+              {%- endif -%}
+              <span class="cart-item-variant">{% if size_name != '' %}{{ size_name }} · {% endif %}{{ item.variant.title }}</span>
             {% endunless %}
             <div class="cart-item-bottom">
               <div class="qty-control">
