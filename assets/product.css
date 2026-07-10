@@ -60,127 +60,27 @@
     isolation: isolate;
 }
 
-/* === GALLERY === */
+/* === GALLERY ===
+   A single stacked column of every product photograph. No thumbnails, no arrows,
+   no dots, no JavaScript. On mobile the same markup becomes a scroll-snap strip. */
 .product-gallery {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 1rem;
-    /* The info column is taller than the gallery, which used to leave a tall
-       empty white block on the left. Pin the gallery so an image stays in view
-       for the whole scroll. Reset to static on mobile in the media query below. */
-    position: sticky;
-    top: calc(var(--header-h) + 1.5rem);
-    align-self: start;
-}
-
-/* Thumbnails */
-.gallery-thumbs {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 1rem;
 }
 
-.thumb {
-    width: 80px;
-    height: 80px;
-    border: 1px solid transparent;
-    overflow: hidden;
-    cursor: pointer;
-    transition: border-color var(--transition), opacity var(--transition);
+.gallery-item {
+    margin: 0;
     background: var(--color-light);
-    flex-shrink: 0;
-    padding: 0;
+    overflow: hidden;
 }
 
-.thumb img {
+.gallery-item img {
+    display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.thumb:hover img {
-    transform: scale(1.08);
-}
-
-.thumb.active {
-    border-color: var(--color-dark);
-}
-
-.thumb:not(.active) {
-    opacity: 0.55;
-}
-
-.thumb:not(.active):hover {
-    opacity: 0.85;
-}
-
-/* Main image */
-.gallery-main-wrap {
-    position: relative;
-}
-
-.gallery-main {
+    height: auto;
     aspect-ratio: 3 / 4;
-    background: var(--color-light);
-    overflow: hidden;
-}
-
-.gallery-main img {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
-    transition: opacity 0.4s ease;
-}
-
-/* Gallery arrows */
-.gallery-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    width: 46px;
-    height: 46px;
-    background: rgba(255,255,255,0.92);
-    border: 1px solid rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: var(--color-dark);
-    transition: background var(--transition), color var(--transition);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-}
-
-.gallery-arrow--prev { left: 1rem; }
-.gallery-arrow--next { right: 1rem; }
-
-.gallery-arrow:hover {
-    background: var(--color-dark);
-    color: var(--color-white);
-}
-
-/* Dots (mobile) */
-.gallery-dots {
-    display: none;
-    justify-content: center;
-    gap: 6px;
-    margin-top: 1rem;
-}
-
-.dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-border);
-    cursor: pointer;
-    transition: background var(--transition), transform var(--transition);
-}
-
-.dot.active {
-    background: var(--color-dark);
-    transform: scale(1.3);
 }
 
 /* === PRODUCT INFO PANEL === */
@@ -189,7 +89,9 @@
 }
 
 .product-info-sticky {
-    position: relative;
+    /* Sticky, because the gallery column is now much taller than this one. */
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -759,23 +661,24 @@
         gap: 0;
     }
 
+    /* The stacked column becomes a swipeable strip. Ten full-height photographs
+       would otherwise be an enormous scroll on a phone. Pure CSS, no carousel. */
     .product-gallery {
-        position: relative;
-        top: 0;
-        grid-template-columns: 1fr;
-        gap: 0;
+        position: static;
+        flex-direction: row;
+        gap: 0.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-inline: var(--gutter);
     }
 
-    .gallery-thumbs {
-        display: none;
-    }
+    .product-gallery::-webkit-scrollbar { display: none; }
 
-    .gallery-main {
-        aspect-ratio: 3 / 4;
-    }
-
-    .gallery-dots {
-        display: flex;
+    .gallery-item {
+        flex: 0 0 86%;
+        scroll-snap-align: center;
     }
 
     .product-info-sticky {
@@ -1197,4 +1100,12 @@
     .honesty-price--them { font-size: 1rem; }
     .honesty-kicker { font-size: 1.25rem; }
     .honesty-foot { font-size: 0.72rem; }
+}
+
+/* Judge.me prints its own "Be the first to write a review" prompt with a button, and
+   then, underneath it, a second empty state whose only text is "No items found".
+   On a page trying to earn trust that reads like a broken widget. Keep the prompt,
+   hide the stray one. */
+#judgeme_product_reviews .jdgm-empty-state {
+    display: none;
 }
