@@ -58,16 +58,17 @@
 
       {%- comment -%}
         Built from primitives, not one path, because the geometry has to be provably
-        full-height: head starts at y=1 and the feet end at y=158 of a 160 box, so when
-        this is scaled to 170 cm the figure really does stand on the floor line.
+        full-height. The figure's bounding box must be exactly 0 to 160: the crown of
+        the head at y=0 and the soles at y=160. Anything less and the figure floats,
+        the scale silently lies, and the drawing is worse than no drawing.
       {%- endcomment -%}
       <symbol id="munler-person" viewBox="0 0 46 160">
-        <circle cx="23" cy="12" r="11" />
-        <rect x="14" y="26" width="18" height="46" rx="8" />
-        <rect x="5.5" y="30" width="7" height="41" rx="3.5" />
-        <rect x="33.5" y="30" width="7" height="41" rx="3.5" />
-        <rect x="15" y="70" width="7" height="88" rx="3.5" />
-        <rect x="24" y="70" width="7" height="88" rx="3.5" />
+        <circle cx="23" cy="11" r="11" />
+        <rect x="14" y="25" width="18" height="47" rx="8" />
+        <rect x="5.5" y="29" width="7" height="42" rx="3.5" />
+        <rect x="33.5" y="29" width="7" height="42" rx="3.5" />
+        <rect x="15" y="70" width="7" height="90" rx="3.5" />
+        <rect x="24" y="70" width="7" height="90" rx="3.5" />
       </symbol>
     </defs>
 
