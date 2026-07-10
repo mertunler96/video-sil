@@ -71,11 +71,11 @@
       {%- endcomment -%}
       <symbol id="munler-person" viewBox="0 0 46 160">
         <circle cx="23" cy="11" r="11" />
-        <rect x="14" y="25" width="18" height="47" rx="8" />
-        <rect x="5.5" y="29" width="7" height="42" rx="3.5" />
-        <rect x="33.5" y="29" width="7" height="42" rx="3.5" />
-        <rect x="15" y="70" width="7" height="90" rx="3.5" />
-        <rect x="24" y="70" width="7" height="90" rx="3.5" />
+        <rect x="13" y="25" width="20" height="48" rx="9" />
+        <rect x="6" y="29" width="8" height="43" rx="4" />
+        <rect x="32" y="29" width="8" height="43" rx="4" />
+        <rect x="14.5" y="68" width="8.5" height="92" rx="4" />
+        <rect x="23" y="68" width="8.5" height="92" rx="4" />
       </symbol>
     </defs>
 
@@ -104,9 +104,13 @@
       <text class="sg-label sg-label--medium" x="212" y="46">Medium &#183; 73 &#215; 52 cm</text>
       <text class="sg-dim" x="112" y="214">120 cm console</text>
     {%- else -%}
+      {%- comment -%}
+        Solenne has one size, so it is drawn solid. The dashed style means "the other
+        size you could choose", and there isn't one here.
+      {%- endcomment -%}
       <!-- Solenne: 170 tall x 90 wide, standing on the floor -->
-      <use href="#munler-blob" class="sg-mirror sg-mirror--large" x="150" y="30" width="90" height="170" />
-      <text class="sg-label sg-label--large" x="248" y="110">170 &#215; 90 cm</text>
+      <use href="#munler-blob" class="sg-mirror sg-mirror--solo" x="150" y="30" width="90" height="170" />
+      <text class="sg-label sg-label--medium" x="248" y="110">170 &#215; 90 cm</text>
       <text class="sg-dim" x="150" y="214">Leans against the wall</text>
     {%- endif -%}
   </svg>
