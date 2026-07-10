@@ -1,0 +1,108 @@
+{% comment %}
+  Priced with honesty: a like-for-like comparison against a genuine, currently
+  available competitor product.
+
+  Our prices come from Shopify so they can never drift. The benchmark prices are
+  fixed here and stamped with the date they were verified, because a stale price
+  comparison is a false claim. Evidence, method and the claims we may not make:
+  docs/price-comparison-evidence.md
+
+  Re-verify before every release. If the benchmark drops below our price, delete
+  the entry rather than leave the module up.
+
+  benchmark_prices is index-aligned with the product's size variants.
+{% endcomment %}
+
+{%- liquid
+  assign show_comparison = false
+  assign benchmark_prices = ''
+
+  case product.handle
+    when 'brook-champagne-gold-wall-mirror', 'brook-matte-black-wall-mirror'
+      assign show_comparison = true
+      assign benchmark_prices = '306,408'
+    when 'solenne-champagne-gold-full-length-mirror'
+      assign show_comparison = true
+      assign benchmark_prices = '1122'
+  endcase
+
+  assign benchmark_name = 'A comparable designer mirror'
+  assign benchmark_note = 'Same size, same materials, shipped to the UK from the United States.'
+  assign checked_on = '10 July 2026'
+-%}
+
+{%- if show_comparison -%}
+  {%- assign bm_list = benchmark_prices | split: ',' -%}
+
+  <section class="pricehonest" aria-labelledby="pricehonest-title">
+    <div class="pricehonest-head">
+      <span class="pricehonest-eyebrow">Priced with honesty</span>
+      <h2 class="pricehonest-title" id="pricehonest-title">The same mirror costs more elsewhere</h2>
+      <p class="pricehonest-sub">We hold our stock in the UK and sell it to you directly. {{ benchmark_note }}</p>
+    </div>
+
+    <table class="pricehonest-table">
+      <thead>
+        <tr>
+          <th scope="col"><span class="pricehonest-vh">Comparison</span></th>
+          <th scope="col" class="pricehonest-us">MUNLER</th>
+          <th scope="col">{{ benchmark_name }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- assign size_idx = 0 -%}
+        {%- for variant in product.variants -%}
+          {%- assign vt = variant.title | downcase -%}
+          {%- unless vt == 'default title' -%}
+            {%- assign bm = bm_list[size_idx] -%}
+            {%- if bm -%}
+              {%- assign bm_money = bm | times: 100 | money_without_trailing_zeros -%}
+              {%- assign size_label = variant.title | split: ' - ' | first -%}
+              <tr>
+                <th scope="row">{{ size_label }}</th>
+                <td class="pricehonest-us pricehonest-price">{{ variant.price | money_without_trailing_zeros }}</td>
+                <td class="pricehonest-price pricehonest-price--them">{{ bm_money }}</td>
+              </tr>
+            {%- endif -%}
+            {%- assign size_idx = size_idx | plus: 1 -%}
+          {%- endunless -%}
+        {%- endfor -%}
+
+        <tr>
+          <th scope="row">Frame</th>
+          <td class="pricehonest-us">304-grade stainless steel</td>
+          <td>Stainless steel</td>
+        </tr>
+        <tr>
+          <th scope="row">Glass</th>
+          <td class="pricehonest-us">4 mm, copper-free and lead-free</td>
+          <td>4 mm, copper-free</td>
+        </tr>
+        <tr>
+          <th scope="row">Warranty</th>
+          <td class="pricehonest-us">5 years</td>
+          <td>Not stated</td>
+        </tr>
+        <tr>
+          <th scope="row">Ships from</th>
+          <td class="pricehonest-us">United Kingdom</td>
+          <td>United States</td>
+        </tr>
+        {%- comment -%}
+          We have not evidenced their UK delivery charge, so we do not characterise it.
+          State only our own terms here.
+        {%- endcomment -%}
+        <tr>
+          <th scope="row">UK delivery</th>
+          <td class="pricehonest-us">Free, insured, tracked</td>
+          <td>Not stated</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="pricehonest-foot">
+      The materials are comparable. The difference is that you are not paying to fly a mirror
+      across the Atlantic. Competitor list prices taken from their own UK storefront on {{ checked_on }}.
+    </p>
+  </section>
+{%- endif -%}
