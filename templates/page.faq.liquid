@@ -20,6 +20,8 @@
   .faq-answer-inner p:last-child{margin-bottom:0}
   .faq-answer-inner a{color:var(--color-dark);text-decoration:underline;text-underline-offset:3px}
   .faq-answer-inner a:hover{color:var(--color-gold)}
+  .faq-payment-icons{margin-top:1rem}
+  .faq-payment-icons .pay-icon{width:42px;height:auto}
 </style>
 
 <section class="warranty-body">
@@ -29,7 +31,7 @@
     <div class="faq-group">
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">How do I place an order?<span class="faq-icon" aria-hidden="true"></span></button>
-        <div class="faq-answer"><div class="faq-answer-inner"><p>Browse our collection on the <a href="/collections/all">Shop page</a>, select your piece, and add it to your cart. Checkout is handled securely online — you can pay by card, Apple Pay, Google Pay, PayPal, Klarna, and other major methods.</p></div></div>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Browse our collection on the <a href="/collections/all">Shop page</a>, select your piece, and add it to your cart. Checkout is handled securely online, and every payment method available to you is shown at the payment step.</p></div></div>
       </div>
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">Can I amend or cancel my order after placing it?<span class="faq-icon" aria-hidden="true"></span></button>
@@ -37,7 +39,16 @@
       </div>
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">What payment methods do you accept?<span class="faq-icon" aria-hidden="true"></span></button>
-        <div class="faq-answer"><div class="faq-answer-inner"><p>We accept Visa, Mastercard, American Express, Apple Pay, Google Pay, PayPal, Klarna (buy now, pay later), Maestro, Discover, Diners Club, Shop Pay, and UnionPay.</p></div></div>
+        {% comment %}Icons come from shop.enabled_payment_types so this answer can never drift from reality.{% endcomment %}
+        <div class="faq-answer"><div class="faq-answer-inner"><p>We accept major credit and debit cards, plus the wallets and payment methods shown below. Whatever is available for your order appears at the payment step of checkout.</p>
+          {% if shop.enabled_payment_types.size > 0 %}
+          <div class="payment-icons faq-payment-icons">
+            {% for payment_type in shop.enabled_payment_types %}
+              {{ payment_type | payment_type_svg_tag: class: 'pay-icon' }}
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div></div>
       </div>
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">Is it safe to pay on your website?<span class="faq-icon" aria-hidden="true"></span></button>
@@ -53,7 +64,7 @@
     <div class="faq-group">
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">How long will delivery take?<span class="faq-icon" aria-hidden="true"></span></button>
-        <div class="faq-answer"><div class="faq-answer-inner"><p>Standard UK delivery takes 3–5 working days from the date of dispatch. Express delivery (1–2 working days) is available at checkout for an additional charge.</p></div></div>
+        <div class="faq-answer"><div class="faq-answer-inner"><p>Standard UK delivery takes 3–5 working days from the date of dispatch, and it is free on every order.</p></div></div>
       </div>
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">Is delivery free?<span class="faq-icon" aria-hidden="true"></span></button>

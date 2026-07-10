@@ -162,11 +162,18 @@
             {% endif %}
           </div>
 
-          {% if product.metafields.judgeme.badge %}
+          {% comment %}
+            Products with no reviews yet have no judgeme metafield at all, which
+            left this block empty and made the page look broken. Fall back to an
+            invitation. Never render a rating that has not been earned.
+          {% endcomment %}
           <div class="pinfo-rating">
-            <a href="#product-reviews">{{ product.metafields.judgeme.badge }}</a>
+            {% if product.metafields.judgeme.badge %}
+              <a href="#product-reviews">{{ product.metafields.judgeme.badge }}</a>
+            {% else %}
+              <a href="#product-reviews" class="pinfo-rating-empty">Be the first to review this piece</a>
+            {% endif %}
           </div>
-          {% endif %}
 
           {% if product.handle == 'brook-matte-black-wall-mirror' or product.handle == 'brook-champagne-gold-wall-mirror' or product.handle == 'solenne-champagne-gold-full-length-mirror' %}
           <button type="button" class="see-at-home-trigger" data-open-home-gallery>See it in the home</button>
@@ -256,7 +263,14 @@
             </div>
           {% endform %}
 
+          {% comment %}
+            Only claim Klarna when it is genuinely an enabled payment method.
+            Fails closed: if Klarna is live but missing from enabled_payment_types
+            we show nothing, rather than promise what checkout cannot offer.
+          {% endcomment %}
+          {% if shop.enabled_payment_types contains 'klarna' %}
           <p class="klarna-line">Pay in 3 interest-free payments with <strong>Klarna</strong>, chosen at checkout.</p>
+          {% endif %}
           {% if product.type == 'Mirrors' %}
           <ul class="feature-checklist">
             <li>100% real glass, distortion-free reflection</li>
