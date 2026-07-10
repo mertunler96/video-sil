@@ -111,6 +111,28 @@ Notes:
 - **Blossholm is Danish** (Copenhagen), not a UK brand, though it ships here.
 - Blossholm's Opal and Virgil pages were bot-blocked. Not quoted.
 
+### Why the designer brands are researched but not cited on the site
+
+We chose not to name Fableroom, Blossholm or William Wood on the website. Naming a small
+competitor invites a fight we do not need, and the high-street retailers already carry the
+argument.
+
+**This has a consequence, and it is deliberate.** A row on the site may only claim what the
+*cited* sources published. So:
+
+- **"Moulded PU" was removed from the frame row.** It is true, and William Wood publishes it
+  ("PU Frame", "Durable PU mould"), but no cited high-street retailer uses PU. Claiming it
+  while citing only Dunelm, John Lewis, Oliver Bonas, La Redoute, Cox & Cox and Atkin & Thyme
+  would misattribute it. **If William Wood is ever added to the footnote, PU can go back in.**
+- Everything left in the row is carried by the cited retailers: **iron** (Dunelm, Oliver Bonas,
+  La Redoute, Atkin & Thyme), **wood** (John Lewis, Cox & Cox), **MDF** (Dunelm, La Redoute),
+  and unspecified **"metal"** (M&S, Habitat).
+- The warranty row's "1 year" is carried by **John Lewis / West Elm**, which states "1 year
+  guarantee". It does not depend on William Wood.
+
+The designer-brand research still matters and stays in this file: it is what proves the
+stainless-steel claim survives outside the high street.
+
 ### Why we write "metal" in quotation marks
 
 About fifteen of these mirrors state only "Metal Frame" with no grade. It is a reasonable
