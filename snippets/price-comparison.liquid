@@ -1,16 +1,16 @@
 {% comment %}
-  "Look at the frame" — a material comparison against typical UK retail.
+  "Priced with honesty" — a material comparison against typical UK retail.
 
-  No competitor is named. Every claim sits at the level of what UK retailers in
-  this price band actually publish on their own product pages. The evidence, the
-  exact wording rules, and the claims we are NOT entitled to make are recorded in
-  docs/price-comparison-evidence.md. Re-verify before every release.
+  No competitor is named in the table. The claims sit at the level of what UK
+  retailers in this band publish on their own product pages, and the retailers we
+  read are credited in the footnote as sources. Evidence, exact wording rules, and
+  the claims we are NOT entitled to make: docs/price-comparison-evidence.md.
+  Re-verify before every release.
 
-  Brook sits inside the £130-£250 high-street band, so it gets a price row and the
-  argument is "same money, better material". Solenne at £749 is dearer than the two
-  full-length pieces we could evidence (£425, £569), so it gets NO price row. We do
-  not show a favourable number while hiding an unfavourable one; we simply argue on
-  material there. See the evidence file before adding one.
+  Brook sits inside the high-street price band, so it carries a price row per size
+  and the line is "same money, better mirror". Solenne at £749 is dearer than the
+  two full-length pieces we could evidence (£425, £569), so it carries NO price row.
+  We do not show a flattering number while hiding an unflattering one.
 {% endcomment %}
 
 {%- liquid
@@ -24,8 +24,8 @@
       assign our_glass = '4 mm, copper-free and lead-free'
       comment
         One band per size variant, in variant order. A single band would quote the
-        small-mirror band next to the large mirror's price. Sources in the evidence file:
-        73x52 -> La Redoute £120.99, G&G £129, M&S £139, Oliver Bonas £160, G&G £165, John Lewis £250
+        small-mirror band beside the large mirror's price. Sources in the evidence file:
+        73x52 -> La Redoute £120.99, G&G £129, M&S £139, Oliver Bonas £160, John Lewis £250
         90x65 -> Oliver Bonas £195, Atkin & Thyme £219, John Lewis £250, Cox & Cox £425
       endcomment
       assign their_bands = '£130 to £250|£195 to £425'
@@ -39,110 +39,81 @@
 
 {%- if show_comparison -%}
 <section class="honesty" aria-labelledby="honesty-title">
-  <div class="container honesty-grid">
+  <div class="container honesty-inner">
 
-    <div class="honesty-copy">
+    <div class="honesty-head">
       <span class="honesty-eyebrow">Priced with honesty</span>
-      <h2 class="honesty-title" id="honesty-title">Turn the mirror over.<br><em>That is where the money went.</em></h2>
-
+      <h2 class="honesty-title" id="honesty-title">The difference is in the frame</h2>
       <p class="honesty-lede">
-        An asymmetrical mirror looks much the same in a photograph whatever it is made of.
-        The difference is in the frame you never see, and it is the reason one mirror is
-        still perfect in a steamy bathroom in ten years and another is not.
-      </p>
-
-      <p class="honesty-body">
-        We went through the asymmetrical mirrors that UK homeware and high-street shops sell
-        between £120 and £400. They are framed in iron, in wood, in MDF, or in metal that is
-        never specified. We could not find a single mainstream UK retailer selling one framed
-        in stainless steel. Not one published a copper-free or lead-free glass claim. Not one
-        offered a multi-year warranty.
-      </p>
-
-      <ul class="honesty-points">
-        <li>
-          <strong>304-grade stainless steel.</strong>
-          The grade used in professional kitchens. It does not rust, tarnish or corrode
-          indoors. Iron does, once the paint is chipped.
-        </li>
-        <li>
-          <strong>Copper-free, lead-free glass.</strong>
-          The silvering is applied without the copper and lead used in conventional mirror
-          production. Cleaner to make, and it will not creep black at the edges.
-        </li>
-        <li>
-          <strong>A five-year warranty.</strong>
-          Against frame corrosion, joint failure and delamination. We offer it because the
-          materials let us.
-        </li>
-      </ul>
-    </div>
-
-    <div class="honesty-panel">
-      <table class="honesty-table">
-        <thead>
-          <tr>
-            <th scope="col"><span class="honesty-vh">Comparison</span></th>
-            <th scope="col" class="honesty-us">MUNLER</th>
-            <th scope="col">Typical UK retail</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Frame</th>
-            <td class="honesty-us"><strong>304 stainless steel</strong></td>
-            <td>Iron, wood or MDF</td>
-          </tr>
-          <tr>
-            <th scope="row">Glass</th>
-            <td class="honesty-us"><strong>{{ our_glass }}</strong></td>
-            <td>Not stated</td>
-          </tr>
-          <tr>
-            <th scope="row">Warranty</th>
-            <td class="honesty-us"><strong>5 years</strong></td>
-            <td>Not stated</td>
-          </tr>
-          <tr>
-            <th scope="row">UK delivery</th>
-            <td class="honesty-us"><strong>Free, insured, tracked</strong></td>
-            <td>Often charged</td>
-          </tr>
-          {%- if their_bands != blank -%}
-            {%- assign band_list = their_bands | split: '|' -%}
-            {%- assign size_idx = 0 -%}
-            {%- for variant in product.variants -%}
-              {%- assign vt = variant.title | downcase -%}
-              {%- unless vt == 'default title' -%}
-                {%- assign band = band_list[size_idx] -%}
-                {%- if band -%}
-                  {%- assign size_label = variant.title | split: ' - ' | first -%}
-                  <tr class="honesty-row--price">
-                    <th scope="row">{{ size_label }}</th>
-                    <td class="honesty-us"><strong class="honesty-price">{{ variant.price | money_without_trailing_zeros }}</strong></td>
-                    <td><span class="honesty-price honesty-price--them">{{ band }}</span></td>
-                  </tr>
-                {%- endif -%}
-                {%- assign size_idx = size_idx | plus: 1 -%}
-              {%- endunless -%}
-            {%- endfor -%}
-          {%- endif -%}
-        </tbody>
-      </table>
-
-      {%- if their_bands != blank -%}
-      <p class="honesty-kicker">Same money. Better mirror.</p>
-      {%- else -%}
-      <p class="honesty-kicker">Built to outlast the room it hangs in.</p>
-      {%- endif -%}
-
-      <p class="honesty-foot">
-        Based on the asymmetrical wall mirrors listed by UK homeware and high-street retailers
-        between £120 and £400, and the frame materials they publish on their own product pages,
-        checked on {{ checked_on }}. We name no one: iron and wood are honest materials, they
-        are simply not the same materials.
+        Two asymmetrical mirrors can look identical in a photograph and be made of
+        completely different things. So we read what UK shops say their frames are
+        actually made of.
       </p>
     </div>
+
+    <table class="honesty-table">
+      <thead>
+        <tr>
+          <th scope="col"><span class="honesty-vh">Comparison</span></th>
+          <th scope="col" class="honesty-us">MUNLER</th>
+          <th scope="col">Typical UK retail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Frame</th>
+          <td class="honesty-us">304 stainless steel</td>
+          <td>Iron, wood or MDF</td>
+        </tr>
+        <tr>
+          <th scope="row">Glass</th>
+          <td class="honesty-us">{{ our_glass }}</td>
+          <td>Not stated</td>
+        </tr>
+        <tr>
+          <th scope="row">Warranty</th>
+          <td class="honesty-us">5 years</td>
+          <td>Not stated</td>
+        </tr>
+        <tr>
+          <th scope="row">UK delivery</th>
+          <td class="honesty-us">Free, insured, tracked</td>
+          <td>Often charged</td>
+        </tr>
+        {%- if their_bands != blank -%}
+          {%- assign band_list = their_bands | split: '|' -%}
+          {%- assign size_idx = 0 -%}
+          {%- for variant in product.variants -%}
+            {%- assign vt = variant.title | downcase -%}
+            {%- unless vt == 'default title' -%}
+              {%- assign band = band_list[size_idx] -%}
+              {%- if band -%}
+                {%- assign size_label = variant.title | split: ' - ' | first -%}
+                <tr class="honesty-row--price">
+                  <th scope="row">{{ size_label }}</th>
+                  <td class="honesty-us"><span class="honesty-price">{{ variant.price | money_without_trailing_zeros }}</span></td>
+                  <td><span class="honesty-price honesty-price--them">{{ band }}</span></td>
+                </tr>
+              {%- endif -%}
+              {%- assign size_idx = size_idx | plus: 1 -%}
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </tbody>
+    </table>
+
+    {%- if their_bands != blank -%}
+    <p class="honesty-kicker">Same money. Better mirror.</p>
+    {%- else -%}
+    <p class="honesty-kicker">Built to outlast the room it hangs in.</p>
+    {%- endif -%}
+
+    <p class="honesty-foot">
+      Frame materials as published by Dunelm, John Lewis, Oliver Bonas, La Redoute,
+      Cox &amp; Cox and Atkin &amp; Thyme on their own product pages, for asymmetrical wall
+      mirrors between £120 and £400, checked on {{ checked_on }}. Iron and wood are honest
+      materials. They are simply not the same materials.
+    </p>
 
   </div>
 </section>

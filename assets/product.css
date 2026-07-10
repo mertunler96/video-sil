@@ -1033,207 +1033,141 @@
 /* =====================================================
    Priced with honesty — full-width material comparison
    snippets/price-comparison.liquid
+   Single centred column: short copy, then a large table.
    ===================================================== */
 .honesty {
     background: var(--color-bg);
     border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
-    padding: 5.5rem 0;
+    padding: 6rem 0;
 }
 
-.honesty-grid {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 5rem;
-    align-items: start;
+.honesty-inner {
+    max-width: 880px;
+    margin: 0 auto;
 }
 
-/* --- Left: the story --- */
+/* --- Head --- */
+.honesty-head {
+    text-align: center;
+    margin-bottom: 3.2rem;
+}
+
 .honesty-eyebrow {
-    display: block;
+    display: inline-block;
     font-family: var(--font-sans);
-    font-size: 0.66rem;
+    font-size: 0.82rem;
     font-weight: 500;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--color-gold-dark);
-    margin-bottom: 1.2rem;
+    padding-bottom: 0.9rem;
+    margin-bottom: 1.3rem;
+    border-bottom: 1px solid var(--color-gold);
 }
 
 .honesty-title {
     font-family: var(--font-serif);
-    font-size: clamp(1.9rem, 2.7vw, 2.7rem);
+    font-size: clamp(2.1rem, 3.4vw, 3rem);
     font-weight: 400;
     line-height: 1.15;
     color: var(--color-dark);
-    margin: 0 0 1.6rem;
-}
-
-.honesty-title em {
-    font-style: italic;
-    color: var(--color-gold-dark);
+    margin: 0 0 1.3rem;
 }
 
 .honesty-lede {
-    font-family: var(--font-serif);
-    font-size: 1.12rem;
-    font-weight: 400;
-    line-height: 1.72;
-    color: var(--color-dark);
-    margin: 0 0 1.3rem;
-    max-width: 46ch;
-}
-
-.honesty-body {
     font-family: var(--font-sans);
-    font-size: 0.88rem;
-    font-weight: 300;
-    line-height: 1.85;
-    color: var(--color-mid);
-    margin: 0 0 2.2rem;
-    max-width: 52ch;
-}
-
-.honesty-points {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 1.4rem;
-}
-
-.honesty-points li {
-    position: relative;
-    padding-left: 1.6rem;
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
+    font-size: 1.02rem;
     font-weight: 300;
     line-height: 1.8;
     color: var(--color-mid);
-    max-width: 52ch;
+    margin: 0 auto;
+    max-width: 58ch;
 }
 
-.honesty-points li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.72em;
-    width: 7px;
-    height: 7px;
-    border: 1px solid var(--color-gold);
-    transform: rotate(45deg);
-}
-
-.honesty-points strong {
-    display: block;
-    font-family: var(--font-sans);
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-dark);
-    margin-bottom: 0.25rem;
-}
-
-/* --- Right: the panel --- */
-.honesty-panel {
-    background: var(--color-white);
-    border: 1px solid var(--color-border);
-    padding: 2.4rem 2.2rem 1.8rem;
-    position: sticky;
-    top: calc(var(--header-h) + 2rem);
-}
-
+/* --- Table --- */
 .honesty-table {
     width: 100%;
     border-collapse: collapse;
     font-family: var(--font-sans);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
 }
 
 .honesty-table th,
 .honesty-table td {
-    padding: 0.95rem 0.6rem;
+    padding: 1.35rem 1.5rem;
     text-align: left;
     vertical-align: middle;
     border-top: 1px solid var(--color-border);
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 300;
     color: var(--color-mid);
 }
 
 .honesty-table thead th {
     border-top: none;
-    padding-top: 0;
-    padding-bottom: 1rem;
-    font-size: 0.64rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-size: 0.76rem;
     font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--color-mid);
 }
 
-.honesty-table thead th.honesty-us {
-    color: var(--color-dark);
-}
+.honesty-table thead th.honesty-us { color: var(--color-dark); }
 
 .honesty-table tbody th {
-    font-size: 0.72rem;
+    font-size: 0.94rem;
     font-weight: 400;
-    letter-spacing: 0.04em;
-    color: var(--color-mid);
-    width: 30%;
+    color: var(--color-dark);
+    width: 26%;
 }
 
 .honesty-table .honesty-us {
     color: var(--color-dark);
-    background: linear-gradient(to bottom, rgba(196,168,130,0.07), rgba(196,168,130,0.07));
-    border-left: 1px solid rgba(196,168,130,0.35);
-    border-right: 1px solid rgba(196,168,130,0.35);
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-.honesty-table .honesty-us strong {
     font-weight: 400;
-    color: var(--color-dark);
+    background: rgba(196, 168, 130, 0.08);
+    box-shadow: inset 1px 0 0 rgba(196,168,130,0.4), inset -1px 0 0 rgba(196,168,130,0.4);
 }
 
 .honesty-row--price th,
 .honesty-row--price td {
-    padding-top: 1.3rem;
-    padding-bottom: 1.3rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
 }
 
 .honesty-price {
     font-family: var(--font-serif);
-    font-size: 1.5rem;
+    font-size: 1.85rem;
     font-weight: 400;
-    letter-spacing: 0.01em;
+    color: var(--color-dark);
 }
 
 .honesty-price--them {
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     color: var(--color-mid);
 }
 
 .honesty-kicker {
-    margin: 1.8rem 0 0;
+    margin: 2.2rem 0 0;
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1.25rem;
+    font-size: 1.6rem;
     color: var(--color-dark);
     text-align: center;
 }
 
 .honesty-foot {
-    margin: 1.4rem 0 0;
-    padding-top: 1.2rem;
-    border-top: 1px solid var(--color-border);
+    margin: 2rem auto 0;
+    max-width: 68ch;
     font-family: var(--font-sans);
-    font-size: 0.66rem;
+    font-size: 0.78rem;
     font-weight: 300;
-    line-height: 1.75;
+    line-height: 1.8;
     color: var(--color-mid);
+    text-align: center;
 }
 
 .honesty-vh {
@@ -1244,17 +1178,16 @@
     white-space: nowrap;
 }
 
-@media (max-width: 1024px) {
-    .honesty-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .honesty-panel { position: static; }
-}
-
-@media (max-width: 600px) {
-    .honesty { padding: 3.5rem 0; }
-    .honesty-panel { padding: 1.6rem 1.2rem 1.4rem; }
-    .honesty-table th, .honesty-table td { padding: 0.8rem 0.4rem; font-size: 0.74rem; }
-    .honesty-table .honesty-us { padding-left: 0.6rem; padding-right: 0.6rem; }
-    .honesty-table tbody th { width: 32%; }
-    .honesty-price { font-size: 1.25rem; }
-    .honesty-lede { font-size: 1rem; }
+@media (max-width: 700px) {
+    .honesty { padding: 4rem 0; }
+    .honesty-head { margin-bottom: 2.2rem; }
+    .honesty-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; }
+    .honesty-lede { font-size: 0.94rem; }
+    .honesty-table th, .honesty-table td { padding: 1rem 0.8rem; font-size: 0.88rem; }
+    .honesty-table tbody th { width: 30%; font-size: 0.84rem; }
+    .honesty-table thead th { font-size: 0.66rem; letter-spacing: 0.12em; }
+    .honesty-price { font-size: 1.4rem; }
+    .honesty-price--them { font-size: 1rem; }
+    .honesty-kicker { font-size: 1.25rem; }
+    .honesty-foot { font-size: 0.72rem; }
 }
