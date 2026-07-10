@@ -52,8 +52,15 @@
         The asymmetric silhouette, normalised to a 100x100 box so it can be dropped in at
         any real size. Deliberately a schematic outline, not a tracing of the product.
       {%- endcomment -%}
+      {%- comment -%}
+        Same rule as the figure: the path must touch all four edges of its 100x100 box,
+        or the mirror draws smaller than the size printed next to it. Each anchor sits
+        exactly on an edge with its control points parallel to that edge, so the curve
+        reaches 0 and 100 on both axes and never overshoots. Asymmetry comes from moving
+        the anchors along the edges, not from letting the shape shrink inside the box.
+      {%- endcomment -%}
       <symbol id="munler-blob" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <path d="M58 1 C84 4 99 26 94 52 C90 76 70 99 44 97 C20 95 2 74 3 48 C4 22 28 -2 58 1 Z" />
+        <path d="M52 0 C80 0 100 19 100 44 C100 73 83 100 56 100 C27 100 0 78 0 54 C0 24 23 0 52 0 Z" />
       </symbol>
 
       {%- comment -%}
