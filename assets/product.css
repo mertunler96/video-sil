@@ -61,18 +61,63 @@
 }
 
 /* === GALLERY === */
+.product-media-col {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+    min-width: 0;
+}
+
 .product-gallery {
     display: grid;
     grid-template-columns: 80px 1fr;
     gap: 1rem;
+    align-items: stretch;
 }
 
-/* Thumbnails */
+/* Thumbnails. The column stretches to the height of the main photograph, and the
+   rail is absolutely positioned inside it, so ten thumbnails can never push the
+   grid row taller than the image they belong to. */
+.gallery-thumbs-col {
+    position: relative;
+    min-height: 100%;
+}
+
 .gallery-thumbs {
+    position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 44px;
+    scroll-behavior: smooth;
 }
+
+.gallery-thumbs::-webkit-scrollbar { display: none; }
+
+.thumbs-more {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 80px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    color: var(--color-mid);
+    cursor: pointer;
+    transition: border-color var(--transition), color var(--transition), transform 0.3s ease;
+}
+
+.thumbs-more[hidden] { display: none; }
+.thumbs-more:hover { border-color: var(--color-dark); color: var(--color-dark); }
+.thumbs-more.is-end svg { transform: rotate(180deg); }
+.thumbs-more svg { transition: transform 0.3s ease; }
 
 .thumb {
     width: 80px;
@@ -93,21 +138,10 @@
     transition: transform 0.4s ease;
 }
 
-.thumb:hover img {
-    transform: scale(1.08);
-}
-
-.thumb.active {
-    border-color: var(--color-dark);
-}
-
-.thumb:not(.active) {
-    opacity: 0.55;
-}
-
-.thumb:not(.active):hover {
-    opacity: 0.85;
-}
+.thumb:hover img { transform: scale(1.08); }
+.thumb.active { border-color: var(--color-dark); }
+.thumb:not(.active) { opacity: 0.55; }
+.thumb:not(.active):hover { opacity: 0.85; }
 
 /* Main image */
 .gallery-main-wrap {
@@ -127,32 +161,43 @@
     transition: opacity 0.4s ease;
 }
 
-/* Gallery arrows */
+/* Gallery arrows. Still real buttons for keyboard and screen readers, but on the
+   photograph they are invisible full-height hit areas. The chevron is drawn in the
+   cursor rather than painted on top of the mirror. */
 .gallery-arrow {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
+    bottom: 0;
     z-index: 10;
-    width: 46px;
-    height: 46px;
-    background: rgba(255,255,255,0.92);
-    border: 1px solid rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: var(--color-dark);
-    transition: background var(--transition), color var(--transition);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    width: 34%;
+    height: auto;
+    transform: none;
+    background: none;
+    border: none;
+    padding: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
-.gallery-arrow--prev { left: 1rem; }
-.gallery-arrow--next { right: 1rem; }
+.gallery-arrow svg { display: none; }
 
-.gallery-arrow:hover {
-    background: var(--color-dark);
-    color: var(--color-white);
+.gallery-arrow--prev {
+    left: 0;
+    right: auto;
+    cursor: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2236%22%20height%3D%2236%22%20viewBox%3D%220%200%2036%2036%22%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%2218%22%20r%3D%2217%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.92%22%20stroke%3D%22%231C1C1C%22%20stroke-opacity%3D%220.18%22%2F%3E%3Cpath%20d%3D%22M20%2011l-7%207%207%207%22%20fill%3D%22none%22%20stroke%3D%22%231C1C1C%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E') 18 18, w-resize;
+}
+
+.gallery-arrow--next {
+    right: 0;
+    left: auto;
+    cursor: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2236%22%20height%3D%2236%22%20viewBox%3D%220%200%2036%2036%22%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%2218%22%20r%3D%2217%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.92%22%20stroke%3D%22%231C1C1C%22%20stroke-opacity%3D%220.18%22%2F%3E%3Cpath%20d%3D%22M16%2011l7%207-7%207%22%20fill%3D%22none%22%20stroke%3D%22%231C1C1C%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E') 18 18, e-resize;
+}
+
+.gallery-arrow:hover { background: none; }
+
+.gallery-arrow:focus-visible {
+    outline: 2px solid var(--color-dark);
+    outline-offset: -6px;
 }
 
 /* Dots (mobile) */
@@ -175,6 +220,37 @@
 .dot.active {
     background: var(--color-dark);
     transform: scale(1.3);
+}
+
+/* === LONG-FORM DESCRIPTION ===
+   Sits under the gallery, in the space the old layout left empty. */
+.longform {
+    max-width: 60ch;
+}
+
+.longform-eyebrow {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-gold-dark);
+    margin-bottom: 1.4rem;
+}
+
+.longform-body p {
+    font-family: var(--font-serif);
+    font-size: 1.28rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: var(--color-dark);
+    margin: 0 0 1.4rem;
+}
+
+.longform-body p:last-child {
+    margin-bottom: 0;
+    color: var(--color-mid);
 }
 
 /* === PRODUCT INFO PANEL === */
@@ -753,6 +829,10 @@
         gap: 0;
     }
 
+    .product-media-col {
+        gap: 0;
+    }
+
     .product-gallery {
         position: relative;
         top: 0;
@@ -760,8 +840,24 @@
         gap: 0;
     }
 
-    .gallery-thumbs {
+    .gallery-thumbs-col {
         display: none;
+    }
+
+    /* No cursor on a touchscreen, so give the swipe the whole photograph and keep
+       the tap targets at the edges. */
+    .gallery-arrow {
+        width: 25%;
+        cursor: pointer;
+    }
+
+    .longform {
+        padding: 0 var(--gutter) 3rem;
+        max-width: none;
+    }
+
+    .longform-body p {
+        font-size: 1.1rem;
     }
 
     .gallery-main {
