@@ -74,7 +74,19 @@
 }
 </script>
 
-<main class="product-main">
+{%- comment -%}
+  Temporary A/B/C: each mirror wears a different section-colour scheme so the founder
+  can compare them live and pick one. Once chosen, drop the branching and apply the
+  winner to all products (or move it to a metafield / theme setting).
+    Brook Champagne Gold -> charcoal bands
+    Brook Matte Black    -> warm clay bands
+    Solenne              -> layered neutrals
+{%- endcomment -%}
+{%- assign pdp_theme = 'pdp-neutral' -%}
+{%- if product.handle == 'brook-champagne-gold-wall-mirror' -%}{%- assign pdp_theme = 'pdp-charcoal' -%}
+{%- elsif product.handle == 'brook-matte-black-wall-mirror' -%}{%- assign pdp_theme = 'pdp-clay' -%}
+{%- elsif product.handle == 'solenne-champagne-gold-full-length-mirror' -%}{%- assign pdp_theme = 'pdp-neutral' -%}{%- endif -%}
+<main class="product-main {{ pdp_theme }}">
 
   <!-- Breadcrumb -->
   <div class="breadcrumb-bar">
