@@ -51,7 +51,7 @@ USD-base; we have no comparable size, so those are excluded rather than cherry-p
 | | MUNLER | Ethnik Living |
 |---|---|---|
 | Frame | 304-grade stainless steel | "Stainless steel frame" (grade not stated) |
-| Glass | 4 mm, copper-free and lead-free | 4 mm "Flotal-E", "copper-free and plastic-free" |
+| Glass | Brook 4 mm / Solenne 5 mm, copper-free and lead-free | AOrganik: 4 mm "Flotal-E", "copper-free and plastic-free". Brody thickness not published. |
 | Warranty | 5 years | Not stated on the product page |
 | Ships from | United Kingdom | United States |
 | UK delivery | Free, insured, tracked | Not stated; US orders free |

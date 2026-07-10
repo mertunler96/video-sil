@@ -17,13 +17,17 @@
   assign show_comparison = false
   assign benchmark_prices = ''
 
+  assign our_glass = ''
+
   case product.handle
     when 'brook-champagne-gold-wall-mirror', 'brook-matte-black-wall-mirror'
       assign show_comparison = true
       assign benchmark_prices = '306,408'
+      assign our_glass = '4 mm, copper-free and lead-free'
     when 'solenne-champagne-gold-full-length-mirror'
       assign show_comparison = true
       assign benchmark_prices = '1122'
+      assign our_glass = '5 mm, copper-free and lead-free'
   endcase
 
   assign benchmark_name = 'A comparable designer mirror'
@@ -73,10 +77,14 @@
           <td class="pricehonest-us">304-grade stainless steel</td>
           <td>Stainless steel</td>
         </tr>
+        {%- comment -%}
+          Their glass thickness is only evidenced for the Brook comparator, so we
+          do not state a thickness for theirs at all. Copper-free is their own claim.
+        {%- endcomment -%}
         <tr>
           <th scope="row">Glass</th>
-          <td class="pricehonest-us">4 mm, copper-free and lead-free</td>
-          <td>4 mm, copper-free</td>
+          <td class="pricehonest-us">{{ our_glass }}</td>
+          <td>Copper-free real glass</td>
         </tr>
         <tr>
           <th scope="row">Warranty</th>
