@@ -1122,7 +1122,14 @@
     font-size: 0.94rem;
     font-weight: 400;
     color: var(--color-dark);
-    width: 26%;
+    width: 24%;
+}
+
+/* Give our column at least as much room as theirs, so our spec does not wrap to
+   two lines while their longer answer sits comfortably on one. */
+.honesty-table thead th.honesty-us,
+.honesty-table tbody td.honesty-us {
+    width: 38%;
 }
 
 .honesty-table .honesty-us {
