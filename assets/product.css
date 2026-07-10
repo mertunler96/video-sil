@@ -1241,7 +1241,7 @@
 }
 
 .sg-person {
-    fill: var(--color-border);
+    fill: rgba(107, 107, 107, 0.32);
 }
 
 .sg-console rect {

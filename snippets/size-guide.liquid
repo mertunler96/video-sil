@@ -53,12 +53,21 @@
         any real size. Deliberately a schematic outline, not a tracing of the product.
       {%- endcomment -%}
       <symbol id="munler-blob" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <path d="M52 1 C76 1 97 19 98 44 C99 68 86 93 56 98 C29 102 5 84 2 57 C-1 30 20 1 52 1 Z" />
+        <path d="M58 1 C84 4 99 26 94 52 C90 76 70 99 44 97 C20 95 2 74 3 48 C4 22 28 -2 58 1 Z" />
       </symbol>
 
+      {%- comment -%}
+        Built from primitives, not one path, because the geometry has to be provably
+        full-height: head starts at y=1 and the feet end at y=158 of a 160 box, so when
+        this is scaled to 170 cm the figure really does stand on the floor line.
+      {%- endcomment -%}
       <symbol id="munler-person" viewBox="0 0 46 160">
-        <path d="M23 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20z
-                 M23 25c-7 0-12 3-14 8L4 49a3 3 0 0 0 5 2l4-11v23l-3 44a4 4 0 0 0 8 1l5-32 5 32a4 4 0 0 0 8-1l-3-44V40l4 11a3 3 0 0 0 5-2l-5-16c-2-5-7-8-14-8z" />
+        <circle cx="23" cy="12" r="11" />
+        <rect x="14" y="26" width="18" height="46" rx="8" />
+        <rect x="5.5" y="30" width="7" height="41" rx="3.5" />
+        <rect x="33.5" y="30" width="7" height="41" rx="3.5" />
+        <rect x="15" y="70" width="7" height="88" rx="3.5" />
+        <rect x="24" y="70" width="7" height="88" rx="3.5" />
       </symbol>
     </defs>
 
