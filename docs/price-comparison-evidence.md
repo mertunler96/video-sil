@@ -1,77 +1,110 @@
-# Price comparison evidence
+# Material and price comparison evidence
 
-The product pages run a `snippets/price-comparison.liquid` module that compares a MUNLER
-mirror against a comparable competitor product. Under the Digital Markets, Competition and
-Consumers Act 2024 and the CAP Code rules on comparative advertising, a price comparison
-must be against a **genuine, currently available, comparable** product, and we must be able
-to **evidence it on the date it was made**. This file is that evidence.
+`snippets/price-comparison.liquid` compares a MUNLER mirror against typical UK retail.
+Under the Digital Markets, Competition and Consumers Act 2024 and the CAP Code rules on
+comparative advertising, a comparison must be objective, must compare products meeting the
+same need, must not denigrate, and must be **evidenced on the date it was made**. This file
+is that evidence.
 
-**Re-check every claim before each theme release, and update `checked_on` in the snippet.**
-If a competitor price falls below ours, pull the module rather than leave a stale claim up.
+**Re-verify before every theme release and update `checked_on` in the snippet.** If the
+evidence stops supporting a row, delete the row rather than leave a stale claim up.
+
+We deliberately do **not name any competitor**. Every claim is at the level of "what UK
+retailers in this price band publish", which is what the evidence below supports.
 
 ---
 
-## Comparator: Ethnik Living (ethnikliving.com)
+## Scope
 
-Chosen because it is the closest like-for-like: a direct-to-consumer brand selling
-asymmetrical / organic stainless-steel-framed wall mirrors, sells into the UK in GBP, and
-sits in the same design language and size range. It is not a department store or a
-showroom, so the comparison is not stacked in our favour.
+UK retailers selling asymmetrical / irregular / organic-shaped wall mirrors, roughly
+60 to 100 cm tall, in the £120 to £400 band. Checked **2026-07-10**.
 
-Company facts as published on their site: warehouses in New Jersey and California, office
-in Los Angeles, free shipping on US orders. **Orders to the UK ship from the US.**
+## What retailers actually state as the frame material
 
-### Method
+Quoted from the retailer's own product page. These rows were opened and read directly.
 
-GBP presentment prices read from their own Shopify storefront on **2026-07-10**:
+| Retailer | Product | Price | Size | Frame material, their exact words |
+|---|---|---|---|---|
+| Dunelm | Bawty Irregular Wall Mirror | £89 to £139 | H70×W60, H90×W70 | "Frame: Iron, Mirror: Glass & Backing: MDF" |
+| Dunelm | Ribbed Wavy Overmantel | £50 | H90×W60 | "Frame: 100% Certified Responsibly Sourced MDF" |
+| Oliver Bonas | Gold Metal Round Pebble XL | £195 | H81×W77 | "Glass Mirror, Iron, MDF" |
+| Oliver Bonas | Rose Gold Full Length Pebble | £160 | H131×W54.5 | "Iron & Glass & MDF" |
+| Oliver Bonas | Rose Gold Pebble XL | £78 | H78×W81 | "Glass, Iron, MDF" |
+| Oliver Bonas | Hammered Gold Pebble XL | £55 | H82×W77 | "Iron, Glass Mirror, MDF" |
+| Atkin & Thyme | Form Mirror | £219 | H90×W90 | "Iron, mirror" |
+| La Redoute | Ornica Organic | £120.99 (sale, was £219.99) | 88.9×74.6 | "Iron metal outline for black … Steel metal outline for the brass"; back "MDF" |
+| La Redoute | Biface H100 Organic | £109.99 (sale, was £199.99) | W63×H100 | "MDF structure" |
+| John Lewis | Asymmetrical Shaped Wood Frame | £250 | H115×W65 | Composition: "Wood, mirror glass, MDF" |
+| John Lewis / West Elm | Eucalyptus Asymmetrical | £569 | H167×W72 | "kiln-dried solid eucalyptus wood frame" |
+| Graham & Green | Matilda Oval Gold | £165 | H100×W70 | "Made of plastic, MDF and glass" |
+| Graham & Green | Wavy Rubberwood | £129 | H62×W65 | "Made from rubberwood & glass" |
+| Cox & Cox | Wavy Full Length | £425 | 150×80 | "Made from recycled elm" |
+| Cox & Cox | Arched Wall Mirror | £450 | H92×W62 | "Made from aluminium and glass" |
+| M&S | Pebble Metal Curved | £80 | H80×L60 | "Metal" (type unspecified) |
+| Habitat | Black Asymmetric | £26.80 | H60×W60 | "Metal" (type unspecified) |
 
-```
-curl -s "https://www.ethnikliving.com/products/aorganik-mirror.js?currency=GBP"
-curl -s "https://www.ethnikliving.com/products/brody-full-length-mirror.js?currency=GBP"
-```
+## Tally across roughly 35 products
 
-These are their list prices in GBP, exclusive of any delivery or import charges added at
-their checkout. Our prices are inclusive of free insured UK delivery. That asymmetry
-favours us, so the module must not also claim their delivery is expensive; it states only
-that they ship from the US, which they publish themselves.
+- **Stainless steel: 1.** A third-party Amazon bathroom mirror ("SUS304"), quoted from the
+  listing bullets, not a mainstream UK retailer, and not page-verified at spec level.
+- **Iron: about 9.** Dunelm, Atkin & Thyme, La Redoute, Oliver Bonas ×4, Wayfair ×2.
+- **Wood: about 9.** Pine, elm, rubberwood, eucalyptus, mango, generic.
+- **MDF stated as the frame itself: 3.** Plus MDF as backing on most iron and wood pieces.
+- **Aluminium: 2.** One of which is an arched, not asymmetrical, mirror.
+- **"Metal", type unspecified: about 7.**
+- **Frameless: 3. Unstated: 3.**
 
-### Recorded on 2026-07-10
+**No stainless steel was found at any mainstream UK homeware or design retailer in this band.**
 
-| MUNLER product | MUNLER size | MUNLER price | Ethnik product | Ethnik size | Ethnik price (GBP) |
-|---|---|---|---|---|---|
-| Brook Wall Mirror | 73 × 52 cm | £199 | AOrganik Mirror, Medium | 74.9 × 54.9 cm | £306.00 |
-| Brook Wall Mirror | 90 × 65 cm | £259 | AOrganik Mirror, Large | 88.9 × 64.8 cm | £408.00 |
-| Solenne Full-Length | 170 × 90 cm | £749 | Brody Full Length, Standard | 172.7 × 93 cm | £1,122.00 |
+## The claim we are entitled to make
 
-Their AOrganik variants also list XL (76.2 × 102.9 cm) at £599 USD-base and XXL at £1,289
-USD-base; we have no comparable size, so those are excluded rather than cherry-picked.
+> At £120 to £400, UK homeware and high-street retailers typically frame asymmetrical
+> mirrors in **iron, wood, MDF or unspecified "metal"**. We found **no mainstream UK
+> retailer using stainless steel** in this band.
 
-### Specification comparison, from their own product copy
+That sentence is quote-backed by the table above.
 
-| | MUNLER | Ethnik Living |
-|---|---|---|
-| Frame | 304-grade stainless steel | "Stainless steel frame" (grade not stated) |
-| Glass | Brook 4 mm / Solenne 5 mm, copper-free and lead-free | AOrganik: 4 mm "Flotal-E", "copper-free and plastic-free". Brody thickness not published. |
-| Warranty | 5 years | Not stated on the product page |
-| Ships from | United Kingdom | United States |
-| UK delivery | Free, insured, tracked | Not stated; US orders free |
+### Wording rules
 
-**Materials are broadly equivalent.** Do not claim our glass or steel is superior. The
-defensible claims are: comparable specification, materially lower price, UK stock, free
-insured UK delivery, and a stated warranty where theirs is unstated.
+- Say **iron, wood or MDF**. Do **not** say aluminium is typical: only two examples, and one
+  of them was not an asymmetrical mirror.
+- Say **"we found no mainstream UK retailer using stainless steel"**, not "nobody uses
+  stainless steel". Several pages say only "Metal" or state nothing; we can prove they do
+  not *claim* stainless, not that they are not stainless.
+- Do **not** say their mirrors are badly made, will rust, or will fail. Iron and wood are
+  legitimate materials. The claim is about what you get for the money, not about defects.
+- Do **not** name a retailer on the site.
 
-### Claims we must NOT make
+## Two genuine white-spaces
 
-- That we are cheaper "because we cut out the middleman". Ethnik is also direct-to-consumer.
-  The price gap comes from UK stock versus transatlantic fulfilment, and from our margin
-  choice. Say that instead.
-- That their frame is aluminium or their glass is inferior. Both are stainless steel and
-  both are copper-free.
-- That their delivery is expensive. We have not evidenced their UK delivery charge.
-- Any "was / now" anchor on our own prices. We have never sold these at a higher price.
+- **Copper-free / lead-free glass.** Found exactly once across the whole set, on an £89.82
+  budget Amazon listing ("4MM copper-free silver mirror"). **No lead-free claim anywhere.**
+  No mainstream or premium UK retailer publishes a copper-free or lead-free glass claim on
+  these mirrors.
+- **Warranty.** **No multi-year warranty found on any mirror in the band.** The only warranty
+  stated at all was West Elm via John Lewis, "1 year guarantee", at £569 and above the band.
+  Oliver Bonas, Dunelm, Habitat, La Redoute and Atkin & Thyme state no warranty at all.
 
-### Sale prices
+## Price bands
 
-Several Ethnik products carry sale pricing (for example Roland at -30%). The three products
-above were at **full list price** with no compare-at price on the date checked. If they go
-on sale below our price, the module must be updated or removed.
+- **Wall mirrors, 60 to 100 cm, non-stainless, page-verified in band:** core cluster
+  **£130 to £250** (La Redoute £120.99, Graham & Green £129, M&S £139, La Redoute £149.99,
+  Oliver Bonas £160, Graham & Green £165, Oliver Bonas £195, Atkin & Thyme £219,
+  John Lewis £250). Premium tail at Cox & Cox £425.
+  - MUNLER Brook is **£199 (73×52 cm)** and **£259 (90×65 cm)**: inside the same band.
+  - So the honest headline for Brook is **"same money, better material"**, not "cheaper".
+
+- **Full-length mirrors:** far thinner evidence. Cox & Cox recycled elm 150×80 at **£425**;
+  West Elm eucalyptus 167×72 at **£569**. MUNLER Solenne is **£749 at 170×90 cm**.
+  - **Solenne is more expensive than both.** We therefore do **not** show a price row on the
+    Solenne page. Showing one would either mislead or lose the argument. The Solenne module
+    compares materials, glass and warranty only.
+  - If a price row is ever added for Solenne, it must state that we are more expensive and
+    say why. Do not quietly omit a bad number while implying a favourable one.
+
+## Rows that were bot-blocked
+
+Very, Next, Amazon spec cells, Wayfair, Argos/Habitat spec tabs and Anthropologie could not
+be opened; their materials were read from search-index titles and bullets. They are counted
+in the tally but **not quoted on the website**. Re-screenshot them in a live UK browser,
+dated, before ever citing them directly.
