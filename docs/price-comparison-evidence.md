@@ -93,6 +93,10 @@ That sentence is quote-backed by the table above.
   John Lewis £250). Premium tail at Cox & Cox £425.
   - MUNLER Brook is **£199 (73×52 cm)** and **£259 (90×65 cm)**: inside the same band.
   - So the honest headline for Brook is **"same money, better material"**, not "cheaper".
+  - The module shows **a band per size**, because the small-mirror band would misrepresent
+    the larger one. 73×52 cm is compared against **£130 to £250**; 90×65 cm against
+    **£195 to £425** (Oliver Bonas £195 at 81×77, Atkin & Thyme £219 at 90×90,
+    John Lewis £250 at 115×65, Cox & Cox £425 at 150×80).
 
 - **Full-length mirrors:** far thinner evidence. Cox & Cox recycled elm 150×80 at **£425**;
   West Elm eucalyptus 167×72 at **£569**. MUNLER Solenne is **£749 at 170×90 cm**.

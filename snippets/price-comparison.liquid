@@ -16,15 +16,19 @@
 {%- liquid
   assign show_comparison = false
   assign our_glass = ''
-  assign their_price = ''
-  assign our_size_note = ''
+  assign their_bands = ''
 
   case product.handle
     when 'brook-champagne-gold-wall-mirror', 'brook-matte-black-wall-mirror'
       assign show_comparison = true
       assign our_glass = '4 mm, copper-free and lead-free'
-      assign their_price = '£130 to £250'
-      assign our_size_note = 'for a mirror this size'
+      comment
+        One band per size variant, in variant order. A single band would quote the
+        small-mirror band next to the large mirror's price. Sources in the evidence file:
+        73x52 -> La Redoute £120.99, G&G £129, M&S £139, Oliver Bonas £160, G&G £165, John Lewis £250
+        90x65 -> Oliver Bonas £195, Atkin & Thyme £219, John Lewis £250, Cox & Cox £425
+      endcomment
+      assign their_bands = '£130 to £250|£195 to £425'
     when 'solenne-champagne-gold-full-length-mirror'
       assign show_comparison = true
       assign our_glass = '5 mm, copper-free and lead-free'
@@ -104,17 +108,29 @@
             <td class="honesty-us"><strong>Free, insured, tracked</strong></td>
             <td>Often charged</td>
           </tr>
-          {%- if their_price != blank -%}
-          <tr class="honesty-row--price">
-            <th scope="row">You pay {{ our_size_note }}</th>
-            <td class="honesty-us"><strong class="honesty-price">{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</strong></td>
-            <td><span class="honesty-price honesty-price--them">{{ their_price }}</span></td>
-          </tr>
+          {%- if their_bands != blank -%}
+            {%- assign band_list = their_bands | split: '|' -%}
+            {%- assign size_idx = 0 -%}
+            {%- for variant in product.variants -%}
+              {%- assign vt = variant.title | downcase -%}
+              {%- unless vt == 'default title' -%}
+                {%- assign band = band_list[size_idx] -%}
+                {%- if band -%}
+                  {%- assign size_label = variant.title | split: ' - ' | first -%}
+                  <tr class="honesty-row--price">
+                    <th scope="row">{{ size_label }}</th>
+                    <td class="honesty-us"><strong class="honesty-price">{{ variant.price | money_without_trailing_zeros }}</strong></td>
+                    <td><span class="honesty-price honesty-price--them">{{ band }}</span></td>
+                  </tr>
+                {%- endif -%}
+                {%- assign size_idx = size_idx | plus: 1 -%}
+              {%- endunless -%}
+            {%- endfor -%}
           {%- endif -%}
         </tbody>
       </table>
 
-      {%- if their_price != blank -%}
+      {%- if their_bands != blank -%}
       <p class="honesty-kicker">Same money. Better mirror.</p>
       {%- else -%}
       <p class="honesty-kicker">Built to outlast the room it hangs in.</p>
