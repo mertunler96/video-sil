@@ -60,25 +60,33 @@
         </tr>
       </thead>
       <tbody>
+        {%- comment -%}
+          "metal" is in quotation marks because it is their word, not our reading of it.
+          Several sellers state only "Metal Frame" with no grade. We do not say what that
+          metal is. We say what ours is.
+
+          There is no delivery row: William Wood also gives free UK delivery, so it is not
+          a difference. There is no "ships from" row for the same reason.
+        {%- endcomment -%}
         <tr>
           <th scope="row">Frame</th>
           <td class="honesty-us">304 stainless steel</td>
-          <td>Iron, wood or MDF</td>
+          <td>Iron, wood, MDF, moulded PU, or &ldquo;metal&rdquo; unspecified</td>
         </tr>
         <tr>
           <th scope="row">Glass</th>
           <td class="honesty-us">{{ our_glass }}</td>
-          <td>Not stated</td>
+          <td>No copper-free or lead-free claim found</td>
         </tr>
+        {%- comment -%}
+          Scoped to UK sellers on purpose. Blossholm, a Danish brand that ships here,
+          offers ten years and beats us. That is recorded in the evidence file. If we ever
+          widen this row beyond the UK, it has to go or we have to match them.
+        {%- endcomment -%}
         <tr>
           <th scope="row">Warranty</th>
           <td class="honesty-us">5 years</td>
-          <td>Not stated</td>
-        </tr>
-        <tr>
-          <th scope="row">UK delivery</th>
-          <td class="honesty-us">Free, insured, tracked</td>
-          <td>Often charged</td>
+          <td>None, or 1 year</td>
         </tr>
         {%- if their_bands != blank -%}
           {%- assign band_list = their_bands | split: '|' -%}
@@ -109,10 +117,11 @@
     {%- endif -%}
 
     <p class="honesty-foot">
-      Frame materials as published by Dunelm, John Lewis, Oliver Bonas, La Redoute,
-      Cox &amp; Cox and Atkin &amp; Thyme on their own product pages, for asymmetrical wall
-      mirrors between £120 and £400, checked on {{ checked_on }}. Iron and wood are honest
-      materials. They are simply not the same materials.
+      Frame and glass as published on their own product pages by UK retailers (Dunelm,
+      John Lewis, Oliver Bonas, La Redoute, Cox &amp; Cox, Atkin &amp; Thyme) and by designer
+      mirror brands (Fableroom, William Wood), for asymmetrical wall mirrors between £120
+      and £400, checked on {{ checked_on }}. Warranty compares UK sellers. Iron and wood
+      are honest materials. They are simply not the same materials.
     </p>
 
   </div>
