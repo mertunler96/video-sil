@@ -61,12 +61,18 @@
 }
 
 /* === GALLERY ===
-   A single stacked column of every product photograph. No thumbnails, no arrows,
-   no dots, no JavaScript. On mobile the same markup becomes a scroll-snap strip. */
+   Every product photograph, in a two-column grid. No thumbnails, no arrows, no dots,
+   no JavaScript. On mobile the same markup becomes a scroll-snap strip.
+
+   Two columns rather than one long stack on purpose. A single stack of ten 3:4 images
+   ran to 9,700px against a 1,600px info column, which just moved the empty white block
+   from the left of the page to the right. Two columns of 4:5 images bring the gallery
+   to roughly 2,500px, close enough to the info column that the page reads as one piece. */
 .product-gallery {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
+    align-content: start;
 }
 
 .gallery-item {
@@ -79,24 +85,21 @@
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 4 / 5;
     object-fit: cover;
 }
 
 /* === PRODUCT INFO PANEL === */
 .product-info-col {
     position: relative;
-    /* .product-layout sets align-items: start, which shrinks this column to its own
-       content. A sticky child can only stick inside its parent, so the panel used to
-       unpin about 1600px in and leave the right side empty for the rest of the
-       gallery. Stretch the column to the full row height instead. */
-    align-self: stretch;
 }
 
 .product-info-sticky {
-    /* Sticky, because the gallery column is now much taller than this one. */
-    position: sticky;
-    top: calc(var(--header-h) + 1.5rem);
+    /* Deliberately not sticky. The panel is about 1,600px tall, taller than most
+       viewports, so pinning its top would park the accordions permanently below the
+       fold with no way to scroll to them. The sticky add-to-cart bar already keeps
+       buying within reach on long scrolls. */
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -670,6 +673,7 @@
        would otherwise be an enormous scroll on a phone. Pure CSS, no carousel. */
     .product-gallery {
         position: static;
+        display: flex;
         flex-direction: row;
         gap: 0.5rem;
         overflow-x: auto;
