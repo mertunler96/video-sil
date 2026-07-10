@@ -1198,3 +1198,105 @@
     .honesty-kicker { font-size: 1.25rem; }
     .honesty-foot { font-size: 0.72rem; }
 }
+
+/* =====================================================
+   To-scale size guide — snippets/size-guide.liquid
+   The SVG user unit is one centimetre. Do not restyle
+   geometry here; change the centimetres in the snippet.
+   ===================================================== */
+.sizeguide {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.4rem 1.3rem 1.2rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+}
+
+.sizeguide-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.sizeguide-note {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 300;
+    color: var(--color-mid);
+}
+
+.sizeguide-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.sg-floor {
+    stroke: var(--color-border);
+    stroke-width: 1;
+}
+
+.sg-person {
+    fill: var(--color-border);
+}
+
+.sg-console rect {
+    fill: none;
+    stroke: var(--color-mid);
+    stroke-width: 1.2;
+}
+
+.sg-mirror {
+    fill: none;
+    stroke: var(--color-dark);
+    vector-effect: non-scaling-stroke;
+}
+
+.sg-mirror--large {
+    stroke: var(--color-gold-dark);
+    stroke-width: 1.5;
+    stroke-dasharray: 5 4;
+}
+
+.sg-mirror--medium {
+    stroke: var(--color-dark);
+    stroke-width: 1.8;
+    fill: rgba(255, 255, 255, 0.55);
+}
+
+.sg-label {
+    font-family: var(--font-sans);
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-anchor: start;
+}
+
+.sg-label--large { fill: var(--color-gold-dark); }
+.sg-label--medium { fill: var(--color-dark); }
+
+.sg-dim {
+    font-family: var(--font-sans);
+    font-size: 7px;
+    font-weight: 300;
+    fill: var(--color-mid);
+    letter-spacing: 0.04em;
+}
+
+.sizeguide-fit {
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--color-mid);
+    margin: 0;
+}
+
+.sizeguide-fit strong {
+    font-weight: 500;
+    color: var(--color-dark);
+}

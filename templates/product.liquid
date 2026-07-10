@@ -242,6 +242,8 @@
             {% endfor %}
             {% endif %}
 
+            {% render 'size-guide', product: product %}
+
             <input type="hidden" name="id" id="variant-id" value="{{ product.selected_or_first_available_variant.id }}">
             <div class="qty-group">
               <span class="option-label">Quantity</span>

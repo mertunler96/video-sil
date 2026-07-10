@@ -1,0 +1,106 @@
+{% comment %}
+  To-scale size guide. The single biggest reason people do not buy a mirror online
+  is that they cannot picture how big it is. Raw "73x52 cm" on a button does not
+  answer that; a 170 cm person standing next to it does.
+
+  Drawn as inline SVG rather than an uploaded image so it stays sharp at any size,
+  follows the brand tokens, costs no extra request, and cannot go out of sync with
+  the product.
+
+  The SVG user unit IS one centimetre. viewBox 0 0 300 218 means a 3 m wide wall,
+  with the floor at y=200 and label room underneath. To place anything, y = 200 minus
+  its height above the floor. Do not "adjust until it looks right": change the
+  centimetres and the drawing stays honest.
+
+  Console: 120 cm wide, 80 cm tall, a normal hallway console.
+  Mirror hangs with its base 95 cm from the floor, just clear of the console top.
+{% endcomment %}
+
+{%- liquid
+  assign guide = ''
+  case product.handle
+    when 'brook-champagne-gold-wall-mirror', 'brook-matte-black-wall-mirror'
+      assign guide = 'brook'
+    when 'solenne-champagne-gold-full-length-mirror'
+      assign guide = 'solenne'
+  endcase
+-%}
+
+{%- if guide != blank -%}
+<div class="sizeguide">
+  <div class="sizeguide-head">
+    <span class="option-label">Size in the room</span>
+    <span class="sizeguide-note">Drawn to scale beside a 170 cm person</span>
+  </div>
+
+  <svg class="sizeguide-svg" viewBox="0 0 300 218" role="img"
+       aria-labelledby="sizeguide-title sizeguide-desc">
+    <title id="sizeguide-title">{{ product.title }} shown to scale</title>
+    <desc id="sizeguide-desc">
+      {%- if guide == 'brook' -%}
+        A 170 cm tall person stands beside a 120 cm wide console table. The medium mirror
+        measures 73 cm tall by 52 cm wide and the large mirror 90 cm tall by 65 cm wide,
+        both hung with the base 95 cm above the floor.
+      {%- else -%}
+        A 170 cm tall person stands beside the Solenne mirror, which is 170 cm tall and
+        90 cm wide and leans against the wall on the floor.
+      {%- endif -%}
+    </desc>
+
+    <defs>
+      {%- comment -%}
+        The asymmetric silhouette, normalised to a 100x100 box so it can be dropped in at
+        any real size. Deliberately a schematic outline, not a tracing of the product.
+      {%- endcomment -%}
+      <symbol id="munler-blob" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M52 1 C76 1 97 19 98 44 C99 68 86 93 56 98 C29 102 5 84 2 57 C-1 30 20 1 52 1 Z" />
+      </symbol>
+
+      <symbol id="munler-person" viewBox="0 0 46 160">
+        <path d="M23 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20z
+                 M23 25c-7 0-12 3-14 8L4 49a3 3 0 0 0 5 2l4-11v23l-3 44a4 4 0 0 0 8 1l5-32 5 32a4 4 0 0 0 8-1l-3-44V40l4 11a3 3 0 0 0 5-2l-5-16c-2-5-7-8-14-8z" />
+      </symbol>
+    </defs>
+
+    <!-- floor -->
+    <line class="sg-floor" x1="0" y1="200" x2="300" y2="200" />
+
+    <!-- person: 170 cm tall, feet on the floor -->
+    <use href="#munler-person" class="sg-person" x="24" y="30" width="49" height="170" />
+    <text class="sg-dim" x="82" y="196">170 cm</text>
+
+    {%- if guide == 'brook' -%}
+      <!-- console: 120 cm wide, 80 cm tall -->
+      <g class="sg-console">
+        <rect x="112" y="120" width="120" height="5" />
+        <rect x="118" y="125" width="4" height="75" />
+        <rect x="222" y="125" width="4" height="75" />
+        <rect x="118" y="180" width="108" height="3" />
+      </g>
+
+      <!-- large: 90 tall x 65 wide, base 95 cm up -> y 15..105, centred on x=172 -->
+      <use href="#munler-blob" class="sg-mirror sg-mirror--large" x="139.5" y="15" width="65" height="90" />
+      <!-- medium: 73 tall x 52 wide, base 95 cm up -> y 32..105 -->
+      <use href="#munler-blob" class="sg-mirror sg-mirror--medium" x="146" y="32" width="52" height="73" />
+
+      <text class="sg-label sg-label--large" x="212" y="24">Large &#183; 90 &#215; 65 cm</text>
+      <text class="sg-label sg-label--medium" x="212" y="46">Medium &#183; 73 &#215; 52 cm</text>
+      <text class="sg-dim" x="112" y="214">120 cm console</text>
+    {%- else -%}
+      <!-- Solenne: 170 tall x 90 wide, standing on the floor -->
+      <use href="#munler-blob" class="sg-mirror sg-mirror--large" x="150" y="30" width="90" height="170" />
+      <text class="sg-label sg-label--large" x="248" y="110">170 &#215; 90 cm</text>
+      <text class="sg-dim" x="150" y="214">Leans against the wall</text>
+    {%- endif -%}
+  </svg>
+
+  <p class="sizeguide-fit">
+    {%- if guide == 'brook' -%}
+      <strong>Medium</strong> sits comfortably above a console or in a cloakroom.
+      <strong>Large</strong> is the statement piece, above a fireplace or on an empty wall.
+    {%- else -%}
+      Leans against the wall, no fixings needed. Give it about 90 cm of clear floor width.
+    {%- endif -%}
+  </p>
+</div>
+{%- endif -%}
