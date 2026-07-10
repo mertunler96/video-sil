@@ -1298,21 +1298,16 @@
 }
 
 /* =====================================================
-   PDP section-colour schemes (temporary A/B/C test)
-   Same rhythm on every product: white product area, cream honesty band with its
-   white table, WHITE reviews, and two coloured bands (features + related). Only
-   the two band colours change between schemes, so the founder is comparing colour
-   and nothing else. Delete the branching once one is chosen.
+   PDP section-colour scheme — charcoal
+   The product page used to run four cream sections after the white gallery. Now the
+   two bands (features + related) go charcoal and reviews goes white, so the rhythm is
+   white -> cream honesty -> charcoal -> white reviews -> charcoal. Product photos sit
+   on cream backgrounds, so they glow against the dark.
    ===================================================== */
-
-/* shared: break the run of cream by making reviews white on all three schemes */
-.pdp-charcoal .reviews-section,
-.pdp-clay .reviews-section,
-.pdp-neutral .reviews-section {
+.pdp-charcoal .reviews-section {
     background: var(--color-white);
 }
 
-/* ---------- A · Charcoal (Brook Champagne Gold) ---------- */
 .pdp-charcoal .features-strip,
 .pdp-charcoal .related-section {
     background: var(--color-dark);
@@ -1333,42 +1328,4 @@
 
 .pdp-charcoal .related-section .product-img-wrap {
     background: #2A2A2A;
-}
-
-/* ---------- B · Warm clay (Brook Matte Black) ---------- */
-.pdp-clay .features-strip,
-.pdp-clay .related-section {
-    background: #A87C5F;
-    border-top-color: rgba(0, 0, 0, 0.10);
-}
-
-.pdp-clay .features-strip .feature-num {
-    color: #3A2A1E;
-}
-
-.pdp-clay .features-strip .feature-strip-item h4,
-.pdp-clay .related-section .section-header h2,
-.pdp-clay .related-section .product-name,
-.pdp-clay .related-section .product-price {
-    color: #FBF6F0;
-}
-
-.pdp-clay .features-strip .feature-strip-item p,
-.pdp-clay .related-section .product-variant {
-    color: #EBD9C9;
-}
-
-.pdp-clay .related-section .section-label {
-    color: #F4E4D5;
-}
-
-.pdp-clay .related-section .product-img-wrap {
-    background: #94684D;
-}
-
-/* ---------- C · Layered neutrals (Solenne) ---------- */
-/* No new hue: a deeper greige for the bands, text stays dark. */
-.pdp-neutral .features-strip,
-.pdp-neutral .related-section {
-    background: #E7DECF;
 }
