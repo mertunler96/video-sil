@@ -86,6 +86,11 @@
 /* === PRODUCT INFO PANEL === */
 .product-info-col {
     position: relative;
+    /* .product-layout sets align-items: start, which shrinks this column to its own
+       content. A sticky child can only stick inside its parent, so the panel used to
+       unpin about 1600px in and leave the right side empty for the rest of the
+       gallery. Stretch the column to the full row height instead. */
+    align-self: stretch;
 }
 
 .product-info-sticky {
