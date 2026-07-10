@@ -19,11 +19,10 @@ body {
     font-family: var(--font-sans);
     background-color: var(--color-bg);
     color: var(--color-dark);
-    /* clip, not hidden. overflow-x: hidden turns body into a scroll container, which
-       silently disables every position: sticky inside the page. clip stops the
-       sideways scroll without that side effect. Older Safari falls back to hidden. */
+    /* Careful: this turns body into a scroll container, which silently disables every
+       position: sticky inside the page. If you ever add a sticky panel, switch this to
+       overflow-x: clip first, which stops the sideways scroll without that side effect. */
     overflow-x: hidden;
-    overflow-x: clip;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding-top: 34px;
