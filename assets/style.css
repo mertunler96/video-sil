@@ -1753,3 +1753,58 @@ p {
 .product-card .jdgm-preview-badge[data-number-of-reviews="0"] {
     display: none !important;
 }
+
+/* ── Real MUNLER Homes (real customer video) ─────────────────────── */
+.real-homes {
+    padding: 8rem 0;
+    background: var(--color-white);
+    border-top: 1px solid var(--color-border);
+}
+.real-homes-inner {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    max-width: 940px;
+    margin: 0 auto;
+}
+.real-homes-media {
+    flex: 0 0 300px;
+    max-width: 300px;
+}
+.real-homes-video {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 30px 60px -22px rgba(0, 0, 0, 0.4);
+    background: var(--color-bg);
+}
+.real-homes-text {
+    flex: 1;
+}
+.real-homes-text h2 {
+    margin: 0.7rem 0 1.1rem;
+}
+.real-homes-text p {
+    margin-bottom: 2rem;
+    max-width: 46ch;
+}
+@media (max-width: 768px) {
+    .real-homes {
+        padding: 5rem 0;
+    }
+    .real-homes-inner {
+        flex-direction: column;
+        gap: 2.5rem;
+        text-align: center;
+    }
+    .real-homes-media {
+        flex-basis: auto;
+        max-width: 250px;
+    }
+    .real-homes-text p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
