@@ -1780,6 +1780,69 @@ p {
     box-shadow: 0 30px 60px -22px rgba(0, 0, 0, 0.4);
     background: var(--color-bg);
 }
+/* Real MUNLER Homes, cok kartli izgara (2+ yaratici).
+   Tek yaratici oldugunda .real-homes-inner (yandan hero) kullanilir. */
+.real-homes-head {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto 3.5rem;
+}
+.real-homes-head h2 {
+    margin: 0.7rem 0 1.1rem;
+}
+.real-homes-head p {
+    margin: 0 auto;
+    max-width: 52ch;
+}
+.real-homes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    max-width: 940px;
+    margin: 0 auto;
+}
+.real-homes-grid.is-two {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 640px;
+}
+.real-home-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+.real-home-card video {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 30px 60px -22px rgba(0, 0, 0, 0.4);
+    transition: transform 0.4s ease;
+}
+a.real-home-card:hover video {
+    transform: translateY(-5px);
+}
+.real-home-meta {
+    display: block;
+    margin-top: 1.1rem;
+    text-align: center;
+}
+.real-home-who {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--color-dark);
+    text-decoration: none;
+}
+a.real-home-who:hover {
+    color: var(--color-gold-dark);
+}
+.real-home-what {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.82rem;
+    color: var(--color-mid);
+}
+
 .real-homes-text {
     flex: 1;
 }
@@ -1793,6 +1856,15 @@ p {
 @media (max-width: 768px) {
     .real-homes {
         padding: 5rem 0;
+    }
+    .real-homes-head {
+        margin-bottom: 2.5rem;
+    }
+    .real-homes-grid,
+    .real-homes-grid.is-two {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        max-width: 260px;
     }
     .real-homes-inner {
         flex-direction: column;
