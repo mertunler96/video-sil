@@ -520,6 +520,32 @@
     font-weight: 500;
     color: var(--color-dark);
 }
+/* Arrival promise: the breakage answer, stated next to the buy button */
+.arrival-promise {
+    margin: 1.25rem 0 0;
+    padding: 0.95rem 1.1rem;
+    border: 1px solid var(--color-border);
+    border-left: 2px solid var(--color-gold-dark);
+    background: rgba(0, 0, 0, 0.015);
+}
+.arrival-promise-head {
+    margin: 0 0 0.3rem;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--color-dark);
+}
+.arrival-promise-body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    font-weight: 300;
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+    color: var(--color-mid);
+}
+
 .feature-checklist {
     list-style: none;
     margin: 0.25rem 0 0;

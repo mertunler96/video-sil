@@ -291,7 +291,16 @@
           {% if shop.enabled_payment_types contains 'klarna' %}
           <p class="klarna-line">Pay in 3 interest-free payments with <strong>Klarna</strong>, chosen at checkout.</p>
           {% endif %}
+          {% comment %}
+            Glass at £199-£749 raises one question before any other: what happens
+            if it arrives broken. "Fully insured" reads as our cover, not theirs,
+            so the promise is stated in the buyer's own words, next to the button.
+          {% endcomment %}
           {% if product.type == 'Mirrors' %}
+          <div class="arrival-promise">
+            <p class="arrival-promise-head">Arrives perfect, or we replace it.</p>
+            <p class="arrival-promise-body">Every mirror is crated and fully insured for the journey. If yours arrives damaged, send us a photo and we replace it free, we arrange and pay for collection. You are never left with a broken mirror you paid for.</p>
+          </div>
           <ul class="feature-checklist">
             <li>100% real glass, distortion-free reflection</li>
             <li>Arrives ready to hang, wall fixings included</li>
