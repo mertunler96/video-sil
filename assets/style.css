@@ -60,8 +60,12 @@ ul { list-style: none; }
     --color-gold:       #B4915B;
     --color-gold-dark:  #8C6B39;
 
-    --font-serif: 'Cormorant Garamond', Georgia, serif;
-    --font-sans:  'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif:   'Cormorant Garamond', Georgia, serif;
+    --font-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+    --font-sans:    'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --color-espresso: #221C16;
+    --color-cream:    #EDE6D8;
 
     --ease-out:   cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --transition: 0.3s ease;
@@ -90,10 +94,10 @@ ul { list-style: none; }
 
 /* === TYPOGRAPHY === */
 h1, h2, h3 {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-weight: 400;
     line-height: 1.12;
-    letter-spacing: 0.01em;
+    letter-spacing: -0.005em;
 }
 
 h1 { font-size: clamp(2.8rem, 5.5vw, 5.2rem); }
@@ -988,7 +992,7 @@ p {
     padding: 0 var(--gutter);
 }
 .photo-marquee-head h2 {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-size: clamp(2.5rem, 4.8vw, 4.1rem);
     font-weight: 400;
     line-height: 1.04;
@@ -1761,6 +1765,15 @@ p {
     background: var(--color-white);
     border-top: 1px solid var(--color-border);
 }
+.real-homes.is-dark {
+    background: var(--color-espresso);
+    border-top: none;
+}
+.real-homes.is-dark .section-label { color: var(--color-gold); }
+.real-homes.is-dark h2 { color: var(--color-cream); }
+.real-homes.is-dark .real-homes-head p { color: #ADA290; }
+.real-homes.is-dark .real-home-who { color: var(--color-cream); }
+.real-homes.is-dark .real-home-what { color: #ADA290; }
 .real-homes-inner {
     display: flex;
     align-items: center;
