@@ -281,5 +281,7 @@
   window.MUNLER_SEARCH_PRODUCTS = [{% for p in collections['all'].products limit: 8 %}{name:{{ p.title | json }},img:{{ p.featured_image | img_url: '300x' | prepend: 'https:' | json }},url:{{ p.url | json }},price:{{ p.price | money | json }}}{% unless forloop.last %},{% endunless %}{% endfor %}];
   </script>
   <script src="{{ 'main.js' | asset_url }}" defer></script>
+
+  {% render 'welcome-popup' %}
 </body>
 </html>

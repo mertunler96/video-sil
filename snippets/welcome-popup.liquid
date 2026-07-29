@@ -1,0 +1,139 @@
+{%- comment -%}
+  MUNLER welcome popup — 10% off first order (WELCOME10).
+  Editorial split layout: lifestyle image + capture panel with success state.
+  Subscribes via Shopify native customer form (POST /contact#contact_form),
+  so subscribers land in Shopify email marketing (no third-party app).
+  Shown once per browser (localStorage), not on cart/checkout/account.
+{%- endcomment -%}
+<div class="mun-wp-overlay" id="mun-wp" aria-hidden="true">
+  <div class="mun-wp-modal" role="dialog" aria-modal="true" aria-label="Ten percent off your first order">
+    <button class="mun-wp-close" type="button" aria-label="Close" data-wp-close>&times;</button>
+
+    <div class="mun-wp-media">
+      <img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/emma-brook-home-1.jpg?v=1785314846&width=760"
+           alt="MUNLER Brook mirror styled in a real home" loading="lazy">
+    </div>
+
+    <div class="mun-wp-body">
+      <div data-wp-panel="form">
+        <span class="mun-wp-brand">MUNLER</span>
+        <h2 class="mun-wp-title">10% off your first order</h2>
+        <p class="mun-wp-sub">Join the list for first look at new pieces, and a little something to begin your space with.</p>
+        <form class="mun-wp-form" data-wp-formel novalidate>
+          <input type="email" class="mun-wp-input" name="email" placeholder="Email address"
+                 required autocomplete="email" aria-label="Email address">
+          <button type="submit" class="mun-wp-btn">Get my 10% off</button>
+          <p class="mun-wp-error" data-wp-error hidden>Please enter a valid email address.</p>
+        </form>
+        <button type="button" class="mun-wp-decline" data-wp-close>No thanks, I&rsquo;ll pay full price</button>
+      </div>
+
+      <div data-wp-panel="success" hidden>
+        <span class="mun-wp-brand">MUNLER</span>
+        <h2 class="mun-wp-title">Welcome in.</h2>
+        <p class="mun-wp-sub">Your 10% is ready. Use this code at checkout, we&rsquo;ve sent a copy to your inbox too.</p>
+        <div class="mun-wp-code" data-wp-code>WELCOME10</div>
+        <button type="button" class="mun-wp-btn" data-wp-copy>Copy code</button>
+        <button type="button" class="mun-wp-decline" data-wp-close>Continue shopping</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var KEY = 'mun_wp_seen_v1';
+  var overlay = document.getElementById('mun-wp');
+  if (!overlay) return;
+
+  // Do not show on cart, checkout or account pages
+  var path = window.location.pathname;
+  if (/\/(cart|checkout|account)(\/|$)/.test(path)) return;
+
+  var modal    = overlay.querySelector('.mun-wp-modal');
+  var formPanel = overlay.querySelector('[data-wp-panel="form"]');
+  var okPanel   = overlay.querySelector('[data-wp-panel="success"]');
+  var formEl   = overlay.querySelector('[data-wp-formel]');
+  var input    = overlay.querySelector('.mun-wp-input');
+  var errEl    = overlay.querySelector('[data-wp-error]');
+  var opened = false;
+
+  function open() {
+    if (opened) return;
+    opened = true;
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {}
+    setTimeout(function () { if (input) input.focus(); }, 350);
+  }
+  function close() {
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  // Trigger: once per browser, after a short delay or on scroll
+  var seen = false;
+  try { seen = !!localStorage.getItem(KEY); } catch (e) {}
+  if (!seen) {
+    var timer = setTimeout(open, 6000);
+    var onScroll = function () {
+      if (window.scrollY > 600) { clearTimeout(timer); open(); window.removeEventListener('scroll', onScroll); }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  // Close interactions
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay || e.target.hasAttribute('data-wp-close')) close();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.getAttribute('aria-hidden') === 'false') close();
+  });
+
+  // Submit -> Shopify native customer (newsletter) form
+  if (formEl) {
+    formEl.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = (input.value || '').trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        if (errEl) errEl.hidden = false;
+        input.focus();
+        return;
+      }
+      if (errEl) errEl.hidden = true;
+      var btn = formEl.querySelector('.mun-wp-btn');
+      if (btn) { btn.disabled = true; btn.textContent = 'Just a moment...'; }
+
+      var fd = new FormData();
+      fd.append('form_type', 'customer');
+      fd.append('utf8', '✓');
+      fd.append('contact[email]', email);
+      fd.append('contact[tags]', 'newsletter,welcome-popup');
+
+      fetch('/contact#contact_form', { method: 'POST', body: fd, headers: { 'Accept': 'text/html' } })
+        .then(function () { showSuccess(); })
+        .catch(function () { showSuccess(); }); // capture is best-effort; always reveal the code
+
+      // Klaviyo-independent: also identify to Shopify analytics if present
+      try { window.ShopifyAnalytics && window.ShopifyAnalytics.lib && window.ShopifyAnalytics.lib.track('Newsletter Signup'); } catch (e) {}
+    });
+  }
+
+  function showSuccess() {
+    if (formPanel) formPanel.hidden = true;
+    if (okPanel) okPanel.hidden = false;
+  }
+
+  // Copy code
+  var copyBtn = overlay.querySelector('[data-wp-copy]');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+      var code = 'WELCOME10';
+      var done = function () { copyBtn.textContent = 'Copied'; setTimeout(function () { copyBtn.textContent = 'Copy code'; }, 1800); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done, done);
+      } else { done(); }
+    });
+  }
+})();
+</script>

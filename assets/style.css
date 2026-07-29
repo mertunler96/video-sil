@@ -1810,6 +1810,162 @@ p {
     max-width: 1180px;
     gap: 1.75rem;
 }
+
+/* ── Welcome popup (10% off first order) ─────────────────────────────── */
+.mun-wp-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(20, 19, 17, 0.55);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.mun-wp-overlay[aria-hidden="false"] { opacity: 1; visibility: visible; }
+.mun-wp-modal {
+    position: relative;
+    display: grid;
+    grid-template-columns: 44% 56%;
+    width: 100%;
+    max-width: 860px;
+    background: var(--color-white);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+    overflow: hidden;
+    transform: translateY(14px) scale(0.985);
+    transition: transform 0.45s cubic-bezier(0.16, 0.84, 0.44, 1);
+}
+.mun-wp-overlay[aria-hidden="false"] .mun-wp-modal { transform: none; }
+.mun-wp-media { position: relative; background: var(--color-light); }
+.mun-wp-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mun-wp-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    z-index: 3;
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: transparent;
+    color: var(--color-dark);
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+.mun-wp-close:hover { opacity: 1; }
+.mun-wp-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem 3rem 2.6rem;
+    text-align: center;
+}
+.mun-wp-brand {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.42em;
+    text-indent: 0.42em;
+    color: var(--color-mid);
+    margin-bottom: 1.4rem;
+}
+.mun-wp-title {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    line-height: 1.08;
+    font-weight: 500;
+    color: var(--color-dark);
+    margin: 0 0 0.85rem;
+}
+.mun-wp-sub {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--color-mid);
+    max-width: 24rem;
+    margin: 0 auto 1.7rem;
+}
+.mun-wp-form { margin: 0; }
+.mun-wp-input {
+    width: 100%;
+    padding: 0.65rem 0.2rem;
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: 0.98rem;
+    color: var(--color-dark);
+    text-align: center;
+    transition: border-color 0.25s ease;
+}
+.mun-wp-input::placeholder { color: #A9A29A; }
+.mun-wp-input:focus { outline: none; border-bottom-color: var(--color-gold-dark); }
+.mun-wp-btn {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1.02rem 1.5rem;
+    border: none;
+    border-radius: 999px;
+    background: var(--color-dark);
+    color: var(--color-white);
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+.mun-wp-btn:hover { background: #000; transform: translateY(-1px); }
+.mun-wp-btn:disabled { opacity: 0.6; cursor: default; transform: none; }
+.mun-wp-error {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: #B3452F;
+    margin: 0.8rem 0 0;
+}
+.mun-wp-decline {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0;
+    border: none;
+    background: none;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: var(--color-mid);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+.mun-wp-decline:hover { color: var(--color-dark); }
+.mun-wp-code {
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-indent: 0.28em;
+    color: var(--color-dark);
+    border: 1px dashed var(--color-gold);
+    padding: 0.95rem 1rem;
+    margin: 0.4rem auto 0;
+    max-width: 20rem;
+    background: #FBF9F5;
+}
+@media (max-width: 700px) {
+    .mun-wp-modal { grid-template-columns: 1fr; max-width: 400px; }
+    .mun-wp-media { height: 160px; }
+    .mun-wp-body { padding: 2.2rem 1.6rem 2rem; }
+    .mun-wp-title { font-size: 2.1rem; }
+    .mun-wp-brand { margin-bottom: 1rem; }
+}
 .real-home-card {
     display: block;
     text-decoration: none;
