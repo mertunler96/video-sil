@@ -1833,7 +1833,8 @@ p {
     display: grid;
     grid-template-columns: 44% 56%;
     width: 100%;
-    max-width: 860px;
+    max-width: 900px;
+    min-height: 540px;
     background: var(--color-white);
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
     overflow: hidden;
@@ -1972,8 +1973,8 @@ p {
     background: #FBF9F5;
 }
 @media (max-width: 700px) {
-    .mun-wp-modal { grid-template-columns: 1fr; max-width: 400px; }
-    .mun-wp-media { height: 160px; }
+    .mun-wp-modal { grid-template-columns: 1fr; max-width: 400px; min-height: 0; }
+    .mun-wp-media { height: 180px; }
     .mun-wp-body { padding: 2.2rem 1.6rem 2rem; }
     .mun-wp-title { font-size: 2.1rem; }
     .mun-wp-brand { margin-bottom: 1rem; }
