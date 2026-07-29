@@ -592,9 +592,13 @@ p {
 
 .hero-title {
     color: var(--color-white);
-    margin-bottom: 1.4rem;
-    line-height: 1.08;
+    font-size: clamp(3.3rem, 6.2vw, 6rem);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    margin-bottom: 1.5rem;
+    line-height: 1.02;
 }
+.hero-title em { font-style: italic; }
 
 .hero-desc {
     color: rgba(255,255,255,0.72);
@@ -1078,6 +1082,27 @@ p {
     padding: 8rem 0;
     background: var(--color-bg);
     text-align: center;
+}
+.newsletter.is-dark { background: var(--color-espresso); }
+.newsletter.is-dark .section-label { color: var(--color-gold); }
+.newsletter.is-dark h2 { color: var(--color-cream); }
+.newsletter.is-dark .newsletter-inner > p { color: #ADA290; }
+.newsletter.is-dark .form-note { color: #8C8577; }
+.newsletter.is-dark .newsletter-form input {
+    background: transparent;
+    border-color: rgba(237, 230, 216, 0.28);
+    color: var(--color-cream);
+}
+.newsletter.is-dark .newsletter-form input::placeholder { color: rgba(237, 230, 216, 0.5); }
+.newsletter.is-dark .btn-dark {
+    background: var(--color-cream);
+    color: var(--color-espresso);
+    border-color: var(--color-cream);
+}
+.newsletter.is-dark .btn-dark:hover {
+    background: transparent;
+    color: var(--color-cream);
+    border-color: rgba(237, 230, 216, 0.6);
 }
 
 .newsletter-inner {
