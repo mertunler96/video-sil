@@ -104,15 +104,16 @@
       var btn = formEl.querySelector('.mun-wp-btn');
       if (btn) { btn.disabled = true; btn.textContent = 'Just a moment...'; }
 
-      var fd = new FormData();
-      fd.append('form_type', 'customer');
-      fd.append('utf8', '✓');
-      fd.append('contact[email]', email);
-      fd.append('contact[tags]', 'newsletter,welcome-popup');
-
-      fetch('/contact#contact_form', { method: 'POST', body: fd, headers: { 'Accept': 'text/html' } })
+      // Shopify's /contact newsletter form expects urlencoded (not multipart)
+      var body = 'form_type=customer&utf8=%E2%9C%93&contact%5Btags%5D=newsletter,welcome-popup'
+               + '&contact%5Bemail%5D=' + encodeURIComponent(email);
+      fetch('/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'text/html' },
+        body: body
+      })
         .then(function () { showSuccess(); })
-        .catch(function () { showSuccess(); }); // capture is best-effort; always reveal the code
+        .catch(function () { showSuccess(); }); // always reveal the code; capture is best-effort
 
       // Klaviyo-independent: also identify to Shopify analytics if present
       try { window.ShopifyAnalytics && window.ShopifyAnalytics.lib && window.ShopifyAnalytics.lib.track('Newsletter Signup'); } catch (e) {}
