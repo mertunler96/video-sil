@@ -1805,6 +1805,11 @@ p {
     grid-template-columns: repeat(2, 1fr);
     max-width: 640px;
 }
+.real-homes-grid.is-four {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1180px;
+    gap: 1.75rem;
+}
 .real-home-card {
     display: block;
     text-decoration: none;
@@ -1861,7 +1866,8 @@ a.real-home-who:hover {
         margin-bottom: 2.5rem;
     }
     .real-homes-grid,
-    .real-homes-grid.is-two {
+    .real-homes-grid.is-two,
+    .real-homes-grid.is-four {
         grid-template-columns: 1fr;
         gap: 3rem;
         max-width: 260px;
