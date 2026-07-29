@@ -1,8 +1,10 @@
 {%- comment -%}
   MUNLER welcome popup — 10% off first order (WELCOME10).
   Editorial split layout: lifestyle image + capture panel with success state.
-  Subscribes via Shopify native customer form (POST /contact#contact_form),
-  so subscribers land in Shopify email marketing (no third-party app).
+  Uses Shopify's native {% form 'customer' %} (same as the footer newsletter),
+  so subscribers reliably land in Shopify email marketing (no third-party app).
+  On successful submit the page reloads; we re-open the popup on the success
+  state (identified via a sessionStorage flag so the footer form never triggers it).
   Shown once per browser (localStorage), not on cart/checkout/account.
 {%- endcomment -%}
 <div class="mun-wp-overlay" id="mun-wp" aria-hidden="true">
@@ -19,12 +21,18 @@
         <span class="mun-wp-brand">MUNLER</span>
         <h2 class="mun-wp-title">10% off your first order</h2>
         <p class="mun-wp-sub">Join the list for first look at new pieces, and a little something to begin your space with.</p>
-        <form class="mun-wp-form" data-wp-formel novalidate>
-          <input type="email" class="mun-wp-input" name="email" placeholder="Email address"
+        {%- form 'customer', class: 'mun-wp-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter,welcome-popup">
+          <input type="email" class="mun-wp-input" name="contact[email]" placeholder="Email address"
                  required autocomplete="email" aria-label="Email address">
           <button type="submit" class="mun-wp-btn">Get my 10% off</button>
-          <p class="mun-wp-error" data-wp-error hidden>Please enter a valid email address.</p>
-        </form>
+          {%- if form.errors -%}
+            <p class="mun-wp-error">Please enter a valid email address.</p>
+          {%- endif -%}
+          {%- if form.posted_successfully? -%}
+            <span id="mun-wp-ok" hidden></span>
+          {%- endif -%}
+        {%- endform -%}
         <button type="button" class="mun-wp-decline" data-wp-close>No thanks, I&rsquo;ll pay full price</button>
       </div>
 
@@ -32,7 +40,7 @@
         <span class="mun-wp-brand">MUNLER</span>
         <h2 class="mun-wp-title">Welcome in.</h2>
         <p class="mun-wp-sub">Your 10% is ready. Use this code at checkout, we&rsquo;ve sent a copy to your inbox too.</p>
-        <div class="mun-wp-code" data-wp-code>WELCOME10</div>
+        <div class="mun-wp-code">WELCOME10</div>
         <button type="button" class="mun-wp-btn" data-wp-copy>Copy code</button>
         <button type="button" class="mun-wp-decline" data-wp-close>Continue shopping</button>
       </div>
@@ -46,43 +54,56 @@
   var overlay = document.getElementById('mun-wp');
   if (!overlay) return;
 
-  // Do not show on cart, checkout or account pages
-  var path = window.location.pathname;
-  if (/\/(cart|checkout|account)(\/|$)/.test(path)) return;
+  var path       = window.location.pathname;
+  var formPanel  = overlay.querySelector('[data-wp-panel="form"]');
+  var okPanel    = overlay.querySelector('[data-wp-panel="success"]');
+  var input      = overlay.querySelector('.mun-wp-input');
+  var popForm    = overlay.querySelector('.mun-wp-form');
 
-  var modal    = overlay.querySelector('.mun-wp-modal');
-  var formPanel = overlay.querySelector('[data-wp-panel="form"]');
-  var okPanel   = overlay.querySelector('[data-wp-panel="success"]');
-  var formEl   = overlay.querySelector('[data-wp-formel]');
-  var input    = overlay.querySelector('.mun-wp-input');
-  var errEl    = overlay.querySelector('[data-wp-error]');
-  var opened = false;
-
-  function open() {
-    if (opened) return;
-    opened = true;
+  function open(success) {
     overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {}
-    setTimeout(function () { if (input) input.focus(); }, 350);
+    if (success) {
+      if (formPanel) formPanel.hidden = true;
+      if (okPanel) okPanel.hidden = false;
+    } else {
+      setTimeout(function () { if (input) input.focus(); }, 350);
+    }
   }
   function close() {
     overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
 
-  // Trigger: once per browser, after a short delay or on scroll
-  var seen = false;
-  try { seen = !!localStorage.getItem(KEY); } catch (e) {}
-  if (!seen) {
-    var timer = setTimeout(open, 6000);
-    var onScroll = function () {
-      if (window.scrollY > 600) { clearTimeout(timer); open(); window.removeEventListener('scroll', onScroll); }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
+  // Mark that THIS popup was the one submitted (so the footer form never triggers the success modal)
+  if (popForm) {
+    popForm.addEventListener('submit', function () {
+      try { sessionStorage.setItem('mun_wp_pending', '1'); } catch (e) {}
+    });
   }
 
-  // Close interactions
+  // Returned from a successful signup via this popup -> show the code
+  var okFlag = !!document.getElementById('mun-wp-ok');
+  var pending = false;
+  try { pending = sessionStorage.getItem('mun_wp_pending') === '1'; } catch (e) {}
+
+  if (okFlag && pending) {
+    try { sessionStorage.removeItem('mun_wp_pending'); } catch (e) {}
+    open(true);
+  } else {
+    var seen = false;
+    try { seen = !!localStorage.getItem(KEY); } catch (e) {}
+    var blocked = /\/(cart|checkout|account)(\/|$)/.test(path);
+    if (!seen && !blocked) {
+      var timer = setTimeout(function () { open(false); }, 6000);
+      var onScroll = function () {
+        if (window.scrollY > 600) { clearTimeout(timer); open(false); window.removeEventListener('scroll', onScroll); }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+  }
+
   overlay.addEventListener('click', function (e) {
     if (e.target === overlay || e.target.hasAttribute('data-wp-close')) close();
   });
@@ -90,42 +111,6 @@
     if (e.key === 'Escape' && overlay.getAttribute('aria-hidden') === 'false') close();
   });
 
-  // Submit -> Shopify native customer (newsletter) form
-  if (formEl) {
-    formEl.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var email = (input.value || '').trim();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        if (errEl) errEl.hidden = false;
-        input.focus();
-        return;
-      }
-      if (errEl) errEl.hidden = true;
-      var btn = formEl.querySelector('.mun-wp-btn');
-      if (btn) { btn.disabled = true; btn.textContent = 'Just a moment...'; }
-
-      // Shopify's /contact newsletter form expects urlencoded (not multipart)
-      var body = 'form_type=customer&utf8=%E2%9C%93&contact%5Btags%5D=newsletter,welcome-popup'
-               + '&contact%5Bemail%5D=' + encodeURIComponent(email);
-      fetch('/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'text/html' },
-        body: body
-      })
-        .then(function () { showSuccess(); })
-        .catch(function () { showSuccess(); }); // always reveal the code; capture is best-effort
-
-      // Klaviyo-independent: also identify to Shopify analytics if present
-      try { window.ShopifyAnalytics && window.ShopifyAnalytics.lib && window.ShopifyAnalytics.lib.track('Newsletter Signup'); } catch (e) {}
-    });
-  }
-
-  function showSuccess() {
-    if (formPanel) formPanel.hidden = true;
-    if (okPanel) okPanel.hidden = false;
-  }
-
-  // Copy code
   var copyBtn = overlay.querySelector('[data-wp-copy]');
   if (copyBtn) {
     copyBtn.addEventListener('click', function () {
