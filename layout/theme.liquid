@@ -77,6 +77,12 @@
   {% unless template == 'index' or template contains 'product' or template == 'cart' %}
     <link rel="stylesheet" href="{{ 'pages.css' | asset_url }}">
   {% endunless %}
+  {%- comment -%}
+    v2 loads last so its system wins. style.css stays underneath only to keep
+    the JS-bound components (cart drawer, search overlay, mobile menu, welcome
+    popup) working while the visual layer is rebuilt on top of them.
+  {%- endcomment -%}
+  <link rel="stylesheet" href="{{ 'v2.css' | asset_url }}">
   <style>.shopify-policy__title{position:absolute !important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.shopify-policy__container{padding-top:calc(var(--header-h) + 2.5rem)}</style>
 
   {% if template == 'index' %}
@@ -180,100 +186,70 @@
   </main>
 
   <!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="/" class="footer-logo">MUNLER</a>
-        <p>Stainless steel frames<br>&amp; ecological mirrors.</p>
-        <div class="footer-social">
-          <a href="https://instagram.com/munleruk" aria-label="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-          <a href="https://pinterest.com/munleruk" aria-label="Pinterest">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.03-2.83.19-.77 1.27-5.38 1.27-5.38s-.32-.65-.32-1.6c0-1.5.87-2.63 1.95-2.63.92 0 1.37.69 1.37 1.52 0 .93-.59 2.31-.9 3.59-.25 1.07.54 1.94 1.59 1.94 1.91 0 3.19-2.47 3.19-5.38 0-2.22-1.49-3.88-3.97-3.88-2.9 0-4.71 2.17-4.71 4.59 0 .84.24 1.42.62 1.88.17.21.19.29.13.52-.04.17-.14.57-.18.73-.06.23-.24.32-.44.23-1.24-.51-1.82-1.88-1.82-3.42 0-2.55 2.16-5.65 6.44-5.65 3.47 0 5.75 2.53 5.75 5.24 0 3.6-1.99 6.32-4.9 6.32-.98 0-1.9-.53-2.22-1.12l-.63 2.47c-.22.87-.83 1.95-1.25 2.61.94.29 1.94.45 2.97.45 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
-          </a>
-          <a href="https://tiktok.com/@munleruk" aria-label="TikTok">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-          </a>
+  <footer class="site-footer v2-footer">
+    <div class="v2-wrap">
+      <div class="v2-footer-grid">
+        <div>
+          <h4>Info</h4>
+          <a href="/pages/contact">Contact</a>
+          <a href="/pages/about-munler">About Us</a>
+          <a href="/pages/shipping-returns">Delivery</a>
+          <a href="/policies/refund-policy">Returns</a>
+          <a href="/pages/warranty">5 Year Promise</a>
+          <a href="/policies/terms-of-service">Terms and Conditions</a>
+          <a href="/policies/privacy-policy">Privacy Policy</a>
+          <a href="/pages/trade">Trade Registration</a>
         </div>
-        {%- form 'customer', class: 'footer-newsletter', id: 'footer-newsletter-form' -%}
-          <p class="footer-newsletter-label">Stay in the loop</p>
+        <div>
+          <h4>Collections</h4>
+          {%- assign foot_cols = 'asymmetrical-mirrors,full-length-mirrors,gold-mirrors,wall-mirrors,furniture' | split: ',' -%}
+          {%- for h in foot_cols -%}
+            {%- assign c = collections[h] -%}
+            {%- if c.products_count > 0 %}<a href="{{ c.url }}">{{ c.title }}</a>{% endif -%}
+          {%- endfor %}
+          <a href="/collections/all">Shop all</a>
+          <a href="/blogs/news">Journal</a>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <a href="mailto:info@munler.co.uk">info@munler.co.uk</a>
+          <a href="/pages/faq">Frequently asked questions</a>
+          <a href="/pages/care-guide">Care guide</a>
+          <li style="margin-top:1rem;">Free UK delivery, fully insured<br>and tracked on every order.</li>
+        </div>
+      </div>
+
+      <div class="v2-footer-news">
+        <h3>Join the list</h3>
+        <p>
+          Be the first to hear about new pieces from MUNLER. Sign up to our
+          interior newsletter and receive 10% off your first order.
+        </p>
+        {% form 'customer' %}
           <input type="hidden" name="contact[tags]" value="newsletter">
-          <div class="footer-newsletter-field">
-            <input type="email" name="contact[email]" placeholder="Your email address" required
-                   class="footer-newsletter-input" id="footer-newsletter-email"
-                   autocomplete="email" aria-label="Email address for newsletter">
-            <button type="submit" class="footer-newsletter-btn" aria-label="Subscribe">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <div class="v2-news-form">
+            <input type="email" name="contact[email]" placeholder="E-mail" aria-label="Email" required>
+            <button type="submit" aria-label="Subscribe">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </button>
           </div>
-          {%- if form.posted_successfully? -%}
-            <p class="footer-newsletter-success">Thank you. You're on the list.</p>
-          {%- elsif form.errors -%}
-            <p class="footer-newsletter-error">Something went wrong. Please try again.</p>
-          {%- endif -%}
-        {%- endform -%}
+        {% endform %}
       </div>
 
-      <div class="footer-links">
-        <div class="footer-col">
-          <h5>Shop</h5>
-          <ul>
-            <li><a href="/collections/all">All Products</a></li>
-            <li><a href="/collections/asymmetrical-mirrors">Asymmetrical Mirrors</a></li>
-            <li><a href="/collections/full-length-mirrors">Full-Length Mirrors</a></li>
-            <li><a href="/collections/wall-mirrors">Wall Mirrors</a></li>
-            <li><a href="/collections/gold-mirrors">Gold Mirrors</a></li>
-            <li><a href="/collections/furniture">Furniture</a></li>
-          </ul>
+      <div class="v2-footer-base">
+        <div class="v2-social">
+          <a href="https://instagram.com/munleruk" aria-label="Instagram" rel="noopener" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://pinterest.com/munleruk" aria-label="Pinterest" rel="noopener" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9 20c1-4 1.5-6 1.5-6M8.5 11c0-2 1.5-3.5 3.5-3.5S15.5 9 15.5 11c0 2.5-1.5 4-3 4"/></svg>
+          </a>
+          <a href="https://tiktok.com/@munleruk" aria-label="TikTok" rel="noopener" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M15 4v9.5a4 4 0 1 1-3-3.87"/><path d="M15 4c.6 2.2 2.2 3.5 4.5 3.7"/></svg>
+          </a>
         </div>
-        <div class="footer-col">
-          <h5>Company</h5>
-          <ul>
-            <li><a href="/pages/about-munler">About Us</a></li>
-            <li><a href="/blogs/news">Blog</a></li>
-            <li><a href="/pages/trade">Trade</a></li>
-            <li><a href="/pages/contact">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5>Support</h5>
-          <ul>
-            <li><a href="/pages/faq">FAQs</a></li>
-            <li><a href="/pages/warranty">Warranty</a></li>
-            <li><a href="/pages/shipping-returns">Shipping &amp; Returns</a></li>
-            <li><a href="/pages/care-guide">Care Guide</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5>Terms &amp; Policies</h5>
-          <ul>
-            <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
-            <li><a href="/policies/terms-of-service">Terms of Service</a></li>
-            <li><a href="/policies/shipping-policy">Shipping Policy</a></li>
-            <li><a href="/policies/refund-policy">Return &amp; Refund Policy</a></li>
-          </ul>
-        </div>
+        <span>&copy; {{ 'now' | date: '%Y' }} MUNLER. All rights reserved.</span>
       </div>
-    </div>
-
-    {% comment %}
-      Rendered from shop.enabled_payment_types so the icons always match the
-      methods a customer will actually be offered at checkout. Do not hardcode.
-    {% endcomment %}
-    {% if shop.enabled_payment_types.size > 0 %}
-    <div class="payment-row">
-      <div class="payment-icons">
-        {% for payment_type in shop.enabled_payment_types %}
-          {{ payment_type | payment_type_svg_tag: class: 'pay-icon' }}
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
-    <div class="footer-bottom">
-      <p>&copy; {{ 'now' | date: '%Y' }} MUNLER. All rights reserved.</p>
-      <p>Crafted with intention.</p>
     </div>
   </footer>
 

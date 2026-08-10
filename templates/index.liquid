@@ -1,314 +1,266 @@
-﻿{% comment %}Build product URL map by title matching — handles may vary{% endcomment %}
-{% assign _url_brook_gold = '/collections/all' %}
-{% assign _url_brook_black = '/collections/all' %}
-{% assign _url_solenne = '/collections/all' %}
-{% assign _url_rib = '/collections/all' %}
-{% assign _url_volta = '/collections/all' %}
-{% for _p in collections['all'].products %}
-  {% assign _tl = _p.title | downcase %}
-  {% if _tl contains 'brook' and _tl contains 'champagne' %}{% assign _url_brook_gold = _p.url %}{% endif %}
-  {% if _tl contains 'brook' and _tl contains 'black' %}{% assign _url_brook_black = _p.url %}{% endif %}
-  {% if _tl contains 'brook' and _tl contains 'matte' %}{% assign _url_brook_black = _p.url %}{% endif %}
-  {% if _tl contains 'solenne' %}{% assign _url_solenne = _p.url %}{% endif %}
-  {% if _tl contains 'rib' %}{% assign _url_rib = _p.url %}{% endif %}
-  {% if _tl contains 'volta' %}{% assign _url_volta = _p.url %}{% endif %}
-{% endfor %}
+{% comment %}
+  MUNLER v2 homepage — redesign2 branch.
 
-<!-- Hero Slider -->
-<section class="hero" id="home">
-  <div class="hero-slides">
-    <div class="hero-slide is-active">
-      <div class="hero-media">
-        <video class="hero-video" autoplay muted loop playsinline preload="metadata"
-               poster="https://munler.co.uk/cdn/shop/files/bu_odanin_farkli_shotlarini_ver__202605231515_91bb8878-aaa5-4548-a64a-2a5e1238b6b5.jpg?width=1920">
-          <source src="{{ 'hero.mp4' | asset_url }}" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-      </div>
-      <div class="hero-content">
-        <h1 class="hero-title">Crafted for<br><em>the Extraordinary</em></h1>
-        <p class="hero-desc">Stainless steel frames &amp; ecological mirrors</p>
-        <a href="#products" class="btn btn-light">Explore Collection</a>
-      </div>
-    </div>
-    <div class="hero-slide">
-      <div class="hero-media">
-        <img src="https://munler.co.uk/cdn/shop/files/bu_odanin_farkli_shotlarini_ver__202605231515_91bb8878-aaa5-4548-a64a-2a5e1238b6b5.jpg?width=1920" alt="MUNLER asymmetrical wall mirror in a modern living room" class="hero-img" width="1920" height="1080" loading="lazy">
-        <div class="hero-overlay"></div>
-      </div>
-      <div class="hero-content">
-        <h1 class="hero-title">Crafted for<br><em>the Extraordinary</em></h1>
-        <p class="hero-desc">Stainless steel frames &amp; ecological mirrors</p>
-        <a href="#products" class="btn btn-light">Explore Collection</a>
-      </div>
-    </div>
-  </div>
-  <button class="hero-arrow hero-arrow--prev" aria-label="Previous slide">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-  </button>
-  <button class="hero-arrow hero-arrow--next" aria-label="Next slide">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-  </button>
-  <div class="hero-dots">
-    <button class="hero-dot is-active" aria-label="Slide 1"></button>
-    <button class="hero-dot" aria-label="Slide 2"></button>
-  </div>
-  <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
-</section>
+  Section order follows the Scandinavian retail pattern the direction was set
+  from: hero, bestsellers, brand statement, category rail, lifestyle band,
+  two-up categories, real-homes carousel, line art, about, guarantee.
 
-<!-- Collections -->
-<section class="collections" id="collections">
-  <div class="collections-header">
-    <span class="section-label">Our Collections</span>
-    <h2>Define Your Space</h2>
+  Everything is pulled from the store rather than hardcoded where it can be:
+  products come from collections, prices and badges from variants, the
+  carousel from the influencer films already on the CDN. Copy is MUNLER's.
+{% endcomment %}
+
+<div class="v2">
+
+{%- assign mirrors = collections['asymmetrical-mirrors'] -%}
+{%- assign hero_product = all_products['solenne-champagne-gold-full-length-mirror'] -%}
+
+<!-- ── Hero ─────────────────────────────────────────────────────────── -->
+<section class="v2-hero">
+  <div class="v2-hero-media">
+    <video autoplay muted loop playsinline preload="metadata"
+           poster="{{ hero_product.media[1].preview_image | image_url: width: 1600 }}">
+      <source src="{{ 'hero.mp4' | asset_url }}" type="video/mp4">
+    </video>
   </div>
-  <div class="collections-grid">
-    <div class="collection-card reveal">
-      <div class="collection-img-wrap">
-        <img src="{{ 'card-asymmetrical.webp' | asset_url }}" alt="MUNLER asymmetrical wall mirror in champagne gold above a marble console table" width="800" height="1000" loading="lazy">
-      </div>
-      <div class="collection-info">
-        <span class="collection-num">01</span>
-        <h3>Asymmetrical Mirrors</h3>
-        <a href="/collections/asymmetrical-mirrors" class="link-arrow">Shop Collection <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </div>
-    </div>
-    <div class="collection-card reveal">
-      <div class="collection-img-wrap">
-        <img src="{{ 'card-full-length.webp' | asset_url }}" alt="MUNLER full-length leaning mirror in champagne gold" width="800" height="1000" loading="lazy">
-      </div>
-      <div class="collection-info">
-        <span class="collection-num">02</span>
-        <h3>Full-Length Mirrors</h3>
-        <a href="/collections/full-length-mirrors" class="link-arrow">Shop Collection <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-      </div>
-    </div>
+  <div class="v2-hero-inner">
+    <span class="v2-eyebrow">Handmade in small batches</span>
+    <h1 class="v2-display v2-h1">Objects to <em>live with</em>,<br>not just look at</h1>
+    <p class="v2-hero-sub">
+      Sculptural mirrors in brushed stainless steel and ecological glass,
+      made for the walls you pass every day.
+    </p>
+    <a href="/collections/asymmetrical-mirrors" class="v2-btn v2-btn--light">Shop the collection</a>
   </div>
 </section>
 
-<!-- Featured Products -->
-<section class="products-section" id="products">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label">The Edit</span>
-      <h2>Our Signature Pieces</h2>
+<!-- ── Ticker ───────────────────────────────────────────────────────── -->
+<div class="v2-ticker" aria-hidden="true">
+  <div class="v2-ticker-track">
+    {% for i in (1..2) %}
+      <span>Free UK delivery</span><span>·</span>
+      <span>5 year promise</span><span>·</span>
+      <span>304 stainless steel</span><span>·</span>
+      <span>Copper &amp; lead free glass</span><span>·</span>
+      <span>30 day returns</span><span>·</span>
+      <span>Made in small batches</span><span>·</span>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ── Bestsellers ──────────────────────────────────────────────────── -->
+<section class="v2-section">
+  <div class="v2-wrap">
+    <div class="v2-head">
+      <span class="v2-eyebrow">The collection</span>
+      <h2 class="v2-display v2-h2">Bestsellers</h2>
     </div>
-    <div class="products-grid">
-      {% comment %}Show 4 non-Solenne products first, then Solenne as wide card{% endcomment %}
-      {% assign fp_count = 0 %}
-      {% assign solenne_product = nil %}
-      {% for product in collections['all'].products %}
-        {% assign tl = product.title | downcase %}
-        {% if tl contains 'solenne' %}
-          {% assign solenne_product = product %}
-        {% elsif fp_count < 4 %}
-          {% assign fp_count = fp_count | plus: 1 %}
-          {% assign tags_lower = product.tags | join: ',' | downcase %}
-          <article class="product-card reveal" onclick="window.location='{{ product.url }}'" style="cursor:pointer">
-            <div class="product-img-wrap">
-              <img src="{{ product.featured_image | img_url: '800x' }}"
-                   srcset="{{ product.featured_image | img_url: '400x' }} 400w, {{ product.featured_image | img_url: '800x' }} 800w"
-                   sizes="(max-width: 600px) 50vw, 25vw"
-                   alt="{{ product.title }}" class="product-img-main" width="800" height="1067" loading="lazy">
-              {% if product.images[1] %}<img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-hover" width="800" height="1067" loading="lazy">{% endif %}
-              <div class="product-overlay"><a href="{{ product.url }}" class="btn-add-cart">View Product</a></div>
-              {% if tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
+
+    <div class="v2-grid">
+      {%- assign shown = 0 -%}
+      {%- for p in mirrors.products -%}
+        {%- if shown >= 3 -%}{%- break -%}{%- endif -%}
+        <a href="{{ p.url }}" class="v2-card">
+          <div class="v2-card-media">
+            <div class="v2-badges">
+              {%- if p.handle == 'solenne-champagne-gold-full-length-mirror' -%}
+                <span class="v2-badge">Signature</span>
+              {%- else -%}
+                <span class="v2-badge">Bestseller</span>
+              {%- endif -%}
             </div>
-            <div class="product-info">
-              <div class="product-meta">
-                {% if product.title contains '–' %}
-                  <h3 class="product-name">{{ product.title | split: '–' | first | strip }}</h3>
-                  <span class="product-variant">{{ product.title | split: '–' | last | strip }}</span>
-                {% else %}
-                  <h3 class="product-name">{{ product.title }}</h3>
-                {% endif %}
-              </div>
-              <span class="product-price">{{ product.price | money_without_trailing_zeros }}</span>
-            </div>
-          </article>
-        {% endif %}
-      {% endfor %}
-      {% comment %}Solenne Mirror — always last, always wide{% endcomment %}
-      {% if solenne_product %}
-        <article class="product-card product-card--wide reveal" onclick="window.location='{{ solenne_product.url }}'" style="cursor:pointer">
-          <div class="product-img-wrap">
-            <img src="{{ solenne_product.featured_image | img_url: '800x' }}"
-                   srcset="{{ solenne_product.featured_image | img_url: '400x' }} 400w, {{ solenne_product.featured_image | img_url: '800x' }} 800w"
-                   sizes="(max-width: 600px) 100vw, 50vw"
-                   alt="{{ solenne_product.title }}" class="product-img-main" width="800" height="1067" loading="lazy">
-            {% if solenne_product.images[1] %}<img src="{{ solenne_product.images[1] | img_url: '800x' }}" alt="{{ solenne_product.title }}" class="product-img-hover" width="800" height="1067" loading="lazy">{% endif %}
-            <div class="product-overlay"><a href="{{ solenne_product.url }}" class="btn-add-cart">View Product</a></div>
-            <span class="product-badge product-badge--gold">Signature</span>
+            <img src="{{ p.featured_media | image_url: width: 800 }}"
+                 alt="{{ p.title | escape }}" width="800" height="1000" loading="lazy">
+            {%- if p.media[1] -%}
+              <img class="is-alt" src="{{ p.media[1] | image_url: width: 800 }}"
+                   alt="" width="800" height="1000" loading="lazy" aria-hidden="true">
+            {%- endif -%}
           </div>
-          <div class="product-info">
-            <div class="product-meta">
-              <h3 class="product-name">The Solenne Mirror</h3>
+          <div class="v2-card-text">
+            <div class="v2-card-vendor">MUNLER</div>
+            <div class="v2-card-title">{{ p.title | split: '–' | first | strip }}</div>
+            <div class="v2-card-price">
+              {%- if p.variants.size > 1 -%}<small>From</small> {% endif %}{{ p.price | money_without_trailing_zeros }}
             </div>
-            <span class="product-price">{{ solenne_product.price | money_without_trailing_zeros }}</span>
           </div>
-        </article>
-      {% endif %}
-    </div>
-    <div class="products-cta">
-      <a href="/collections/all" class="btn btn-dark">View All Products</a>
+        </a>
+        {%- assign shown = shown | plus: 1 -%}
+      {%- endfor -%}
     </div>
   </div>
 </section>
 
-<!-- Values -->
-<section class="values">
-  <div class="container">
-    <div class="values-grid">
-      <div class="value-item reveal">
-        <div class="value-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h4>Ecological Materials</h4>
-        <p>Our mirrors are crafted using sustainable, ecological glass — designed to reduce environmental impact without compromising clarity or quality.</p>
-      </div>
-      <div class="value-item reveal">
-        <div class="value-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-        <h4>Premium Stainless Steel</h4>
-        <p>Each frame is precision-engineered in premium stainless steel — resistant to corrosion, tarnish, and time. Built to last a lifetime.</p>
-      </div>
-      <div class="value-item reveal">
-        <div class="value-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-        <h4>Free UK Delivery</h4>
-        <p>Every order includes complimentary UK delivery. Your piece arrives safely packaged and ready to transform your space.</p>
-      </div>
-      <div class="value-item reveal">
-        <div class="value-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
-        <h4>5-Year Warranty</h4>
-        <p>Every MUNLER piece is backed by a 5-year warranty against manufacturing defects — a reflection of the confidence we have in our materials and craft.</p>
-      </div>
+<!-- ── Brand statement ──────────────────────────────────────────────── -->
+<section class="v2-statement">
+  <div class="v2-wrap v2-wrap--narrow">
+    <p>Made in London, shaped by the quiet <em>architecture</em> of a room</p>
+    <a href="/pages/about-munler" class="v2-textlink">Discover the brand</a>
+  </div>
+</section>
+
+<!-- ── Category rail ────────────────────────────────────────────────── -->
+<section class="v2-section v2-section--tight">
+  <div class="v2-wrap">
+    <div class="v2-rail">
+      {%- assign rail = 'asymmetrical-mirrors,full-length-mirrors,gold-mirrors,furniture' | split: ',' -%}
+      {%- for h in rail -%}
+        {%- assign c = collections[h] -%}
+        {%- if c.products_count > 0 -%}
+          <a href="{{ c.url }}" class="v2-tile">
+            <div class="v2-tile-label">{{ c.title }}</div>
+            <div class="v2-tile-media">
+              <img src="{{ c.products.first.featured_media | image_url: width: 700 }}"
+                   alt="{{ c.title | escape }}" width="700" height="933" loading="lazy">
+              <span class="v2-tile-cta">Shop now</span>
+            </div>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
   </div>
 </section>
 
-<!-- Real MUNLER Homes -->
-<section class="real-homes">
-  <div class="container">
-    <div class="real-homes-head reveal">
-      <span class="section-label">Real MUNLER Homes</span>
-      <h2>Unboxed in real homes</h2>
-      <p>Our mirrors, hung and styled by the people who chose them. Real glass, real steel, real UK homes.</p>
-    </div>
-    <div class="real-homes-grid is-five">
-      <a href="{{ _url_brook_gold }}" class="real-home-card reveal">
-        <video autoplay muted loop playsinline preload="none"
-               poster="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/annie-brook-home-1.jpg?v=1784292783&width=640">
-          <source src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/annie-brook-home.mp4?v=1784292783" type="video/mp4">
-        </video>
-        <span class="real-home-meta">
-          <span class="real-home-who">@ourhome_daffodilway</span>
-          <span class="real-home-what">Brook Mirror, Champagne Gold</span>
-        </span>
-      </a>
-      <a href="{{ _url_brook_gold }}" class="real-home-card reveal">
-        <video autoplay muted loop playsinline preload="none"
-               poster="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/ellie-brook-home-1.jpg?v=1784040846&width=640">
-          <source src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/ellie-brook-home-v2.mp4?v=1784041824" type="video/mp4">
-        </video>
-        <span class="real-home-meta">
-          <span class="real-home-who">@homewithellie1</span>
-          <span class="real-home-what">Brook Mirror, Champagne Gold</span>
-        </span>
-      </a>
-      <a href="{{ _url_solenne }}" class="real-home-card reveal">
-        <video autoplay muted loop playsinline preload="none"
-               poster="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/vicky-solenne-poster2.jpg?v=1784293239&width=640">
-          <source src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/vicky-solenne-home.mp4?v=1784292784" type="video/mp4">
-        </video>
-        <span class="real-home-meta">
-          <span class="real-home-who">@number5.renovation</span>
-          <span class="real-home-what">Solenne Mirror, Champagne Gold</span>
-        </span>
-      </a>
-      <a href="{{ _url_brook_black }}" class="real-home-card reveal">
-        <video autoplay muted loop playsinline preload="none"
-               poster="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/emma-brook-home-1.jpg?v=1785314846&width=640">
-          <source src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/emma-brook-home-v2.mp4?v=1785315954" type="video/mp4">
-        </video>
-        <span class="real-home-meta">
-          <span class="real-home-who">@thebigger_house</span>
-          <span class="real-home-what">Brook Mirror, Matte Black</span>
-        </span>
-      </a>
-      <a href="{{ _url_solenne }}" class="real-home-card reveal">
-        <video autoplay muted loop playsinline preload="none"
-               poster="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/abbey-solenne-poster.jpg?v=1786363374&width=640">
-          <source src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/abbey-solenne-home.mp4?v=1786363375" type="video/mp4">
-        </video>
-        <span class="real-home-meta">
-          <span class="real-home-who">@ourberkelyhome</span>
-          <span class="real-home-what">Solenne Mirror, Champagne Gold</span>
-        </span>
-      </a>
+<!-- ── At home band ─────────────────────────────────────────────────── -->
+<section class="v2-band">
+  <div class="v2-band-media">
+    <img src="{{ all_products['brook-champagne-gold-wall-mirror'].media[2] | image_url: width: 1800 }}"
+         alt="A MUNLER mirror in a styled living room" width="1800" height="1200" loading="lazy">
+  </div>
+  <div class="v2-band-inner">
+    <span class="v2-eyebrow">In real homes</span>
+    <h2 class="v2-display v2-h2">At home with MUNLER</h2>
+    <p>
+      Not a showroom and not a render. Scroll through real homes styled with
+      MUNLER, and the people who chose to live with them.
+    </p>
+    <a href="#v2-homes" class="v2-btn v2-btn--light">See the homes</a>
+  </div>
+</section>
+
+<!-- ── Two-up categories ────────────────────────────────────────────── -->
+<section class="v2-section">
+  <div class="v2-wrap">
+    <div class="v2-grid v2-grid--2">
+      {%- assign duo = 'asymmetrical-mirrors,full-length-mirrors' | split: ',' -%}
+      {%- for h in duo -%}
+        {%- assign c = collections[h] -%}
+        <a href="{{ c.url }}" class="v2-tile">
+          <div class="v2-tile-label">{{ c.title }}</div>
+          <div class="v2-tile-media" style="aspect-ratio: 4 / 3;">
+            <img src="{{ c.products.last.media[1] | image_url: width: 1100 }}"
+                 alt="{{ c.title | escape }}" width="1100" height="825" loading="lazy">
+            <span class="v2-tile-cta">Shop now</span>
+          </div>
+        </a>
+      {%- endfor -%}
     </div>
   </div>
 </section>
 
-<!-- Photo Marquee -->
-<section class="photo-marquee">
-  <div class="photo-marquee-head">
-    <span class="section-label">In Situ</span>
-    <h2>The MUNLER Look</h2>
-    <p>Our pieces, styled in considered interiors. Tag <a href="https://instagram.com/munleruk" target="_blank" rel="noopener">@munleruk</a> to be featured.</p>
-  </div>
-  <div class="photo-marquee-track">
-    <a href="{{ _url_brook_gold }}" class="photo-marquee-item"><img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/annie-brook-home-2.jpg?v=1784292783&width=500" alt="Brook Mirror in champagne gold in a real UK hallway" loading="lazy"><span class="photo-marquee-label">Brook Mirror, styled by @ourhome_daffodilway</span></a>
-    <a href="{{ _url_brook_gold }}" class="photo-marquee-item"><img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/annie-brook-home-1.jpg?v=1784292783&width=500" alt="Brook Mirror in champagne gold above a radiator cover" loading="lazy"><span class="photo-marquee-label">Brook Mirror, styled by @ourhome_daffodilway</span></a>
-    <a href="{{ _url_brook_gold }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/bu_odanin_farkli_shotlarini_ver__202605231515_91bb8878-aaa5-4548-a64a-2a5e1238b6b5.jpg?width=500" alt="Brook Mirror" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Champagne Gold</span></a>
-    <a href="{{ _url_solenne }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/aynaya_odakli_shotlar_ver_2K_202605251702.jpg?width=500" alt="Solenne Mirror" loading="lazy"><span class="photo-marquee-label">Solenne Mirror</span></a>
-    <a href="{{ _url_brook_black }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/ayna_cercevelerini_siyah_yap_2K_202605251344.jpg?width=500" alt="Brook Mirror Matte Black" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Matte Black</span></a>
-    <a href="{{ _url_solenne }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg?width=500" alt="Solenne Mirror" loading="lazy"><span class="photo-marquee-label">Solenne Mirror</span></a>
-    <a href="{{ _url_rib }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_en00uven00uven00_073900b8-d131-4da8-abf2-5d60f3b89639.png?width=500" alt="Rib End Table" loading="lazy"><span class="photo-marquee-label">Rib End Table</span></a>
-    <a href="{{ _url_volta }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_f348e2f348e2f348.png?width=500" alt="Volta End Table" loading="lazy"><span class="photo-marquee-label">Volta End Table</span></a>
-    <a href="{{ _url_brook_gold }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/Make_the_armchair_202511231422.jpg?width=500" alt="Brook Mirror" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Champagne Gold</span></a>
-    <a href="{{ _url_brook_black }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/A_minimalist_living_202511231425.jpg?width=500" alt="Brook Mirror Matte Black" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Matte Black</span></a>
-    <a href="{{ _url_solenne }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/Photorealistic_interior_design_202512012237.jpg?width=500" alt="Solenne Mirror" loading="lazy"><span class="photo-marquee-label">Solenne Mirror</span></a>
-    <a href="{{ _url_solenne }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/aynanin_tam_karsisindan_shot_ver__202605251536.jpg?width=500" alt="Solenne Mirror" loading="lazy"><span class="photo-marquee-label">Solenne Mirror</span></a>
-    <a href="{{ _url_brook_gold }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_911uwy911uwy911u_e7d39ccc-05d1-48df-b1ad-be72125a156c.png?width=500" alt="Brook Mirror Champagne Gold" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Champagne Gold</span></a>
-    <a href="{{ _url_brook_black }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_q04fizq04fizq04f_93c8f86e-3b76-48f2-8f88-91396526d02c.png?width=500" alt="Brook Mirror Matte Black" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Matte Black</span></a>
-    <a href="{{ _url_solenne }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_xskxeuxskxeuxskx.png?width=500" alt="Solenne Mirror" loading="lazy"><span class="photo-marquee-label">Solenne Mirror</span></a>
-    <a href="{{ _url_brook_gold }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/A_brightly_lit_202511242029.jpg?width=500" alt="Brook Mirror" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Champagne Gold</span></a>
-    <a href="{{ _url_brook_black }}" class="photo-marquee-item"><img src="https://munler.co.uk/cdn/shop/files/A_sophisticated_and_202511231423_1_1.jpg?width=500" alt="Brook Mirror Matte Black" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Matte Black</span></a>
-    <!-- Duplicate set for seamless loop -->
-    <a href="{{ _url_brook_gold }}" class="photo-marquee-item" aria-hidden="true"><img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/annie-brook-home-2.jpg?v=1784292783&width=500" alt="" loading="lazy"><span class="photo-marquee-label">Brook Mirror, styled by @ourhome_daffodilway</span></a>
-    <a href="{{ _url_brook_gold }}" class="photo-marquee-item" aria-hidden="true"><img src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/annie-brook-home-1.jpg?v=1784292783&width=500" alt="" loading="lazy"><span class="photo-marquee-label">Brook Mirror, styled by @ourhome_daffodilway</span></a>
-    <a href="{{ _url_brook_gold }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/bu_odanin_farkli_shotlarini_ver__202605231515_91bb8878-aaa5-4548-a64a-2a5e1238b6b5.jpg?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Champagne Gold</span></a>
-    <a href="{{ _url_solenne }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/aynaya_odakli_shotlar_ver_2K_202605251702.jpg?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Solenne Mirror</span></a>
-    <a href="{{ _url_brook_black }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/ayna_cercevelerini_siyah_yap_2K_202605251344.jpg?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Matte Black</span></a>
-    <a href="{{ _url_solenne }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/ayna_cercevesini_champagne_gold_yap_202605251429.jpg?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Solenne Mirror</span></a>
-    <a href="{{ _url_rib }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_en00uven00uven00_073900b8-d131-4da8-abf2-5d60f3b89639.png?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Rib End Table</span></a>
-    <a href="{{ _url_volta }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_f348e2f348e2f348.png?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Volta End Table</span></a>
-    <a href="{{ _url_brook_gold }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/Make_the_armchair_202511231422.jpg?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Champagne Gold</span></a>
-    <a href="{{ _url_brook_black }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/A_minimalist_living_202511231425.jpg?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Matte Black</span></a>
-    <a href="{{ _url_solenne }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/Photorealistic_interior_design_202512012237.jpg?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Solenne Mirror</span></a>
-    <a href="{{ _url_solenne }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/aynanin_tam_karsisindan_shot_ver__202605251536.jpg?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Solenne Mirror</span></a>
-    <a href="{{ _url_brook_gold }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_911uwy911uwy911u_e7d39ccc-05d1-48df-b1ad-be72125a156c.png?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Champagne Gold</span></a>
-    <a href="{{ _url_brook_black }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_q04fizq04fizq04f_93c8f86e-3b76-48f2-8f88-91396526d02c.png?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Matte Black</span></a>
-    <a href="{{ _url_solenne }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/Gemini_Generated_Image_xskxeuxskxeuxskx.png?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Solenne Mirror</span></a>
-    <a href="{{ _url_brook_gold }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/A_brightly_lit_202511242029.jpg?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Champagne Gold</span></a>
-    <a href="{{ _url_brook_black }}" class="photo-marquee-item" aria-hidden="true"><img src="https://munler.co.uk/cdn/shop/files/A_sophisticated_and_202511231423_1_1.jpg?width=500" alt="" loading="lazy"><span class="photo-marquee-label">Brook Mirror — Matte Black</span></a>
-  </div>
-</section>
+<!-- ── In your homes ────────────────────────────────────────────────── -->
+<section class="v2-section" id="v2-homes">
+  <div class="v2-wrap">
+    <div class="v2-ugc-head">
+      <div>
+        <span class="v2-eyebrow">Styled by you</span>
+        <h2 class="v2-display v2-h2">In your homes</h2>
+      </div>
+      <div class="v2-ugc-nav">
+        <button type="button" data-ugc="prev" aria-label="Previous">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button type="button" data-ugc="next" aria-label="Next">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
 
-<!-- Newsletter -->
-<section class="newsletter" id="contact">
-  <div class="container-narrow">
-    <div class="newsletter-inner reveal">
-      <span class="section-label">Stay Connected</span>
-      <h2>The MUNLER Edit</h2>
-      <p>New pieces, design inspiration, and exclusive offers — delivered to your inbox.</p>
-      <form class="newsletter-form" id="newsletter-form" action="/contact#contact_form" method="post" accept-charset="UTF-8">
-        <input type="hidden" name="form_type" value="customer">
-        <input type="hidden" name="utf8" value="✓">
-        <input type="hidden" name="contact[tags]" value="newsletter">
-        <div class="form-row">
-          <input type="email" name="contact[email]" placeholder="Your email address" required>
-          <button type="submit" class="btn btn-dark">Subscribe</button>
+    {%- comment -%}
+      The five influencer films already live on the Shopify CDN. preload="none"
+      so five videos on the homepage do not cost five downloads before the
+      visitor has scrolled to them.
+    {%- endcomment -%}
+    {%- assign homes = 'abbey-solenne-home.mp4?v=1786363375|ourberkelyhome|vicky-solenne-home.mp4?v=1784292784|number5.renovation|ellie-brook-home-v2.mp4?v=1784041824|homewithellie1|emma-brook-home-v2.mp4?v=1785315954|thebigger_house|annie-brook-home.mp4?v=1784292783|ourhome_daffodilway' | split: '|' -%}
+    <div class="v2-ugc-rail" data-ugc-rail>
+      {%- for i in (0..4) -%}
+        {%- assign fi = i | times: 2 -%}
+        {%- assign hi = fi | plus: 1 -%}
+        <div class="v2-ugc-item">
+          <video autoplay muted loop playsinline preload="none">
+            <source src="https://cdn.shopify.com/s/files/1/0993/7928/2251/files/{{ homes[fi] }}" type="video/mp4">
+          </video>
+          <span class="v2-ugc-tag">@{{ homes[hi] }}</span>
         </div>
-        <p class="form-note">By subscribing you agree to our Privacy Policy. Unsubscribe at any time.</p>
-      </form>
+      {%- endfor -%}
     </div>
   </div>
 </section>
+
+<!-- ── Line art ─────────────────────────────────────────────────────── -->
+<section class="v2-line-art">
+  <svg viewBox="0 0 700 300" fill="none" stroke="currentColor" stroke-width="1.1"
+       stroke-linecap="round" stroke-linejoin="round" role="img"
+       aria-label="Line drawing of a leaning mirror beside a console table">
+    <path d="M60 268h580"/>
+    <path d="M232 268V96c0-30 15-48 42-52 30-4 50 14 52 44 2 30-2 62-4 92l-6 88"/>
+    <path d="M246 262V104c0-22 10-36 30-38 22-3 36 10 38 32 1 22-2 50-3 72l-5 92"/>
+    <path d="M420 268v-92h168v92"/>
+    <path d="M420 200h168"/>
+    <path d="M470 176v-30c0-14 10-24 24-24s24 10 24 24v30"/>
+    <path d="M494 122V96"/>
+    <ellipse cx="494" cy="90" rx="16" ry="7"/>
+    <path d="M104 268v-56c0-20 12-32 30-32s30 12 30 32v56"/>
+    <path d="M134 180v-22"/>
+    <path d="M118 158h32"/>
+  </svg>
+</section>
+
+<!-- ── About ────────────────────────────────────────────────────────── -->
+<section class="v2-section">
+  <div class="v2-wrap v2-wrap--narrow" style="text-align:center;">
+    <span class="v2-eyebrow" style="margin-bottom:1rem;">About MUNLER</span>
+    <h2 class="v2-display v2-h2" style="margin-bottom:1.1rem;">The difference is what it&rsquo;s made of</h2>
+    <p class="v2-body" style="max-width:56ch;margin:0 auto 2rem;">
+      Two asymmetrical mirrors can look identical in a photograph and be made of
+      completely different things. Ours are built on 304-grade stainless steel
+      with copper-free, lead-free glass, finished by hand and guaranteed for
+      five years.
+    </p>
+    <a href="/pages/about-munler" class="v2-btn v2-btn--dark">Discover the brand</a>
+  </div>
+</section>
+
+<!-- ── Guarantee ────────────────────────────────────────────────────── -->
+<section class="v2-section v2-section--tight">
+  <div class="v2-wrap">
+    <div class="v2-guarantee">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
+      </svg>
+      <div>
+        <h4>Arrives perfect, or we replace it</h4>
+        <p>
+          Every mirror is crated and fully insured for the journey. If yours
+          arrives damaged, send us a photo and we replace it free. We arrange
+          and pay for collection. You are never left with a broken mirror you
+          paid for.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<script>
+  (function () {
+    var rail = document.querySelector('[data-ugc-rail]');
+    if (!rail) return;
+    document.querySelectorAll('[data-ugc]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var step = rail.clientWidth * 0.7;
+        rail.scrollBy({ left: b.dataset.ugc === 'next' ? step : -step, behavior: 'smooth' });
+      });
+    });
+  })();
+</script>
