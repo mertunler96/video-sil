@@ -29,7 +29,12 @@
     --v2-ground:    #EBECE7;
     --v2-ground-2:  #E2E3DD;
     --v2-white:     #FFFFFF;
-    --v2-dark:      #353434;
+    /* Announcement bar, ticker and footer. The reference sits at #353434, but
+       against this sage ground that reads as a soft grey slab rather than a
+       hard edge to the page, so it goes most of the way to black. Kept a shade
+       off #000 so the black buttons and badges still register as a step darker
+       when they sit on it. */
+    --v2-dark:      #1B1B1A;
     --v2-black:     #141414;
 
     --v2-ink:       #141414;
