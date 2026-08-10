@@ -608,7 +608,10 @@ p {
 .hero-title {
     color: var(--color-white);
     font-size: clamp(3.3rem, 6.2vw, 6rem);
-    font-weight: 400;
+    /* Overrides the h1 rule, so it needs the same correction: Playfair is
+       lighter than the Fraunces this replaced, and at ~79px a 400 reads thin
+       over a photograph. */
+    font-weight: 500;
     letter-spacing: -0.015em;
     margin-bottom: 1.5rem;
     line-height: 1.02;
