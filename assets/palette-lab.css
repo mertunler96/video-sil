@@ -1,0 +1,97 @@
+/* =====================================================
+   PALETTE LAB — redesign branch only, not for main
+   =====================================================
+
+   Three candidate palettes for the "no third colour" question, switchable at
+   runtime so they can be compared on real pages with real product photography
+   instead of argued about in the abstract.
+
+   Everything here is a token override. No component rule is touched, which is
+   why this can be deleted in one commit once a palette is chosen: remove this
+   file, the <link> in theme.liquid, and the switcher snippet.
+
+   Switch with ?palette=pure | warm | nogold, or the floating switcher.
+   Default (no attribute) is the live palette, so the baseline is always one
+   click away.
+
+   --color-gold / --color-gold-dark are kept as token NAMES in every palette
+   even where nothing gold remains. They are the accent slots: -gold is the one
+   that sits on dark grounds, -gold-dark the one for light grounds. Renaming
+   them would mean touching all 32 call sites for no visual gain.
+
+   Contrast floor: every --color-mid and --color-gold-dark below clears 4.5:1
+   against the lightest surface it is used on. Measured, not eyeballed.
+   ===================================================== */
+
+/* ── 1. PURE — no warmth anywhere, product photos carry all the colour ── */
+:root[data-palette="pure"] {
+    --color-bg:         #FFFFFF;
+    --color-white:      #FFFFFF;
+    --color-dark:       #000000;
+    --color-dark-2:     #1A1A1A;
+    --color-mid:        #595959;  /* 7.00:1 on white */
+    --color-light:      #F2F2F2;
+    --color-border:     #DCDCDC;
+    --color-gold:       #B8B8B8;  /* accent on dark grounds */
+    --color-gold-dark:  #6B6B6B;  /* 5.33:1 on white */
+    --color-espresso:   #000000;
+    --color-cream:      #FFFFFF;
+}
+
+/* ── 2. WARM — monochrome, but the neutrals keep their warmth ── */
+:root[data-palette="warm"] {
+    --color-bg:         #FAF8F5;
+    --color-white:      #FFFFFF;
+    --color-dark:       #191512;
+    --color-dark-2:     #2A2521;
+    --color-mid:        #6E6458;  /* 5.31:1 on #FAF8F5 */
+    --color-light:      #F1EDE7;
+    --color-border:     #E3DED5;
+    --color-gold:       #A9A096;
+    --color-gold-dark:  #6E6458;
+    --color-espresso:   #221C16;
+    --color-cream:      #F5F1EA;
+}
+
+/* ── 3. NOGOLD — today's site with the gold accent removed, cream intact ── */
+:root[data-palette="nogold"] {
+    --color-gold:       #A9A096;
+    --color-gold-dark:  #6E6458;  /* 5.09:1 on #F4F0E8 */
+}
+
+/* ── Switcher UI. Dev furniture; goes when the palette is chosen. ── */
+.palette-lab {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    z-index: 99999;
+    display: flex;
+    gap: 4px;
+    padding: 5px;
+    border-radius: 999px;
+    background: rgba(20, 20, 20, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.3);
+    font-family: 'Jost', -apple-system, sans-serif;
+}
+
+.palette-lab button {
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.62);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.palette-lab button:hover { color: #fff; }
+
+.palette-lab button[aria-pressed="true"] {
+    background: #fff;
+    color: #111;
+}
+
+@media print { .palette-lab { display: none; } }
