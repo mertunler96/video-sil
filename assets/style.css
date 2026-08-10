@@ -1852,6 +1852,20 @@ p {
     max-width: 1180px;
     gap: 1.75rem;
 }
+.real-homes-grid.is-five {
+    grid-template-columns: repeat(5, 1fr);
+    max-width: 1320px;
+    gap: 1.5rem;
+}
+/* Tablet: 4-5 dikey video yan yana cok darliyor, 3 sutuna dus. */
+@media (max-width: 1100px) {
+    .real-homes-grid.is-four,
+    .real-homes-grid.is-five {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 720px;
+        gap: 1.75rem;
+    }
+}
 
 /* ── Welcome popup (10% off first order) ─────────────────────────────── */
 .mun-wp-overlay {
@@ -2079,7 +2093,8 @@ a.real-home-who:hover {
     }
     .real-homes-grid,
     .real-homes-grid.is-two,
-    .real-homes-grid.is-four {
+    .real-homes-grid.is-four,
+    .real-homes-grid.is-five {
         grid-template-columns: 1fr;
         gap: 3rem;
         max-width: 260px;
