@@ -1755,14 +1755,27 @@ p {
 .footer-newsletter {
     margin-top: 1.6rem;
 }
+/* The offer is the reason anyone subscribes, so it leads the block rather than
+   sitting above it as a small label. --color-mid was inherited from when this
+   sat on a light ground; on the footer it measured about 2.2:1. */
 .footer-newsletter-label {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: normal;
+    text-transform: none;
+    color: var(--color-cream);
+    margin-bottom: 0.5rem;
+}
+
+.footer-newsletter-copy {
     font-family: var(--font-sans);
-    font-size: 0.7rem;
+    font-size: 0.88rem;
     font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-mid);
-    margin-bottom: 0.6rem;
+    line-height: 1.6;
+    color: #A0A398;
+    max-width: 44ch;
+    margin-bottom: 1.1rem;
 }
 .footer-newsletter-field {
     display: flex;
