@@ -726,11 +726,16 @@ p {
     min-width: 28px;
 }
 
+/* Sits in a flex row between the 01/02 numeral and the Shop Collection link,
+   so it only ever gets the leftover width. At 2rem plus 0.04em tracking
+   "Asymmetrical Mirrors" filled almost the whole card and wrapped to two lines
+   as soon as the cards narrowed. Smaller, with the tracking eased off, which
+   buys back more room than the size alone. */
 .collection-info h3 {
     flex: 1;
     text-align: center;
-    font-size: 2rem;
-    letter-spacing: 0.04em;
+    font-size: 1.5rem;
+    letter-spacing: 0.02em;
 }
 
 /* === PRODUCTS === */
@@ -1601,8 +1606,11 @@ p {
         padding: 0.8rem 0 0;
     }
 
+    /* Two cards side by side at this width leaves each about 155px, so the
+       title has to come down again to stay on one line. */
     .collection-info h3 {
-        font-size: 1.1rem;
+        font-size: 0.95rem;
+        letter-spacing: 0.01em;
         text-align: left;
     }
 
