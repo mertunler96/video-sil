@@ -1757,8 +1757,13 @@ p {
 }
 /* The offer is the reason anyone subscribes, so it leads the block rather than
    sitting above it as a small label. --color-mid was inherited from when this
-   sat on a light ground; on the footer it measured about 2.2:1. */
-.footer-newsletter-label {
+   sat on a light ground; on the footer it measured about 2.2:1.
+
+   Scoped under .footer-brand because that rule sets `.footer-brand p` at
+   0.84rem, which outranks a bare class and quietly flattened both of these
+   back to body size. The heading is an h3 for the same reason, and because
+   that is what it is. */
+.footer-brand .footer-newsletter-label {
     font-family: var(--font-display);
     font-size: 1.75rem;
     font-weight: 600;
@@ -1768,7 +1773,7 @@ p {
     margin-bottom: 0.5rem;
 }
 
-.footer-newsletter-copy {
+.footer-brand .footer-newsletter-copy {
     font-family: var(--font-sans);
     font-size: 0.88rem;
     font-weight: 400;
