@@ -54,10 +54,12 @@ ul { list-style: none; }
     --color-white:      #FFFFFF;
     --color-dark:       #191512;
     --color-dark-2:     #2A2521;
-    /* Muted body text. #7A7064 measured 4.27:1 on --color-bg, under the 4.5:1
-       AA floor, so it was darkened. Keep any replacement above 4.5:1 on #F4F0E8,
-       which is the lightest surface it sits on. */
-    --color-mid:        #6E6458;
+    /* Muted body text. #7A7064 was 4.27:1 on --color-bg, under the 4.5:1 AA
+       floor. #6E6458 cleared it at 5.09:1 but still read as washed out at
+       paragraph sizes, so it went darker again. AA is the floor here, not the
+       target. Keep any replacement above 6:1 on #F4F0E8, the lightest surface
+       it sits on. */
+    --color-mid:        #5C5348;
     --color-light:      #EAE2D4;
     --color-border:     #DFD6C7;
     --color-gold:       #B4915B;
@@ -109,10 +111,14 @@ h3 { font-size: clamp(1.3rem, 2vw,   1.8rem); }
 
 em { font-style: italic; }
 
+/* Every paragraph on the site lands here. It was 0.92rem at weight 300, which
+   is 14.7px of thin type, and the per-section bumps made earlier never reached
+   it. 1rem at 400 is the actual fix; line-height is unchanged so the vertical
+   rhythm holds. */
 p {
     font-family: var(--font-sans);
-    font-weight: 300;
-    font-size: 0.92rem;
+    font-weight: 400;
+    font-size: 1rem;
     line-height: 1.85;
     color: var(--color-mid);
 }
@@ -133,7 +139,7 @@ p {
 .section-label {
     display: block;
     font-family: var(--font-sans);
-    font-size: 0.74rem;
+    font-size: 0.8rem;
     font-weight: 500;
     letter-spacing: 0.3em;
     text-indent: 0.3em;
@@ -154,7 +160,7 @@ p {
     justify-content: center;
     padding: 14px 38px;
     font-family: var(--font-sans);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -190,7 +196,7 @@ p {
     align-items: center;
     gap: 8px;
     font-family: var(--font-sans);
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     font-weight: 500;
     letter-spacing: 0.13em;
     text-transform: uppercase;
