@@ -1113,14 +1113,14 @@ p {
 .newsletter.is-dark { background: var(--color-espresso); }
 .newsletter.is-dark .section-label { color: var(--color-gold); }
 .newsletter.is-dark h2 { color: var(--color-cream); }
-.newsletter.is-dark .newsletter-inner > p { color: #ADA290; }
-.newsletter.is-dark .form-note { color: #8C8577; }
+.newsletter.is-dark .newsletter-inner > p { color: #A0A398; }
+.newsletter.is-dark .form-note { color: #83867C; }
 .newsletter.is-dark .newsletter-form input {
     background: transparent;
-    border-color: rgba(237, 230, 216, 0.28);
+    border-color: rgba(226, 227, 221, 0.28);
     color: var(--color-cream);
 }
-.newsletter.is-dark .newsletter-form input::placeholder { color: rgba(237, 230, 216, 0.5); }
+.newsletter.is-dark .newsletter-form input::placeholder { color: rgba(226, 227, 221, 0.5); }
 .newsletter.is-dark .btn-dark {
     background: var(--color-cream);
     color: var(--color-espresso);
@@ -1129,7 +1129,7 @@ p {
 .newsletter.is-dark .btn-dark:hover {
     background: transparent;
     color: var(--color-cream);
-    border-color: rgba(237, 230, 216, 0.6);
+    border-color: rgba(226, 227, 221, 0.6);
 }
 
 .newsletter-inner {
@@ -1895,9 +1895,9 @@ p {
 }
 .real-homes.is-dark .section-label { color: var(--color-gold); }
 .real-homes.is-dark h2 { color: var(--color-cream); }
-.real-homes.is-dark .real-homes-head p { color: #ADA290; }
+.real-homes.is-dark .real-homes-head p { color: #A0A398; }
 .real-homes.is-dark .real-home-who { color: var(--color-cream); }
-.real-homes.is-dark .real-home-what { color: #ADA290; }
+.real-homes.is-dark .real-home-what { color: #A0A398; }
 .real-homes-inner {
     display: flex;
     align-items: center;
@@ -2074,7 +2074,7 @@ p {
     text-align: center;
     transition: border-color 0.25s ease;
 }
-.mun-wp-input::placeholder { color: #A9A29A; }
+.mun-wp-input::placeholder { color: #9C9F94; }
 .mun-wp-input:focus { outline: none; border-bottom-color: var(--color-gold-dark); }
 .mun-wp-btn {
     width: 100%;
