@@ -70,14 +70,11 @@
               {% if product.images[1] %}
                 <img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-hover" width="800" height="1067" loading="lazy">
               {% endif %}
-              <div class="product-overlay">
-                <a href="/products/{{ product.handle }}" class="btn-add-cart">View Product</a>
-              </div>
-              {% if product_tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
-              {% if product_tags_lower contains 'signature' or product.title contains 'Solenne' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
             </div>
             <div class="product-info">
               <div class="product-meta">
+                {% if product_tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
+                {% if product_tags_lower contains 'signature' or product.title contains 'Solenne' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
                 {% if product.title contains '–' %}
                   <h3 class="product-name">{{ product.title | split: '–' | first | strip }}</h3>
                   <span class="product-variant">{{ product.title | split: '–' | last | strip }}</span>

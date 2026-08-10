@@ -111,11 +111,10 @@
                    sizes="(max-width: 600px) 50vw, 25vw"
                    alt="{{ product.title }}" class="product-img-main" width="800" height="1067" loading="lazy">
               {% if product.images[1] %}<img src="{{ product.images[1] | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-hover" width="800" height="1067" loading="lazy">{% endif %}
-              <div class="product-overlay"><a href="{{ product.url }}" class="btn-add-cart">View Product</a></div>
-              {% if tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
             </div>
             <div class="product-info">
               <div class="product-meta">
+                {% if tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
                 {% if product.title contains '–' %}
                   <h3 class="product-name">{{ product.title | split: '–' | first | strip }}</h3>
                   <span class="product-variant">{{ product.title | split: '–' | last | strip }}</span>
@@ -137,11 +136,10 @@
                    sizes="(max-width: 600px) 100vw, 50vw"
                    alt="{{ solenne_product.title }}" class="product-img-main" width="800" height="1067" loading="lazy">
             {% if solenne_product.images[1] %}<img src="{{ solenne_product.images[1] | img_url: '800x' }}" alt="{{ solenne_product.title }}" class="product-img-hover" width="800" height="1067" loading="lazy">{% endif %}
-            <div class="product-overlay"><a href="{{ solenne_product.url }}" class="btn-add-cart">View Product</a></div>
-            <span class="product-badge product-badge--gold">Signature</span>
           </div>
           <div class="product-info">
             <div class="product-meta">
+              <span class="product-badge product-badge--gold">Signature</span>
               <h3 class="product-name">The Solenne Mirror</h3>
             </div>
             <span class="product-price">{{ solenne_product.price | money_without_trailing_zeros }}</span>

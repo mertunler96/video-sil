@@ -793,27 +793,8 @@ p {
     transform: scale(1.04);
 }
 
-.product-overlay {
-    position: absolute;
-    inset-inline: 0;
-    bottom: 0;
-    padding: 1.5rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
-    transform: translateY(100%);
-    transition: transform 0.35s var(--ease-out);
-    will-change: transform;
-}
 
-.product-card:hover .product-overlay {
-    transform: translateY(0);
-}
 
-@media (hover: none) {
-    .product-overlay {
-        transform: translateY(0);
-        background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 65%);
-    }
-}
 
 .btn-add-cart {
     width: 100%;
@@ -835,10 +816,12 @@ p {
     color: var(--color-white);
 }
 
+/* Sits above the product name rather than on the photograph. Pinned to the top
+   left of the image it covered the top of whatever was in frame, which on the
+   Solenne is the mirror itself. Out of the image it cannot clash with any
+   photograph, now or later. */
 .product-badge {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
+    display: inline-block;
     background: var(--color-dark);
     color: var(--color-white);
     font-family: var(--font-sans);
@@ -846,8 +829,8 @@ p {
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    padding: 5px 11px;
-    z-index: 1;
+    padding: 4px 9px;
+    margin-bottom: 0.45rem;
 }
 
 .product-badge--gold {

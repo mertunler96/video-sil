@@ -793,13 +793,12 @@
               <div class="product-img-wrap">
                 <img src="{{ p.featured_image | img_url: '800x' }}" alt="{{ p.featured_image.alt | default: p.title }}" class="product-img-main" loading="lazy">
                 {% if p.images[1] %}<img src="{{ p.images[1] | img_url: '800x' }}" alt="{{ p.images[1].alt | default: p.title }}" class="product-img-hover" loading="lazy">{% endif %}
-                <div class="product-overlay"><a href="{{ p.url }}" class="btn-add-cart">View Product</a></div>
                 {% assign p_tags_lower = p.tags | join: ',' | downcase %}
-                {% if p_tags_lower contains 'signature' or p.title contains 'Solenne' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
-                {% if p_tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
               </div>
               <div class="product-info">
                 <div class="product-meta">
+                  {% if p_tags_lower contains 'signature' or p.title contains 'Solenne' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
+                  {% if p_tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
                   {% if p.title contains '–' %}
                     <h3 class="product-name">{{ p.title | split: '–' | first | strip }}</h3>
                     <span class="product-variant">{{ p.title | split: '–' | last | strip }}</span>
