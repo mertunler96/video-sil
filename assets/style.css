@@ -614,16 +614,17 @@ p {
     margin-bottom: 1.6rem;
 }
 
+/* The 6.2vw came from the Fraunces hero, where the letterforms were narrower
+   and carried the size. Playfair is wider and heavier in the same slot, so
+   79px at 500 filled the frame and read as shouting. Down on both counts, and
+   the tighter tracking eased off with them. */
 .hero-title {
     color: var(--color-white);
-    font-size: clamp(3.3rem, 6.2vw, 6rem);
-    /* Overrides the h1 rule, so it needs the same correction: Playfair is
-       lighter than the Fraunces this replaced, and at ~79px a 400 reads thin
-       over a photograph. */
-    font-weight: 500;
-    letter-spacing: -0.015em;
+    font-size: clamp(2.6rem, 4.6vw, 4.4rem);
+    font-weight: 400;
+    letter-spacing: -0.005em;
     margin-bottom: 1.5rem;
-    line-height: 1.02;
+    line-height: 1.06;
 }
 .hero-title em { font-style: italic; }
 
