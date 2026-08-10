@@ -1149,7 +1149,7 @@
 }
 .jdgm-prev-badge[data-number-of-reviews="0"] { display: none !important; }
 .jdgm-prev-badge__stars { display: inline-flex !important; gap: 0.15rem !important; }
-.jdgm-prev-badge .jdgm-star.jdgm--on { color: var(--color-gold) !important; }
+.jdgm-prev-badge .jdgm-star.jdgm--on { color: var(--color-dark) !important; }
 .jdgm-prev-badge .jdgm-star.jdgm--off { color: #ccc !important; }
 .jdgm-prev-badge__text { font-size: 0.75rem !important; color: var(--color-mid) !important; }
 

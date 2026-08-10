@@ -50,11 +50,9 @@ ul { list-style: none; }
 
 /* === VARIABLES === */
 :root {
-    /* Palette and type carried over from redesign2. The ground moves from warm
-       cream to cool sage and the gold accent becomes a warm taupe, so nothing
-       in the system is a yellow any more. The token NAMES stay as they are:
-       --color-gold is still the accent slot, just no longer gold. Renaming it
-       would mean touching every call site for no visual gain. */
+    /* Palette and type carried over from redesign2, with the accents taken
+       further: see the note on --color-gold below. Nothing in the system is a
+       yellow any more. */
     --color-bg:         #EBECE7;
     --color-white:      #FFFFFF;
     --color-dark:       #141414;
@@ -64,8 +62,21 @@ ul { list-style: none; }
     --color-mid:        #56564F;
     --color-light:      #E2E3DD;
     --color-border:     #D3D4CD;
-    --color-gold:       #A38F70;
-    --color-gold-dark:  #8A7659;
+    /* Accent slots. Both were browns carried over from the cream system: at
+       #8A7659 the R-B spread is +49, squarely in the yellow family, which
+       fought the sage ground everywhere a label sat on it. It also measured
+       3.67:1, under the AA floor.
+
+       These sit in the ground's own hue family instead. #EBECE7 is faintly
+       green (G highest, R-B +4); both replacements share that character, so
+       labels read as part of the palette rather than a leftover from another.
+
+         --color-gold        on dark grounds   6.61:1
+         --color-gold-dark   on the sage ground 5.52:1
+
+       Names kept: they are the accent slots, they are simply no longer gold. */
+    --color-gold:       #9EA294;
+    --color-gold-dark:  #5A5F55;
 
     --font-serif:   'Playfair Display', Georgia, serif;
     --font-display: 'Playfair Display', Georgia, serif;
@@ -108,10 +119,8 @@ h1, h2, h3 {
 }
 
 /* Playfair carries far less weight than Fraunces did at display sizes, so the
-   hero would look thin at 600. Sizes are unchanged; only the weight moves. */
-h1 { font-weight: 500; }
-
-h1 { font-size: clamp(2.8rem, 5.5vw, 5.2rem); }
+   hero would look thin at 600. Size unchanged; only the weight moves. */
+h1 { font-size: clamp(2.8rem, 5.5vw, 5.2rem); font-weight: 500; }
 h2 { font-size: clamp(2rem,   3.8vw, 3.5rem); }
 h3 { font-size: clamp(1.3rem, 2vw,   1.8rem); }
 
