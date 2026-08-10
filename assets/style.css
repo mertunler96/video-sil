@@ -2172,11 +2172,18 @@ p {
        max-height keeps the modal inside short screens; the crop widens again
        there, which is the right thing to give up first. */
     .mun-wp-media {
+        /* width has to be stated. aspect-ratio sizes both axes, so once
+           max-height clamps the height the box narrows to keep the ratio and
+           leaves a white gap down the right of the modal. Pinning the width
+           makes the clamp cost a little height instead, which cover absorbs. */
+        width: 100%;
         height: auto;
         aspect-ratio: 5 / 4;
         max-height: 34vh;
     }
-    .mun-wp-media img { object-position: 50% 26%; }
+    /* 27% centres the mirror in the visible band at both the ratio height and
+       the clamped one: 190..766 and 194..757 against a mirror at 205..745. */
+    .mun-wp-media img { object-position: 50% 27%; }
     .mun-wp-body { padding: 2.2rem 1.6rem 2rem; }
     .mun-wp-title { font-size: 2.1rem; }
     .mun-wp-brand { margin-bottom: 1rem; }
