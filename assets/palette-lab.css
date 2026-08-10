@@ -23,6 +23,20 @@
    against the lightest surface it is used on. Measured, not eyeballed.
    ===================================================== */
 
+/* ── Why --color-white moves too ────────────────────────────────────────
+   The product area, In Real Homes and the reviews block all paint themselves
+   with --color-white. Leaving it at #FFFFFF in every palette meant the biggest
+   surfaces on the page, including everything above the fold, stayed identical
+   and only the ground and the dark bands moved. That is not a palette test.
+
+   So each palette sets both: --color-bg is the ground, --color-white the
+   surface that lifts off it. --color-white stays the lighter of the two
+   everywhere except pure, which is deliberately flat.
+
+   --color-white is also the text colour on dark grounds in 35 places. Tinting
+   it warms that text by the same amount, which is the intent, and it stays
+   above 15:1 against every dark ground here.                              */
+
 /* ── 1. PURE — no warmth anywhere, product photos carry all the colour ── */
 :root[data-palette="pure"] {
     --color-bg:         #FFFFFF;
@@ -40,8 +54,8 @@
 
 /* ── 2. WARM — monochrome, but the neutrals keep their warmth ── */
 :root[data-palette="warm"] {
-    --color-bg:         #FAF8F5;
-    --color-white:      #FFFFFF;
+    --color-bg:         #F2EEE6;
+    --color-white:      #FBF8F2;
     --color-dark:       #191512;
     --color-dark-2:     #2A2521;
     --color-mid:        #6E6458;  /* 5.31:1 on #FAF8F5 */
@@ -58,16 +72,16 @@
    warm the near-black is. Averaging only the ground gives a white page with
    brown text, which reads as a mistake rather than a choice. So both move.
 
-   Ground sits roughly halfway from #FAF8F5 to white. The ink keeps its warmth
-   but loses the brown cast, and the grey drops a little saturation to match.
-   The result should read as paper rather than cream.
+   Ground and surface both sit about halfway between warm and pure. The ink
+   keeps its warmth but loses the brown cast, and the grey drops a little
+   saturation to match. The result should read as paper rather than cream.
 
    There is only about one perceptible step between pure and warm, which is why
    this is one palette and not three. If it lands close but not right, the fix
    is to nudge these values, not to add another variant.                    */
 :root[data-palette="paper"] {
-    --color-bg:         #FCFBF8;
-    --color-white:      #FFFFFF;
+    --color-bg:         #F7F5F1;
+    --color-white:      #FDFCFA;
     --color-dark:       #14110E;
     --color-dark-2:     #241F1B;
     --color-mid:        #635C53;
