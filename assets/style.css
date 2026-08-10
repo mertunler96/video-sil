@@ -672,7 +672,7 @@ p {
 /* === COLLECTIONS === */
 .collections {
     padding: 8rem var(--gutter);
-    background: var(--color-white);
+    background: var(--color-bg);
 }
 
 .collections-header {
@@ -935,7 +935,7 @@ p {
 /* === VALUES === */
 .values {
     padding: 8rem 0;
-    background: var(--color-white);
+    background: var(--color-bg);
 }
 
 .values-grid {
@@ -1393,8 +1393,11 @@ p {
 }
 
 /* === FOOTER === */
+/* Same ground as the newsletter band directly above it. These were #1A1A1A
+   and --color-espresso, one shade apart, which read as a seam across the
+   bottom of the page rather than one dark block. */
 .site-footer {
-    background: #1A1A1A;
+    background: var(--color-espresso);
     padding: 5.5rem 0 0;
 }
 
@@ -1415,14 +1418,14 @@ p {
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--color-white);
+    color: var(--color-cream);
     margin-bottom: 1.2rem;
     line-height: 1;
 }
 
 .footer-brand p {
     font-size: 0.84rem;
-    color: rgba(255,255,255,0.42);
+    color: #A0A398;
     line-height: 1.7;
     margin-bottom: 2rem;
 }
@@ -1433,12 +1436,12 @@ p {
 }
 
 .footer-social a {
-    color: rgba(255,255,255,0.4);
+    color: #A0A398;
     transition: color var(--transition);
 }
 
 .footer-social a:hover {
-    color: var(--color-gold);
+    color: var(--color-cream);
 }
 
 .footer-links {
@@ -1453,7 +1456,7 @@ p {
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.32);
+    color: var(--color-gold);
     margin-bottom: 1.5rem;
 }
 
@@ -1467,12 +1470,12 @@ p {
     font-family: var(--font-sans);
     font-size: 0.84rem;
     font-weight: 300;
-    color: rgba(255,255,255,0.58);
+    color: #A0A398;
     transition: color var(--transition);
 }
 
 .footer-col li a:hover {
-    color: var(--color-white);
+    color: var(--color-cream);
 }
 
 .payment-row {
@@ -1508,7 +1511,7 @@ p {
 
 .footer-bottom p {
     font-size: 0.68rem;
-    color: rgba(255,255,255,0.22);
+    color: #83867C;
     letter-spacing: 0.06em;
 }
 
