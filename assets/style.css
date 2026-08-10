@@ -2160,16 +2160,23 @@ p {
 }
 @media (max-width: 700px) {
     .mun-wp-modal { grid-template-columns: 1fr; max-width: 400px; min-height: 0; }
-    /* The source is 720x1280, a portrait phone frame. A fixed 180px strip made
-       the box 3.3x wider in aspect than the photograph, so cover took a thin
-       horizontal band out of the middle and sliced the mirror in half. A 4:3
-       box is much closer to the image, and the position bias keeps the mirror
-       rather than the floor. */
+    /* The source is 720x1280, a portrait phone frame, with the mirror sitting
+       between y=205 and y=745. cover scales to the 330px column, so the box
+       ratio and the position together decide which band of the photograph
+       survives.
+
+       4/3 at 35% left the band at 183..799 in source pixels and clipped 54px
+       off the top of the mirror. 5/4 at 26% puts it at 183..759, which holds
+       the whole mirror with a little air either side.
+
+       max-height keeps the modal inside short screens; the crop widens again
+       there, which is the right thing to give up first. */
     .mun-wp-media {
         height: auto;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 5 / 4;
+        max-height: 34vh;
     }
-    .mun-wp-media img { object-position: 50% 35%; }
+    .mun-wp-media img { object-position: 50% 26%; }
     .mun-wp-body { padding: 2.2rem 1.6rem 2rem; }
     .mun-wp-title { font-size: 2.1rem; }
     .mun-wp-brand { margin-bottom: 1rem; }
