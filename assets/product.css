@@ -788,7 +788,8 @@
 }
 
 .feature-strip-item p {
-    font-size: 0.84rem;
+    font-size: 0.92rem;
+    font-weight: 400;
     line-height: 1.75;
 }
 
@@ -1193,8 +1194,8 @@
 
 .honesty-lede {
     font-family: var(--font-sans);
-    font-size: 1.02rem;
-    font-weight: 300;
+    font-size: 1.08rem;
+    font-weight: 400;
     line-height: 1.8;
     color: var(--color-mid);
     margin: 0 auto;
@@ -1286,8 +1287,8 @@
     margin: 2rem auto 0;
     max-width: 68ch;
     font-family: var(--font-sans);
-    font-size: 0.78rem;
-    font-weight: 300;
+    font-size: 0.86rem;
+    font-weight: 400;
     line-height: 1.8;
     color: var(--color-mid);
     text-align: center;
@@ -1305,14 +1306,14 @@
     .honesty { padding: 4rem 0; }
     .honesty-head { margin-bottom: 2.2rem; }
     .honesty-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; }
-    .honesty-lede { font-size: 0.94rem; }
+    .honesty-lede { font-size: 1rem; }
     .honesty-table th, .honesty-table td { padding: 1rem 0.8rem; font-size: 0.88rem; }
     .honesty-table tbody th { width: 30%; font-size: 0.84rem; }
     .honesty-table thead th { font-size: 0.66rem; letter-spacing: 0.12em; }
     .honesty-price { font-size: 1.4rem; }
     .honesty-price--them { font-size: 1rem; }
     .honesty-kicker { font-size: 1.25rem; }
-    .honesty-foot { font-size: 0.72rem; }
+    .honesty-foot { font-size: 0.8rem; }
 }
 
 /* Judge.me prints its own "Be the first to write a review" prompt with a button, and
