@@ -86,7 +86,7 @@
   <link rel="stylesheet" href="{{ 'palette-lab.css' | asset_url }}">
   <script>
     (function () {
-      var allowed = ['pure', 'warm', 'nogold'];
+      var allowed = ['pure', 'paper', 'warm', 'nogold'];
       var q = new URLSearchParams(location.search).get('palette');
       var p = allowed.indexOf(q) > -1 ? q : null;
       if (p) { try { localStorage.setItem('munler-palette', p); } catch (e) {} }
@@ -307,6 +307,7 @@
     <button type="button" data-palette-set="">Live</button>
     <button type="button" data-palette-set="nogold">No gold</button>
     <button type="button" data-palette-set="warm">Warm</button>
+    <button type="button" data-palette-set="paper">Paper</button>
     <button type="button" data-palette-set="pure">Pure</button>
   </div>
   <script>

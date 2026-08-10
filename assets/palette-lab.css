@@ -53,6 +53,32 @@
     --color-cream:      #F5F1EA;
 }
 
+/* ── 2b. PAPER — between pure and warm ──────────────────────────────────
+   Warmth on this page comes from two places, not one: the ground tint and how
+   warm the near-black is. Averaging only the ground gives a white page with
+   brown text, which reads as a mistake rather than a choice. So both move.
+
+   Ground sits roughly halfway from #FAF8F5 to white. The ink keeps its warmth
+   but loses the brown cast, and the grey drops a little saturation to match.
+   The result should read as paper rather than cream.
+
+   There is only about one perceptible step between pure and warm, which is why
+   this is one palette and not three. If it lands close but not right, the fix
+   is to nudge these values, not to add another variant.                    */
+:root[data-palette="paper"] {
+    --color-bg:         #FCFBF8;
+    --color-white:      #FFFFFF;
+    --color-dark:       #14110E;
+    --color-dark-2:     #241F1B;
+    --color-mid:        #635C53;
+    --color-light:      #F5F2EC;
+    --color-border:     #E6E1D9;
+    --color-gold:       #AFA79D;
+    --color-gold-dark:  #635C53;
+    --color-espresso:   #1C1814;
+    --color-cream:      #F7F4EE;
+}
+
 /* ── 3. NOGOLD — today's site with the gold accent removed, cream intact ── */
 :root[data-palette="nogold"] {
     --color-gold:       #A9A096;
