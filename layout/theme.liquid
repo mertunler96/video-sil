@@ -66,7 +66,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Playfair+Display:wght@700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   {{ content_for_header }}
 
@@ -77,23 +77,6 @@
   {% unless template == 'index' or template contains 'product' or template == 'cart' %}
     <link rel="stylesheet" href="{{ 'pages.css' | asset_url }}">
   {% endunless %}
-  {%- comment -%}
-    Palette lab: redesign branch only. Loaded last so its token overrides win.
-    Applied before first paint to avoid a flash of the default palette.
-    Delete this block, assets/palette-lab.css and the switcher markup in one
-    commit once a palette is chosen.
-  {%- endcomment -%}
-  <link rel="stylesheet" href="{{ 'palette-lab.css' | asset_url }}">
-  <script>
-    (function () {
-      var allowed = ['pure', 'paper', 'warm', 'nogold'];
-      var q = new URLSearchParams(location.search).get('palette');
-      var p = allowed.indexOf(q) > -1 ? q : null;
-      if (p) { try { localStorage.setItem('munler-palette', p); } catch (e) {} }
-      else { try { p = localStorage.getItem('munler-palette'); } catch (e) {} }
-      if (allowed.indexOf(p) > -1) document.documentElement.dataset.palette = p;
-    })();
-  </script>
   <style>.shopify-policy__title{position:absolute !important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.shopify-policy__container{padding-top:calc(var(--header-h) + 2.5rem)}</style>
 
   {% if template == 'index' %}
@@ -302,40 +285,5 @@
   {% render 'welcome-popup' %}
   {% render 'cart-drawer' %}
 
-  {%- comment -%} Palette lab switcher: redesign branch only. {%- endcomment -%}
-  <div class="palette-lab" role="group" aria-label="Palette preview">
-    <button type="button" data-palette-set="">Live</button>
-    <button type="button" data-palette-set="nogold">No gold</button>
-    <button type="button" data-palette-set="warm">Warm</button>
-    <button type="button" data-palette-set="paper">Paper</button>
-    <button type="button" data-palette-set="pure">Pure</button>
-  </div>
-  <script>
-    (function () {
-      var lab = document.querySelector('.palette-lab');
-      if (!lab) return;
-      var btns = lab.querySelectorAll('[data-palette-set]');
-      function paint() {
-        var cur = document.documentElement.dataset.palette || '';
-        btns.forEach(function (b) {
-          b.setAttribute('aria-pressed', String(b.dataset.paletteSet === cur));
-        });
-      }
-      lab.addEventListener('click', function (e) {
-        var b = e.target.closest('[data-palette-set]');
-        if (!b) return;
-        var v = b.dataset.paletteSet;
-        if (v) {
-          document.documentElement.dataset.palette = v;
-          try { localStorage.setItem('munler-palette', v); } catch (err) {}
-        } else {
-          delete document.documentElement.dataset.palette;
-          try { localStorage.removeItem('munler-palette'); } catch (err) {}
-        }
-        paint();
-      });
-      paint();
-    })();
-  </script>
 </body>
 </html>

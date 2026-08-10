@@ -50,27 +50,29 @@ ul { list-style: none; }
 
 /* === VARIABLES === */
 :root {
-    --color-bg:         #F4F0E8;
+    /* Palette and type carried over from redesign2. The ground moves from warm
+       cream to cool sage and the gold accent becomes a warm taupe, so nothing
+       in the system is a yellow any more. The token NAMES stay as they are:
+       --color-gold is still the accent slot, just no longer gold. Renaming it
+       would mean touching every call site for no visual gain. */
+    --color-bg:         #EBECE7;
     --color-white:      #FFFFFF;
-    --color-dark:       #191512;
-    --color-dark-2:     #2A2521;
-    /* Muted body text. #7A7064 was 4.27:1 on --color-bg, under the 4.5:1 AA
-       floor. #6E6458 cleared it at 5.09:1 but still read as washed out at
-       paragraph sizes, so it went darker again. AA is the floor here, not the
-       target. Keep any replacement above 6:1 on #F4F0E8, the lightest surface
-       it sits on. */
-    --color-mid:        #5C5348;
-    --color-light:      #EAE2D4;
-    --color-border:     #DFD6C7;
-    --color-gold:       #B4915B;
-    --color-gold-dark:  #8C6B39;
+    --color-dark:       #141414;
+    --color-dark-2:     #1B1B1A;
+    /* Muted body text. Keep any replacement above 6:1 on --color-bg, which is
+       the lightest surface it sits on. */
+    --color-mid:        #56564F;
+    --color-light:      #E2E3DD;
+    --color-border:     #D3D4CD;
+    --color-gold:       #A38F70;
+    --color-gold-dark:  #8A7659;
 
-    --font-serif:   'Cormorant Garamond', Georgia, serif;
-    --font-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
-    --font-sans:    'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif:   'Playfair Display', Georgia, serif;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-sans:    'Roboto', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 
-    --color-espresso: #221C16;
-    --color-cream:    #EDE6D8;
+    --color-espresso: #1B1B1A;
+    --color-cream:    #E2E3DD;
 
     --ease-out:   cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --transition: 0.3s ease;
@@ -100,10 +102,14 @@ ul { list-style: none; }
 /* === TYPOGRAPHY === */
 h1, h2, h3 {
     font-family: var(--font-display);
-    font-weight: 400;
-    line-height: 1.12;
-    letter-spacing: -0.005em;
+    font-weight: 600;
+    line-height: 1.18;
+    letter-spacing: normal;
 }
+
+/* Playfair carries far less weight than Fraunces did at display sizes, so the
+   hero would look thin at 600. Sizes are unchanged; only the weight moves. */
+h1 { font-weight: 500; }
 
 h1 { font-size: clamp(2.8rem, 5.5vw, 5.2rem); }
 h2 { font-size: clamp(2rem,   3.8vw, 3.5rem); }
@@ -282,7 +288,7 @@ p {
 
 .site-header.scrolled {
     transform: translateY(0);
-    background: rgba(249, 247, 244, 0.96);
+    background: rgba(235, 236, 231, 0.96);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom-color: var(--color-border);
@@ -1794,6 +1800,78 @@ p {
 }
 
 /* ── Real MUNLER Homes (real customer video) ─────────────────────── */
+/* === AT HOME BAND ===
+   Ported from redesign2. Full-bleed photograph with the copy held in the left
+   third. The overlay is a horizontal gradient rather than a flat wash so the
+   right of the frame, where the product actually is, keeps its detail. */
+.at-home-band {
+    position: relative;
+    min-height: clamp(340px, 48vw, 560px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.at-home-band-media,
+.at-home-band-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.at-home-band::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(20,20,20,0.55) 0%, rgba(20,20,20,0.22) 55%, rgba(20,20,20,0.04) 100%);
+    z-index: 1;
+}
+
+.at-home-band-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 520px;
+    padding: 3rem var(--gutter);
+}
+
+.at-home-band-inner .section-label { color: rgba(255,255,255,0.8); margin-bottom: 1rem; }
+.at-home-band-inner h2 { color: #FFFFFF; margin-bottom: 0.9rem; }
+.at-home-band-inner p { color: rgba(255,255,255,0.9); margin-bottom: 1.6rem; max-width: 40ch; }
+
+/* Sentence case and near-square, matching the band this was taken from. The
+   site's own .btn stays uppercase everywhere else. */
+.at-home-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.78rem 1.7rem;
+    border-radius: 2px;
+    background: var(--color-white);
+    color: var(--color-dark);
+    border: 1px solid var(--color-white);
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: normal;
+    text-transform: none;
+    transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.at-home-btn:hover {
+    background: transparent;
+    color: #FFFFFF;
+    border-color: rgba(255,255,255,0.8);
+}
+
+@media (max-width: 640px) {
+    .at-home-band-inner { max-width: none; }
+    .at-home-band::after {
+        background: linear-gradient(180deg, rgba(20,20,20,0.28) 0%, rgba(20,20,20,0.62) 100%);
+    }
+}
+
 .real-homes {
     padding: 8rem 0;
     background: var(--color-white);
