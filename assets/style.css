@@ -54,7 +54,10 @@ ul { list-style: none; }
     --color-white:      #FFFFFF;
     --color-dark:       #191512;
     --color-dark-2:     #2A2521;
-    --color-mid:        #7A7064;
+    /* Muted body text. #7A7064 measured 4.27:1 on --color-bg, under the 4.5:1
+       AA floor, so it was darkened. Keep any replacement above 4.5:1 on #F4F0E8,
+       which is the lightest surface it sits on. */
+    --color-mid:        #6E6458;
     --color-light:      #EAE2D4;
     --color-border:     #DFD6C7;
     --color-gold:       #B4915B;
