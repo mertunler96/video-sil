@@ -2160,7 +2160,16 @@ p {
 }
 @media (max-width: 700px) {
     .mun-wp-modal { grid-template-columns: 1fr; max-width: 400px; min-height: 0; }
-    .mun-wp-media { height: 180px; }
+    /* The source is 720x1280, a portrait phone frame. A fixed 180px strip made
+       the box 3.3x wider in aspect than the photograph, so cover took a thin
+       horizontal band out of the middle and sliced the mirror in half. A 4:3
+       box is much closer to the image, and the position bias keeps the mirror
+       rather than the floor. */
+    .mun-wp-media {
+        height: auto;
+        aspect-ratio: 4 / 3;
+    }
+    .mun-wp-media img { object-position: 50% 35%; }
     .mun-wp-body { padding: 2.2rem 1.6rem 2rem; }
     .mun-wp-title { font-size: 2.1rem; }
     .mun-wp-brand { margin-bottom: 1rem; }
