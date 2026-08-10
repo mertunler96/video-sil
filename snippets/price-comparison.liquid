@@ -34,7 +34,12 @@
       assign our_glass = '5 mm, copper-free and lead-free'
   endcase
 
-  assign checked_on = '10 July 2026'
+  comment
+    Set by hand. Nothing verifies this for us, so it must only ever be moved
+    forward after the sources in docs/price-comparison-evidence.md have actually
+    been re-read. Never derive it from 'now'. Re-verify every 6 months.
+  endcomment
+  assign checked_on = 'July 2026'
 -%}
 
 {%- if show_comparison -%}
@@ -42,7 +47,7 @@
   <div class="container honesty-inner">
 
     <div class="honesty-head">
-      <span class="honesty-eyebrow">Priced with honesty</span>
+      <span class="honesty-eyebrow">Materials, compared</span>
       <h2 class="honesty-title" id="honesty-title">The difference is what it&rsquo;s made of</h2>
       <p class="honesty-lede">
         Two asymmetrical mirrors can look identical in a photograph and be made of
@@ -121,10 +126,8 @@
     {%- endif -%}
 
     <p class="honesty-foot">
-      Frame and glass as published on their own product pages by Dunelm, John Lewis,
-      Oliver Bonas, La Redoute, Cox &amp; Cox and Atkin &amp; Thyme, for asymmetrical wall
-      mirrors between £120 and £400, checked on {{ checked_on }}. Warranty compares UK
-      sellers. Iron and wood are honest materials. They are simply not the same materials.
+      Based on frame and glass specifications published by six UK retailers for
+      asymmetrical wall mirrors, checked {{ checked_on }}.
     </p>
 
   </div>
