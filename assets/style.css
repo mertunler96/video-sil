@@ -1889,7 +1889,7 @@ p {
 
 .real-homes {
     padding: 8rem 0;
-    background: var(--color-white);
+    background: var(--color-bg);
     border-top: 1px solid var(--color-border);
 }
 .real-homes.is-dark {

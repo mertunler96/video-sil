@@ -4,7 +4,7 @@
 
 /* === PAGE HERO BANNER === */
 .page-hero {
-    background: var(--color-dark);
+    background: var(--color-espresso);
     padding: calc(var(--header-h) + 34px + 4rem) var(--gutter) 5rem;
     text-align: center;
 }
@@ -186,7 +186,7 @@
 /* === COLLECTIONS PAGE === */
 .collections-page-section {
     padding: 6rem 0 8rem;
-    background: var(--color-white);
+    background: var(--color-bg);
 }
 
 .collection-group {
@@ -219,7 +219,7 @@
 /* === ABOUT PAGE === */
 /* Dark editorial hero */
 .about-hero {
-    background: var(--color-dark);
+    background: var(--color-espresso);
     min-height: 56vh;
     display: flex;
     align-items: center;
@@ -254,7 +254,7 @@
 
 /* Dark alternating story rows */
 .about-chapters {
-    background: var(--color-dark);
+    background: var(--color-espresso);
     padding: 1rem 0 5rem;
 }
 .about-row {
@@ -329,7 +329,7 @@
 /* Story chapters */
 .about-story {
     padding: 7.5rem 0;
-    background: var(--color-white);
+    background: var(--color-bg);
 }
 .about-story--tint {
     background: var(--color-bg);
@@ -397,7 +397,7 @@
 /* Finale */
 .about-finale {
     padding: 8rem 0 9rem;
-    background: var(--color-white);
+    background: var(--color-bg);
     text-align: center;
     border-top: 1px solid var(--color-border);
 }
@@ -511,7 +511,7 @@
 /* === CONTACT PAGE === */
 .contact-section {
     padding: 7rem 0 8rem;
-    background: var(--color-white);
+    background: var(--color-bg);
 }
 
 .contact-grid {
@@ -726,7 +726,7 @@
 
 .warranty-body {
     padding: 8rem 0;
-    background: var(--color-white);
+    background: var(--color-bg);
 }
 
 .warranty-intro {
@@ -1029,7 +1029,7 @@
 
 .trade-who-section {
     padding: 8rem 0;
-    background: var(--color-white);
+    background: var(--color-bg);
     border-top: 1px solid var(--color-border);
 }
 

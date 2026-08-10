@@ -17,7 +17,7 @@
 .breadcrumb-bar {
     padding: calc(var(--header-h) + 34px + 1.5rem) 0 1rem;
     border-bottom: 1px solid var(--color-border);
-    background: var(--color-white);
+    background: var(--color-bg);
 }
 
 .breadcrumb {
@@ -47,7 +47,7 @@
 
 /* === PRODUCT SECTION === */
 .product-section {
-    background: var(--color-white);
+    background: var(--color-bg);
     padding: 4rem 0 6rem;
 }
 
@@ -1331,19 +1331,20 @@
 }
 
 /* =====================================================
-   PDP section-colour scheme — charcoal
-   The product page used to run four cream sections after the white gallery. Now the
-   two bands (features + related) go charcoal and reviews goes white, so the rhythm is
-   white -> cream honesty -> charcoal -> white reviews -> charcoal. Product photos sit
-   on cream backgrounds, so they glow against the dark.
+   PDP section-colour scheme
+   Was an alternation built for the cream system: white gallery, cream honesty,
+   charcoal bands, white reviews. With one sage ground across the site there is
+   nothing left to alternate against, so every light section sits on the ground
+   and the two bands take --color-espresso, the same dark the footer and the
+   newsletter use. Product photos still glow against it.
    ===================================================== */
 .pdp-charcoal .reviews-section {
-    background: var(--color-white);
+    background: var(--color-bg);
 }
 
 .pdp-charcoal .features-strip,
 .pdp-charcoal .related-section {
-    background: var(--color-dark);
+    background: var(--color-espresso);
     border-top-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -1351,14 +1352,14 @@
 .pdp-charcoal .related-section .section-header h2,
 .pdp-charcoal .related-section .product-name,
 .pdp-charcoal .related-section .product-price {
-    color: #EDEDE8;
+    color: var(--color-cream);
 }
 
 .pdp-charcoal .features-strip .feature-strip-item p,
 .pdp-charcoal .related-section .product-variant {
-    color: #A6A69E;
+    color: #A0A398;
 }
 
 .pdp-charcoal .related-section .product-img-wrap {
-    background: #2A2A2A;
+    background: #262625;
 }
