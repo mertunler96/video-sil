@@ -161,6 +161,30 @@
         revealObserver.observe(el);
     });
 
+
+    // ── Videolari sadece goruntuye girince yukle ─────────────
+    // autoplay ozniteligi preload="none" degerini gecersiz kilip
+    // videoyu sayfa acilir acilmaz indiriyordu. Urun sayfasinda bu
+    // 4 MB'lik bir on yukleme demekti ve mobilde sayfayi bekletiyordu.
+    var lazyVideos = document.querySelectorAll('video[data-lazyplay]');
+    if (lazyVideos.length) {
+        var videoObserver = new IntersectionObserver(
+            function (entries) {
+                entries.forEach(function (entry) {
+                    var v = entry.target;
+                    if (entry.isIntersecting) {
+                        var p = v.play();
+                        if (p && p.catch) { p.catch(function () {}); }
+                    } else if (!v.paused) {
+                        v.pause();
+                    }
+                });
+            },
+            { threshold: 0.25, rootMargin: '200px 0px' }
+        );
+        lazyVideos.forEach(function (v) { videoObserver.observe(v); });
+    }
+
     // ── Newsletter form ──────────────────────────────────────
     var form = document.getElementById('newsletter-form');
     if (form) {
