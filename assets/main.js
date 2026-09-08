@@ -163,26 +163,54 @@
 
 
     // ── Videolari sadece goruntuye girince yukle ─────────────
-    // autoplay ozniteligi preload="none" degerini gecersiz kilip
-    // videoyu sayfa acilir acilmaz indiriyordu. Urun sayfasinda bu
-    // 4 MB'lik bir on yukleme demekti ve mobilde sayfayi bekletiyordu.
+    // autoplay ozniteligi preload="none" degerini gecersiz kilip videoyu
+    // sayfa acilir acilmaz indiriyordu. Urun sayfasinda bu 4 MB'lik bir on
+    // yukleme demekti ve mobilde ilk acilisi bekletiyordu.
+    //
+    // Video goruntuye girince autoplay'i geri veriyoruz. Boylece oynatmayi
+    // biz zorlamiyoruz, tarayici kendi kurallariyla basliyor. Sekme arka
+    // planda ise Chrome sessiz videoyu guc tasarrufu icin duraklatir ve
+    // sekme one gelince kendisi devam ettirir.
     var lazyVideos = document.querySelectorAll('video[data-lazyplay]');
     if (lazyVideos.length) {
-        var videoObserver = new IntersectionObserver(
-            function (entries) {
-                entries.forEach(function (entry) {
-                    var v = entry.target;
-                    if (entry.isIntersecting) {
-                        var p = v.play();
-                        if (p && p.catch) { p.catch(function () {}); }
-                    } else if (!v.paused) {
-                        v.pause();
-                    }
-                });
-            },
-            { threshold: 0.25, rootMargin: '200px 0px' }
-        );
-        lazyVideos.forEach(function (v) { videoObserver.observe(v); });
+        var basla = function (v) {
+            if (v.dataset.basladi) { return; }
+            v.dataset.basladi = '1';
+            v.preload = 'auto';
+            v.autoplay = true;
+            v.load();
+            var istek = v.play();
+            if (istek && istek.catch) { istek.catch(function () {}); }
+        };
+
+        if ('IntersectionObserver' in window) {
+            var videoObserver = new IntersectionObserver(
+                function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            basla(entry.target);
+                            videoObserver.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.2, rootMargin: '300px 0px' }
+            );
+            lazyVideos.forEach(function (v) { videoObserver.observe(v); });
+        } else {
+            // Cok eski tarayici: gozlemci yoksa hepsini normal sekilde baslat
+            lazyVideos.forEach(basla);
+        }
+
+        // Sekme arka planda acilmissa oynatma reddedilir. One gelince tekrar dene.
+        document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState !== 'visible') { return; }
+            lazyVideos.forEach(function (v) {
+                if (v.dataset.basladi && v.paused) {
+                    var istek = v.play();
+                    if (istek && istek.catch) { istek.catch(function () {}); }
+                }
+            });
+        });
     }
 
     // ── Newsletter form ──────────────────────────────────────
