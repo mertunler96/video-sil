@@ -200,7 +200,13 @@
           {% endif %}
 
           <div class="pinfo-price-block">
-            <span class="pinfo-price" id="pinfo-price">{{ product.selected_or_first_available_variant.price | money }}</span>
+            {%- assign sv = product.selected_or_first_available_variant -%}
+            {%- if sv.compare_at_price > sv.price -%}
+              <s class="pinfo-was" id="pinfo-was">{{ sv.compare_at_price | money }}</s>
+            {%- else -%}
+              <s class="pinfo-was" id="pinfo-was" hidden></s>
+            {%- endif -%}
+            <span class="pinfo-price" id="pinfo-price">{{ sv.price | money }}</span>
             <span class="pinfo-price-note">Free UK delivery</span>
           </div>
 
@@ -238,6 +244,7 @@
                     <button type="button" class="size-btn {% if variant == product.selected_or_first_available_variant %}active{% endif %}"
                       data-variant-id="{{ variant.id }}"
                       data-price="{{ variant.price | money }}"
+                      data-was="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
                       data-title="{{ variant.title }}"
                       {% unless variant.available %}disabled{% endunless %}>
                       {% if size_name != '' %}<span class="size-name">{{ size_name }}</span>{% endif %}
@@ -806,7 +813,12 @@
                     <h3 class="product-name">{{ p.title }}</h3>
                   {% endif %}
                 </div>
-                <span class="product-price">{{ p.price | money_without_trailing_zeros }}</span>
+                <span class="product-price">
+                  {%- if p.compare_at_price > p.price -%}
+                    <s class="was">{{ p.compare_at_price | money_without_trailing_zeros }}</s>
+                  {%- endif -%}
+                  {{ p.price | money_without_trailing_zeros }}
+                </span>
               </div>
             </article>
           {% endif %}
@@ -948,6 +960,13 @@
       document.getElementById('variant-id').value = btn.getAttribute('data-variant-id');
       var priceEl = document.getElementById('pinfo-price');
       if (priceEl) priceEl.textContent = btn.getAttribute('data-price');
+      // Indirimli donemde ustu cizili eski fiyat da varyantla degisir
+      var wasEl = document.getElementById('pinfo-was');
+      if (wasEl) {
+        var was = btn.getAttribute('data-was');
+        wasEl.textContent = was || '';
+        wasEl.hidden = !was;
+      }
       var sizeLabel = document.getElementById('selected-size-label');
       if (sizeLabel) sizeLabel.textContent = btn.getAttribute('data-title');
     });

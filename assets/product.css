@@ -1363,3 +1363,26 @@
 .pdp-charcoal .related-section .product-img-wrap {
     background: #262625;
 }
+
+
+/* ── Indirim donemi, urun sayfasi ───────────────────────────────
+   Eski fiyat yeni fiyatin solunda, daha kucuk ve soluk. Varyant
+   degistiginde JS ikisini birden guncelliyor. */
+.pinfo-was {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--color-mid);
+    text-decoration: line-through;
+    margin-right: 0.6rem;
+    vertical-align: 0.12em;
+}
+
+.pinfo-was[hidden] { display: none; }
+
+.related-section .product-price .was,
+.pdp-charcoal .related-section .product-price .was {
+    color: var(--color-mid);
+    text-decoration: line-through;
+    margin-right: 0.4rem;
+}
