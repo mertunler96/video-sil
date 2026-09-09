@@ -23,6 +23,10 @@
               {% assign product_tags_lower = product.tags | join: ',' | downcase %}
               <article class="product-card reveal" onclick="window.location='/products/{{ product.handle }}'" style="cursor:pointer">
                 <div class="product-img-wrap">
+                  {%- if product.compare_at_price > product.price -%}
+                    {%- assign indirim_oran = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                    <span class="sale-badge">-{{ indirim_oran }}%</span>
+                  {%- endif -%}
                   {% if product.featured_image %}
                     <img src="{{ product.featured_image | img_url: '800x' }}" alt="{{ product.title }}" class="product-img-main">
                   {% endif %}
@@ -41,7 +45,12 @@
                       <h3 class="product-name">{{ product.title }}</h3>
                     {% endif %}
                   </div>
-                  <span class="product-price">{{ product.price | money_without_trailing_zeros }}</span>
+                  <span class="product-price">
+                    {%- if product.compare_at_price > product.price -%}
+                      <s class="was">{{ product.compare_at_price | money_without_trailing_zeros }}</s>
+                    {%- endif -%}
+                    {{ product.price | money_without_trailing_zeros }}
+                  </span>
                 </div>
               </article>
             {% endfor %}
