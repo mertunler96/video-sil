@@ -22,13 +22,28 @@
 {%- assign collection_lead = collection.description | split: '</p>' | first | append: '</p>' -%}
 {%- assign collection_body = collection.description | remove_first: collection_lead -%}
 
-<section class="page-hero">
+{%- comment -%}
+  The sale line only appears while something in the collection is actually
+  marked down, so it disappears on its own when the compare-at prices go.
+{%- endcomment -%}
+{%- assign has_sale = false -%}
+{%- for product in collection.products -%}
+  {%- if product.compare_at_price > product.price -%}
+    {%- assign has_sale = true -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+<section class="page-hero collection-hero">
   <span class="section-label" style="color:var(--color-gold);">
     {% if collection.handle == 'all' %}All Products{% else %}The Collection{% endif %}
   </span>
   <h1 class="page-hero-title">
     {% if collection.handle == 'all' %}Shop{% else %}{{ collection.title }}{% endif %}
   </h1>
+  {% if has_sale %}
+    <p class="page-hero-sale">20% off every mirror until 17 September</p>
+  {% endif %}
   {% if collection.handle == 'all' %}
     <p class="page-hero-desc">Premium mirrors and furniture, crafted for the extraordinary home.</p>
   {% elsif collection.description != blank %}

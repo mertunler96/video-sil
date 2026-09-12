@@ -33,6 +33,16 @@
     line-height: 1.8;
 }
 
+.page-hero-sale {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    font-weight: 400;
+    margin: 0 auto 1.2rem;
+}
+
 /* === COLLECTION SEO CONTENT (below product grid) === */
 .collection-seo {
     padding: 4.5rem var(--gutter) 6.5rem;
@@ -1187,5 +1197,30 @@
 
     .page-hero {
         padding: calc(var(--header-h) + 34px + 3rem) var(--gutter) 4rem;
+    }
+
+    /* A collection page has to show a mirror and a price on the first screen.
+       The full banner pushed the first product to 579px, below the fold on a
+       phone, and paid visitors were leaving after 18 seconds. Only the
+       collection banner shrinks; About, Contact and Trade keep theirs. */
+    .collection-hero {
+        padding: calc(var(--header-h) + 34px + 1.25rem) var(--gutter) 1.75rem;
+    }
+
+    .collection-hero .page-hero-title {
+        font-size: 2.1rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .collection-hero .section-label {
+        margin-bottom: 0.6rem;
+    }
+
+    .collection-hero .page-hero-sale {
+        margin-bottom: 0;
+    }
+
+    .collection-hero .page-hero-desc {
+        display: none;
     }
 }
