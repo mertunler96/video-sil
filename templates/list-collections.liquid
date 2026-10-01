@@ -1,7 +1,7 @@
 ﻿<section class="page-hero">
   <span class="section-label" style="color:var(--color-gold);">Curated</span>
   <h1 class="page-hero-title">Collections</h1>
-  <p class="page-hero-desc">Three distinct collections, one consistent vision — objects that endure and elevate.</p>
+  <p class="page-hero-desc">Distinct collections, one consistent vision: objects that endure and elevate.</p>
 </section>
 
 <section class="collections-page-section">
@@ -15,7 +15,7 @@
             <span class="section-label">Collection 0{{ col_counter }}</span>
             <h2>{{ collection.title }}</h2>
             {% if collection.description != blank %}
-              <p>{{ collection.description | strip_html }}</p>
+              <p>{{ collection.description | split: '</p>' | first | strip_html }}</p>
             {% endif %}
           </div>
           <div class="collection-products-grid">

@@ -3,7 +3,7 @@
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": {{ collection.title | json }},
-  "description": {{ collection.description | strip_html | truncate: 300 | default: 'Shop the MUNLER collection of stainless steel framed mirrors and furniture.' | json }},
+  "description": {{ collection.description | split: '</p>' | first | strip_html | truncate: 300 | default: 'Shop the MUNLER collection of stainless steel framed mirrors and furniture.' | json }},
   "url": "{{ shop.url }}{{ collection.url }}"
 }
 </script>
@@ -26,11 +26,19 @@
   The sale line only appears while something in the collection is actually
   marked down, so it disappears on its own when the compare-at prices go.
 {%- endcomment -%}
+{%- comment -%}
+  Update sale_ends with every new sale. The percentage is worked out from the
+  compare-at prices, so the banner can never claim a bigger discount than the
+  products actually carry.
+{%- endcomment -%}
+{%- assign sale_ends = '12 October' -%}
 {%- assign has_sale = false -%}
+{%- assign max_sale_pct = 0 -%}
 {%- for product in collection.products -%}
   {%- if product.compare_at_price > product.price -%}
     {%- assign has_sale = true -%}
-    {%- break -%}
+    {%- assign pct = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+    {%- if pct > max_sale_pct -%}{%- assign max_sale_pct = pct -%}{%- endif -%}
   {%- endif -%}
 {%- endfor -%}
 
@@ -42,7 +50,7 @@
     {% if collection.handle == 'all' %}Shop{% else %}{{ collection.title }}{% endif %}
   </h1>
   {% if has_sale %}
-    <p class="page-hero-sale">20% off every mirror until 18 September</p>
+    <p class="page-hero-sale">Up to {{ max_sale_pct }}% off, until {{ sale_ends }}</p>
   {% endif %}
   {% if collection.handle == 'all' %}
     <p class="page-hero-desc">Premium mirrors and furniture, crafted for the extraordinary home.</p>

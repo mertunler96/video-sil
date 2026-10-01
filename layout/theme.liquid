@@ -8,7 +8,7 @@
   <meta name="google-site-verification" content="{{ settings.google_site_verification | default: 'exJl5lQDjCnemV41M1dhpCzTHevOF8ampm6GFkfMYaY' }}">
   {% if settings.bing_site_verification != blank %}<meta name="msvalidate.01" content="{{ settings.bing_site_verification }}">{% endif %}
   {% if settings.pinterest_site_verification != blank %}<meta name="p:domain_verify" content="{{ settings.pinterest_site_verification }}">{% endif %}
-  <title>{% if template == 'index' %}MUNLER | Asymmetrical &amp; Full-Length Mirrors{% elsif page_title %}{{ page_title }} | MUNLER{% else %}MUNLER{% endif %}</title>
+  <title>{% if template == 'index' %}MUNLER | Asymmetrical &amp; Full-Length Mirrors{% elsif page_title %}{% if page_title contains 'MUNLER' %}{{ page_title }}{% else %}{{ page_title }} | MUNLER{% endif %}{% else %}MUNLER{% endif %}</title>
   <link rel="canonical" href="{{ canonical_url }}">
 
   <!-- Favicon -->
@@ -33,14 +33,14 @@
   {% elsif template contains 'product' %}
     <meta property="og:type" content="product">
     <meta property="og:title" content="{{ product.title | escape }} | MUNLER">
-    <meta property="og:description" content="{{ product.description | strip_html | truncate: 160 | escape }}">
+    <meta property="og:description" content="{{ product.description | replace: '</p>', ' </p>' | strip_html | strip_newlines | truncate: 160 | escape }}">
     <meta property="og:image" content="https:{{ product.featured_image | img_url: '1200x630' }}">
     <meta property="product:price:amount" content="{{ product.price | money_without_currency }}">
     <meta property="product:price:currency" content="GBP">
   {% elsif template contains 'collection' %}
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ collection.title | escape }} | MUNLER">
-    <meta property="og:description" content="{{ collection.description | strip_html | truncate: 160 | default: 'Shop the MUNLER collection.' | escape }}">
+    <meta property="og:description" content="{{ collection.description | split: '</p>' | first | strip_html | truncate: 160 | default: 'Shop the MUNLER collection.' | escape }}">
     {% if collection.image %}<meta property="og:image" content="https:{{ collection.image | img_url: '1200x630' }}">{% elsif settings.share_image %}<meta property="og:image" content="https:{{ settings.share_image | img_url: '1200x630' }}">{% else %}<meta property="og:image" content="{{ default_share_image }}">{% endif %}
   {% else %}
     <meta property="og:type" content="website">
