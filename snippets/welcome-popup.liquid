@@ -1,5 +1,5 @@
 {%- comment -%}
-  MUNLER welcome popup — 10% off first order (WELCOME10).
+  MUNLER welcome popup — 10% off first order (WELCOME10) + Black Friday early access (tag bf-early-access).
   Editorial split layout: lifestyle image + capture panel with success state.
   Uses Shopify's native {% form 'customer' %} (same as the footer newsletter),
   so subscribers reliably land in Shopify email marketing (no third-party app).
@@ -24,9 +24,9 @@
       <div data-wp-panel="form">
         <span class="mun-wp-brand">MUNLER</span>
         <h2 class="mun-wp-title">10% off your first order</h2>
-        <p class="mun-wp-sub">Join the list for first look at new pieces, and a little something to begin your space with.</p>
+        <p class="mun-wp-sub">Plus early access to our Black Friday prices, 24 hours before everyone else.</p>
         {%- form 'customer', class: 'mun-wp-form' -%}
-          <input type="hidden" name="contact[tags]" value="newsletter,welcome-popup">
+          <input type="hidden" name="contact[tags]" value="newsletter,welcome-popup,bf-early-access">
           <input type="email" class="mun-wp-input" name="contact[email]" placeholder="Email address"
                  required autocomplete="email" aria-label="Email address">
           <button type="submit" class="mun-wp-btn">Get my 10% off</button>
@@ -43,7 +43,7 @@
       <div data-wp-panel="success" hidden>
         <span class="mun-wp-brand">MUNLER</span>
         <h2 class="mun-wp-title">Welcome in.</h2>
-        <p class="mun-wp-sub">Your 10% is ready. Use this code at checkout, we&rsquo;ve sent a copy to your inbox too.</p>
+        <p class="mun-wp-sub">Your 10% is ready. Use this code at checkout, we&rsquo;ve sent a copy to your inbox too. You&rsquo;re also on the list for early Black Friday access.</p>
         <div class="mun-wp-code">WELCOME10</div>
         <button type="button" class="mun-wp-btn" data-wp-copy>Copy code</button>
         <button type="button" class="mun-wp-decline" data-wp-close>Continue shopping</button>
@@ -54,7 +54,8 @@
 
 <script>
 (function () {
-  var KEY = 'mun_wp_seen_v1';
+  // v2: Black Friday early access copy, shown once more to visitors who saw v1
+  var KEY = 'mun_wp_seen_v2';
   var overlay = document.getElementById('mun-wp');
   if (!overlay) return;
 
