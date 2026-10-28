@@ -143,7 +143,6 @@
         </div>
       </div>
 
-      {% render 'product-description', product: product %}
       </div>
 
       <!-- Product Info -->
@@ -373,6 +372,16 @@
 
           {% assign title_lower = product.title | downcase %}
           <div class="accordions">
+
+            <div class="accordion">
+              <button class="accordion-btn" aria-expanded="false">
+                <span>Description</span>
+                <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="accordion-body">
+                {% render 'product-description', product: product %}
+              </div>
+            </div>
 
             {% if title_lower contains 'brook' and title_lower contains 'champagne' %}
               <!-- Brook Mirror - Champagne Gold -->
