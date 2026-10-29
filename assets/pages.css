@@ -1269,3 +1269,9 @@
     .warranty-hero { height: 40vh; }
     .contact-section, .collections-page-section { padding-top: 3rem; padding-bottom: 4rem; }
 }
+
+/* Collections list: the same tiles as the homepage, last odd one spans the row. */
+.collections-list-grid { max-width: none; }
+.collections-list-grid .collection-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.collections-list-grid .collection-card:last-child:nth-child(odd) .collection-img-wrap { aspect-ratio: 21 / 9; }
+.collections-list-grid .collection-img-wrap { display: block; }
