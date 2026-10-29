@@ -320,10 +320,10 @@ p {
 }
 
 .site-logo {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Rozha One', Georgia, serif;
     font-size: 1.55rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
+    font-weight: 400;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--color-white);
     justify-self: center;
@@ -1426,10 +1426,10 @@ p {
 
 .footer-logo {
     display: block;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Rozha One', Georgia, serif;
     font-size: 1.55rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
+    font-weight: 400;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--color-cream);
     margin-bottom: 1.2rem;
@@ -2076,10 +2076,10 @@ p {
 }
 .mun-wp-brand {
     display: block;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Rozha One', Georgia, serif;
     font-size: 1.35rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
+    font-weight: 400;
+    letter-spacing: 0.24em;
     text-indent: 0.22em;
     text-transform: uppercase;
     color: var(--color-dark);
