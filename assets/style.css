@@ -500,6 +500,30 @@ p {
 }
 .mobile-menu-inner .mobile-sub a { font-size: 0.72rem; color: var(--color-mid); }
 
+/* Phone menu: clear glass over the photograph like the desktop Shop panel, and
+   frosted cream once the header has turned solid. */
+.mobile-menu {
+    background: rgba(20, 16, 12, 0.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.1);
+    backdrop-filter: blur(16px) saturate(1.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+.mobile-menu .mobile-menu-inner a { color: rgba(255, 255, 255, 0.95); text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35); }
+.mobile-menu .mobile-menu-inner a:hover { color: #fff; }
+.mobile-menu .mobile-menu-inner .mobile-sub a { color: rgba(255, 255, 255, 0.82); }
+.mobile-sub { border-left-color: rgba(255, 255, 255, 0.35); }
+
+.site-header.scrolled .mobile-menu {
+    background: rgba(246, 243, 238, 0.86);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    border-top: 1px solid var(--color-border);
+}
+.site-header.scrolled .mobile-menu .mobile-menu-inner a { color: var(--color-dark); text-shadow: none; }
+.site-header.scrolled .mobile-menu .mobile-menu-inner a:hover { color: var(--color-gold-dark); }
+.site-header.scrolled .mobile-menu .mobile-menu-inner .mobile-sub a { color: var(--color-mid); }
+.site-header.scrolled .mobile-sub { border-left-color: var(--color-border); }
+
 .mobile-menu-inner {
     padding: 1.5rem var(--gutter) 2rem;
     display: flex;
