@@ -5,7 +5,7 @@
   so subscribers reliably land in Shopify email marketing (no third-party app).
   On successful submit the page reloads; we re-open the popup on the success
   state (identified via a sessionStorage flag so the footer form never triggers it).
-  Shown once per browser (localStorage), not on cart/checkout/account.
+  Shown once per browser (localStorage), not on cart/checkout/account. Waits 35s or 60% scroll (after 12s).
 {%- endcomment -%}
 <div class="mun-wp-overlay" id="mun-wp" aria-hidden="true">
   <div class="mun-wp-modal" role="dialog" aria-modal="true" aria-label="Ten percent off your first order">
@@ -102,9 +102,22 @@
     try { seen = !!localStorage.getItem(KEY); } catch (e) {}
     var blocked = /\/(cart|checkout|account)(\/|$)/.test(path);
     if (!seen && !blocked) {
-      var timer = setTimeout(function () { open(false); }, 6000);
+      // Not at the first look: after 35 seconds on the page, or once the visitor
+      // has read well down it (past 60 percent, and at least 12 seconds in).
+      var openedAt = Date.now();
+      var shown = false;
+      function show() {
+        if (shown) return;
+        shown = true;
+        clearTimeout(timer);
+        window.removeEventListener('scroll', onScroll);
+        open(false);
+      }
+      var timer = setTimeout(show, 35000);
       var onScroll = function () {
-        if (window.scrollY > 600) { clearTimeout(timer); open(false); window.removeEventListener('scroll', onScroll); }
+        var doc = document.documentElement;
+        var read = (window.scrollY + window.innerHeight) / Math.max(doc.scrollHeight, 1);
+        if (read > 0.6 && Date.now() - openedAt > 12000) show();
       };
       window.addEventListener('scroll', onScroll, { passive: true });
     }

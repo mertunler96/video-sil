@@ -3,13 +3,16 @@
 (function () {
     'use strict';
 
-    // ── Seamless announcement marquee ───────────────────────
-    // Build: [original] · [original] · so -50% lands on an identical view
-    var announcementTrack = document.querySelector('.announcement-track');
-    if (announcementTrack) {
-        var _orig = announcementTrack.innerHTML.trim();
-        var _sep  = '<span style="padding:0 0.6rem;opacity:0.45">&nbsp;·&nbsp;</span>';
-        announcementTrack.innerHTML = _orig + _sep + _orig + _sep;
+    // ── Announcement bar: slow fade between the messages ─────
+    var annMsgs = document.querySelectorAll('.announcement-msg');
+    var annReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (annMsgs.length > 1 && !annReduced) {
+        var annIdx = 0;
+        setInterval(function () {
+            annMsgs[annIdx].classList.remove('is-active');
+            annIdx = (annIdx + 1) % annMsgs.length;
+            annMsgs[annIdx].classList.add('is-active');
+        }, 5500);
     }
 
     // ── Smart header + announcement bar ─────────────────────

@@ -261,25 +261,23 @@ p {
     pointer-events: none;
 }
 
-.announcement-track {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    white-space: nowrap;
-    animation: marquee 28s linear infinite;
+.announcement-bar { display: grid; place-items: center; }
+
+.announcement-bar .announcement-msg {
+    grid-area: 1 / 1;
+    margin: 0;
     font-family: var(--font-sans);
     font-size: 0.62rem;
     font-weight: 400;
-    letter-spacing: 0.18em;
+    line-height: 1;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.75);
-    will-change: transform;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    transition: opacity 0.9s ease;
 }
-
-@keyframes marquee {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
+.announcement-bar .announcement-msg.is-active { opacity: 1; }
 
 /* === HEADER === */
 .site-header {
