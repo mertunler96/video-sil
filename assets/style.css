@@ -519,7 +519,16 @@ p {
 /* The mirrors fill the lower half of the portrait photo, so the copy sits up on the wall. */
 @media (max-width: 900px) {
     .hero-slide--mirrors { align-items: flex-start; }
-    .hero-slide--mirrors .hero-content { padding-top: 6rem; }
+    /* Centre the copy between the header and the top of the tallest mirror
+       (about 40% down the photo, or 72vw when the photo is scaled by width). */
+    .hero-slide--mirrors .hero-content {
+        box-sizing: border-box;
+        height: max(40%, 72vw);
+        padding-top: 83px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
     .hero-slide--mirrors .hero-img { object-position: center top; }
     .hero-slide--mirrors .hero-title { font-size: 1.9rem; margin-bottom: 0.6rem; }
     .hero-slide--mirrors .hero-desc { margin-bottom: 1.1rem; line-height: 1.5; }
