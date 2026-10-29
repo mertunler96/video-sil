@@ -119,8 +119,8 @@ h1, h2, h3 {
 /* Playfair carries far less weight than Fraunces did at display sizes, so the
    hero would look thin at 600. Size unchanged; only the weight moves. */
 h1 { font-size: clamp(2.8rem, 5.5vw, 5.2rem); font-weight: 400; }
-h2 { font-size: clamp(2rem,   3.8vw, 3.5rem); }
-h3 { font-size: clamp(1.3rem, 2vw,   1.8rem); }
+h2 { font-size: clamp(1.75rem, 2.7vw, 2.4rem); }
+h3 { font-size: clamp(1.2rem, 1.6vw, 1.45rem); }
 
 em { font-style: italic; }
 
@@ -163,7 +163,7 @@ p {
 
 .section-header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 
 /* === BUTTONS === */
@@ -696,20 +696,20 @@ p {
 
 /* === COLLECTIONS === */
 .collections {
-    padding: 8rem var(--gutter);
+    padding: 5.5rem var(--gutter);
     background: var(--color-bg);
 }
 
 .collections-header {
     text-align: center;
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
 }
 
 .collections-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3px;
-    max-width: var(--container-max);
+    max-width: 1020px;
     margin: 0 auto;
 }
 
@@ -739,7 +739,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.8rem 0 0;
+    padding: 1.2rem 1.25rem 0;
 }
 
 .collection-num {
@@ -759,13 +759,13 @@ p {
 .collection-info h3 {
     flex: 1;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     letter-spacing: 0.02em;
 }
 
 /* === PRODUCTS === */
 .products-section {
-    padding: 8rem 0;
+    padding: 5.5rem 0;
     background: var(--color-bg);
 }
 
