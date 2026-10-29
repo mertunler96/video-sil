@@ -33,7 +33,10 @@
     </div>
     <div class="hero-slide hero-slide--mirrors">
       <div class="hero-media">
-        <img src="{{ 'hero-mirrors.jpg' | asset_url }}" alt="MUNLER mirrors in gold and black leaning against a walnut panelled wall" class="hero-img" width="2000" height="1116" loading="lazy">
+        <picture>
+          <source media="(max-width: 900px)" srcset="{{ 'hero-mirrors-mobile.jpg' | asset_url }}">
+          <img src="{{ 'hero-mirrors.jpg' | asset_url }}" alt="MUNLER mirrors in gold and black leaning against a walnut panelled wall" class="hero-img" width="2000" height="1116" loading="lazy">
+        </picture>
         <div class="hero-overlay"></div>
       </div>
       <div class="hero-content">
