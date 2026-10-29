@@ -763,6 +763,42 @@ p {
     letter-spacing: 0.02em;
 }
 
+/* Desktop: two full-width tiles with the name over the photo. */
+@media (min-width: 961px) {
+    .collections { padding: 0; }
+    .collections-header { margin: 0; padding: 4.5rem 0 2rem; }
+    .collections-header h2 { display: none; }
+    .collections-header .section-label { margin-bottom: 0; }
+    .collections-grid { max-width: none; gap: 2px; }
+    .collection-img-wrap { aspect-ratio: 4 / 3; position: relative; }
+    .collection-img-wrap::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(20,16,12,.55) 0%, rgba(20,16,12,0) 50%);
+        pointer-events: none;
+    }
+    .collection-info {
+        position: absolute;
+        left: 2.4rem;
+        bottom: 2.1rem;
+        z-index: 1;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+        padding: 0;
+    }
+    .collection-num { display: none; }
+    .collection-info h3 {
+        flex: none;
+        text-align: left;
+        font-size: 1.75rem;
+        color: #fff;
+    }
+    .collection-info .link-arrow { color: #fff; font-size: 0.7rem; }
+    .collection-info .link-arrow:hover { color: #fff; }
+}
+
 /* === PRODUCTS === */
 .products-section {
     padding: 5.5rem 0;
