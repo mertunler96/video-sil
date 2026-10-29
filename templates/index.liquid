@@ -93,8 +93,7 @@
 <section class="products-section" id="products">
   <div class="container">
     <div class="section-header">
-      <span class="section-label">The Edit</span>
-      <h2>Our Signature Pieces</h2>
+      <span class="section-label">The Range</span>
     </div>
     <div class="products-grid">
       {% comment %}Show 4 non-Solenne products first, then Solenne as wide card{% endcomment %}
@@ -121,8 +120,10 @@
             </div>
             <div class="product-info">
               <div class="product-meta">
-                {% if tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
-                {% if product.title contains '–' %}
+                {% if product.title contains 'Brook' %}
+                  <h3 class="product-name">The Brook Mirror</h3>
+                  <span class="product-variant">{% if product.title contains '–' %}{{ product.title | split: '–' | last | strip }}{% endif %}</span>
+                {% elsif product.title contains '–' %}
                   <h3 class="product-name">{{ product.title | split: '–' | first | strip }}</h3>
                   <span class="product-variant">{{ product.title | split: '–' | last | strip }}</span>
                 {% else %}
@@ -155,8 +156,8 @@
           </div>
           <div class="product-info">
             <div class="product-meta">
-              <span class="product-badge product-badge--gold">Signature</span>
               <h3 class="product-name">The Solenne Mirror</h3>
+              <span class="product-variant">Champagne Gold</span>
             </div>
             <span class="product-price">
               {%- if solenne_product.compare_at_price > solenne_product.price -%}
@@ -169,7 +170,7 @@
       {% endif %}
     </div>
     <div class="products-cta">
-      <a href="/collections/all" class="btn btn-dark">View All Products</a>
+      <a href="/collections/all" class="link-arrow">Shop all <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
   </div>
 </section>
