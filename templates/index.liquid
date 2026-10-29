@@ -91,10 +91,11 @@
 
 <!-- Featured Products -->
 <section class="products-section" id="products">
+  <div class="section-header">
+    <span class="section-label">The Range</span>
+  </div>
+  <div class="products-band">
   <div class="container">
-    <div class="section-header">
-      <span class="section-label">The Range</span>
-    </div>
     <div class="products-grid">
       {% comment %}Show 4 non-Solenne products first, then Solenne as wide card{% endcomment %}
       {% assign fp_count = 0 %}
@@ -172,6 +173,7 @@
     <div class="products-cta">
       <a href="/collections/all" class="link-arrow">Shop all <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
+  </div>
   </div>
 </section>
 
