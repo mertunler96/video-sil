@@ -258,10 +258,18 @@
             activeSlide = (n + heroSlideEls.length) % heroSlideEls.length;
             heroSlideEls[activeSlide].classList.add('is-active');
             heroDotEls[activeSlide].classList.add('is-active');
-            // Pause/play video on its slide
+            // Pause/play video on its slide. Video baslarken basa sarilir, boylece
+            // her giriste ilk saniyeden izlenir.
             heroSlideEls.forEach(function(slide, i) {
                 var vid = slide.querySelector('video');
-                if (vid) { i === activeSlide ? vid.play() : vid.pause(); }
+                if (!vid) { return; }
+                if (i === activeSlide) {
+                    try { vid.currentTime = 0; } catch (e) {}
+                    var istek = vid.play();
+                    if (istek && istek.catch) { istek.catch(function () {}); }
+                } else {
+                    vid.pause();
+                }
             });
             resetSliderTimer();
         }
@@ -280,6 +288,22 @@
         });
 
         resetSliderTimer();
+
+        // Ilk slayt fotograf. Hero videosunu fotograf yuklenip sayfa oturduktan
+        // sonra arka planda hazirliyoruz; boylece ilk gorsel hizli acilir ve
+        // gecis geldiginde video hazir olur.
+        var heroVideo = document.querySelector('video[data-hero-video]');
+        if (heroVideo) {
+            var heroVideoHazirla = function () {
+                heroVideo.preload = 'auto';
+                heroVideo.load();
+            };
+            if (document.readyState === 'complete') {
+                setTimeout(heroVideoHazirla, 500);
+            } else {
+                window.addEventListener('load', function () { setTimeout(heroVideoHazirla, 500); });
+            }
+        }
     }
 
     // ── Search overlay ───────────────────────────────────────
