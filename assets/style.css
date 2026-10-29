@@ -512,6 +512,25 @@ p {
     object-position: center 35%;
 }
 
+/* Mirrors-on-walnut slide: the mirrors sit left and the wall is empty on the right,
+   so the copy moves right and the shade flips to sit behind it. On a phone the crop
+   is centred on the tall gold mirror. */
+.hero-slide--mirrors .hero-img { object-position: 33% center; }
+.hero-slide--mirrors .hero-title { font-size: 2.1rem; }
+
+@media (min-width: 901px) {
+    .hero-slide--mirrors .hero-content { margin-left: auto; }
+    .hero-slide--mirrors .hero-title { font-size: clamp(2.6rem, 3.5vw, 3.5rem); }
+    .hero-slide--mirrors .hero-overlay {
+        background: linear-gradient(
+            255deg,
+            rgba(10, 10, 10, 0.55) 0%,
+            rgba(10, 10, 10, 0.28) 45%,
+            rgba(10, 10, 10, 0.04) 100%
+        );
+    }
+}
+
 .hero-video {
     width: 100%;
     height: 100%;
