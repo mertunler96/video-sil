@@ -100,9 +100,10 @@
             </div>
             <div class="product-info">
               <div class="product-meta">
-                {% if product_tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
-                {% if product_tags_lower contains 'signature' or product.title contains 'Solenne' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
-                {% if product.title contains '–' %}
+                {% if product.title contains 'Brook' or product.title contains 'Solenne' %}
+                  <h3 class="product-name">{% if product.title contains 'Brook' %}The Brook Mirror{% else %}The Solenne Mirror{% endif %}</h3>
+                  <span class="product-variant">{% if product.title contains '–' %}{{ product.title | split: '–' | last | strip }}{% endif %}</span>
+                {% elsif product.title contains '–' %}
                   <h3 class="product-name">{{ product.title | split: '–' | first | strip }}</h3>
                   <span class="product-variant">{{ product.title | split: '–' | last | strip }}</span>
                 {% else %}

@@ -664,9 +664,7 @@
   <section class="real-homes">
     <div class="container">
       <div class="real-homes-head reveal">
-        <span class="section-label">In Real Homes</span>
-        <h2>The Brook Mirror, unboxed</h2>
-        <p>Not a showroom and not a render, the champagne gold Brook hung on real walls by the people who chose it.</p>
+        <span class="section-label">Real homes</span>
       </div>
       <div class="real-homes-grid is-two">
         <div class="real-home-card reveal">
@@ -720,9 +718,7 @@
   <section class="real-homes">
     <div class="container">
       <div class="real-homes-head reveal">
-        <span class="section-label">In Real Homes</span>
-        <h2>The Solenne, unboxed</h2>
-        <p>Not a showroom and not a render, the champagne gold Solenne leaned against real walls by the people who chose it.</p>
+        <span class="section-label">Real homes</span>
       </div>
       <div class="real-homes-grid">
         <div class="real-home-card reveal">
@@ -770,10 +766,8 @@
   <section class="reviews-section" id="product-reviews">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">Customer Reviews</span>
-        {% if review_count > 0 %}
-          <h2>What Our Customers Say</h2>
-        {% else %}
+        <span class="section-label">Customer reviews</span>
+        {% if review_count == 0 %}
           <h2>Be the first to review this piece</h2>
         {% endif %}
       </div>
@@ -822,8 +816,7 @@
   <section class="related-section">
     <div class="container">
       <div class="section-header">
-        <span class="section-label">You May Also Like</span>
-        <h2>More from MUNLER</h2>
+        <span class="section-label">You may also like</span>
       </div>
       <div class="related-grid">
         {% assign rel_count = 0 %}
@@ -838,9 +831,10 @@
               </div>
               <div class="product-info">
                 <div class="product-meta">
-                  {% if p_tags_lower contains 'signature' or p.title contains 'Solenne' %}<span class="product-badge product-badge--gold">Signature</span>{% endif %}
-                  {% if p_tags_lower contains 'new' %}<span class="product-badge">New</span>{% endif %}
-                  {% if p.title contains '–' %}
+                  {% if p.title contains 'Brook' or p.title contains 'Solenne' %}
+                    <h3 class="product-name">{% if p.title contains 'Brook' %}The Brook Mirror{% else %}The Solenne Mirror{% endif %}</h3>
+                    <span class="product-variant">{% if p.title contains '–' %}{{ p.title | split: '–' | last | strip }}{% endif %}</span>
+                  {% elsif p.title contains '–' %}
                     <h3 class="product-name">{{ p.title | split: '–' | first | strip }}</h3>
                     <span class="product-variant">{{ p.title | split: '–' | last | strip }}</span>
                   {% else %}

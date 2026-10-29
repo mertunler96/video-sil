@@ -348,6 +348,37 @@ p {
     gap: 2.5rem;
 }
 
+/* Shop dropdown: the collections live under the top-level Shop link. */
+.nav-item { position: relative; display: flex; align-items: center; height: var(--header-h); }
+.nav-menu {
+    position: absolute;
+    top: 100%;
+    left: -1.6rem;
+    min-width: 240px;
+    padding: 0.9rem 0;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-top: none;
+    box-shadow: 0 18px 40px rgba(20, 16, 12, 0.08);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+.nav-item:hover .nav-menu,
+.nav-item:focus-within .nav-menu { opacity: 1; visibility: visible; transform: none; }
+.nav-menu a {
+    display: block;
+    padding: 0.65rem 1.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-dark);
+    transition: background var(--transition), color var(--transition);
+}
+.nav-menu a:hover { background: var(--color-light); color: var(--color-gold-dark); }
+
 .nav-link {
     font-family: var(--font-sans);
     font-size: 0.7rem;
@@ -445,8 +476,18 @@ p {
 }
 
 .mobile-menu.open {
-    max-height: 260px;
+    max-height: 560px;
 }
+
+.mobile-sub {
+    display: flex;
+    flex-direction: column;
+    gap: 0.95rem;
+    margin: -0.4rem 0 0.2rem 1rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--color-border);
+}
+.mobile-menu-inner .mobile-sub a { font-size: 0.72rem; color: var(--color-mid); }
 
 .mobile-menu-inner {
     padding: 1.5rem var(--gutter) 2rem;
@@ -1522,7 +1563,7 @@ p {
 
 .footer-links {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
 }
 

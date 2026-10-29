@@ -1393,27 +1393,21 @@
     background: var(--color-bg);
 }
 
-.pdp-charcoal .features-strip,
-.pdp-charcoal .related-section {
+.pdp-charcoal .features-strip {
     background: var(--color-espresso);
     border-top-color: rgba(255, 255, 255, 0.08);
 }
 
-.pdp-charcoal .features-strip .feature-strip-item h4,
-.pdp-charcoal .related-section .section-header h2,
-.pdp-charcoal .related-section .product-name,
-.pdp-charcoal .related-section .product-price {
+.pdp-charcoal .features-strip .feature-strip-item h4 {
     color: var(--color-cream);
 }
 
-.pdp-charcoal .features-strip .feature-strip-item p,
-.pdp-charcoal .related-section .product-variant {
+.pdp-charcoal .features-strip .feature-strip-item p {
     color: #A0A398;
 }
 
-.pdp-charcoal .related-section .product-img-wrap {
-    background: #262625;
-}
+/* "You may also like" stays on the page cream so it does not run into the
+   dark footer right below it. */
 
 
 /* ── Indirim donemi, urun sayfasi ───────────────────────────────
@@ -1436,4 +1430,28 @@
     color: var(--color-mid);
     text-decoration: line-through;
     margin-right: 0.4rem;
+}
+
+/* =====================================================
+   CALM SCALE (product page)
+   Same quieter sizes and spacing as the homepage.
+   ===================================================== */
+.product-section { padding: 3rem 0 4.5rem; }
+.pinfo-title { font-size: clamp(1.9rem, 2.6vw, 2.4rem); }
+.reviews-section { padding: 4.5rem 0; }
+.features-strip { padding: 4.5rem 0; }
+.honesty { padding: 4.5rem 0; }
+.honesty-title { font-size: clamp(1.7rem, 2.6vw, 2.2rem); }
+.related-section { padding: 4.5rem 0 5.5rem; }
+.reviews-section .section-header,
+.related-section .section-header { margin-bottom: 2rem; }
+.reviews-section .section-label,
+.related-section .section-label { margin-bottom: 0; }
+
+@media (max-width: 768px) {
+    .product-section { padding-top: 2rem; }
+    .reviews-section, .features-strip, .honesty { padding: 3rem 0; }
+    .related-section { padding: 3rem 0 4rem; }
+    .reviews-section .section-header,
+    .related-section .section-header { margin-bottom: 1.5rem; }
 }
