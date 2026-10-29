@@ -3,6 +3,27 @@
 (function () {
     'use strict';
 
+    // ── Images: one patient retry ───────────────────────────
+    // Shopify's file servers occasionally answer a single request with a 502,
+    // most often right after a theme goes live. A broken-image box for that is
+    // avoidable: try the same file again after a moment (twice at most). A tile
+    // in the photo strip that still fails is hidden rather than left broken.
+    document.addEventListener('error', function (e) {
+        var img = e.target;
+        if (!img || img.tagName !== 'IMG' || !img.src) return;
+        var tries = parseInt(img.getAttribute('data-retry') || '0', 10);
+        if (tries >= 2) {
+            var tile = img.closest('.photo-marquee-item');
+            if (tile) tile.style.display = 'none';
+            return;
+        }
+        img.setAttribute('data-retry', String(tries + 1));
+        var base = img.src.replace(/([?&])r=\d+&?/, '$1').replace(/[?&]$/, '');
+        setTimeout(function () {
+            img.src = base + (base.indexOf('?') > -1 ? '&' : '?') + 'r=' + (tries + 1);
+        }, 1200 * (tries + 1));
+    }, true);
+
     // ── Announcement bar: slow fade between the messages ─────
     var annMsgs = document.querySelectorAll('.announcement-msg');
     var annReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
