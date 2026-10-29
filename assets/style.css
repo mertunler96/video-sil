@@ -323,7 +323,7 @@ p {
     font-family: 'Rozha One', Georgia, serif;
     font-size: 1.55rem;
     font-weight: 400;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.242em;
     text-transform: uppercase;
     color: var(--color-white);
     justify-self: center;
@@ -1429,7 +1429,7 @@ p {
     font-family: 'Rozha One', Georgia, serif;
     font-size: 1.55rem;
     font-weight: 400;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.242em;
     text-transform: uppercase;
     color: var(--color-cream);
     margin-bottom: 1.2rem;
@@ -2079,7 +2079,7 @@ p {
     font-family: 'Rozha One', Georgia, serif;
     font-size: 1.35rem;
     font-weight: 400;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.242em;
     text-indent: 0.22em;
     text-transform: uppercase;
     color: var(--color-dark);
