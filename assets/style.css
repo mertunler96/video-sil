@@ -23,6 +23,7 @@ body {
        position: sticky inside the page. If you ever add a sticky panel, switch this to
        overflow-x: clip first, which stops the sideways scroll without that side effect. */
     overflow-x: hidden;
+    overflow-x: clip;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding-top: 34px;

@@ -68,6 +68,24 @@
     min-width: 0;
 }
 
+/* Desktop: the photograph follows the shopper down the page while the info column
+   scrolls past, and releases when the product-layout row ends. The photo is capped
+   to the viewport height (width shrinks with it, ratio stays 3:4) so the whole
+   mirror is always visible. Needs body overflow-x: clip, not hidden. */
+@media (min-width: 901px) {
+    .product-media-col {
+        position: sticky;
+        top: 5.5rem;
+    }
+
+    .gallery-main-wrap {
+        max-width: calc((100vh - 7.5rem) * 0.75);
+        max-width: calc((100svh - 7.5rem) * 0.75);
+        margin-inline: auto;
+        width: 100%;
+    }
+}
+
 .product-gallery {
     display: grid;
     grid-template-columns: 80px 1fr;
