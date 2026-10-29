@@ -320,7 +320,7 @@
           {% if product.type == 'Mirrors' %}
           <div class="arrival-promise">
             <p class="arrival-promise-head">Arrives perfect, or we replace it.</p>
-            <p class="arrival-promise-body">Every mirror is crated and fully insured for the journey. If yours arrives damaged, send us a photo and we replace it free, we arrange and pay for collection. You are never left with a broken mirror you paid for.</p>
+            <p class="arrival-promise-body">Crated and fully insured. If yours arrives damaged, send us a photo and we replace it free, collection included.</p>
           </div>
           <ul class="feature-checklist">
             <li>100% real glass, distortion-free reflection</li>
@@ -771,7 +771,25 @@
           <h2>Be the first to review this piece</h2>
         {% endif %}
       </div>
+      <div class="reviews-clamp" id="reviews-clamp">
       <!-- Start of Judge.me code -->{% assign has_legacy = false %}{% if product.metafields.judgeme.widget.size > 20 %}{% assign has_legacy = true %}{% endif %}<div style='clear:both'></div><div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title | escape }}' data-id='{{ product.id }}' data-product-id='{{ product.id }}' data-widget='review' data-auto-install='false' data-shop-reviews-count='{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}' data-entry-point='review_widget.js' data-entry-key='review-widget/main.js'>{% if has_legacy %}<div class='jdgm-legacy-widget-content' style='display: none;'>{{ product.metafields.judgeme.widget }}</div>{% endif %}</div>{% if product.metafields.judgeme.review_widget_data %}<script>jdgm.data ||= {}; jdgm.data.reviewWidget ||= {}; jdgm.data.reviewWidget[{{ product.id }}] = {{ product.metafields.judgeme.review_widget_data }}</script>{% endif %}<!-- End of Judge.me code -->
+      </div>
+      <button type="button" class="reviews-more" id="reviews-more" hidden>Read all reviews</button>
+      <script>
+      (function () {
+        var c = document.getElementById('reviews-clamp'), b = document.getElementById('reviews-more');
+        if (!c || !b) return;
+        function check() {
+          if (c.classList.contains('is-open') || c.classList.contains('is-clamped')) return;
+          if (c.scrollHeight > 620) { c.classList.add('is-clamped'); b.hidden = false; }
+        }
+        if ('MutationObserver' in window) new MutationObserver(check).observe(c, { childList: true, subtree: true });
+        [1500, 4000, 7000].forEach(function (t) { setTimeout(check, t); });
+        b.addEventListener('click', function () {
+          c.classList.remove('is-clamped'); c.classList.add('is-open'); b.hidden = true;
+        });
+      })();
+      </script>
     </div>
   </section>
 
