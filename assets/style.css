@@ -789,6 +789,8 @@ p {
         padding: 0;
     }
     .collection-num { display: none; }
+    .collection-card:nth-child(1) .collection-img-wrap img { object-position: 50% 22%; }
+    .collection-card:nth-child(2) .collection-img-wrap img { object-position: 50% 8%; }
     .collection-info h3 {
         flex: none;
         text-align: left;
