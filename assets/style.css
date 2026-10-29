@@ -2074,6 +2074,15 @@ p {
     padding: 3rem 3rem 2.6rem;
     text-align: center;
 }
+/* The brand name set in the logo face wherever it sits inside a heading. */
+.brand-word {
+    font-family: 'Rozha One', Georgia, serif;
+    font-weight: 400;
+    font-size: 0.8em;
+    letter-spacing: 0.242em;
+    text-transform: uppercase;
+}
+
 .mun-wp-brand {
     display: block;
     font-family: 'Rozha One', Georgia, serif;
