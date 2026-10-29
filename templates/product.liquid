@@ -211,6 +211,18 @@
 
           {% if product.available %}
           <p class="pinfo-stock"><span class="pinfo-stock-dot"></span>In stock, ready to ship in 3–5 days</p>
+          {% comment %}
+            Small-batch note. It only appears when the count is real: stock is tracked
+            by Shopify, selling stops at zero, and fewer than low_stock_at remain.
+            The size buttons carry each variant's count so it follows the selection.
+          {% endcomment %}
+          {%- if product.type == 'Mirrors' -%}
+          {%- assign low_stock_at = 10 -%}
+          {%- assign sv_stock = sv.inventory_quantity -%}
+          {%- assign sv_counted = false -%}
+          {%- if sv.inventory_management == 'shopify' and sv.inventory_policy == 'deny' and sv_stock > 0 and sv_stock < low_stock_at -%}{%- assign sv_counted = true -%}{%- endif -%}
+          <p class="pinfo-scarcity" id="pinfo-scarcity" data-threshold="{{ low_stock_at }}"{% unless sv_counted %} hidden{% endunless %}>Made in small batches. Only <span id="pinfo-scarcity-n">{{ sv_stock }}</span> left in this finish.</p>
+          {%- endif -%}
           {% endif %}
 
           {% form 'product', product %}
@@ -245,6 +257,7 @@
                       data-price="{{ variant.price | money }}"
                       data-was="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
                       data-title="{{ variant.title }}"
+                      data-stock="{% if variant.inventory_management == 'shopify' and variant.inventory_policy == 'deny' %}{{ variant.inventory_quantity }}{% endif %}"
                       {% unless variant.available %}disabled{% endunless %}>
                       {% if size_name != '' %}<span class="size-name">{{ size_name }}</span>{% endif %}
                       <span class="size-cm">{{ parts[0] }}</span>
@@ -988,6 +1001,18 @@
       }
       var sizeLabel = document.getElementById('selected-size-label');
       if (sizeLabel) sizeLabel.textContent = btn.getAttribute('data-title');
+      // Small-batch note follows the selected size's real stock
+      var scarcity = document.getElementById('pinfo-scarcity');
+      if (scarcity) {
+        var left = parseInt(btn.getAttribute('data-stock'), 10);
+        var limit = parseInt(scarcity.getAttribute('data-threshold'), 10);
+        if (left > 0 && left < limit) {
+          document.getElementById('pinfo-scarcity-n').textContent = left;
+          scarcity.hidden = false;
+        } else {
+          scarcity.hidden = true;
+        }
+      }
     });
   });
 

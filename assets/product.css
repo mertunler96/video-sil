@@ -523,6 +523,26 @@
     color: var(--color-mid);
     margin: 0.5rem 0 0;
 }
+.pinfo-scarcity {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: #6e1f2b;
+    margin: -1.3rem 0 0;
+}
+.pinfo-scarcity::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    vertical-align: middle;
+    background: #6e1f2b;
+    box-shadow: 0 0 0 3px rgba(110, 31, 43, 0.15);
+}
+.pinfo-scarcity[hidden] { display: none; }
 .pinfo-stock-dot {
     width: 7px;
     height: 7px;
