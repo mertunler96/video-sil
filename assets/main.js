@@ -213,25 +213,6 @@
         });
     }
 
-    // ── Newsletter form ──────────────────────────────────────
-    var form = document.getElementById('newsletter-form');
-    if (form) {
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            var input = form.querySelector('input[type="email"]');
-            var submitBtn = form.querySelector('button[type="submit"]');
-
-            submitBtn.textContent = 'Subscribed!';
-            submitBtn.disabled = true;
-            input.value = '';
-
-            setTimeout(function () {
-                submitBtn.textContent = 'Subscribe';
-                submitBtn.disabled = false;
-            }, 3500);
-        });
-    }
-
     // ── Smooth scroll for anchor links ───────────────────────
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
         anchor.addEventListener('click', function (e) {
