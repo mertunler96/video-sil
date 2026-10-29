@@ -731,6 +731,10 @@ p {
     transition: transform 0.9s var(--ease-out);
 }
 
+/* Portrait crop on phones: keep each mirror inside the frame. */
+.collection-card:nth-child(1) .collection-img-wrap img { object-position: 55% 50%; }
+.collection-card:nth-child(2) .collection-img-wrap img { object-position: 40% 50%; }
+
 .collection-card:hover .collection-img-wrap img {
     transform: scale(1.06);
 }
@@ -789,8 +793,6 @@ p {
         padding: 0;
     }
     .collection-num { display: none; }
-    .collection-card:nth-child(1) .collection-img-wrap img { object-position: 50% 22%; }
-    .collection-card:nth-child(2) .collection-img-wrap img { object-position: 50% 8%; }
     .collection-info h3 {
         flex: none;
         text-align: left;
