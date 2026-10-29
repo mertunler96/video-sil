@@ -255,6 +255,7 @@
                     <button type="button" class="size-btn {% if variant == product.selected_or_first_available_variant %}active{% endif %}"
                       data-variant-id="{{ variant.id }}"
                       data-price="{{ variant.price | money }}"
+                      data-cents="{{ variant.price }}"
                       data-was="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
                       data-title="{{ variant.title }}"
                       data-stock="{% if variant.inventory_management == 'shopify' and variant.inventory_policy == 'deny' %}{{ variant.inventory_quantity }}{% endif %}"
@@ -310,7 +311,10 @@
             we show nothing, rather than promise what checkout cannot offer.
           {% endcomment %}
           {% if shop.enabled_payment_types contains 'klarna' %}
-          <p class="klarna-line">Pay in 3 interest-free payments with <strong>Klarna</strong>, chosen at checkout.</p>
+          <div class="klarna-line">
+            <p class="klarna-line-main">Or in 3 instalments of <strong id="klarna-amount">{{ sv.price | times: 1.0 | divided_by: 3 | round | money }}</strong> with <img class="klarna-badge" src="{{ 'klarna-badge.svg' | asset_url }}" alt="Klarna" width="45" height="19"></p>
+            <p class="klarna-line-sub">Interest free, chosen at checkout</p>
+          </div>
           {% endif %}
           {% comment %}
             Glass at £199-£749 raises one question before any other: what happens
@@ -1006,6 +1010,13 @@
       document.getElementById('variant-id').value = btn.getAttribute('data-variant-id');
       var priceEl = document.getElementById('pinfo-price');
       if (priceEl) priceEl.textContent = btn.getAttribute('data-price');
+      // Klarna: a third of the selected size's price
+      var kAmt = document.getElementById('klarna-amount');
+      var cents = parseInt(btn.getAttribute('data-cents'), 10);
+      if (kAmt && cents > 0) {
+        var sym = (btn.getAttribute('data-price') || '').replace(/[\d.,\s].*$/, '');
+        kAmt.textContent = sym + (Math.round(cents / 3) / 100).toFixed(2);
+      }
       // Indirimli donemde ustu cizili eski fiyat da varyantla degisir
       var wasEl = document.getElementById('pinfo-was');
       if (wasEl) {

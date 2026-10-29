@@ -1534,21 +1534,30 @@
 .pinfo-stock { color: #4F6048; }
 .pinfo-stock-dot { background: #5E7A5A; box-shadow: 0 0 0 3px rgba(94, 122, 90, 0.18); }
 
-.klarna-line {
-    font-size: 0.78rem;
+.klarna-line { text-align: center; margin: 0.25rem 0 0; }
+.klarna-line-main {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
     font-weight: 400;
     line-height: 1.9;
+    letter-spacing: 0.01em;
+    color: var(--color-dark);
 }
-.klarna-line strong {
+.klarna-line-main strong { font-weight: 600; }
+.klarna-badge {
     display: inline-block;
-    margin: 0 0.1em;
-    padding: 1px 9px;
-    border-radius: 3px;
-    background: #FFB3C7;
-    color: #17120F;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    line-height: 1.5;
+    width: 45px;
+    height: auto;
+    margin-left: 0.2rem;
+    vertical-align: -0.28em;
+}
+.klarna-line-sub {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    letter-spacing: 0.04em;
+    color: var(--color-mid);
 }
 
 .arrival-promise {
