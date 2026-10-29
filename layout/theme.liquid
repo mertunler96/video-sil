@@ -296,8 +296,15 @@
     {% if shop.enabled_payment_types.size > 0 %}
     <div class="payment-row">
       <div class="payment-icons">
+        {%- comment -%}
+          Still driven by what checkout offers. Only these three are left out of the
+          row: they are accepted at checkout, but they read as foreign to UK buyers.
+        {%- endcomment -%}
+        {% assign hidden_pay = 'discover,diners_club,unionpay' | split: ',' %}
         {% for payment_type in shop.enabled_payment_types %}
-          {{ payment_type | payment_type_svg_tag: class: 'pay-icon' }}
+          {% unless hidden_pay contains payment_type %}
+            {{ payment_type | payment_type_svg_tag: class: 'pay-icon' }}
+          {% endunless %}
         {% endfor %}
       </div>
     </div>
