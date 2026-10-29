@@ -75,9 +75,9 @@ ul { list-style: none; }
     --color-gold:       #A89F90;
     --color-gold-dark:  #6B6256;
 
-    --font-serif:   'Playfair Display', Georgia, serif;
-    --font-display: 'Playfair Display', Georgia, serif;
-    --font-sans:    'Roboto', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    --font-serif:   'Bodoni Moda', 'Didot', Georgia, serif;
+    --font-display: 'Bodoni Moda', 'Didot', Georgia, serif;
+    --font-sans:    'Jost', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 
     --color-espresso: #1B1B1A;
     --color-cream:    #ECE7DF;
@@ -110,7 +110,7 @@ ul { list-style: none; }
 /* === TYPOGRAPHY === */
 h1, h2, h3 {
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.18;
     letter-spacing: normal;
 }
@@ -319,7 +319,7 @@ p {
 }
 
 .site-logo {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: var(--font-display);
     font-size: 1.55rem;
     font-weight: 700;
     letter-spacing: 0.22em;
@@ -1003,7 +1003,7 @@ p {
 .quote-section blockquote p {
     font-family: var(--font-serif);
     font-size: clamp(1.4rem, 2.8vw, 2.3rem);
-    font-weight: 300;
+    font-weight: 400;
     font-style: italic;
     color: var(--color-white);
     line-height: 1.55;
@@ -1037,7 +1037,7 @@ p {
 .photo-marquee-head h2 {
     font-family: var(--font-display);
     font-size: clamp(2.5rem, 4.8vw, 4.1rem);
-    font-weight: 400;
+    font-weight: 500;
     line-height: 1.04;
     margin: 1rem 0 1rem;
 }
@@ -1255,7 +1255,7 @@ p {
     outline: none;
     font-family: var(--font-serif);
     font-size: clamp(1.4rem, 3vw, 2.2rem);
-    font-weight: 300;
+    font-weight: 400;
     color: var(--color-dark);
     background: transparent;
     padding: 0;
@@ -1425,7 +1425,7 @@ p {
 
 .footer-logo {
     display: block;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: var(--font-display);
     font-size: 1.55rem;
     font-weight: 700;
     letter-spacing: 0.22em;
@@ -1739,7 +1739,7 @@ p {
 .warranty-hero-title {
     font-family: var(--font-serif);
     font-size: clamp(3.5rem, 7vw, 6.5rem);
-    font-weight: 400;
+    font-weight: 500;
     color: var(--color-white);
     line-height: 1.05;
 }
@@ -1773,7 +1773,7 @@ p {
 .footer-brand .footer-newsletter-label {
     font-family: var(--font-display);
     font-size: 1.75rem;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: normal;
     text-transform: none;
     color: var(--color-cream);
@@ -2075,7 +2075,7 @@ p {
 }
 .mun-wp-brand {
     display: block;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: var(--font-display);
     font-size: 1.35rem;
     font-weight: 700;
     letter-spacing: 0.22em;

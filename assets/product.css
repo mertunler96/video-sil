@@ -683,7 +683,7 @@
 }
 .home-gallery-title {
     text-align: center;
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: var(--font-display);
     font-weight: 400;
     font-size: 2rem;
     color: var(--color-dark);
