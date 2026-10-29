@@ -54,37 +54,33 @@ ul { list-style: none; }
     /* Palette and type carried over from redesign2, with the accents taken
        further: see the note on --color-gold below. Nothing in the system is a
        yellow any more. */
-    --color-bg:         #EBECE7;
+    --color-bg:         #F6F3EE;
     --color-white:      #FFFFFF;
     --color-dark:       #141414;
     --color-dark-2:     #1B1B1A;
     /* Muted body text. Keep any replacement above 6:1 on --color-bg, which is
        the lightest surface it sits on. */
-    --color-mid:        #56564F;
-    --color-light:      #E2E3DD;
-    --color-border:     #D3D4CD;
-    /* Accent slots. Both were browns carried over from the cream system: at
-       #8A7659 the R-B spread is +49, squarely in the yellow family, which
-       fought the sage ground everywhere a label sat on it. It also measured
-       3.67:1, under the AA floor.
+    --color-mid:        #5C574F;
+    --color-light:      #ECE7DF;
+    --color-border:     #DDD7CC;
+    /* Accent slots. Warm taupes in the ground's own family: the page is a warm
+       off-white (#F6F3EE) and the accents lean the same way, so labels read as
+       part of the palette. The previous sage-grey ground clashed with the warm
+       photography (walnut, champagne gold), so it was replaced on 29 Oct 2026.
 
-       These sit in the ground's own hue family instead. #EBECE7 is faintly
-       green (G highest, R-B +4); both replacements share that character, so
-       labels read as part of the palette rather than a leftover from another.
-
-         --color-gold        on dark grounds   6.61:1
-         --color-gold-dark   on the sage ground 5.52:1
+         --color-gold        on dark grounds   6.59:1
+         --color-gold-dark   on the cream ground 5.41:1
 
        Names kept: they are the accent slots, they are simply no longer gold. */
-    --color-gold:       #9EA294;
-    --color-gold-dark:  #5A5F55;
+    --color-gold:       #A89F90;
+    --color-gold-dark:  #6B6256;
 
     --font-serif:   'Playfair Display', Georgia, serif;
     --font-display: 'Playfair Display', Georgia, serif;
     --font-sans:    'Roboto', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 
     --color-espresso: #1B1B1A;
-    --color-cream:    #E2E3DD;
+    --color-cream:    #ECE7DF;
 
     --ease-out:   cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --transition: 0.3s ease;
@@ -298,7 +294,7 @@ p {
 
 .site-header.scrolled {
     transform: translateY(0);
-    background: rgba(235, 236, 231, 0.96);
+    background: rgba(246, 243, 238, 0.96);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom-color: var(--color-border);
