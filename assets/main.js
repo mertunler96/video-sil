@@ -292,6 +292,29 @@
             dot.addEventListener('click', function () { goToSlide(i); });
         });
 
+        // Parmakla kaydirma: sola = sonraki, saga = onceki. Dikey kaydirma (sayfa
+        // gezme) ve dokunuslar etkilenmez.
+        var heroEl = document.querySelector('.hero');
+        if (heroEl) {
+            var swX = 0, swY = 0, swOn = false;
+            heroEl.addEventListener('touchstart', function (e) {
+                if (e.touches.length !== 1) { swOn = false; return; }
+                swX = e.touches[0].clientX;
+                swY = e.touches[0].clientY;
+                swOn = true;
+            }, { passive: true });
+            heroEl.addEventListener('touchend', function (e) {
+                if (!swOn) { return; }
+                swOn = false;
+                var t = e.changedTouches[0];
+                var dx = t.clientX - swX;
+                var dy = t.clientY - swY;
+                if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+                    goToSlide(activeSlide + (dx < 0 ? 1 : -1));
+                }
+            }, { passive: true });
+        }
+
         resetSliderTimer();
 
         // Ilk slayt fotograf. Hero videosunu fotograf yuklenip sayfa oturduktan

@@ -2642,3 +2642,14 @@ a.real-home-who:hover {
 .announcement-bar .announcement-msg a:hover { color: #fff; text-decoration-color: #fff; }
 .footer-bf-link { display: inline-block; margin-top: 1.2rem; padding-bottom: 3px; font-family: var(--font-sans); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #C9A86A; border-bottom: 1px solid rgba(201,168,106,.5); transition: color .2s, border-color .2s; }
 .footer-bf-link:hover { color: #E4C98E; border-bottom-color: #E4C98E; }
+
+/* Phone and narrow screens: hero arrows sit beside the dots at the bottom, clear of the slide text */
+@media (max-width: 1100px) {
+    .hero-arrow { top: auto; bottom: 1.8rem; transform: none; }
+}
+
+/* Phone: swipe replaces the arrows (dots stay) */
+.hero { touch-action: pan-y; }
+@media (max-width: 768px) {
+    .hero-arrow { display: none; }
+}
