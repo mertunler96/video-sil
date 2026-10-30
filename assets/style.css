@@ -2634,3 +2634,11 @@ a.real-home-who:hover {
     .trust-strip-note { margin-top: 0.5rem; font-size: 0.6rem; }
     .trust-strip-note svg { width: 11px; height: 11px; }
 }
+
+/* Announcement link + footer early-access link */
+.announcement-bar .announcement-msg { pointer-events: none; }
+.announcement-bar .announcement-msg.is-active a { pointer-events: auto; }
+.announcement-bar .announcement-msg a { color: inherit; text-decoration: underline; text-decoration-color: rgba(255,255,255,.35); text-underline-offset: 3px; transition: color .2s, text-decoration-color .2s; }
+.announcement-bar .announcement-msg a:hover { color: #fff; text-decoration-color: #fff; }
+.footer-bf-link { display: inline-block; margin-top: 1.2rem; padding-bottom: 3px; font-family: var(--font-sans); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #C9A86A; border-bottom: 1px solid rgba(201,168,106,.5); transition: color .2s, border-color .2s; }
+.footer-bf-link:hover { color: #E4C98E; border-bottom-color: #E4C98E; }
