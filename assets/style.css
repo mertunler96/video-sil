@@ -2619,3 +2619,18 @@ a.real-home-who:hover {
 .trust-strip-note a > svg:first-child { transform: translateY(-1px); }
 .trust-note-arrow { transition: transform .25s; }
 .trust-strip-note a:hover .trust-note-arrow { transform: translateX(3px); }
+
+/* Slimmer strip */
+.trust-strip { padding: 0.95rem 1.5rem 0.8rem; }
+.trust-strip-note { margin: 0.55rem 0 0; font-size: 0.68rem; }
+.trust-strip-note a { padding-bottom: 2px; }
+@media (max-width: 768px) {
+    .trust-strip { padding: 0.75rem 1rem 0.7rem; }
+    .trust-strip-list { grid-template-columns: repeat(3, 1fr); gap: 0.55rem 0; justify-content: stretch; }
+    .trust-item { flex-direction: row; padding: 0.1rem 0.3rem; font-size: 0.58rem; letter-spacing: 0.1em; line-height: 1.35; text-align: center; }
+    .trust-item svg { display: none; }
+    .trust-item.trust-item--reviews { grid-column: 1 / -1; flex-direction: row; gap: 0.5rem; border-left: 0; border-top: 1px solid rgba(42,34,28,.18); padding-top: 0.55rem; }
+    .trust-stars { font-size: 0.85rem; }
+    .trust-strip-note { margin-top: 0.5rem; font-size: 0.6rem; }
+    .trust-strip-note svg { width: 11px; height: 11px; }
+}
