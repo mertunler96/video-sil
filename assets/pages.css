@@ -1302,3 +1302,13 @@
     .ea-body { padding: 3rem 1.5rem 4rem; }
     .ea-field { flex-direction: column; }
 }
+
+/* Early access countdown */
+.ea-countdown { margin: 0 0 2rem; }
+.ea-countdown[hidden] { display: none; }
+.ea-countdown-label { display: block; font-family: var(--font-sans); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(246,243,238,.65); margin-bottom: 0.9rem; }
+.ea-countdown-row { display: flex; justify-content: center; gap: 2.2rem; }
+.ea-countdown-row > div { display: flex; flex-direction: column; align-items: center; min-width: 3.6rem; }
+.ea-cd-num { font-family: var(--font-serif); font-weight: 400; font-size: 2.2rem; line-height: 1; color: #F6F3EE; font-variant-numeric: tabular-nums; }
+.ea-cd-unit { margin-top: 0.5rem; font-family: var(--font-sans); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,243,238,.55); }
+@media (max-width: 900px) { .ea-countdown-row { gap: 1.6rem; } .ea-cd-num { font-size: 1.9rem; } }

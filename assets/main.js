@@ -24,6 +24,46 @@
         }, 1200 * (tries + 1));
     }, true);
 
+    // ── Black Friday countdown (real date, same for everyone) ──
+    // Counts to a fixed moment (data-bf-start / data-bf-countdown, UTC). Once it has
+    // passed, the countdown and the announcement message simply disappear.
+    (function () {
+        var bfMsg = document.querySelector('[data-bf-message]');
+        var bfBox = document.querySelector('[data-bf-countdown]');
+        var target = Date.parse((bfMsg && bfMsg.getAttribute('data-bf-start')) || (bfBox && bfBox.getAttribute('data-bf-countdown')) || '');
+        if (isNaN(target)) { return; }
+        if (Date.now() >= target) {
+            if (bfMsg && bfMsg.parentNode) { bfMsg.parentNode.removeChild(bfMsg); }
+            return;
+        }
+        function pad(n) { return (n < 10 ? '0' : '') + n; }
+        function tick() {
+            var left = target - Date.now();
+            if (left <= 0) {
+                if (bfBox) { bfBox.hidden = true; }
+                return;
+            }
+            var mins  = Math.floor(left / 60000);
+            var days  = Math.floor(mins / 1440);
+            var hours = Math.floor((mins % 1440) / 60);
+            var m     = mins % 60;
+            if (bfBox) {
+                bfBox.hidden = false;
+                bfBox.querySelector('[data-cd="d"]').textContent = pad(days);
+                bfBox.querySelector('[data-cd="h"]').textContent = pad(hours);
+                bfBox.querySelector('[data-cd="m"]').textContent = pad(m);
+            }
+            var txt = bfMsg && bfMsg.querySelector('[data-bf-text]');
+            if (txt) {
+                txt.textContent = days >= 2 ? 'Black Friday in ' + days + ' days, join the list'
+                               : days === 1 ? 'Black Friday in 1 day, join the list'
+                               : 'Black Friday opens today, join the list';
+            }
+        }
+        tick();
+        setInterval(tick, 30000);
+    })();
+
     // ── Announcement bar: slow fade between the messages ─────
     var annMsgs = document.querySelectorAll('.announcement-msg');
     var annReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
