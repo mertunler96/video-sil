@@ -1,0 +1,27 @@
+<section class="ea">
+  <div class="ea-photo">
+    <img src="{{ 'collection-full-length.webp' | asset_url }}" alt="MUNLER Solenne full-length mirror in champagne gold leaning against a slatted walnut wall" width="2000" height="1493" fetchpriority="high">
+  </div>
+  <div class="ea-body">
+    <span class="section-label">Black Friday</span>
+    <h1 class="ea-title">Black Friday, first.</h1>
+    <p class="ea-lead">Each MUNLER mirror is made in small batches. Fewer than ten of each Brook size and finish remain, and the next batch won&rsquo;t arrive before spring.</p>
+    <p class="ea-copy">Join the list for early access to our Black Friday prices, a day before anyone else.</p>
+
+    {%- form 'customer', class: 'ea-form', id: 'early-access-form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter,early-access-page,bf-early-access">
+      {%- if form.posted_successfully? -%}
+        <p class="ea-success">Thank you. You&rsquo;re on the list. We&rsquo;ll email you on 26 November, before everyone else.</p>
+      {%- else -%}
+        <div class="ea-field">
+          <input type="email" name="contact[email]" placeholder="Your email address" required autocomplete="email" aria-label="Email address">
+          <button type="submit" class="btn btn-dark">Get early access</button>
+        </div>
+        {%- if form.errors -%}
+          <p class="ea-error">Something went wrong. Please check your email address and try again.</p>
+        {%- endif -%}
+        <p class="ea-note">One email on 26 November, then the occasional update. Unsubscribe at any time.</p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>

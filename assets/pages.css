@@ -1275,3 +1275,29 @@
 .collections-list-grid .collection-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .collections-list-grid .collection-card:last-child:nth-child(odd) .collection-img-wrap { aspect-ratio: 21 / 9; }
 .collections-list-grid .collection-img-wrap { display: block; }
+
+/* === EARLY ACCESS PAGE === */
+.ea { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; background: #2A221C; color: #F6F3EE; }
+.ea-photo { position: relative; min-height: 360px; }
+.ea-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% center; }
+.ea-body { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 8rem 3rem 5rem; }
+.ea-body .section-label { margin-bottom: 1.2rem; color: #C9A86A; }
+.ea-title { font-family: var(--font-serif); font-weight: 400; font-size: clamp(2.3rem, 4vw, 3.4rem); line-height: 1.08; letter-spacing: -0.01em; color: #F6F3EE; margin: 0 0 1.6rem; }
+.ea-lead { max-width: 30rem; font-size: 0.98rem; line-height: 1.8; color: #F6F3EE; margin: 0 0 1rem; }
+.ea-copy { max-width: 30rem; font-size: 0.92rem; line-height: 1.8; color: rgba(246,243,238,.72); margin: 0 0 2rem; }
+.ea-form { width: 100%; max-width: 30rem; }
+.ea-field { display: flex; gap: 0.6rem; }
+.ea-field input { flex: 1; min-width: 0; padding: 0.95rem 1rem; border: 1px solid rgba(246,243,238,.4); background: transparent; font-family: var(--font-sans); font-size: 0.9rem; color: #F6F3EE; border-radius: 0; }
+.ea-field input::placeholder { color: rgba(246,243,238,.55); }
+.ea-field input:focus { outline: none; border-color: #F6F3EE; }
+.ea-field .btn { white-space: nowrap; background: #F6F3EE; color: #2A221C; border-color: #F6F3EE; }
+.ea-field .btn:hover { background: #fff; color: #2A221C; }
+.ea-note { margin: 0.9rem 0 0; font-size: 0.72rem; letter-spacing: 0.04em; color: rgba(246,243,238,.6); }
+.ea-success { margin: 0; font-size: 0.98rem; line-height: 1.8; color: #F6F3EE; }
+.ea-error { margin: 0.8rem 0 0; font-size: 0.8rem; color: #E8A398; }
+@media (max-width: 900px) {
+    .ea { grid-template-columns: 1fr; min-height: 0; }
+    .ea-photo { min-height: 0; aspect-ratio: 4 / 3; }
+    .ea-body { padding: 3rem 1.5rem 4rem; }
+    .ea-field { flex-direction: column; }
+}
