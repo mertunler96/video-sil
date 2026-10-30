@@ -59,6 +59,43 @@
   <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
 
+<!-- Trust strip -->
+<section class="trust-strip" aria-label="Why shop with MUNLER">
+  <ul class="trust-strip-list">
+    <li class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      <span>Free UK delivery</span>
+    </li>
+    <li class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <span>5-year warranty</span>
+    </li>
+    <li class="trust-item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.5 15a9 9 0 1 0 2.1-9.4L1 10"/></svg>
+      <span>30-day returns</span>
+    </li>
+    {%- assign jm_total = 0 -%}
+    {%- assign jm_sum = 0.0 -%}
+    {%- for p in collections.all.products -%}
+      {%- assign jm_count = p.metafields.reviews.rating_count | default: 0 -%}
+      {%- if jm_count > 0 -%}
+        {%- assign jm_total = jm_total | plus: jm_count -%}
+        {%- assign jm_str = p.metafields.reviews.rating.value | append: '' -%}
+        {%- assign jm_part = jm_str | times: jm_count -%}
+        {%- assign jm_sum = jm_sum | plus: jm_part -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if jm_total > 0 -%}
+      {%- assign jm_avg = jm_sum | divided_by: jm_total -%}
+      <li class="trust-item trust-item--reviews">
+        <span class="trust-stars" style="--fill: {{ jm_avg | divided_by: 5.0 | times: 100 | round }}%" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span>Rated {{ jm_avg | round: 1 }} by {{ jm_total }} customer{% if jm_total != 1 %}s{% endif %}</span>
+      </li>
+    {%- endif -%}
+  </ul>
+  <p class="trust-strip-note"><a href="https://uk.trustpilot.com/review/munler.co.uk" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><path fill="#00B67A" d="M12 1.5l3.1 7.2 7.9.7-6 5.2 1.8 7.7L12 18.1l-6.8 4.2L7 14.6 1 9.4l7.9-.7z"/></svg><span>Read our reviews on Trustpilot</span><svg class="trust-note-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></p>
+</section>
+
 <!-- Collections -->
 <section class="collections" id="collections">
   <div class="collections-header">
