@@ -1,4 +1,5 @@
-{% render 'page-hero', img: 'https://munler.co.uk/cdn/shop/files/aynanin_tam_karsisindan_shot_ver__202605251536.jpg', title: blog.title %}
+{%- assign banner_src = 'collection-full-length.webp' | asset_url -%}
+{% render 'page-hero', img: banner_src, title: blog.title, img_position: 'center 88%' %}
 
 <style>
   .blog-body{padding:5rem var(--gutter) 6rem}
