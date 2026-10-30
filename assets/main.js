@@ -25,22 +25,23 @@
     }, true);
 
     // ── Black Friday countdown (real date, same for everyone) ──
-    // Counts to a fixed moment (data-bf-start / data-bf-countdown, UTC). Once it has
-    // passed, the countdown and the announcement message simply disappear.
+    // Counts to a fixed moment (data-bf-start / data-bf-countdown, UTC), measured
+    // against the shop's server clock (Date header), not the visitor's device clock,
+    // so a wrong phone or PC clock cannot show a wrong time. Once the moment has
+    // passed, the countdown and the announcement message disappear.
     (function () {
         var bfMsg = document.querySelector('[data-bf-message]');
         var bfBox = document.querySelector('[data-bf-countdown]');
         var target = Date.parse((bfMsg && bfMsg.getAttribute('data-bf-start')) || (bfBox && bfBox.getAttribute('data-bf-countdown')) || '');
         if (isNaN(target)) { return; }
-        if (Date.now() >= target) {
-            if (bfMsg && bfMsg.parentNode) { bfMsg.parentNode.removeChild(bfMsg); }
-            return;
-        }
+        var skew = 0; // server time minus device time, in ms
+        function now() { return Date.now() + skew; }
         function pad(n) { return (n < 10 ? '0' : '') + n; }
         function tick() {
-            var left = target - Date.now();
+            var left = target - now();
             if (left <= 0) {
                 if (bfBox) { bfBox.hidden = true; }
+                if (bfMsg && bfMsg.parentNode) { bfMsg.parentNode.removeChild(bfMsg); bfMsg = null; }
                 return;
             }
             var mins  = Math.floor(left / 60000);
@@ -61,7 +62,13 @@
             }
         }
         tick();
-        setInterval(tick, 30000);
+        setInterval(tick, 20000);
+        if (window.fetch) {
+            fetch('/cart.js', { cache: 'no-store', credentials: 'same-origin' }).then(function (r) {
+                var d = Date.parse(r.headers.get('Date') || '');
+                if (!isNaN(d)) { skew = d - Date.now(); tick(); }
+            }).catch(function () {});
+        }
     })();
 
     // ── Announcement bar: slow fade between the messages ─────
