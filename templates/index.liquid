@@ -309,8 +309,8 @@
     <span class="section-label">Styled interiors</span>
   </div>
   <div class="photo-marquee-track">
-    {%- assign look_files = 'look-01,look-02,look-03,look-04,look-05,look-06,look-07,look-08,look-09,look-10,look-11,look-12,look-13,look-14' | split: ',' -%}
-    {%- assign look_types = 'b,s,b,s,b,s,b,s,b,b,b,s,s,b' | split: ',' -%}
+    {%- assign look_files = 'look-01,look-02,look-03,look-05,look-06,look-07,look-08,look-09,look-10,look-11,look-12,look-13,look-14' | split: ',' -%}
+    {%- assign look_types = 'b,s,b,b,s,b,s,b,b,b,s,s,b' | split: ',' -%}
     {%- for pass in (1..2) -%}
       {%- for f in look_files -%}
         {%- assign t = look_types[forloop.index0] -%}
