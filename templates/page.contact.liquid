@@ -7,24 +7,20 @@
 
       <!-- Form (left) -->
       <div>
-        <div class="section-header" style="text-align:left; margin-bottom:3rem;">
-          <span class="section-label">Send a Message</span>
-          <h2 style="font-size:clamp(1.6rem,2.5vw,2.2rem); margin-bottom:0;">How can we help?</h2>
-        </div>
 
         {% form 'contact' %}
           {% if form.posted_successfully? %}
-            <div style="padding:1.5rem; background:#f0f7f0; border:1px solid #c3e0c3; margin-bottom:1.5rem;">
-              <p style="color:#2d6a2d; font-size:0.9rem;">Thank you for your message. We'll be in touch within one working day.</p>
+            <div class="form-notice">
+              <p>Thank you for your message. We'll be in touch within one working day.</p>
             </div>
           {% endif %}
           {% if form.errors %}
-            <div style="padding:1rem; background:#fff0f0; border:1px solid #e0c3c3; margin-bottom:1.5rem;">
-              <p style="color:#6a2d2d; font-size:0.85rem;">{{ form.errors | default_errors }}</p>
+            <div class="form-notice form-notice--error">
+              <p>{{ form.errors | default_errors }}</p>
             </div>
           {% endif %}
 
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; margin-bottom:1.4rem;">
+          <div class="contact-row">
             <div class="form-field">
               <label for="ContactFormName">Name</label>
               <input type="text" id="ContactFormName" name="contact[name]" placeholder="Your name" value="{{ form.name }}" required>
@@ -79,25 +75,8 @@
         </div>
 
         <div class="contact-info-block">
-          <h4>Frequently Asked</h4>
-          <div class="faq-list">
-            <div class="faq-item">
-              <p class="faq-q">How long does delivery take?</p>
-              <p class="faq-a">Most orders are dispatched within 1–2 working days, and delivery takes 3–5 working days from the date of your order.</p>
-            </div>
-            <div class="faq-item">
-              <p class="faq-q">Can I return my order?</p>
-              <p class="faq-a">Yes. We accept returns within 30 days of receipt. Refunds are processed within 5 working days of us receiving the item.</p>
-            </div>
-            <div class="faq-item">
-              <p class="faq-q">Is delivery really free?</p>
-              <p class="faq-a">Free tracked and insured delivery on all UK orders.</p>
-            </div>
-            <div class="faq-item">
-              <p class="faq-q">What is the warranty?</p>
-              <p class="faq-a">All MUNLER products come with a 5-year warranty against manufacturing defects.</p>
-            </div>
-          </div>
+          <h4>Questions</h4>
+          <p>Delivery, returns, care and the warranty are answered in our <a href="/pages/faq" class="contact-faq-link">FAQs</a>.</p>
         </div>
 
       </div>
