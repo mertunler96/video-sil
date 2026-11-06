@@ -2653,3 +2653,6 @@ a.real-home-who:hover {
 @media (max-width: 768px) {
     .hero-arrow { display: none; }
 }
+
+/* Black Friday phases: main.js switches these on the server's date */
+.bf-off { display: none !important; }

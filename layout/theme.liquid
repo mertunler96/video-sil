@@ -152,6 +152,7 @@
   <div class="announcement-bar" role="region" aria-label="Announcement">
     <p class="announcement-msg is-active">Free UK delivery on every order</p>
     <p class="announcement-msg" data-bf-message data-bf-start="2026-11-17T00:00:00Z"><a href="/pages/early-access"><span data-bf-text>Black Friday early access, join the list</span> &rarr;</a></p>
+    <p class="announcement-msg bf-off" data-bf-phase="sale"><a href="/collections/wall-mirrors">Black Friday: up to 20% off, until 30 November</a> &rarr;</p>
     <p class="announcement-msg">Stainless steel frames, ecological glass</p>
     <p class="announcement-msg">Five-year warranty</p>
   </div>
@@ -239,7 +240,7 @@
           </a>
         </div>
         {%- form 'customer', class: 'footer-newsletter', id: 'footer-newsletter-form' -%}
-          <h3 class="footer-newsletter-label">Enjoy 10% off</h3>
+          <h3 class="footer-newsletter-label" data-bf-phase="pre post">Enjoy 10% off</h3>
           <p class="footer-newsletter-copy">Join the community and be the first to know
             about new collections and special offers. Subscribe to the newsletter.</p>
           <input type="hidden" name="contact[tags]" value="newsletter">
@@ -257,7 +258,7 @@
             <p class="footer-newsletter-error">Something went wrong. Please try again.</p>
           {%- endif -%}
         {%- endform -%}
-        <a class="footer-bf-link" href="/pages/early-access">Black Friday early access &rarr;</a>
+        <a class="footer-bf-link" data-bf-phase="pre" href="/pages/early-access">Black Friday early access &rarr;</a>
       </div>
 
       <div class="footer-links">

@@ -71,15 +71,62 @@
         }
     })();
 
+    // ── Black Friday phases ──────────────────────────────────
+    // Before 17 Nov: 'pre'. 17-30 Nov: 'sale'. From 1 Dec: 'post'. Elements with
+    // data-bf-phase show only in the phases they list. Uses the shop's server clock.
+    // Test any phase with ?bf_now=2026-11-18 in the address.
+    (function () {
+        var SALE_START = Date.parse('2026-11-17T00:00:00Z');
+        var SALE_END   = Date.parse('2026-12-01T00:00:00Z');
+        var forced = (window.location.search.match(/[?&]bf_now=([^&]+)/) || [])[1];
+        forced = forced ? Date.parse(decodeURIComponent(forced)) : NaN;
+        var skew = 0;
+        function apply() {
+            var now = isNaN(forced) ? Date.now() + skew : forced;
+            var phase = now < SALE_START ? 'pre' : (now < SALE_END ? 'sale' : 'post');
+            document.querySelectorAll('[data-bf-phase]').forEach(function (el) {
+                var on = (' ' + el.getAttribute('data-bf-phase') + ' ').indexOf(' ' + phase + ' ') !== -1;
+                el.classList.toggle('bf-off', !on);
+                if (!on) { el.classList.remove('is-active'); }
+            });
+            var redirect = document.querySelector('[data-bf-redirect]');
+            if (redirect && phase !== 'pre' && isNaN(forced)) {
+                window.location.replace(redirect.getAttribute('data-bf-redirect'));
+            }
+            if (phase !== 'pre') {
+                var msg = document.querySelector('[data-bf-message]');
+                if (msg && msg.parentNode) { msg.parentNode.removeChild(msg); }
+                var box = document.querySelector('[data-bf-countdown]');
+                if (box) { box.hidden = true; }
+            }
+            if (!document.querySelector('.announcement-msg.is-active')) {
+                var first = document.querySelector('.announcement-msg:not(.bf-off)');
+                if (first) { first.classList.add('is-active'); }
+            }
+        }
+        apply();
+        setInterval(apply, 60000);
+        if (window.fetch && isNaN(forced)) {
+            fetch('/cart.js', { cache: 'no-store', credentials: 'same-origin' }).then(function (r) {
+                var d = Date.parse(r.headers.get('Date') || '');
+                if (!isNaN(d)) { skew = d - Date.now(); apply(); }
+            }).catch(function () {});
+        }
+    })();
+
     // ── Announcement bar: slow fade between the messages ─────
-    var annMsgs = document.querySelectorAll('.announcement-msg');
+    // Messages switched off for the current Black Friday phase are skipped.
     var annReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (annMsgs.length > 1 && !annReduced) {
-        var annIdx = 0;
+    if (!annReduced) {
         setInterval(function () {
-            annMsgs[annIdx].classList.remove('is-active');
-            annIdx = (annIdx + 1) % annMsgs.length;
-            annMsgs[annIdx].classList.add('is-active');
+            var list = Array.prototype.filter.call(document.querySelectorAll('.announcement-msg'), function (m) {
+                return !m.classList.contains('bf-off');
+            });
+            if (list.length < 2) { return; }
+            var cur = 0;
+            for (var i = 0; i < list.length; i++) { if (list[i].classList.contains('is-active')) { cur = i; } }
+            list[cur].classList.remove('is-active');
+            list[(cur + 1) % list.length].classList.add('is-active');
         }, 5500);
     }
 

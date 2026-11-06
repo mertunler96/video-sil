@@ -1,4 +1,4 @@
-<section class="ea">
+<section class="ea" data-bf-redirect="/collections/wall-mirrors">
   <div class="ea-photo">
     <img src="{{ 'collection-full-length.webp' | asset_url }}" alt="MUNLER Solenne full-length mirror in champagne gold leaning against a slatted walnut wall" width="2000" height="1493" fetchpriority="high">
   </div>
@@ -19,7 +19,7 @@
     {%- form 'customer', class: 'ea-form', id: 'early-access-form' -%}
       <input type="hidden" name="contact[tags]" value="newsletter,early-access-page,bf-early-access">
       {%- if form.posted_successfully? -%}
-        <p class="ea-success">Thank you. You&rsquo;re on the list. We&rsquo;ll email you on 26 November, before everyone else.</p>
+        <p class="ea-success">Thank you. You&rsquo;re on the list. We&rsquo;ll email you on 16 November, before everyone else.</p>
       {%- else -%}
         <div class="ea-field">
           <input type="email" name="contact[email]" placeholder="Your email address" required autocomplete="email" aria-label="Email address">
@@ -28,7 +28,7 @@
         {%- if form.errors -%}
           <p class="ea-error">Something went wrong. Please check your email address and try again.</p>
         {%- endif -%}
-        <p class="ea-note">One email on 26 November, then the occasional update. Unsubscribe at any time.</p>
+        <p class="ea-note">One email on 16 November, then the occasional update. Unsubscribe at any time.</p>
       {%- endif -%}
     {%- endform -%}
   </div>

@@ -7,7 +7,7 @@
   state (identified via a sessionStorage flag so the footer form never triggers it).
   Shown once per browser (localStorage), not on cart/checkout/account. Waits 35s or 60% scroll (after 12s).
 {%- endcomment -%}
-<div class="mun-wp-overlay" id="mun-wp" aria-hidden="true">
+<div class="mun-wp-overlay" id="mun-wp" aria-hidden="true" data-bf-phase="pre">
   <div class="mun-wp-modal" role="dialog" aria-modal="true" aria-label="Ten percent off your first order">
     <button class="mun-wp-close" type="button" aria-label="Close" data-wp-close>&times;</button>
 
@@ -66,6 +66,8 @@
   var popForm    = overlay.querySelector('.mun-wp-form');
 
   function open(success) {
+    // WELCOME10 is closed during Black Friday (main.js hides the popup outside the 'pre' phase)
+    if (overlay.classList.contains('bf-off')) return;
     overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {}
