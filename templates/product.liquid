@@ -108,6 +108,12 @@
               <button class="thumb {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}" data-src="{{ image | img_url: '1000x' }}">
                 <img src="{{ image | img_url: '120x' }}" alt="{{ image.alt | default: product.title }}">
               </button>
+              {% if forloop.first %}{% if product.handle == 'brook-matte-black-wall-mirror' or product.handle == 'brook-champagne-gold-wall-mirror' or product.handle == 'solenne-champagne-gold-full-length-mirror' %}
+              <button type="button" class="thumb-3d" data-open-3d aria-label="View in 3D">
+                <img src="{{ image | img_url: '120x' }}" alt="">
+                <span class="thumb-3d-badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l8.5 4.75v9.5L12 21.5l-8.5-4.75v-9.5z"/><path d="M3.5 7.25L12 12l8.5-4.75M12 12v9.5"/></svg>3D</span>
+              </button>
+              {% endif %}{% endif %}
             {% endfor %}
           </div>
           <button type="button" class="thumbs-more" id="thumbs-more" aria-label="Show more images" hidden>
@@ -132,6 +138,42 @@
                  width="800" height="1067"
                  id="gallery-main-img">
           </div>
+          {% if product.handle == 'brook-matte-black-wall-mirror' or product.handle == 'brook-champagne-gold-wall-mirror' or product.handle == 'solenne-champagne-gold-full-length-mirror' %}
+          {% assign v3d = 'brook' %}
+          {% if product.handle contains 'solenne' %}{% assign v3d = 'solenne' %}{% endif %}
+          {% assign brook_col = 'gold' %}
+          {% if product.handle contains 'black' %}{% assign brook_col = 'black' %}{% endif %}
+          {% assign glb_m = 'brook-' | append: brook_col | append: '-medium.glb' %}
+          {% assign glb_l = 'brook-' | append: brook_col | append: '-large.glb' %}
+          {% if v3d == 'solenne' %}{% assign glb_m = 'solenne-gold.glb' %}{% assign glb_l = 'solenne-gold.glb' %}{% endif %}
+          {% comment %} 3D + AR viewer (Brook). model-viewer and the model load only when the 3D view is first opened. {% endcomment %}
+          <button type="button" class="pdp-ar-cta g3d-cta" data-open-3d><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l8.5 4.75v9.5L12 21.5l-8.5-4.75v-9.5z"/><path d="M3.5 7.25L12 12l8.5-4.75M12 12v9.5"/></svg>{% if v3d == 'solenne' %}See it in your room{% else %}See it on your wall{% endif %}</button>
+          <div class="gallery-3d g3d-{{ v3d }}" id="gallery-3d" hidden
+               data-desk-note="Drag to turn it. Open this page on your phone to {% if v3d == 'solenne' %}see it in your own room{% else %}place it on your own wall{% endif %}."
+               data-lib="{{ 'model-viewer.min.js' | asset_url }}" data-src-medium="{{ glb_m | asset_url }}" data-src-large="{{ glb_l | asset_url }}">
+            <div class="g3d-progress"><span></span></div>
+            <model-viewer alt="{% if v3d == 'solenne' %}The Solenne Mirror, champagne gold, in 3D{% else %}The Brook Mirror, {% if brook_col == 'black' %}matte black{% else %}champagne gold{% endif %}, in 3D{% endif %}"
+              camera-controls touch-action="pan-y" interaction-prompt="auto" shadow-intensity="0.9" shadow-softness="1" exposure="1.1"
+              environment-image="{{ 'env-room.jpg' | asset_url }}" {% if v3d == 'solenne' %}camera-orbit="-22deg 82deg 5.2m" field-of-view="30deg" min-camera-orbit="auto auto 1m" max-camera-orbit="auto auto 7m"{% else %}camera-orbit="-22deg 82deg 2.5m" field-of-view="30deg" min-camera-orbit="auto auto 0.7m" max-camera-orbit="auto auto 3.5m"{% endif %}
+              ar ar-modes="webxr scene-viewer quick-look" ar-placement="wall" ar-scale="fixed"{% if v3d == 'solenne' %} ios-src="{{ 'solenne-gold.usdz' | asset_url }}"{% endif %}>
+              <button type="button" slot="ar-button" class="mv-ar-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l8.5 4.75v9.5L12 21.5l-8.5-4.75v-9.5z"/><path d="M3.5 7.25L12 12l8.5-4.75M12 12v9.5"/></svg>{% if v3d == 'solenne' %}See it in your room{% else %}See it on your wall{% endif %}</button>
+            </model-viewer>
+            <div class="g3d-top">
+              <div class="g3d-sizes" role="group" aria-label="Size">
+                <button type="button" class="mv-size" data-mv-size="medium">Medium</button>
+                <button type="button" class="mv-size" data-mv-size="large">Large</button>
+              </div>
+              <button type="button" class="g3d-close" data-close-3d aria-label="Back to photos">&times;</button>
+            </div>
+            <div class="g3d-angle">
+              <label for="g3d-angle-range">Angle</label>
+              <input type="range" id="g3d-angle-range" min="0" max="360" step="0.5" value="0">
+              <output id="g3d-angle-val" for="g3d-angle-range">0°</output>
+              <button type="button" class="g3d-rot90" aria-label="Turn 90 degrees"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg>90°</button>
+            </div>
+            <p class="g3d-hint" id="g3d-hint">Drag to turn it. Shown to scale.</p>
+          </div>
+          {% endif %}
           <button class="gallery-arrow gallery-arrow--next" id="gallery-next" aria-label="Next image">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
           </button>
@@ -142,6 +184,97 @@
           </div>
         </div>
       </div>
+
+      {% if product.handle == 'brook-matte-black-wall-mirror' or product.handle == 'brook-champagne-gold-wall-mirror' or product.handle == 'solenne-champagne-gold-full-length-mirror' %}
+      <script>
+      (function(){
+        var g = document.getElementById('gallery-3d');
+        var gal = document.getElementById('product-gallery');
+        if(!g || !gal) return;
+        var mv = g.querySelector('model-viewer');
+        var hint = document.getElementById('g3d-hint');
+        var prog = g.querySelector('.g3d-progress');
+        var bar = prog.querySelector('span');
+        var btns = g.querySelectorAll('[data-mv-size]');
+        // Angle on the wall. The mirror hangs any way up, so it turns in the wall plane (roll).
+        // model-viewer carries this into the iPhone AR file and into Android WebXR.
+        var rng = document.getElementById('g3d-angle-range'), aval = document.getElementById('g3d-angle-val');
+        function setAngle(a){
+          a = Math.max(0, Math.min(360, a));
+          [0, 90, 180, 270, 360].forEach(function(q){ if(Math.abs(a - q) < 2.5) a = q; });
+          rng.value = a;
+          aval.textContent = (Math.round(a * 2) / 2) + '°';
+          mv.setAttribute('orientation', (-(a % 360)) + 'deg 0deg 0deg');
+        }
+        rng.addEventListener('input', function(){ setAngle(parseFloat(rng.value)); });
+        g.querySelector('.g3d-rot90').addEventListener('click', function(){
+          var a = parseFloat(rng.value) % 360;
+          setAngle(((Math.floor(a / 90 + 1e-6) + 1) * 90) % 360);
+        });
+        var libP = null, cur = null;
+        function lib(){
+          if(libP) return libP;
+          libP = new Promise(function(res, rej){
+            if(window.customElements && customElements.get('model-viewer')) return res();
+            var s = document.createElement('script'); s.type = 'module'; s.src = g.getAttribute('data-lib');
+            s.onload = function(){ customElements.whenDefined('model-viewer').then(res); };
+            s.onerror = function(){ libP = null; rej(); };
+            document.head.appendChild(s);
+          });
+          return libP;
+        }
+        function pageSize(){
+          var a = document.querySelector('.size-btn.active');
+          var t = a ? (a.getAttribute('data-title') || '') : '';
+          return /90\s*x\s*65/i.test(t) ? 'large' : 'medium';
+        }
+        function show(size){
+          if(size === cur) return;
+          cur = size;
+          btns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-mv-size') === size); });
+          prog.classList.remove('done'); bar.style.width = '8%';
+          mv.setAttribute('src', g.getAttribute('data-src-' + size));
+        }
+        function syncPage(size){
+          var re = size === 'medium' ? /73\s*x\s*52/i : /90\s*x\s*65/i;
+          document.querySelectorAll('.size-btn').forEach(function(b){
+            if(re.test(b.getAttribute('data-title') || '') && !b.classList.contains('active') && !b.disabled) b.click();
+          });
+        }
+        function open3d(fromOutside){
+          g.hidden = false; gal.classList.add('is-3d');
+          var small = window.innerWidth <= 900;
+          if(fromOutside || small){
+            var r = gal.getBoundingClientRect();
+            if(small || r.top < 0 || r.top > window.innerHeight * 0.5) window.scrollTo({ top: window.scrollY + r.top - (small ? 8 : 80), behavior: 'smooth' });
+          }
+          if(!cur){ prog.classList.remove('done'); bar.style.width = '8%'; }
+          lib().then(function(){ show(pageSize()); }).catch(close3d);
+        }
+        function close3d(){ g.hidden = true; gal.classList.remove('is-3d'); }
+        // Delegated: the 'View in 3D' link and the size buttons come after this script in the page.
+        document.addEventListener('click', function(e){
+          var t = e.target.closest ? e.target : e.target.parentElement;
+          var o = t && t.closest('[data-open-3d]');
+          if(o){ open3d(!gal.contains(o)); return; }
+          if(t && t.closest('.size-btn')) setTimeout(function(){ if(!g.hidden && cur) show(pageSize()); }, 0);
+        });
+        g.querySelector('[data-close-3d]').addEventListener('click', close3d);
+        document.querySelectorAll('#gallery-thumbs .thumb, #gallery-dots .dot').forEach(function(b){ b.addEventListener('click', close3d); });
+        ['touchstart', 'touchend'].forEach(function(ev){ g.addEventListener(ev, function(e){ e.stopPropagation(); }, { passive: true }); });
+        btns.forEach(function(b){ b.addEventListener('click', function(){ var s = b.getAttribute('data-mv-size'); show(s); syncPage(s); }); });
+        mv.addEventListener('progress', function(e){
+          var p = e.detail.totalProgress || 0;
+          bar.style.width = Math.max(8, p * 100) + '%';
+          if(p >= 1) prog.classList.add('done');
+        });
+        mv.addEventListener('load', function(){
+          hint.textContent = mv.canActivateAR ? 'Drag to turn it. Shown to scale.' : g.getAttribute('data-desk-note');
+        });
+        document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !g.hidden) close3d(); });
+      })();
+      </script>
+      {% endif %}
 
       </div>
 
@@ -195,7 +328,12 @@
           </div>
 
           {% if product.handle == 'brook-matte-black-wall-mirror' or product.handle == 'brook-champagne-gold-wall-mirror' or product.handle == 'solenne-champagne-gold-full-length-mirror' %}
-          <button type="button" class="see-at-home-trigger" data-open-home-gallery>See it in the home</button>
+          <div class="pdp-view-links">
+            <button type="button" class="see-at-home-trigger" data-open-home-gallery>See it in the home</button>
+            {% if product.handle == 'brook-matte-black-wall-mirror' or product.handle == 'brook-champagne-gold-wall-mirror' or product.handle == 'solenne-champagne-gold-full-length-mirror' %}
+            <button type="button" class="see-at-home-trigger" data-open-3d>View in 3D</button>
+            {% endif %}
+          </div>
           {% endif %}
 
           <div class="pinfo-price-block">

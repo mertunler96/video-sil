@@ -1583,3 +1583,91 @@
     border-bottom-color: #5E7A5A;
 }
 .feature-checklist li { color: var(--color-dark); }
+
+/* === 3D + AR VIEWER (Brook, inside the gallery) === */
+.pdp-view-links { display: flex; flex-wrap: wrap; gap: 0.35rem 1.5rem; }
+
+.thumb-3d {
+    position: relative; width: 80px; height: 80px; flex-shrink: 0; padding: 0;
+    border: 1px solid transparent; background: var(--color-light); overflow: hidden; cursor: pointer;
+    transition: border-color var(--transition);
+}
+.thumb-3d img { width: 100%; height: 100%; object-fit: cover; opacity: 0.45; }
+.thumb-3d-badge {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.2rem;
+    font-family: var(--font-sans); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; color: var(--color-dark);
+}
+.thumb-3d-badge svg { width: 22px; height: 22px; }
+.thumb-3d:hover { border-color: var(--color-border); }
+.product-gallery.is-3d .thumb-3d { border-color: var(--color-dark); }
+.product-gallery.is-3d .thumb.active { border-color: transparent; opacity: 0.55; }
+
+.gallery-3d {
+    position: absolute; top: 0; left: 0; width: 100%; aspect-ratio: 3 / 4; z-index: 20;
+    background: #F2EEE7;
+}
+.gallery-3d[hidden] { display: none; }
+.gallery-3d model-viewer { display: block; width: 100%; height: 100%; --poster-color: transparent; outline: none; }
+.g3d-progress { position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 3; pointer-events: none; }
+.g3d-progress span { display: block; height: 100%; width: 0; background: var(--color-dark); transition: width 0.25s ease; }
+.g3d-progress.done { opacity: 0; transition: opacity 0.4s ease 0.3s; }
+.g3d-top {
+    position: absolute; top: 0.75rem; left: 0.75rem; right: 0.75rem; z-index: 2;
+    display: flex; justify-content: space-between; align-items: flex-start; pointer-events: none;
+}
+.g3d-top > * { pointer-events: auto; }
+.g3d-sizes { display: flex; gap: 0.4rem; }
+.mv-size {
+    font-family: var(--font-sans); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+    background: #fff; color: var(--color-dark); border: 1px solid var(--color-border);
+    padding: 0.55rem 0.85rem; cursor: pointer;
+}
+.mv-size.active { background: var(--color-dark); color: #fff; border-color: var(--color-dark); }
+.g3d-close {
+    width: 36px; height: 36px; border-radius: 50%; background: #fff; border: 1px solid var(--color-border);
+    color: var(--color-dark); font-size: 1.3rem; line-height: 1; cursor: pointer; padding: 0;
+}
+.g3d-hint {
+    position: absolute; left: 1rem; right: 1rem; top: 3.9rem; z-index: 2; margin: 0; pointer-events: none;
+    text-align: center; font-family: var(--font-sans); font-size: 0.72rem; color: rgba(28, 28, 28, 0.62);
+}
+.mv-ar-btn {
+    position: absolute; left: 50%; bottom: 4.2rem; transform: translateX(-50%); white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-sans); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    background: var(--color-dark); color: #fff; border: 0; padding: 0.85rem 1.3rem; cursor: pointer;
+}
+
+.g3d-angle {
+    position: absolute; left: 0.75rem; right: 0.75rem; bottom: 0.9rem; z-index: 2;
+    max-width: 420px; margin-inline: auto;
+    display: flex; align-items: center; gap: 0.6rem; padding: 0.4rem 0.6rem 0.4rem 0.8rem;
+    background: rgba(255, 255, 255, 0.88); border: 1px solid var(--color-border);
+    font-family: var(--font-sans); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-dark);
+}
+.g3d-angle input[type=range] { flex: 1; min-width: 0; accent-color: var(--color-dark); margin: 0; }
+.g3d-angle output { min-width: 3.2em; text-align: right; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.g3d-rot90 {
+    display: inline-flex; align-items: center; gap: 0.3rem; cursor: pointer;
+    padding: 0.35rem 0.55rem; background: #fff; border: 1px solid var(--color-border); color: var(--color-dark);
+    font-family: var(--font-sans); font-size: 0.66rem; letter-spacing: 0.04em;
+}
+
+/* Solenne: one size and it leans on the floor, so no size or angle controls. */
+.g3d-solenne .g3d-sizes, .g3d-solenne .g3d-angle { display: none; }
+.g3d-solenne .mv-ar-btn { bottom: 1.4rem; }
+
+/* Phones: a clear call to action on the photograph itself, above the swipe areas. */
+.pdp-ar-cta { display: none; }
+@media (max-width: 900px) {
+    .pdp-ar-cta {
+        position: absolute; left: 50%; transform: translateX(-50%); z-index: 15;
+        top: 1rem;   /* the top: the sticky add-to-cart bar covers the bottom of the photo on phones */
+        display: inline-flex; align-items: center; gap: 0.5rem; white-space: nowrap;
+        padding: 0.7rem 1.1rem; border: 0; border-radius: 999px; cursor: pointer;
+        background: rgba(255, 255, 255, 0.92); color: var(--color-dark);
+        box-shadow: 0 2px 12px rgba(28, 28, 28, 0.12);
+        font-family: var(--font-sans); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .product-gallery.is-3d .pdp-ar-cta { display: none; }
+}
