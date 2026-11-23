@@ -196,6 +196,17 @@
         var prog = g.querySelector('.g3d-progress');
         var bar = prog.querySelector('span');
         var btns = g.querySelectorAll('[data-mv-size]');
+        // Usage tracking for the 3D / AR viewer. Published as Shopify custom events (munler_*),
+        // a customer-events pixel forwards them to Meta. Silent if analytics is not available.
+        var sentOnce = {};
+        function track(name, extra, once){
+          if(once){ if(sentOnce[name]) return; sentOnce[name] = 1; }
+          try {
+            var data = { product: {{ product.handle | json }}, device: window.innerWidth <= 900 ? 'mobile' : 'desktop' };
+            if(extra) for(var k in extra) data[k] = extra[k];
+            if(window.Shopify && Shopify.analytics && typeof Shopify.analytics.publish === 'function') Shopify.analytics.publish('munler_' + name, data);
+          } catch(e) {}
+        }
         // Angle on the wall. The mirror hangs any way up, so it turns in the wall plane (roll).
         // model-viewer carries this into the iPhone AR file and into Android WebXR.
         var rng = document.getElementById('g3d-angle-range'), aval = document.getElementById('g3d-angle-val');
@@ -206,10 +217,11 @@
           aval.textContent = (Math.round(a * 2) / 2) + '°';
           mv.setAttribute('orientation', (-(a % 360)) + 'deg 0deg 0deg');
         }
-        rng.addEventListener('input', function(){ setAngle(parseFloat(rng.value)); });
+        rng.addEventListener('input', function(){ setAngle(parseFloat(rng.value)); track('3d_angle', null, true); });
         g.querySelector('.g3d-rot90').addEventListener('click', function(){
           var a = parseFloat(rng.value) % 360;
           setAngle(((Math.floor(a / 90 + 1e-6) + 1) * 90) % 360);
+          track('3d_angle', null, true);
         });
         var libP = null, cur = null;
         function lib(){
@@ -256,13 +268,21 @@
         document.addEventListener('click', function(e){
           var t = e.target.closest ? e.target : e.target.parentElement;
           var o = t && t.closest('[data-open-3d]');
-          if(o){ open3d(!gal.contains(o)); return; }
+          if(o){ track('3d_open', { source: o.classList.contains('g3d-cta') ? 'button' : 'thumbnail' }, true); open3d(!gal.contains(o)); return; }
           if(t && t.closest('.size-btn')) setTimeout(function(){ if(!g.hidden && cur) show(pageSize()); }, 0);
         });
         g.querySelector('[data-close-3d]').addEventListener('click', close3d);
         document.querySelectorAll('#gallery-thumbs .thumb, #gallery-dots .dot').forEach(function(b){ b.addEventListener('click', close3d); });
         ['touchstart', 'touchend'].forEach(function(ev){ g.addEventListener(ev, function(e){ e.stopPropagation(); }, { passive: true }); });
-        btns.forEach(function(b){ b.addEventListener('click', function(){ var s = b.getAttribute('data-mv-size'); show(s); syncPage(s); }); });
+        btns.forEach(function(b){ b.addEventListener('click', function(){ var s = b.getAttribute('data-mv-size'); show(s); syncPage(s); track('3d_size', { size: s }, true); }); });
+        // AR: the tap on the AR button works on every platform; session / placed only exist on Android (WebXR, Scene Viewer).
+        var arBtn = g.querySelector('.mv-ar-btn');
+        if(arBtn) arBtn.addEventListener('click', function(){ track('ar_tap', { size: cur || pageSize(), platform: /iPhone|iPad|iPod/.test(navigator.userAgent) ? 'ios' : 'android' }); });
+        mv.addEventListener('ar-status', function(e){
+          var s = e.detail && e.detail.status;
+          if(s === 'session-started') track('ar_session', { size: cur || pageSize() });
+          else if(s === 'object-placed') track('ar_placed', { size: cur || pageSize() }, true);
+        });
         mv.addEventListener('progress', function(e){
           var p = e.detail.totalProgress || 0;
           bar.style.width = Math.max(8, p * 100) + '%';
