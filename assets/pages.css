@@ -1531,3 +1531,12 @@
 @media (max-width: 768px) {
     .ab-row .ab-row-img--land { aspect-ratio: 4 / 3; }
 }
+
+/* Landscape hero photo */
+.ab-hero-img--land { aspect-ratio: 4 / 3; }
+@media (min-width: 769px) {
+    .ab-hero .ab-hero-img--land { width: min(calc(86vh * 4 / 3), 1100px, 60vw); }
+}
+@media (max-width: 768px) {
+    .ab-hero .ab-hero-img--land { aspect-ratio: 4 / 3; }
+}
