@@ -1,0 +1,108 @@
+{%- comment -%}
+  About page, light version (draft, November 2026).
+  Preview without touching the live page: /pages/about?view=about-new
+  Photos are placeholders from the existing product imagery; Mert will swap them.
+{%- endcomment -%}
+
+<section class="ab-hero">
+  <div class="ab-hero-text reveal">
+    <span class="section-label">About MUNLER</span>
+    <h1 class="ab-hero-title">Designed by us.<br>Delivered by us.</h1>
+    <p>MUNLER is a small London brand run by a couple. We design every piece ourselves, choose every material, pack every order by hand, and wherever we can, bring it to your door in our own car.</p>
+  </div>
+  <figure class="ab-hero-img reveal">
+    <img src="{{ 'card-full-length.webp' | asset_url }}" width="1000" height="1339"
+         alt="The Solenne full-length mirror in a bedroom" fetchpriority="high">
+  </figure>
+</section>
+
+<section class="ab-rows">
+
+  <div class="ab-row reveal">
+    <figure class="ab-row-img">
+      <img src="{{ 'look-03.webp' | asset_url }}" width="640" height="857"
+           alt="A MUNLER mirror above a sideboard in a hallway" loading="lazy">
+    </figure>
+    <div class="ab-row-text">
+      <span class="section-label">How it started</span>
+      <h2>A ten-square-metre room in London</h2>
+      <p>We come from two different worlds. One of us is a civil engineer who spent years on London building sites, where a material is chosen for how it performs. The other studied international relations and law.</p>
+      <p>We kept looking for a mirror that felt like a piece of design rather than an afterthought, and we couldn&rsquo;t find one. So in the small room we were living in at the time, we started drawing our own.</p>
+    </div>
+  </div>
+
+  <div class="ab-row ab-row--flip reveal">
+    <figure class="ab-row-img">
+      <img src="{{ 'card-asymmetrical.webp' | asset_url }}" width="1000" height="1339"
+           alt="The Brook asymmetrical mirror above a marble console" loading="lazy">
+    </figure>
+    <div class="ab-row-text">
+      <span class="section-label">Our design</span>
+      <h2>Every shape is drawn by us</h2>
+      <p>We design every MUNLER piece ourselves, and we only release one when we would happily hang it in our own home. Brook and Solenne were the first.</p>
+      <p>There are many more shapes on our table. We&rsquo;ll bring them out slowly, one at a time, rather than fill a catalogue for the sake of it.</p>
+    </div>
+  </div>
+
+  <div class="ab-row reveal">
+    <figure class="ab-row-img">
+      <img src="{{ 'look-06.webp' | asset_url }}" width="640" height="857"
+           alt="The Solenne mirror leaning in a sunlit room" loading="lazy">
+    </figure>
+    <div class="ab-row-text">
+      <span class="section-label">Materials</span>
+      <h2>The best materials, at a fair price</h2>
+      <p>Our frames are brushed stainless steel, so they won&rsquo;t rust, even in a bathroom. The glass is copper-free and lead-free silver mirror, which is kinder to the environment and stays clear for longer.</p>
+      <p>We want MUNLER to feel premium without a showroom price. We sell directly to you, with no shops and no middlemen in between, and that is how we keep it within reach.</p>
+    </div>
+  </div>
+
+  <div class="ab-row ab-row--flip reveal">
+    <figure class="ab-row-img">
+      <img src="{{ 'look-09.webp' | asset_url }}" width="640" height="857"
+           alt="A MUNLER mirror in an entrance hall by the front door" loading="lazy">
+    </figure>
+    <div class="ab-row-text">
+      <span class="section-label">From us to your door</span>
+      <h2>We often deliver it ourselves</h2>
+      <p>There is no team behind MUNLER and no warehouse staff. The two of us do everything: we pack every mirror by hand, and wherever we can, we load it into our own car and drive it to your door. We have driven a mirror from London to Glasgow to make sure it arrived safely.</p>
+      <p>And when you email us, one of us will be the one who replies.</p>
+    </div>
+  </div>
+
+</section>
+
+<section class="ab-facts">
+  <ul class="ab-facts-list">
+    <li><strong>Free UK delivery</strong><span>Packed by hand, on every order</span></li>
+    <li><strong>5-year warranty</strong><span>On every frame and glass</span></li>
+    <li><strong>30-day returns</strong><span>If it isn&rsquo;t right, send it back</span></li>
+    {%- assign jm_total = 0 -%}
+    {%- assign jm_sum = 0.0 -%}
+    {%- for p in collections.all.products -%}
+      {%- assign jm_count = p.metafields.reviews.rating_count | default: 0 -%}
+      {%- if jm_count > 0 -%}
+        {%- assign jm_total = jm_total | plus: jm_count -%}
+        {%- assign jm_str = p.metafields.reviews.rating.value | append: '' -%}
+        {%- assign jm_part = jm_str | times: jm_count -%}
+        {%- assign jm_sum = jm_sum | plus: jm_part -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if jm_total > 0 -%}
+      {%- assign jm_avg = jm_sum | divided_by: jm_total -%}
+      <li><strong>Rated {{ jm_avg | round: 1 }} out of 5</strong><span>By {{ jm_total }} customer{% if jm_total != 1 %}s{% endif %} &middot; <a href="https://uk.trustpilot.com/review/munler.co.uk" target="_blank" rel="noopener">Trustpilot</a></span></li>
+    {%- endif -%}
+  </ul>
+</section>
+
+<section class="ab-close">
+  <div class="ab-close-inner reveal">
+    <span class="section-label">Still small</span>
+    <h2>This is only the beginning</h2>
+    <p>Right now MUNLER is two people and a small collection. We plan to grow it slowly, one carefully made piece at a time. Thank you for being here at the start.</p>
+    <div class="ab-close-actions">
+      <a href="/collections/all" class="btn btn-dark">Shop the collection</a>
+      <a href="/pages/contact" class="btn btn-outline">Say hello</a>
+    </div>
+  </div>
+</section>
