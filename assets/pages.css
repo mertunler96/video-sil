@@ -1386,13 +1386,19 @@
     color: var(--color-mid);
     max-width: 470px;
 }
+/* Portrait photos keep their own 3:4 shape (nothing is cropped) and sit
+   against the page edge; the box is as tall as the screen allows. */
 .ab-hero-img,
 .ab-row-img {
     margin: 0;
-    height: clamp(520px, 84vh, 900px);
+    width: min(100%, calc(86vh * 0.75), 760px);
+    aspect-ratio: 3 / 4;
     overflow: hidden;
     background: var(--color-light);
 }
+.ab-hero-img,
+.ab-row--flip .ab-row-img { justify-self: end; }
+.ab-row:not(.ab-row--flip) .ab-row-img { justify-self: start; }
 .ab-hero-img img,
 .ab-row-img img {
     width: 100%;
@@ -1492,7 +1498,7 @@
     .ab-row:not(.ab-row--flip) .ab-row-text { padding: 1.8rem var(--gutter) 0; }
     .ab-row--flip .ab-row-img { order: 0; }
     .ab-hero-img,
-    .ab-row-img { height: auto; aspect-ratio: 4 / 5; }
+    .ab-row-img { width: 100%; aspect-ratio: 3 / 4; }
     .ab-rows { padding-bottom: 3.5rem; }
     .ab-facts-list { grid-template-columns: 1fr 1fr; gap: 1.6rem 1rem; }
     .ab-close { padding: 3.5rem var(--gutter) 4rem; }
