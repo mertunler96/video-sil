@@ -1503,3 +1503,22 @@
     .ab-facts-list { grid-template-columns: 1fr 1fr; gap: 1.6rem 1rem; }
     .ab-close { padding: 3.5rem var(--gutter) 4rem; }
 }
+
+/* Desktop: the photo column takes only the width the uncropped 3:4 photo
+   needs, and the text is centred in the space that is left. */
+@media (min-width: 769px) {
+    .ab-hero,
+    .ab-row--flip { grid-template-columns: minmax(0, 1fr) auto; }
+    .ab-row:not(.ab-row--flip) { grid-template-columns: auto minmax(0, 1fr); }
+    .ab-hero-img,
+    .ab-row-img { width: min(calc(86vh * 0.75), 760px, 52vw); }
+    .ab-hero-text,
+    .ab-row-text,
+    .ab-row:not(.ab-row--flip) .ab-row-text {
+        justify-self: center;
+        width: 100%;
+        max-width: 560px;
+        padding: 0 4vw;
+        box-sizing: content-box;
+    }
+}
