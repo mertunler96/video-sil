@@ -75,7 +75,7 @@
 <section class="ab-facts">
   <ul class="ab-facts-list">
     <li><strong>Free UK delivery</strong><span>Packed by hand, on every order</span></li>
-    <li><strong>5-year warranty</strong><span>On every frame and glass</span></li>
+    <li><strong>5-year warranty</strong><span>Against defects in materials and workmanship</span></li>
     <li><strong>30-day returns</strong><span>If it isn&rsquo;t right, send it back</span></li>
     {%- assign jm_total = 0 -%}
     {%- assign jm_sum = 0.0 -%}
@@ -90,7 +90,7 @@
     {%- endfor -%}
     {%- if jm_total > 0 -%}
       {%- assign jm_avg = jm_sum | divided_by: jm_total -%}
-      <li><strong>Rated {{ jm_avg | round: 1 }} out of 5</strong><span>By {{ jm_total }} customer{% if jm_total != 1 %}s{% endif %} &middot; <a href="https://uk.trustpilot.com/review/munler.co.uk" target="_blank" rel="noopener">Trustpilot</a></span></li>
+      <li><strong>Rated {{ jm_avg | round: 1 }} out of 5</strong><span>From {{ jm_total }} customer review{% if jm_total != 1 %}s{% endif %}</span></li>
     {%- endif -%}
   </ul>
 </section>
