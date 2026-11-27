@@ -4,6 +4,18 @@
   Photos are placeholders from the existing product imagery; Mert will swap them.
 {%- endcomment -%}
 
+<style>
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300 500;
+    font-display: swap;
+    src: url('{{ 'inter-latin.woff2' | asset_url }}') format('woff2');
+  }
+</style>
+
+<div class="ab-page">
+
 <section class="ab-hero">
   <div class="ab-hero-text reveal">
     <span class="section-label">About MUNLER</span>
@@ -20,7 +32,7 @@
 
   <div class="ab-row reveal">
     <figure class="ab-row-img">
-      <img src="{{ 'about-story-brook-black.jpg' | asset_url }}" width="1100" height="1473"
+      <img src="{{ 'about-story-brook-black.jpg' | asset_url }}" width="1493" height="2000"
            alt="The Brook mirror in Matte Black above a wooden console in a bright living room" loading="lazy">
     </figure>
     <div class="ab-row-text">
@@ -33,8 +45,8 @@
 
   <div class="ab-row ab-row--flip reveal">
     <figure class="ab-row-img">
-      <img src="{{ 'card-asymmetrical.webp' | asset_url }}" width="1000" height="1339"
-           alt="The Brook asymmetrical mirror above a marble console" loading="lazy">
+      <img src="{{ 'hero-mirrors.jpg' | asset_url }}" width="2000" height="1116" class="ab-img-left"
+           alt="Brook and Solenne mirrors leaning together against a walnut wall" loading="lazy">
     </figure>
     <div class="ab-row-text">
       <span class="section-label">Our design</span>
@@ -46,8 +58,8 @@
 
   <div class="ab-row reveal">
     <figure class="ab-row-img">
-      <img src="{{ 'look-06.webp' | asset_url }}" width="640" height="857"
-           alt="The Solenne mirror leaning in a sunlit room" loading="lazy">
+      <img src="{{ 'card-asymmetrical.webp' | asset_url }}" width="1000" height="1339"
+           alt="The Brook mirror in Champagne Gold above a marble console" loading="lazy">
     </figure>
     <div class="ab-row-text">
       <span class="section-label">Materials</span>
@@ -59,7 +71,7 @@
 
   <div class="ab-row ab-row--flip reveal">
     <figure class="ab-row-img">
-      <img src="{{ 'about-door-brook-hall.jpg' | asset_url }}" width="1100" height="1473"
+      <img src="{{ 'about-door-brook-hall.jpg' | asset_url }}" width="1493" height="2000"
            alt="The Brook mirror above a marble console in an entrance hall" loading="lazy">
     </figure>
     <div class="ab-row-text">
@@ -106,3 +118,4 @@
     </div>
   </div>
 </section>
+</div>
