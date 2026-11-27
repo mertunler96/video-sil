@@ -102,7 +102,7 @@
     {%- endfor -%}
     {%- if jm_total > 0 -%}
       {%- assign jm_avg = jm_sum | divided_by: jm_total -%}
-      <li><strong>Rated {{ jm_avg | round: 1 }} out of 5</strong><span>From {{ jm_total }} customer review{% if jm_total != 1 %}s{% endif %}</span></li>
+      <li><strong>Rated {{ jm_avg | round: 1 }} out of 5</strong><span>From {{ jm_total }} customer review{% if jm_total != 1 %}s{% endif %} &middot; <a href="https://uk.trustpilot.com/review/munler.co.uk" target="_blank" rel="noopener">See us on Trustpilot</a></span></li>
     {%- endif -%}
   </ul>
 </section>

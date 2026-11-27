@@ -1576,3 +1576,4 @@
     font-weight: 400;
     font-size: 1.05rem;
 }
+.ab-facts-list a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
