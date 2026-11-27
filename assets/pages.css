@@ -1540,3 +1540,39 @@
 @media (max-width: 768px) {
     .ab-hero .ab-hero-img--land { aspect-ratio: 4 / 3; }
 }
+
+/* Minimal type pass (Mert, 27 Nov): one clean sans for everything on the
+   About page, light uppercase headings, tighter line spacing. */
+.ab-page .ab-hero-title,
+.ab-page .ab-row-text h2,
+.ab-page .ab-close h2 {
+    font-family: var(--ab-sans);
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    color: var(--color-dark);
+}
+.ab-page .ab-hero-title { font-size: clamp(2.2rem, 3.6vw, 3.3rem); margin-bottom: 1.4rem; }
+.ab-page .ab-row-text h2 { font-size: clamp(1.7rem, 2.5vw, 2.4rem); margin-bottom: 1.1rem; }
+.ab-page .ab-close h2 { font-size: clamp(1.7rem, 2.5vw, 2.4rem); }
+.ab-page p,
+.ab-page .ab-hero-text p,
+.ab-page .ab-row-text p,
+.ab-page .ab-close p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #2b2925;
+}
+.ab-page .ab-row-text p { margin-bottom: 0.9rem; }
+.ab-page .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--color-mid);
+    margin-bottom: 1rem;
+}
+.ab-page .ab-facts-list strong {
+    font-family: var(--ab-sans);
+    font-weight: 400;
+    font-size: 1.05rem;
+}
